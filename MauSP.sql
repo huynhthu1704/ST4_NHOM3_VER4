@@ -1,0 +1,48 @@
+-- Lấy 
+CREATE PROC sp_Lay
+AS
+	BEGIN
+		SELECT * FROM 
+	END
+
+--Thêm 
+GO
+CREATE PROC sp_Them
+AS
+	BEGIN
+		INSERT INTO 
+		VALUES ()	
+	END
+
+--Sửa 
+GO
+CREATE PROC sp_Sua
+AS
+	BEGIN
+		UPDATE 
+		SET 
+		WHERE 
+	END
+
+--Xóa 
+GO
+CREATE PROC sp_Xoa
+AS
+	BEGIN
+		DELETE 
+		FROM 
+		WHERE 
+	END
+
+--Tìm Nhân viên
+GO
+CREATE PROC sp_Tim
+AS
+	BEGIN
+		SELECT * 
+		FROM 
+		WHERE 
+	 END
+
+
+
