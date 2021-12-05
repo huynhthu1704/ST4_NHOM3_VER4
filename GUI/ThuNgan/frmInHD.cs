@@ -31,13 +31,13 @@ namespace GUI.ThuNgan
 
         private void frmInHD_Load(object sender, EventArgs e)
         {
-            DataTable dt = null;
+            /*DataTable dt = null;
             try
             {
                 MessageBox.Show(etHD.MaHD);
                 dt = bllCTHD.LayCTHDTheoMaHD(etHD.MaHD);
                 MessageBox.Show(dt.Rows.Count.ToString() + "row1");
-                RPInHoaDon rp = new RPInHoaDon();
+                //RPInHoaDon rp = new RPInHoaDon();
                 MessageBox.Show(dt.Rows.Count.ToString() + "row2");
                 rp.SetDataSource(dt);
                 MessageBox.Show(dt.Rows.Count.ToString() + "row3");
@@ -60,7 +60,7 @@ namespace GUI.ThuNgan
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }*/
         }
     }
 }

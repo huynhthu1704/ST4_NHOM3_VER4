@@ -42,7 +42,7 @@ namespace GUI.CSKH
             cboMaKH.ValueMember = "MaKH";
 
             dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
-            cboMaNV.SelectedIndex = 0;
+            //cboMaNV.SelectedIndex = 0;
             cboMaTheKH.SelectedIndex = 0;
             cboMaKH.SelectedIndex = 0;
         }
@@ -99,11 +99,10 @@ namespace GUI.CSKH
                 }
                 else if (_bll.CheckTonTai(et))
                 {
-                    MessageBox.Show("Đã tồn tại Phiếu Đăng Ký này!");
+                    MessageBox.Show("Đã tồn tại Phiếu Đăng Ký này");
                 }
                 else
                 {
-
                     if (_bll.ThemPhieuDK(et))
                     {
                         _bllKH.SuaTheKH(et.MaKH, et.MaTheKH);

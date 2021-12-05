@@ -24,7 +24,7 @@ namespace BLL
         }
         public DataTable HienThiDSHH()
         {
-            return _dal.HienThi("sp_LayHangHoa");
+            return _dal.HienThi("sp_LayHHCoBaoHanh");
         }
         public DataTable HienThiDSKH()
         {

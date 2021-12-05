@@ -67,7 +67,7 @@ namespace DAL
             return dt;
         }
 
-        public bool ThemTheKhachHang(string maThe)
+        public bool ThemTheKhachHang(string maThe, int tinhTrang)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace DAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@MaTheKH", maThe));
                 //cmd.Parameters.Add(new SqlParameter("@LoaiThe", et.LoaiThe));
-                //cmd.Parameters.Add(new SqlParameter("@TinhTrang", et.TinhTrang));
+                cmd.Parameters.Add(new SqlParameter("@TinhTrang", tinhTrang));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {

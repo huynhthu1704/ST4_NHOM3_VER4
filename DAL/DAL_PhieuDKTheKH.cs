@@ -97,6 +97,34 @@ namespace DAL
             return false;
         }
 
+        public bool CapNhatTKH(string et)
+        {
+            dt = null;
+            try
+            {
+                conn.Open();
+                cmd = new SqlCommand("sp_CapNhapTheKH", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@MaTheKH", et));
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
+
         public bool XoaPhieuDK(ET_PhieuDKTheKH et)
         {
             try

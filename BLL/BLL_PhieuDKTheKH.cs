@@ -50,5 +50,9 @@ namespace BLL
         {
             return _dal.CheckTonTai(et);
         }
+        public bool CapNhatTKH(string et)
+        {
+            return _dal.CapNhatTKH(et);
+        }
     }
 }
