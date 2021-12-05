@@ -21,7 +21,8 @@ namespace BLL
         public DataTable HienThiDS()
         {
             return _dal.HienThiDS("sp_LayTaiKhoan");
-        }
+        } 
+        
 
         public DataTable HienThiLTK()
         {
@@ -44,8 +45,20 @@ namespace BLL
 
         public bool CheckTonTai(string maTK)
         {
-            return _dal.CheckTonTai(maTK);
+            if (_dal.TimTaiKhoan(maTK).Rows.Count > 0)
+            {
+                return true;
+            }
+            return false;
         }
-        
+
+        public DataTable KiemTraDN(string tenDN, string matKhau)
+        {
+            return _dal.KiemTraDN(tenDN, matKhau);
+        }
+        public DataTable TimTaiKhoan(string maTK)
+        {
+            return _dal.TimTaiKhoan(maTK);
+        }
     }
 }

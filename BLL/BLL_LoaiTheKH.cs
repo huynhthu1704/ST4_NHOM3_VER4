@@ -12,30 +12,38 @@ namespace BLL
 {
     public class BLL_LoaiTheKH
     {
-        DAL_LoaiTheKH _dal;
+        DAL_LoaiTheKH _dal; // DAL của LoaiTheKH
 
         public BLL_LoaiTheKH()
         {
-            _dal = new DAL_LoaiTheKH();
+            _dal = new DAL_LoaiTheKH(); // khởi tạo DAL
         }
+
+        // Lấy ds
         public DataTable HienThiDS()
         {
             return _dal.HienThiDS("sp_LayLoaiTheKH");
         }
-      
-        public bool ThemLoaiTK(ET_LoaiTheKH et)
+      // Thêm LoaiThe, nếu thành công trả về true
+        public bool ThemLoaiTheKH(ET_LoaiTheKH et)
         {
-            return _dal.ThemLoaiTK(et);
+            return _dal.ThemLoaiTheKH(et);
         }
-        public bool XoaLoaiTK(ET_LoaiTheKH et)
+        
+        // Xóa LoaiTheKH, nếu thành công trả về true
+        public bool XoaLoaiTheKH(ET_LoaiTheKH et)
         {
-            return _dal.XoaLoaiTK(et);
-        }
-        public bool SuaLoaiTK(ET_LoaiTheKH et)
-        {
-            return _dal.SuaLoaiTK(et);
+            return _dal.XoaLoaiTheKH(et);
         }
 
+        // Sửa LoaiTheKH
+        public bool SuaLoaiTheKH(ET_LoaiTheKH et)
+        {
+            return _dal.SuaLoaiTheKH(et);
+        }
+
+
+        // Check LoaiThe có tồn tại hay không, nếu tồn tại trả về true
         public bool CheckTonTai(ET_LoaiTheKH et)
         {
             return _dal.CheckTonTai(et);

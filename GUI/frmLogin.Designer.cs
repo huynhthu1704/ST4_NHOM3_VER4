@@ -76,6 +76,7 @@ namespace GUI
             // 
             // btnThoat
             // 
+            this.btnThoat.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnThoat.Location = new System.Drawing.Point(242, 220);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(103, 46);
@@ -96,7 +97,9 @@ namespace GUI
             // 
             // frmLogin
             // 
+            this.AcceptButton = this.btnDN;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.CancelButton = this.btnThoat;
             this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.btnDN);
             this.Controls.Add(this.btnThoat);
@@ -106,6 +109,7 @@ namespace GUI
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
             this.Load += new System.EventHandler(this.frmLogin_Load);

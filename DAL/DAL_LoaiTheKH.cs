@@ -21,6 +21,7 @@ namespace DAL
             conn = Connection.conn;
         }
 
+        // Lấy danh sách loại thẻ KH
         public DataTable HienThiDS(string tenSP)
         {
             dt = null;
@@ -35,6 +36,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -43,6 +45,7 @@ namespace DAL
             return dt;
         }
 
+        // Check thẻ có tồn tại hay không, nếu tồn tại trả về true
         public bool CheckTonTai(ET_LoaiTheKH et)
         {
             dt = null;
@@ -62,7 +65,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -71,7 +74,8 @@ namespace DAL
             return false;
         }
 
-        public bool ThemLoaiTK(ET_LoaiTheKH et)
+        // Thêm LoaiTheKH
+        public bool ThemLoaiTheKH(ET_LoaiTheKH et)
         {
             try
             {
@@ -87,6 +91,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -95,7 +100,8 @@ namespace DAL
             return false;
         }
 
-        public bool XoaLoaiTK(ET_LoaiTheKH et)
+        // Xóa LoaiTheKH
+        public bool XoaLoaiTheKH(ET_LoaiTheKH et)
         {
             try
             {
@@ -110,6 +116,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -118,7 +125,8 @@ namespace DAL
             return false;
         }
 
-        public bool SuaLoaiTK(ET_LoaiTheKH et)
+        // Sửa LoaiTheKH
+        public bool SuaLoaiTheKH(ET_LoaiTheKH et)
         {
             try
             {
@@ -134,6 +142,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {

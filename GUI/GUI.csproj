@@ -68,6 +68,7 @@
     <Compile Include="Admin\frmNCC.Designer.cs">
       <DependentUpon>frmNCC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Const.cs" />
     <Compile Include="CSKH\frmKH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +80,12 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPInHoaDon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPInHoaDon.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ThuNgan\frmInHD.cs">
       <SubType>Form</SubType>
@@ -217,6 +224,10 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RPInHoaDon.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPInHoaDon.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ThuNgan\frmInHD.resx">
       <DependentUpon>frmInHD.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +281,9 @@
       <Project>{95cd842c-7b3c-4d94-83a0-a4ca9fa12fc5}</Project>
       <Name>ET</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

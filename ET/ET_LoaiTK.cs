@@ -10,8 +10,8 @@ namespace ET
 {
     public class ET_LoaiTK
     {
-        private string _maLoaiTK;
-        private string _tenLoai;
+        private string _maLoaiTK; // mã loại tài khoản
+        private string _tenLoai; // tên loại tài khoản
 
         public ET_LoaiTK(string maLoaiTK, string tenLoai)
         {

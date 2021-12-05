@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Ngọc Thư
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace ET
 {
     public class ET_LoaiTheKH
     {
-        private string _maLoaiThe;
-        private string _tenLoaiThe;
+        private string _maLoaiThe; // mã loại thẻ KH
+        private string _tenLoaiThe; // tên loại thẻ KH
 
         public ET_LoaiTheKH(string maLoaiThe, string tenLoaiThe)
         {

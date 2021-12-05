@@ -34,9 +34,9 @@ namespace DAL
                 dt = new DataTable();
                 da.Fill(dt);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -191,6 +191,30 @@ namespace DAL
                 _conn.Close();
             }
             return false;
+        }
+
+        public DataTable TimNVTheoTKDN(string maTK)
+        {
+            dt = null;
+            try
+            {
+                _conn.Open();
+                cmd = new SqlCommand("sp_TimNVTheoTKDN", _conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@MaTK", maTK));
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (SqlException ex)
+            {
+
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return dt;
         }
     }
 }
