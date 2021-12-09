@@ -22,6 +22,11 @@ namespace DAL
             conn = Connection.conn;
         }
 
+        /// <summary>
+        /// Lấy danh sách loại tài khoản
+        /// </summary>
+        /// <param name="tenSP">tenSP là tên stored procedure cần lấy ds</param>
+        /// <returns></returns>
         public DataTable HienThiDS(string tenSP)
         {
             dt = null;
@@ -36,6 +41,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -44,7 +50,12 @@ namespace DAL
             return dt;
         }
 
-        public bool CheckTonTai(ET_LoaiTK et)
+        /// <summary>
+        /// Tìm loại tài khoản dựa tên mã loại tài khoản
+        /// </summary>
+        /// <param name="maLoai">Mã loại tài khoản cần tìm</param>
+        /// <returns></returns>
+        public DataTable TimLoaiTK(string maLoai)
         {
             dt = null;
             try
@@ -52,26 +63,27 @@ namespace DAL
                 conn.Open();
                 cmd = new SqlCommand("sp_TimLoaiTaiKhoan", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@MaLoaiTK", et.MaLoaiTK));
+                cmd.Parameters.Add(new SqlParameter("@MaLoaiTK",maLoai));
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    return true;
-                }
             }
             catch (SqlException ex)
             {
-               
+                throw ex;
             }
             finally
             {
                 conn.Close();
             }
-            return false;
+            return dt;
         }
 
+        /// <summary>
+        /// Thêm loại tài khoản
+        /// </summary>
+        /// <param name="et">Class Loại Tài Khoản</param>
+        /// <returns></returns>
         public bool ThemLoaiTK(ET_LoaiTK et)
         {
             try
@@ -88,6 +100,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -96,6 +109,11 @@ namespace DAL
             return false;
         }
 
+        /// <summary>
+        /// Xóa loại tài khoản
+        /// </summary>
+        /// <param name="et">Class Loại Tài Khoản</param>
+        /// <returns></returns>
         public bool XoaLoaiTK(ET_LoaiTK et)
         {
             try
@@ -111,6 +129,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -119,6 +138,11 @@ namespace DAL
             return false;
         }
 
+        /// <summary>
+        /// Sửa loại tài khoản
+        /// </summary>
+        /// <param name="et">Class Loại Tài Khoản</param>
+        /// <returns></returns>
         public bool SuaLoaiTK(ET_LoaiTK et)
         {
             try
@@ -135,6 +159,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {

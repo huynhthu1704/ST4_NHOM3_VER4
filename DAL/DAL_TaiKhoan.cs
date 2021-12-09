@@ -44,7 +44,7 @@ namespace DAL
             return dt;
         }
 
-        public bool CheckTonTai(string maTK)
+        public DataTable TimTaiKhoan(string maTK)
         {
             dt = null;
             try
@@ -56,20 +56,39 @@ namespace DAL
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    return true;
-                }
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
                 conn.Close();
             }
-            return false;
+            return dt;
+        } public DataTable KiemTraDN(string tenDN, string matKhau)
+        {
+            dt = null;
+            try
+            {
+                conn.Open();
+                cmd = new SqlCommand("sp_KiemTraDN", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@TenDangNhap", tenDN));
+                cmd.Parameters.Add(new SqlParameter("@MatKhau", matKhau));
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return dt;
         }
 
         public bool ThemTK(ET_TaiKhoan et)

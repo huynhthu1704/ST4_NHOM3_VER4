@@ -55,6 +55,7 @@ namespace GUI.Admin
             // 
             // btnThoat
             // 
+            this.btnThoat.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnThoat.Location = new System.Drawing.Point(431, 135);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
@@ -95,15 +96,16 @@ namespace GUI.Admin
             // 
             // txtMaLoai
             // 
-            this.txtMaLoai.Location = new System.Drawing.Point(134, 36);
+            this.txtMaLoai.Location = new System.Drawing.Point(135, 49);
             this.txtMaLoai.Name = "txtMaLoai";
+            this.txtMaLoai.ReadOnly = true;
             this.txtMaLoai.Size = new System.Drawing.Size(176, 27);
             this.txtMaLoai.TabIndex = 17;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(357, 44);
+            this.label3.Location = new System.Drawing.Point(358, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 19);
             this.label3.TabIndex = 15;
@@ -112,7 +114,7 @@ namespace GUI.Admin
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 44);
+            this.label1.Location = new System.Drawing.Point(44, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 19);
             this.label1.TabIndex = 16;
@@ -120,14 +122,16 @@ namespace GUI.Admin
             // 
             // txtTenLoai
             // 
-            this.txtTenLoai.Location = new System.Drawing.Point(447, 36);
+            this.txtTenLoai.Location = new System.Drawing.Point(448, 49);
             this.txtTenLoai.Name = "txtTenLoai";
             this.txtTenLoai.Size = new System.Drawing.Size(176, 27);
             this.txtTenLoai.TabIndex = 17;
             // 
             // frmLoaiTheKH
             // 
+            this.AcceptButton = this.btnThem;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.CancelButton = this.btnThoat;
             this.ClientSize = new System.Drawing.Size(684, 411);
             this.Controls.Add(this.dgvDS);
             this.Controls.Add(this.btnThoat);
@@ -140,6 +144,7 @@ namespace GUI.Admin
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmLoaiTheKH";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLoaiTheKH";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoaiTheKH_FormClosing);
             this.Load += new System.EventHandler(this.frmLoaiTheKH_Load);

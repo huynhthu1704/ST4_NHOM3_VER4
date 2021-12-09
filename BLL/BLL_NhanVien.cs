@@ -37,5 +37,10 @@ namespace BLL
         {
             return da.CheckTonTaiMaTK(et);
         }
+
+        public DataTable TimNVTheoTKDN(string maTK)
+        {
+            return da.TimNVTheoTKDN(maTK);
+        }
     }
 }

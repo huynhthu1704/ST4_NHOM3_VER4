@@ -17,6 +17,7 @@ namespace GUI.Admin
     public partial class frmLoaiTheKH : Form
     {
         private BLL_LoaiTheKH _bll;
+        private int STT; // STT để lấy mã số tự động tăng
         public frmLoaiTheKH()
         {
             InitializeComponent();
@@ -25,9 +26,14 @@ namespace GUI.Admin
 
         private void frmLoaiTheKH_Load(object sender, EventArgs e)
         {
+            // Tính STT dựa trên số thứ tự cũ + 1
+            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiThe"].ToString().Substring(2)) + 1;
+            // Set txtMaLoai = LT + STT
+            txtMaLoai.Text = "LT" + string.Format("{0:00}", STT);
             dgvDS.DataSource = _bll.HienThiDS();
         }
 
+        // Sự kiện trước khi đóng form
         private void frmLoaiTheKH_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -49,98 +55,123 @@ namespace GUI.Admin
             }
         }
 
+        /// <summary>
+        /// Sự kiện khi nhấn nút Thêm
+        /// Kiểm tra tên loại thẻ hợp lệ hay không, nếu hợp lệ thì thêm vào csdl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ET_LoaiTheKH et = new ET_LoaiTheKH(txtMaLoai.Text, txtTenLoai.Text);
-            try
+            if (string.IsNullOrEmpty(txtTenLoai.Text))
             {
-                if (_bll.CheckTonTai(et))
+                MessageBox.Show("Tên thẻ không được trống");
+            }
+            else
+            {
+                ET_LoaiTheKH et = new ET_LoaiTheKH(txtMaLoai.Text, txtTenLoai.Text);
+                try
                 {
-                    MessageBox.Show("Đã tồn tại loại tài khoản này");
-                }
-                else
-                {
-                    if (_bll.ThemLoaiTK(et))
+                    if (_bll.CheckTonTai(et))
                     {
-                        MessageBox.Show("Thêm thành công");
+                        MessageBox.Show("Đã tồn tại loại tài khoản này");
                     }
                     else
                     {
-                        MessageBox.Show("Thêm không thành công");
+                        if (_bll.ThemLoaiTheKH(et))
+                        {
+                            MessageBox.Show("Thêm thành công");
+                            STT++;
+                            Reset();
+                            dgvDS.DataSource = _bll.HienThiDS();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thêm không thành công");
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvDS.DataSource = _bll.HienThiDS();
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
+        // Sự kiện khi nhấn nút xóa
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            ET_LoaiTheKH et = new ET_LoaiTheKH(txtMaLoai.Text, txtTenLoai.Text);
             try
             {
-                DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (kq == DialogResult.Yes)
+                if (!string.IsNullOrEmpty(txtTenLoai.Text))
                 {
-                    if (_bll.XoaLoaiTK(et))
+                    DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (kq == DialogResult.Yes)
                     {
-                        MessageBox.Show("Xóa thành công");
+                        ET_LoaiTheKH et = new ET_LoaiTheKH(txtMaLoai.Text, txtTenLoai.Text);
+                        if (_bll.XoaLoaiTheKH(et))
+                        {
+                            MessageBox.Show("Xóa thành công");
+                            STT = _bll.HienThiDS().Rows.Count == 0 ? STT : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiThe"].ToString().Substring(2)) + 1;
+                            Reset();
+                            dgvDS.DataSource = _bll.HienThiDS();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa không thành công");
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Xóa không thành công");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvDS.DataSource = _bll.HienThiDS();
-            }
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            ET_LoaiTheKH et = new ET_LoaiTheKH(txtMaLoai.Text, txtTenLoai.Text);
-            try
-            {
-                if (_bll.XoaLoaiTK(et))
-                {
-                    MessageBox.Show("Sửa thành công");
                 }
                 else
                 {
-                    MessageBox.Show("Sửa không thành công");
+                    MessageBox.Show("Vui lòng chọn tài khoản để xóa");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
+        }
+
+        // Sự kiện khi nhấn nút Sửa
+        // Kiểm tra tên nhập vào có hợp lệ hay không, nếu hợp lệ thì sửa vào CSDL
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTenLoai.Text))
             {
-                Reset();
-                dgvDS.DataSource = _bll.HienThiDS();
+                MessageBox.Show("Tên thẻ không được để trống");
+            }
+            else
+            {
+                ET_LoaiTheKH et = new ET_LoaiTheKH(txtMaLoai.Text, txtTenLoai.Text);
+                try
+                {
+                    if (_bll.SuaLoaiTheKH(et))
+                    {
+                        MessageBox.Show("Sửa thành công");
+                        Reset();
+                        dgvDS.DataSource = _bll.HienThiDS();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sửa không thành công");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
+        // Sự kiện khi nhấn nút Thoát
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Sự kiện khi ckick vào datagridview, hiển thi các dữ liệu tên textbox
         private void dgvDS_Click(object sender, EventArgs e)
         {
             int index = dgvDS.CurrentCell.RowIndex;
@@ -148,9 +179,10 @@ namespace GUI.Admin
             txtTenLoai.Text = dgvDS.Rows[index].Cells[1].Value.ToString();
         }
 
+        // Reset control 
         public void Reset()
         {
-            txtMaLoai.Text = "";
+            txtMaLoai.Text = "LT" + string.Format("{0:00}", STT);
             txtTenLoai.Text = "";
         }
     }
