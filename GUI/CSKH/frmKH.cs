@@ -92,17 +92,24 @@ namespace GUI.CSKH
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text,"");
             try
             {
-                DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (kq == DialogResult.Yes)
+                if (txtMaKH.Text == "")
                 {
-                    if (_bll.XoaKH(et))
+                    MessageBox.Show("Vui Lòng nhập đủ thông tin cần xóa");
+                }
+                else
+                {
+                    DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (kq == DialogResult.Yes)
                     {
-                        MessageBox.Show("Xóa thành công");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa không thành công");
+                        if (_bll.XoaKH(et))
+                        {
+                            MessageBox.Show("Xóa thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa không thành công");
+                        }
                     }
                 }
             }

@@ -33,7 +33,7 @@ namespace GUI.ThuNgan
 
         private void frmInHD_Load(object sender, EventArgs e)
         {
-            DataTable dt = null;
+            /*DataTable dt = null;
             try
             {
                 MessageBox.Show(etHD.MaHD);
@@ -67,7 +67,7 @@ namespace GUI.ThuNgan
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }*/
         }
     }
 }

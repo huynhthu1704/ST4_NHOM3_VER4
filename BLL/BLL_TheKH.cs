@@ -32,9 +32,9 @@ namespace BLL
             return _dal.HienThi("sp_LayLoaiTheKH");
         }
         
-        public bool ThemTheKhachHang(string maThe)
+        public bool ThemTheKhachHang(string maThe, int tinhTrang)
         {
-            return _dal.ThemTheKhachHang(maThe);
+            return _dal.ThemTheKhachHang(maThe, tinhTrang);
         }
         public bool CheckTonTai(string maKH)
         {

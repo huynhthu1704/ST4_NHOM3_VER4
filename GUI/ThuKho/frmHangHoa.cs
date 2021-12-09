@@ -52,38 +52,48 @@ namespace GUI.ThuKho
                 bh = 0;
             }
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
-            MessageBox.Show(km);
+            //MessageBox.Show(km);
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
-            MessageBox.Show(et.MaHH);
-            MessageBox.Show(et.TenHH);
-            MessageBox.Show(et.Gia.ToString());
-            MessageBox.Show(et.MaDM);
-            MessageBox.Show(et.DonVT);
-            MessageBox.Show(et.BaoHanh.ToString());
-            MessageBox.Show(et.MaKM);
+            //MessageBox.Show(et.MaHH);
+            //MessageBox.Show(et.TenHH);
+            //MessageBox.Show(et.Gia.ToString());
+            //MessageBox.Show(et.MaDM);
+            //MessageBox.Show(et.DonVT);
+            //MessageBox.Show(et.BaoHanh.ToString());
+            //MessageBox.Show(et.MaKM);
             try
             {
-                if (_bll.CheckTonTai(txtMaHH.Text))
+                if (txtMaHH.Text == "" || txtTenHH.Text == "" || txtGia.Text == "")
                 {
-                    MessageBox.Show("Đã tồn tại Hàng Hóa này");
+                    MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
-                if (_bll.ThemHH(et))
-                {
-                    MessageBox.Show("Thêm thành công");
-                        Reset();
-                        dgvHangHoa.DataSource = _bll.HienThiDSHH();
+                    if (_bll.CheckTonTai(txtMaHH.Text))
+                    {
+                        MessageBox.Show("Đã tồn tại Hàng Hóa này");
                     }
-                else
-                {
-                    MessageBox.Show("Thêm không thành công");
+                    else
+                    {
+                        if (_bll.ThemHH(et))
+                        {
+                            MessageBox.Show("Thêm thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thêm không thành công");
+                        }
+                    }
                 }
-               }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Reset();
+                dgvHangHoa.DataSource = _bll.HienThiDSHH();
             }
         }
 
@@ -184,7 +194,7 @@ namespace GUI.ThuKho
             {
                 bh = 0;
             }
-            MessageBox.Show(bh.ToString());
+            //MessageBox.Show(bh.ToString());
             int gia = CheckGia(txtGia.Text) ? int.Parse(txtGia.Text) : -1;
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);

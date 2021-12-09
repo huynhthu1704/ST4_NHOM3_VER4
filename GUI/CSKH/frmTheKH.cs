@@ -25,13 +25,19 @@ namespace GUI.CSKH
         private void frmTheKH_Load(object sender, EventArgs e)
         {
             dgvTheKH.DataSource = _bll.HienThiDSTheKH();
+            rdbChuaKH.Checked = true;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            
+            int tinhTrang = 0;
+            if (rdbDaKH.Checked == true)
+            {
+                tinhTrang = 1;
+            }
+
             //kiem tra cac control cho dung:
-            ET_TheKH et = new ET_TheKH(txtMaThe.Text,"", 0, 0);
+            ET_TheKH et = new ET_TheKH(txtMaThe.Text,"", tinhTrang, 0);
             try
             {
                 if (txtMaThe.Text == "")
@@ -46,7 +52,7 @@ namespace GUI.CSKH
                     }
                     else
                     {
-                        if (_bll.ThemTheKhachHang(et.MaTheKH))
+                        if (_bll.ThemTheKhachHang(et.MaTheKH, et.TinhTrang))
                         {
                             MessageBox.Show("Thêm thành công");
                         }
@@ -70,6 +76,7 @@ namespace GUI.CSKH
         private void Reset()
         {
             txtMaThe.Text = "";
+            rdbChuaKH.Checked = true;
             txtMaThe.Focus();
         }
 
@@ -86,40 +93,6 @@ namespace GUI.CSKH
                 MessageBox.Show("Lỗi " + ex.Message);
             }
         }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            int row = dgvTheKH.CurrentCell.RowIndex;
-            string maThe = dgvTheKH.Rows[row].Cells[0].Value.ToString();
-            //kiem tra cac control cho dung:
-            try
-            {
-                DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (kq == DialogResult.Yes)
-                {
-                    if (_bll.Xoa(maThe))
-                    {
-                        MessageBox.Show("Xóa thành công");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa không thành công");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvTheKH.DataSource = _bll.HienThiDSTheKH();
-            }
-        }
-
-   
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -138,6 +111,43 @@ namespace GUI.CSKH
             else
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            int tinhTrang = 0;
+            if (rdbDaKH.Checked == true)
+            {
+                tinhTrang = 1;
+            }
+            ET_TheKH et = new ET_TheKH(txtMaThe.Text, "", tinhTrang, 0);
+            try
+            {
+                if (txtMaThe.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập đủ thông tin !");
+                }
+                else
+                {
+                    if (_bll.SuaTinhTrangThe(txtMaThe.Text, tinhTrang))
+                    {
+                        MessageBox.Show("Sửa thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sửa không thành công");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Reset();
+                dgvTheKH.DataSource = _bll.HienThiDSTheKH();
             }
         }
     }
