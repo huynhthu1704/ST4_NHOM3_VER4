@@ -21,25 +21,31 @@ namespace GUI.Admin
         BLL_Kho bKho = new BLL_Kho();
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ET_Kho Kho = new ET_Kho(txtMaKho.Text,txtTenKho.Text);
-
             try
             {
-                if (bKho.CheckTonTai(Kho) == true)
+                if (txtMaKho.Text == "" || txtTenKho.Text == "")
                 {
-                    MessageBox.Show("Kho đã tồn tại");
+                    MessageBox.Show("Vui lòng nhập đủ thông tin");
                 }
                 else
                 {
-                    if (bKho.ThemKho(Kho) == true)
+                    ET_Kho Kho = new ET_Kho(txtMaKho.Text, txtTenKho.Text);
+                    if (bKho.CheckTonTai(Kho) == true)
                     {
-                        MessageBox.Show("Thêm Thành Công");
-                        txtMaKho.Text = "";
-                        txtTenKho.Text = "";
+                        MessageBox.Show("Kho đã tồn tại");
                     }
                     else
                     {
-                        MessageBox.Show("Thêm Không Thành Công");
+                        if (bKho.ThemKho(Kho) == true)
+                        {
+                            MessageBox.Show("Thêm Thành Công");
+                            txtMaKho.Text = "";
+                            txtTenKho.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thêm Không Thành Công");
+                        }
                     }
                 }
             }
@@ -56,44 +62,66 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaKho.Text;
-            try
+            DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
             {
-                if (bKho.XoaKho(ma) == true)
+                try
                 {
-                    MessageBox.Show("Xoá Thành Công");
-                    txtMaKho.Text = "";
-                    txtTenKho.Text = "";
+                    if (ma == "")
+                    {
+                        MessageBox.Show("Vui lòng nhập Mã kho");
+                    }
+                    else
+                    {
+                        ET_Kho Kho = new ET_Kho(txtMaKho.Text, txtTenKho.Text);
+                        if (bKho.XoaKho(ma) == true)
+                        {
+                            MessageBox.Show("Xoá Thành Công");
+                            txtMaKho.Text = "";
+                            txtTenKho.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xoá Không Thành Công");
+                        }
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Xoá Không Thành Công");
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    dvgDS.DataSource = bKho.LayDS();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dvgDS.DataSource = bKho.LayDS();
+
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            ET_Kho Kho = new ET_Kho(txtMaKho.Text, txtTenKho.Text);
-
             try
             {
-                if (bKho.SuaKho(Kho) == true)
+                if (txtMaKho.Text == "" || txtTenKho.Text == "")
                 {
-                    MessageBox.Show("Sửa Thành Công");
-                    txtMaKho.Text = "";
-                    txtTenKho.Text = "";
+                    MessageBox.Show("Vui lòng nhập đủ thông tin");
                 }
                 else
                 {
-                    MessageBox.Show("Sửa Không Thành Công");
+                    ET_Kho Kho = new ET_Kho(txtMaKho.Text, txtTenKho.Text);
+                    if (bKho.SuaKho(Kho) == true)
+                    {
+                        MessageBox.Show("Sửa Thành Công");
+                        txtMaKho.Text = "";
+                        txtTenKho.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sửa Không Thành Công");
+                    }
                 }
             }
             catch (Exception ex)
@@ -140,7 +168,7 @@ namespace GUI.Admin
         {
             int index = dvgDS.CurrentCell.RowIndex;
             txtMaKho.Text = dvgDS.Rows[index].Cells[0].Value.ToString();
-            txtTenKho.Text = dvgDS.Rows[index].Cells[1].Value.ToString();  
+            txtTenKho.Text = dvgDS.Rows[index].Cells[1].Value.ToString();
         }
     }
 }

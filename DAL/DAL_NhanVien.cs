@@ -70,8 +70,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -104,8 +105,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -114,7 +116,7 @@ namespace DAL
             return flag;
         }
 
-        public bool XoaNhanVien(String et)
+        public bool XoaNhanVien(string et)
         {
             bool flag = false;
             try
@@ -129,8 +131,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -157,7 +160,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -184,7 +187,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -208,7 +211,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {

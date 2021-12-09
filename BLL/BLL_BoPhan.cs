@@ -25,7 +25,7 @@ namespace BLL
         {
             return daBoPhan.SuaBoPhan(et);
         }
-        public bool XoaBoPhan(String Ma)
+        public bool XoaBoPhan(string Ma)
         {
             return daBoPhan.XoaBoPhan(Ma);
         }
