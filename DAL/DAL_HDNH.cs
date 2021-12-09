@@ -20,6 +20,8 @@ namespace DAL
         {
             _conn = Connection.conn;
         }
+
+        // Lấy danh sách hóa đơn nhập hàng
         public DataTable LayDS(string tenSP)
         {
             dt = null;
@@ -32,9 +34,9 @@ namespace DAL
                 dt = new DataTable();
                 da.Fill(dt);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -43,6 +45,7 @@ namespace DAL
             return dt;
         }
 
+        // Thêm hóa đơn nhâp hàng
         public bool ThemHDNH(ET_HDNH et)
         {
             bool flag = false;
@@ -63,8 +66,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -72,6 +76,8 @@ namespace DAL
             }
             return flag;
         }
+
+        // Sửa hóa đơn nhập hàng
         public bool SuaHDNH(ET_HDNH et)
         {
             bool flag = false;
@@ -92,8 +98,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -102,6 +109,7 @@ namespace DAL
             return flag;
         }
 
+        // Xóa hóa đơn nhập hàng
         public bool XoaHDNH(ET_HDNH et)
         {
             bool flag = false;
@@ -116,8 +124,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -125,6 +134,8 @@ namespace DAL
             }
             return flag;
         }
+
+        // Check tồn tại hóa đơn nhập hàng
         public bool CheckTonTai(string maHD)
         {
             dt = null;
@@ -144,7 +155,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {

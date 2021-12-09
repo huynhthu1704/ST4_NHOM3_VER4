@@ -21,6 +21,8 @@ namespace DAL
         {
             conn = Connection.conn;
         }
+
+        // Lấy ds hóa đơn
         public DataTable HienThiDS(string tenSP)
         {
             dt = null;
@@ -43,7 +45,9 @@ namespace DAL
             }
             return dt;
         }
-          public DataTable LayHDTheoMaHD(string maHD)
+
+        // Lấy hóa đơn theo mã hóa đơn
+        public DataTable LayHDTheoMaHD(string maHD)
         {
             dt = null;
             try
@@ -67,18 +71,20 @@ namespace DAL
             return dt;
         }
 
+        // Thêm hóa đ
         public bool ThemHD(ET_HoaDon et)
         {
             try
             {
                 conn.Open();
-              
-               
+
+
                 if (string.IsNullOrEmpty(et.MaTheKH))
                 {
                     cmd = new SqlCommand("sp_ThemHoaDonKhachVL", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                } else
+                }
+                else
                 {
                     cmd = new SqlCommand("sp_ThemHoaDonTheoMaKH", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -88,10 +94,10 @@ namespace DAL
 
                 cmd.Parameters.Add(new SqlParameter("@MaHD", et.MaHD));
                 cmd.Parameters.Add(new SqlParameter("@MaNV", et.MaNV));
-                cmd.Parameters.Add(new SqlParameter("@GhiChu", et.GhiChu));  
+                cmd.Parameters.Add(new SqlParameter("@GhiChu", et.GhiChu));
                 cmd.Parameters.Add(new SqlParameter("@TienHang", et.TienHang));
                 cmd.Parameters.Add(new SqlParameter("@KhuyenMai", et.KhuyenMai));
-                cmd.Parameters.Add(new SqlParameter("@ChietKhau", et.ChietKhau));  
+                cmd.Parameters.Add(new SqlParameter("@ChietKhau", et.ChietKhau));
                 cmd.Parameters.Add(new SqlParameter("@TongTien", et.TongTien));
                 cmd.Parameters.Add(new SqlParameter("@TienKhachDua", et.TienKhachDua));
                 cmd.Parameters.Add(new SqlParameter("@TienThoi", et.TienThoi));
@@ -110,8 +116,5 @@ namespace DAL
             }
             return false;
         }
-
-
-
     }
 }

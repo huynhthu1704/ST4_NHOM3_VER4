@@ -110,7 +110,7 @@ namespace GUI.ThuNgan
             this.panel1.Location = new System.Drawing.Point(12, 53);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(539, 496);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 11;
             // 
             // label7
             // 
@@ -128,6 +128,7 @@ namespace GUI.ThuNgan
             this.txtDiemTL.ReadOnly = true;
             this.txtDiemTL.Size = new System.Drawing.Size(121, 26);
             this.txtDiemTL.TabIndex = 7;
+            this.txtDiemTL.TabStop = false;
             // 
             // txtTienThoi
             // 
@@ -136,13 +137,14 @@ namespace GUI.ThuNgan
             this.txtTienThoi.ReadOnly = true;
             this.txtTienThoi.Size = new System.Drawing.Size(121, 26);
             this.txtTienThoi.TabIndex = 6;
+            this.txtTienThoi.TabStop = false;
             // 
             // txtTienKhachDua
             // 
             this.txtTienKhachDua.Location = new System.Drawing.Point(384, 384);
             this.txtTienKhachDua.Name = "txtTienKhachDua";
             this.txtTienKhachDua.Size = new System.Drawing.Size(121, 26);
-            this.txtTienKhachDua.TabIndex = 6;
+            this.txtTienKhachDua.TabIndex = 10;
             this.txtTienKhachDua.TextChanged += new System.EventHandler(this.txtTienKhachDua_TextChanged);
             // 
             // txtTongTien
@@ -152,6 +154,7 @@ namespace GUI.ThuNgan
             this.txtTongTien.ReadOnly = true;
             this.txtTongTien.Size = new System.Drawing.Size(125, 26);
             this.txtTongTien.TabIndex = 6;
+            this.txtTongTien.TabStop = false;
             // 
             // txtChietKhau
             // 
@@ -160,6 +163,7 @@ namespace GUI.ThuNgan
             this.txtChietKhau.ReadOnly = true;
             this.txtChietKhau.Size = new System.Drawing.Size(125, 26);
             this.txtChietKhau.TabIndex = 6;
+            this.txtChietKhau.TabStop = false;
             // 
             // txtKhuyenMai
             // 
@@ -167,7 +171,8 @@ namespace GUI.ThuNgan
             this.txtKhuyenMai.Name = "txtKhuyenMai";
             this.txtKhuyenMai.ReadOnly = true;
             this.txtKhuyenMai.Size = new System.Drawing.Size(125, 26);
-            this.txtKhuyenMai.TabIndex = 6;
+            this.txtKhuyenMai.TabIndex = 0;
+            this.txtKhuyenMai.TabStop = false;
             // 
             // txtGhiChu
             // 
@@ -175,7 +180,7 @@ namespace GUI.ThuNgan
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
             this.txtGhiChu.Size = new System.Drawing.Size(384, 49);
-            this.txtGhiChu.TabIndex = 6;
+            this.txtGhiChu.TabIndex = 9;
             // 
             // txtTienHang
             // 
@@ -183,7 +188,8 @@ namespace GUI.ThuNgan
             this.txtTienHang.Name = "txtTienHang";
             this.txtTienHang.ReadOnly = true;
             this.txtTienHang.Size = new System.Drawing.Size(125, 26);
-            this.txtTienHang.TabIndex = 5;
+            this.txtTienHang.TabIndex = 0;
+            this.txtTienHang.TabStop = false;
             // 
             // dgvHoaDon
             // 
@@ -200,9 +206,9 @@ namespace GUI.ThuNgan
             this.dgvHoaDon.Location = new System.Drawing.Point(0, 3);
             this.dgvHoaDon.Name = "dgvHoaDon";
             this.dgvHoaDon.Size = new System.Drawing.Size(536, 274);
-            this.dgvHoaDon.TabIndex = 0;
+            this.dgvHoaDon.TabIndex = 11;
+            this.dgvHoaDon.TabStop = false;
             this.dgvHoaDon.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHoaDon_CellValueChanged);
-            this.dgvHoaDon.Click += new System.EventHandler(this.dgvHoaDon_Click);
             // 
             // colMaSp
             // 
@@ -259,7 +265,7 @@ namespace GUI.ThuNgan
             this.btnReset.Location = new System.Drawing.Point(425, 457);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(80, 36);
-            this.btnReset.TabIndex = 4;
+            this.btnReset.TabIndex = 12;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -422,7 +428,7 @@ namespace GUI.ThuNgan
             this.btnXoa.Location = new System.Drawing.Point(577, 448);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(125, 36);
-            this.btnXoa.TabIndex = 4;
+            this.btnXoa.TabIndex = 7;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -432,7 +438,7 @@ namespace GUI.ThuNgan
             this.btnThem.Location = new System.Drawing.Point(746, 448);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(114, 36);
-            this.btnThem.TabIndex = 4;
+            this.btnThem.TabIndex = 8;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
@@ -442,7 +448,7 @@ namespace GUI.ThuNgan
             this.btnInHoaDon.Location = new System.Drawing.Point(746, 508);
             this.btnInHoaDon.Name = "btnInHoaDon";
             this.btnInHoaDon.Size = new System.Drawing.Size(114, 36);
-            this.btnInHoaDon.TabIndex = 4;
+            this.btnInHoaDon.TabIndex = 11;
             this.btnInHoaDon.Text = "In hóa đơn";
             this.btnInHoaDon.UseVisualStyleBackColor = true;
             this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
@@ -453,7 +459,7 @@ namespace GUI.ThuNgan
             this.btnHuy.Location = new System.Drawing.Point(577, 508);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(125, 36);
-            this.btnHuy.TabIndex = 4;
+            this.btnHuy.TabIndex = 9;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
@@ -474,6 +480,7 @@ namespace GUI.ThuNgan
             this.txtTenHH.ReadOnly = true;
             this.txtTenHH.Size = new System.Drawing.Size(159, 39);
             this.txtTenHH.TabIndex = 5;
+            this.txtTenHH.TabStop = false;
             // 
             // txtMaHD
             // 
@@ -482,6 +489,7 @@ namespace GUI.ThuNgan
             this.txtMaHD.ReadOnly = true;
             this.txtMaHD.Size = new System.Drawing.Size(159, 26);
             this.txtMaHD.TabIndex = 1;
+            this.txtMaHD.TabStop = false;
             // 
             // txtMaTheKH
             // 
@@ -520,7 +528,7 @@ namespace GUI.ThuNgan
             this.panel2.Location = new System.Drawing.Point(567, 218);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(293, 175);
-            this.panel2.TabIndex = 10;
+            this.panel2.TabIndex = 4;
             // 
             // lblThoiGian
             // 

@@ -103,6 +103,7 @@ namespace GUI.Admin
         {
             try
             {
+                // khi click vào datagridview thì thông tin hiện lên các field, vì vậy có thể kiểm tra filed có dữ liệu hay chưa để xóa
                 if (!string.IsNullOrEmpty(txtTenLoai.Text))
                 {
                     DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
@@ -113,6 +114,7 @@ namespace GUI.Admin
                         if (_bll.XoaLoaiTheKH(et))
                         {
                             MessageBox.Show("Xóa thành công");
+                            // Làm lại mã loại thẻ mới
                             STT = _bll.HienThiDS().Rows.Count == 0 ? STT : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiThe"].ToString().Substring(2)) + 1;
                             Reset();
                             dgvDS.DataSource = _bll.HienThiDS();
@@ -184,6 +186,12 @@ namespace GUI.Admin
         {
             txtMaLoai.Text = "LT" + string.Format("{0:00}", STT);
             txtTenLoai.Text = "";
+        }
+
+        // Reset các field khi nhấn nút làm mới
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

@@ -9,13 +9,13 @@ namespace ET
 {
     public class ET_HDNH
     {
-        private string maHD;
-        private string maNCC;
-        private string maNV;
-        private DateTime thoiGian;
-        private int tongTien;
-        private int traTruoc;
-        private int congNo;
+        private string maHD; // mã hóa đơn
+        private string maNCC;// mã nhà cung cấp
+        private string maNV; // mã nhân viên
+        private DateTime thoiGian; // thời gian nhập hàng
+        private int tongTien; // tổng tiền nhập
+        private int traTruoc; // trả trước
+        private int congNo; // công nợ
 
 
         public ET_HDNH(string maHD, string maNCC, string maNV, DateTime thoiGian, int tongTien, int traTruoc, int congNo)

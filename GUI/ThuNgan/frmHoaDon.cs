@@ -23,21 +23,22 @@ namespace GUI.ThuNgan
         BLL_HoaDon bllHoaDon = new BLL_HoaDon();
         BLL_Kho bllKho = new BLL_Kho();
         BLL_ChiTietHoaDon bllCTHD = new BLL_ChiTietHoaDon();
-        int sTT = 0;
-        int tienHang = 0;
-        int khuyenMai = 0;
-        int tongTien = 0;
-        int diemTichLuy = 0;
-        int tienKhachDua = 0;
-        int tienThoi = 0;
-        int chietKhau = 0;
-        bool checkThe = false;
+        int sTT = 0; // STT
+        int tienHang = 0; // Tiền hàng
+        int khuyenMai = 0; // Khuyến mãi
+        int tongTien = 0; // Tổng tiền
+        int diemTichLuy = 0; // Điểm tích lũy
+        int tienKhachDua = 0; // Tiền khách đưa
+        int tienThoi = 0; // Tiền thối
+        int chietKhau = 0; // Chiết khấu
+        bool checkThe = false; // Check thẻ
         public frmHoaDon()
         {
             InitializeComponent();
             timer.Start();
         }
 
+        // Sự kiện load form
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
             sTT = bllHoaDon.LayHDGiamDan().Rows.Count == 0 ? 1 :
@@ -47,7 +48,8 @@ namespace GUI.ThuNgan
             cboMaNV.DisplayMember = "HoTen";
             cboMaNV.ValueMember = "MaNV";
         }
-
+         
+        // Sự kiện trước khi đóng form, xác nhận có muốn đóng form hay không
         private void frmHoaDon_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -69,30 +71,28 @@ namespace GUI.ThuNgan
             }
         }
 
+        // Timer tick hiển thị thời gian thanh toán lên màn hìh
         private void timer_Tick(object sender, EventArgs e)
         {
             lblThoiGian.Text = (DateTime.Now.ToString());
         }
 
+        // Sự kiện txtMaSP thay đổi, kiểm tra nếu hàng hóa không tồn tại thì thông báo error
         private void txtMaSP_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                if (bllTonKho.CheckTT(txtMaHH.Text))
+                if (bllTonKho.CheckTT(txtMaHH.Text)) // Check tồn tại hàng hóa
                 {
-                    int sLTonKho = bllTonKho.DemTonKho(txtMaHH.Text);
-                    //  MessageBox.Show(sLTonKho.ToString());
+                    int sLTonKho = bllTonKho.DemTonKho(txtMaHH.Text); // Số lượng tồn kho
                     if (sLTonKho >= 1)
                     {
-                        //MessageBox.Show(txtMaHH.Text.Length.ToString());
                         int row = bllHH.LayTT(txtMaHH.Text).Rows.Count;
-                        //MessageBox.Show(row.ToString());
+                        txtMaHH.Text = bllHH.LayTT(txtMaHH.Text).Rows[0]["MaHH"].ToString();
                         txtTenHH.Text = bllHH.LayTT(txtMaHH.Text).Rows[0]["TenHH"].ToString();
-                        //numericSL.Maximum = 
                         errorProvider.Clear();
                     }
                 }
-
                 else
                 {
                     txtTenHH.Text = "";
@@ -105,6 +105,7 @@ namespace GUI.ThuNgan
             }
         }
 
+        // Check hàng hóa đã được thêm hay chưa
         public int CheckCoHH(string maHH)
         {
             if (dgvHoaDon.Rows.Count != 1)
@@ -119,62 +120,63 @@ namespace GUI.ThuNgan
             }
             return -1;
         }
+         
 
+        // Sự kiện khi nhấn btnThem, thêm hàng hóa vào datagridview
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                if (bllHH.CheckTonTai(txtMaHH.Text))
+                if (bllHH.CheckTonTai(txtMaHH.Text)) // Check tồn tại mã hàng hóa
                 {
-                    int sL = (int)numericSL.Value;
+                    int sL = (int)numericSL.Value; // Số lượng lấy từ numerric
                     if (bllTonKho.CheckTT(txtMaHH.Text))
                     {
-                        int sLTonKho = bllTonKho.DemTonKho(txtMaHH.Text);
-                        // MessageBox.Show(sLTonKho.ToString());
+                        int sLTonKho = bllTonKho.DemTonKho(txtMaHH.Text); // Số lượng tồn kho
                         if (sL > sLTonKho)
                         {
                             MessageBox.Show("Không đủ sản phẩm");
                         }
                         else
                         {
+                            // Mã hàng hóa
                             string maHH = bllHH.LayTT(txtMaHH.Text).Rows[0]["MaHH"].ToString();
+                            // Tên hàng hóa
                             string tenHH = bllHH.LayTT(txtMaHH.Text).Rows[0]["TenHH"].ToString();
+                            // Giá
                             int gia = int.Parse(bllHH.LayTT(txtMaHH.Text).Rows[0]["Gia"].ToString());
+                            // Mã khuyến mãi
                             string maKM = bllHH.LayTT(txtMaHH.Text).Rows[0]["MaKM"].ToString();
-                            MessageBox.Show(maKM);
+                            // Giá trị khuyến mãi
                             int gtriKM = 0;
+                            // Kiểm tra nếu có khuyến mãi thì check ngày khuyến mãi được áp dụng hay chưa
                             if (bllKM.LayKMTheoMa(maKM).Rows.Count > 0)
                             {
                                 DateTime ngayBatDau = DateTime.Parse(bllKM.LayKMTheoMa(maKM).Rows[0]["NgayBatDauKM"].ToString());
                                 DateTime ngayKetThuc = DateTime.Parse(bllKM.LayKMTheoMa(maKM).Rows[0]["NgayKetThucKM"].ToString());
                                 if (ngayBatDau <= DateTime.Now && DateTime.Now <= ngayKetThuc)
                                 {
-                                    //MessageBox.Show(ngayBatDau.ToString());
-                                    //MessageBox.Show(ngayKetThuc.ToString());  
-                                    //MessageBox.Show(DateTime.Now.ToString());
                                     gtriKM = int.Parse(bllKM.LayKMTheoMa(maKM).Rows[0]["GiaTriKM"].ToString());
-                                    MessageBox.Show(gtriKM.ToString());
                                 }
                             }
-                            // MessageBox.Show(bllKM.LayKMTheoMa(maKM).Rows.Count.ToString());
-                            int tienKM = gia / 100 * gtriKM * sL;
-                            int thanhTien = (gia * sL - tienKM);
+                            int tienKM = gia / 100 * gtriKM * sL; // Tính tiền khuyến mãi
+                            int thanhTien = (gia * sL - tienKM); // Thành tiền
+                            // Kiểm tra hàng hóa đã được thêm vào datagridview hay chưa, nếu rồi thì cộng số lượng vào
                             if (CheckCoHH(maHH) != -1)
                             {
-                                int row = CheckCoHH(maHH);
-                                int slCu = int.Parse(dgvHoaDon.Rows[row].Cells[4].Value.ToString());
-                                int kmCu = int.Parse(dgvHoaDon.Rows[row].Cells[6].Value.ToString());
+                                int row = CheckCoHH(maHH); // Lấy hàng trong datagridview có chứa hàng hóa đó
+                                int slCu = int.Parse(dgvHoaDon.Rows[row].Cells[4].Value.ToString()); // số lượng cũ
+                                int kmCu = int.Parse(dgvHoaDon.Rows[row].Cells[6].Value.ToString()); // khuyễn mãi cũ
                                 int thanhTienCu = int.Parse(dgvHoaDon.Rows[row].Cells[7].Value.ToString());
-                                if ((sL + slCu) > sLTonKho)
+                                if ((sL + slCu) > sLTonKho) // Kiểm tra đủ hàng hay không
                                 {
                                     MessageBox.Show("Không đủ sản phẩm");
                                 }
                                 else
                                 {
+                                    // Có 2 cột số lượng, 1 cột cũ để lưu trữ số lượng cũ trong trường hợp thay đổi số lượng trực tiếp trên datagridview
                                     dgvHoaDon.Rows[row].Cells[4].Value = sL + slCu;
-                                    dgvHoaDon.Rows[row].Cells[3].Value = sL + slCu;
-                                    //dgvHoaDon.Rows[row].Cells[4].Value = tienKM + kmCu;
-                                    //dgvHoaDon.Rows[row].Cells[5].Value = thanhTien + thanhTienCu;
+                                    dgvHoaDon.Rows[row].Cells[3].Value = sL + slCu; 
                                 }
                             }
                             else
@@ -193,16 +195,17 @@ namespace GUI.ThuNgan
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "Them");
+                MessageBox.Show(ex.Message);
             }
         }
 
+        // Tính toán các thông tin về giá tiền, khuyến mãi, tích lũy...
         public void ThongTinHD()
         {
-            tienHang = 0;
-            khuyenMai = 0;
-            tongTien = 0;
-            diemTichLuy = 0;
+            tienHang = 0; // tiền hàng
+            khuyenMai = 0; // khuyến mãi
+            tongTien = 0; // tổng tiền
+            diemTichLuy = 0; // điểm tích lũy
             for (int i = 0; i < dgvHoaDon.Rows.Count - 1; i++)
             {
                 tienHang += int.Parse(dgvHoaDon.Rows[i].Cells[2].Value.ToString())
@@ -211,7 +214,6 @@ namespace GUI.ThuNgan
                 tongTien += int.Parse(dgvHoaDon.Rows[i].Cells[7].Value.ToString());
 
             }
-            //  tongTien = tienHang - khuyenMai;
            
             diemTichLuy = (int)(tongTien / 1000);
             if (checkThe)
@@ -221,19 +223,19 @@ namespace GUI.ThuNgan
             txtTienHang.Text = tienHang.ToString();
             txtKhuyenMai.Text = khuyenMai.ToString();
             txtTongTien.Text = tongTien.ToString();
-            //txtDiemTL.Text = diemTichLuy.ToString();
         }
+
+        // Sự kiện thay đổi cột số lượng trong datagridview
         private void dgvHoaDon_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                // MessageBox.Show(e.ColumnIndex.ToString());
                 if (e.RowIndex >= 0 && e.ColumnIndex == 4)
                 {
-
+                    // Cột số lượng cũ là hidden
                     int slCu = int.Parse(dgvHoaDon.Rows[e.RowIndex].Cells[3].Value.ToString());
                     int sl = int.Parse(dgvHoaDon.Rows[e.RowIndex].Cells[4].Value.ToString());
-                    MessageBox.Show(sl.ToString());
+                    // Số lượng tồn kho
                     int sLTonKho = bllTonKho.DemTonKho(dgvHoaDon.Rows[e.RowIndex].Cells[0].Value.ToString());
                     if (sl < 1)
                     {
@@ -247,16 +249,16 @@ namespace GUI.ThuNgan
                     else
                     {
                         dgvHoaDon.Rows[e.RowIndex].Cells[3].Value = sl.ToString();
-                        //dgvHoaDon.Rows[e.RowIndex].Cells[3].Value = sl;
+                        // giá trị khuyến mãi
                         int gTriKM = int.Parse(dgvHoaDon.Rows[e.RowIndex].Cells[5].Value.ToString());
-                        //MessageBox.Show(gTriKM.ToString());
+                        // giá tiền khuyến mãi
                         int giaTienKM = int.Parse(dgvHoaDon.Rows[e.RowIndex].Cells[6].Value.ToString());
+                        // giá
                         int gia = int.Parse(dgvHoaDon.Rows[e.RowIndex].Cells[2].Value.ToString());
+                        // tiền khuyến mãi
                         int tienKM = gia / 100 * gTriKM * sl;
-                        //MessageBox.Show("hihi7");
+                        // thành tiền
                         int thanhTien = (gia * sl - tienKM);
-                        //dgvHoaDon.Rows[e.RowIndex].Cells[2].Value = gia;
-                        //dgvHoaDon.Rows[e.RowIndex].Cells[3].Value = sl;
                         dgvHoaDon.Rows[e.RowIndex].Cells[6].Value = tienKM;
                         dgvHoaDon.Rows[e.RowIndex].Cells[7].Value = thanhTien;
                         ThongTinHD();
@@ -266,7 +268,7 @@ namespace GUI.ThuNgan
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "Cell change");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -274,15 +276,17 @@ namespace GUI.ThuNgan
         {
             try
             {
+                // số lượng
                 int sL = int.Parse(numericSL.Value.ToString());
-                if (bllTonKho.CheckTT(txtMaHH.Text))
+                if (bllTonKho.CheckTT(txtMaHH.Text)) // check tồn kho
                 {
+                    // số lượng tồn kho
                     int sLTonKho = bllTonKho.DemTonKho(txtMaHH.Text);
-                    // MessageBox.Show(sLTonKho.ToString());
-                    if (sL > sLTonKho)
+                    numericSL.Maximum = sLTonKho;
+                    if (sL == sLTonKho)
                     {
                         errorProvider.SetError(numericSL, "Không đủ số lượng sản phẩm");
-                        // MessageBox.Show("Không đủ số lượng sản phẩm");
+                      
                     }
                     else
                     {
@@ -292,28 +296,26 @@ namespace GUI.ThuNgan
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "Numeric change");
+                MessageBox.Show(ex.Message);
             }
         }
 
+        // Reset các fields
         private void Reset()
         {
             txtMaHH.Text = "";
+            txtMaHH.Focus();
             txtTenHH.Text = "";
             numericSL.Value = 1;
             errorProvider.Clear();
         }
 
-        private void dgvHoaDon_Click(object sender, EventArgs e)
-        {
-            //int i = dgvHoaDon.CurrentCell.RowIndex;
-            //MessageBox.Show(i.ToString());
-        }
-
+       // Sự kiện khi nhấn btnXoa
         private void btnXoa_Click(object sender, EventArgs e)
         {
             try
             {
+                // Lấy hàng đang được click vào
                 int row = dgvHoaDon.CurrentCell.RowIndex;
                 if (row < dgvHoaDon.Rows.Count)
                 {
@@ -332,6 +334,7 @@ namespace GUI.ThuNgan
             }
         }
 
+        // Sự kiện khi nhấn btnHuy
         private void btnHuy_Click(object sender, EventArgs e)
         {
             try
@@ -344,6 +347,7 @@ namespace GUI.ThuNgan
             }
         }
 
+        // Sự kiện khi nhấn btnResrt, reset toàn bộ dữ liệu của form
         private void btnReset_Click(object sender, EventArgs e)
         {
             txtMaHD.Text = "";
@@ -363,13 +367,16 @@ namespace GUI.ThuNgan
             txtTienKhachDua.Text = "";
             txtTienThoi.Text = "";
             txtMaHD.Text = "HD" + string.Format("{0:000}", sTT);
+            errorProvider.Clear();
         }
-
+         
+        // Sự kiện khi nhấn btnQuayVe, thoát form Hóa đơn hiện tại
         private void btnQuayVe_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // In hóa đơne
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
             bool kq = true;
@@ -394,57 +401,64 @@ namespace GUI.ThuNgan
                         string ghiChu = txtGhiChu.Text;
                         try
                         {
-                            if (checkThe)
+                            if (checkThe) // Check nếu khách hàng có thẻ khách hàng
                             {
                                 etHD = new ET_HoaDon(maHD, txtMaTheKH.Text, maNV, DateTime.Now, ghiChu, tienHang, khuyenMai, chietKhau, tongTien,diemTichLuy, tienKhachDua, tienThoi);
+                                // Lấy số điểm cũ trong thẻ
                                 int diemTheCu = int.Parse(bllTheKH.LayTheKHTheoMa(txtMaTheKH.Text).Rows[0]["DiemTL"].ToString());
-                                MessageBox.Show(diemTichLuy.ToString()+"DTL");
+                                // Update điểm thẻ
                                 bllTheKH.SuaDiemThe(txtMaTheKH.Text, diemTheCu + diemTichLuy); 
                             }
                             else
                             {
                                 etHD = new ET_HoaDon(maHD, "", maNV, DateTime.Now, ghiChu, tienHang, khuyenMai, chietKhau, tongTien,0, tienKhachDua, tienThoi);
                             }
-                            kq = bllHoaDon.ThemHoaDon(etHD);
+                            kq = bllHoaDon.ThemHoaDon(etHD); //Check thêm hóa đơn thành công hay chưa
                             
                             for (int i = 0; i < dgvHoaDon.Rows.Count - 1; i++)
                             {
+                                // Mã sản phẩm
                                 string maSP = dgvHoaDon.Rows[i].Cells[0].Value.ToString();
+                                // Giá
                                 int gia = int.Parse(dgvHoaDon.Rows[i].Cells[2].Value.ToString());
+                                // Số lượng
                                 int sL = int.Parse(dgvHoaDon.Rows[i].Cells[4].Value.ToString());
+                                // Khuyến mãi
                                 int khuyenMai = int.Parse(dgvHoaDon.Rows[i].Cells[6].Value.ToString());
-                                MessageBox.Show(khuyenMai.ToString()+"KM");
+                                // Thành tiền
                                 int thanhTien = int.Parse(dgvHoaDon.Rows[i].Cells[7].Value.ToString());
                                 ET_ChiTietHD etCTHD = new ET_ChiTietHD(maHD, maSP, sL, gia, khuyenMai, thanhTien);
                                 kq = bllCTHD.ThemCTHD(etCTHD);
                                 DataTable dsKho = bllKho.LayDS();
+
+                                // Kiểm tra số lượng từng kho, nếu kho đầu không đủ số lượng thì tiếp trừ những kho tiếp theo
                                 for (int k = 0; k < dsKho.Rows.Count; k++)
                                 {
+                                    // Lấy mã kho
                                     string maKho = dsKho.Rows[k][0].ToString();
-                                     MessageBox.Show(maKho);
                                     if (bllTonKho.CheckTonTaiTheoKho(maSP, maKho) && (sL > 0))
                                     {
-                                        MessageBox.Show(bllTonKho.LaySL(maSP, maKho).ToString()+"TKho");
-                                        if (bllTonKho.LaySL(maSP, maKho) >= sL)
+                                        if (bllTonKho.LaySL(maSP, maKho) > sL)
                                         {
+                                            MessageBox.Show(bllTonKho.LaySL(maSP, maKho).ToString());
+                                            MessageBox.Show(sL.ToString());
+                                            
                                             ET_TonKho etTonKho = new ET_TonKho(maSP, maKho, bllTonKho.LaySL(maSP, maKho) - sL);
                                             kq = bllTonKho.SuaTonKho(etTonKho);
-                                            // MessageBox.Show(etTonKho.SoLuong.ToString() + "1");
                                             break;
                                         }
                                         else
                                         {
-                                            ET_TonKho etTonKho = new ET_TonKho(maSP, maKho, bllTonKho.LaySL(maSP, maKho));
+                                            ET_TonKho etTonKho = new ET_TonKho(maSP, maKho, 0);
                                             kq = bllTonKho.SuaTonKho(etTonKho);
                                             sL -= bllTonKho.LaySL(maSP, maKho);
-                                            // MessageBox.Show(etTonKho.SoLuong.ToString() + "2");
                                         }
                                     }
                                 }
                             }
                             if (kq)
                             {
-                                sTT++;
+                                sTT++; // Tăng số thứ tự để làm mã hóa đơn tự động tăng
                                 btnReset_Click(null, null);
                                 frmInHD frm = new frmInHD(etHD);
                                 frm.Show();
@@ -456,9 +470,13 @@ namespace GUI.ThuNgan
                         }
                     }
                 }
+            } else
+            {
+                MessageBox.Show("Chưa có hàng hóa để in");
             }
         }
 
+        // Check string nhập vào có phải là số hay không
         public bool CheckSo(string so)
         {
             if (string.IsNullOrEmpty(so))
@@ -472,6 +490,8 @@ namespace GUI.ThuNgan
             }
             return true;
         }
+
+        // Sự kiện khi txtMaTheKH thay đổi, nếu tồn tại thẻ và thẻ đươc kích hoạt thì checkThe  = true
         private void txtMaKH_TextChanged(object sender, EventArgs e)
         {
             try
@@ -480,11 +500,10 @@ namespace GUI.ThuNgan
                 {
                     errorProvider.Clear();
                     bool tinhTrang = Boolean.Parse(bllTheKH.LayTheKHTheoMa(txtMaTheKH.Text).Rows[0]["TinhTrang"].ToString());
-                    MessageBox.Show(tinhTrang.ToString());
                     if (tinhTrang)
                     {
-                       // checkThe = false;
                         checkThe = true;
+                        txtMaTheKH.Text = bllTheKH.LayTheKHTheoMa(txtMaTheKH.Text).Rows[0]["MaTheKH"].ToString();
                         txtDiemTL.Text = diemTichLuy.ToString();
                     } else
                     {
@@ -504,6 +523,7 @@ namespace GUI.ThuNgan
             }
         }
 
+        // Khi nhập vào tiền khách đưa, thay đổi tiền thối tương ứng
         private void txtTienKhachDua_TextChanged(object sender, EventArgs e)
         {
             if (!CheckSo(txtTienKhachDua.Text))

@@ -9,12 +9,12 @@ namespace ET
 {
     public class ET_ChiTietHD
     {
-        private string maHD;
-        private string maHH;
-        private int sL;
-        private int gia;
-        private int khuyenMai;
-        private int thanhTien;
+        private string maHD; // mã hóa đơn
+        private string maHH; // mã hàng hóa
+        private int sL; // số lượng
+        private int gia; // giá
+        private int khuyenMai; // khuyến mãi
+        private int thanhTien; // thành tiền
 
         public ET_ChiTietHD(string maHD, string maHH, int sL, int gia, int khuyenMai, int thanhTien)
         {

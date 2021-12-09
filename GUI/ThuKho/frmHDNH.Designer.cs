@@ -71,10 +71,12 @@ namespace GUI.ThuKho
             this.btnSua = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHDNH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSL)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -141,7 +143,6 @@ namespace GUI.ThuKho
             this.dgvHDNH.ReadOnly = true;
             this.dgvHDNH.Size = new System.Drawing.Size(536, 274);
             this.dgvHDNH.TabIndex = 0;
-            this.dgvHDNH.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHDNH_CellContentClick);
             this.dgvHDNH.Click += new System.EventHandler(this.dgvHDNH_Click);
             // 
             // colMaSP
@@ -285,7 +286,7 @@ namespace GUI.ThuKho
             this.btnXoa.Location = new System.Drawing.Point(577, 448);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(125, 36);
-            this.btnXoa.TabIndex = 4;
+            this.btnXoa.TabIndex = 9;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -295,7 +296,7 @@ namespace GUI.ThuKho
             this.btnThem.Location = new System.Drawing.Point(746, 448);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(114, 36);
-            this.btnThem.TabIndex = 4;
+            this.btnThem.TabIndex = 10;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
@@ -305,7 +306,7 @@ namespace GUI.ThuKho
             this.btnLuuHoaDon.Location = new System.Drawing.Point(746, 508);
             this.btnLuuHoaDon.Name = "btnLuuHoaDon";
             this.btnLuuHoaDon.Size = new System.Drawing.Size(114, 36);
-            this.btnLuuHoaDon.TabIndex = 4;
+            this.btnLuuHoaDon.TabIndex = 12;
             this.btnLuuHoaDon.Text = "Lưu hóa đơn";
             this.btnLuuHoaDon.UseVisualStyleBackColor = true;
             this.btnLuuHoaDon.Click += new System.EventHandler(this.btnLuuHoaDon_Click);
@@ -385,7 +386,7 @@ namespace GUI.ThuKho
             this.txtGia.Location = new System.Drawing.Point(124, 160);
             this.txtGia.Name = "txtGia";
             this.txtGia.Size = new System.Drawing.Size(159, 26);
-            this.txtGia.TabIndex = 17;
+            this.txtGia.TabIndex = 7;
             // 
             // cboKho
             // 
@@ -394,7 +395,7 @@ namespace GUI.ThuKho
             this.cboKho.Location = new System.Drawing.Point(124, 206);
             this.cboKho.Name = "cboKho";
             this.cboKho.Size = new System.Drawing.Size(159, 28);
-            this.cboKho.TabIndex = 16;
+            this.cboKho.TabIndex = 8;
             // 
             // label3
             // 
@@ -421,14 +422,14 @@ namespace GUI.ThuKho
             this.cboNCC.Location = new System.Drawing.Point(676, 98);
             this.cboNCC.Name = "cboNCC";
             this.cboNCC.Size = new System.Drawing.Size(184, 28);
-            this.cboNCC.TabIndex = 11;
+            this.cboNCC.TabIndex = 2;
             // 
             // btnSua
             // 
             this.btnSua.Location = new System.Drawing.Point(577, 508);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(125, 36);
-            this.btnSua.TabIndex = 12;
+            this.btnSua.TabIndex = 11;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
@@ -446,6 +447,10 @@ namespace GUI.ThuKho
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmHDNH
             // 
@@ -480,6 +485,7 @@ namespace GUI.ThuKho
             ((System.ComponentModel.ISupportInitialize)(this.numericSL)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,5 +534,6 @@ namespace GUI.ThuKho
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtGia;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

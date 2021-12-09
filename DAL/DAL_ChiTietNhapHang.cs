@@ -21,6 +21,8 @@ namespace DAL
         {
             conn = Connection.conn;
         }
+
+        // Hiển thi chi tiết nhập hàng
         public DataTable HienThi(string tenSP)
         {
             dt = null;
@@ -35,6 +37,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -43,6 +46,7 @@ namespace DAL
             return dt;
         }
 
+        // Thêm chi tiết nhập hàng
         public bool ThemCTNH(ET_ChiTietNH et)
         {
             try
@@ -71,6 +75,8 @@ namespace DAL
             }
             return false;
         }
+
+        // Check tồn tại chi tiết nhập hàng
         public bool CheckTonTai(string maHD, string maHH)
         {
             dt = null;
@@ -91,7 +97,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -100,6 +106,7 @@ namespace DAL
             return false;
         }
 
+        // Xóa chi tiết nhập hàng
         public bool XoaCTNH(string maHD, string maHH)
         {
             try
@@ -116,6 +123,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -123,6 +131,8 @@ namespace DAL
             }
             return false;
         }
+
+        // Sửa chi tiết nhập hàng
         public bool SuaCTNH(ET_ChiTietNH et)
         {
             try
@@ -144,6 +154,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {

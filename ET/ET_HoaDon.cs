@@ -9,18 +9,18 @@ namespace ET
 {
     public class ET_HoaDon
     {
-		private string maHD;
-		private string maTheKH;
-        private string maNV;
-		private DateTime ngayTT;
-		private string ghiChu;
-		private int tienHang;
-		private int khuyenMai;
-		private int chietKhau;
-		private int tongTien;
-        private int diemTL;
-		private int tienKhachDua;
-		private int tienThoi;
+		private string maHD; // mã hóa đơn
+		private string maTheKH;// mã thẻ KH
+        private string maNV; // mã nhân viên
+		private DateTime ngayTT; // ngày thanh toán
+		private string ghiChu; // ghi chú
+		private int tienHang; // tiền hàng
+		private int khuyenMai; // khuyến mãi
+		private int chietKhau; // chiết khấu
+		private int tongTien; // tổng tiền
+        private int diemTL; // điểm tích lũy
+		private int tienKhachDua; // tiền khách đưa
+		private int tienThoi; // tiền thối
 
         public ET_HoaDon(string maHD, string maTheKH, string maNV, DateTime ngayTT, string ghiChu, int tienHang, int khuyenMai, int chietKhau, int tongTien, int diemTL, int tienKhachDua, int tienThoi)
         {

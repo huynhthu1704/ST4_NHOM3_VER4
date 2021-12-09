@@ -21,6 +21,8 @@ namespace DAL
         {
             conn = Connection.conn;
         }
+
+        // Hiển thị ds tồn kho
         public DataTable HienThi(string tenSP)
         {
             dt = null;
@@ -44,6 +46,7 @@ namespace DAL
             return dt;
         }
 
+        // Thêm tồn kho
         public bool ThemTonKho(ET_TonKho et)
         {
             try
@@ -69,6 +72,8 @@ namespace DAL
             }
             return false;
         }
+
+        // Check tồn tại theo kho
         public bool CheckTonTaiTheoKho(string maHH, string maKho)
         {
             dt = null;
@@ -98,6 +103,7 @@ namespace DAL
             return false;
         }
 
+        // Check tồn tại theo mã hàng hóa
         public bool CheckTonTai(string maHH)
         {
             dt = null;
@@ -125,6 +131,8 @@ namespace DAL
             }
             return false;
         }
+
+        // Lấy số lượng tồn kho
         public int LaySL(string maHH, string maKho)
         {
             dt = null;
@@ -155,28 +163,7 @@ namespace DAL
             return sl;
         }
 
-        //public bool XoaTonKho(ET_DanhMucHH et)
-        //{
-        //    try
-        //    {
-        //        conn.Open();
-        //        cmd = new SqlCommand("sp_XoaDanhMucHH", conn);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.Add(new SqlParameter("@MaDM", et.MaDM));
-        //        if (cmd.ExecuteNonQuery() > 0)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //    return false;
-        //}
+        // Sửa tồn kho
         public bool SuaTonKho(ET_TonKho et)
         {
             try
@@ -203,6 +190,8 @@ namespace DAL
             }
             return false;
         }
+        
+        // Đếm tồn kho
         public int DemTonKho(string maHH)
         {
             dt = null;

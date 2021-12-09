@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Ngọc Thư
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// Ngọc Thư
+
 using CrystalDecisions.Shared;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Data;
@@ -21,6 +22,7 @@ namespace GUI.ThuNgan
         ET_ChiTietHD etCTHD;
         BLL_ChiTietHoaDon bllCTHD;
         BLL_HoaDon bllHD;
+        List<ET_ChiTietHD> cthd = new List<ET_ChiTietHD>();
         public frmInHD(ET_HoaDon etHD)
         {
             InitializeComponent();
@@ -36,23 +38,28 @@ namespace GUI.ThuNgan
             {
                 MessageBox.Show(etHD.MaHD);
                 dt = bllCTHD.LayCTHDTheoMaHD(etHD.MaHD);
-                MessageBox.Show(dt.Rows.Count.ToString() + "row1");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    MessageBox.Show("hi");
+                    cthd.Add(new ET_ChiTietHD(dr["MaHD"].ToString(), dr["MaHH"].ToString(), int.Parse(dr["SL"].ToString()), int.Parse(dr["Gia"].ToString()), int.Parse(dr["KhuyenMai"].ToString()), int.Parse(dr["ThanhTien"].ToString())));
+                }
+               // MessageBox.Show(dt.Rows.Count.ToString() + "row1");
                 RPInHoaDon rp = new RPInHoaDon();
-                MessageBox.Show(dt.Rows.Count.ToString() + "row2");
-                rp.SetDataSource(dt);
-                MessageBox.Show(dt.Rows.Count.ToString() + "row3");
-                rp.SetParameterValue("maHD", etHD.MaHD);
-                rp.SetParameterValue("tenNV", etHD.MaNV);
-                rp.SetParameterValue("ngayTT", etHD.NgayTT.ToString("dd/MM/yyyy HH:mm:ss"));
-                rp.SetParameterValue("ghiChu", etHD.GhiChu);
-                rp.SetParameterValue("tienHang", etHD.TienHang);
-                rp.SetParameterValue("kM", etHD.KhuyenMai);
-                rp.SetParameterValue("chietKhau", etHD.ChietKhau);
-                rp.SetParameterValue("thanhTien", etHD.TongTien);
-                rp.SetParameterValue("maThe", etHD.MaTheKH);
-                rp.SetParameterValue("diemTichLuy", etHD.DiemTL);
-                rp.SetParameterValue("tienKhachDua", etHD.TienKhachDua);
-                rp.SetParameterValue("tienThoi", etHD.TienThoi);
+               // MessageBox.Show(dt.Rows.Count.ToString() + "row2");
+                rp.SetDataSource(cthd);
+                //MessageBox.Show(dt.Rows.Count.ToString() + "row3");
+                rp.SetParameterValue("@MaHD", etHD.MaHD);
+                //rp.SetParameterValue("tenNV", etHD.MaNV);
+                //rp.SetParameterValue("ngayTT", etHD.NgayTT.ToString("dd/MM/yyyy HH:mm:ss"));
+                //rp.SetParameterValue("ghiChu", etHD.GhiChu);
+                //rp.SetParameterValue("tienHang", etHD.TienHang);
+                //rp.SetParameterValue("kM", etHD.KhuyenMai);
+                //rp.SetParameterValue("chietKhau", etHD.ChietKhau);
+                //rp.SetParameterValue("thanhTien", etHD.TongTien);
+                //rp.SetParameterValue("maThe", etHD.MaTheKH);
+                //rp.SetParameterValue("diemTichLuy", etHD.DiemTL);
+                //rp.SetParameterValue("tienKhachDua", etHD.TienKhachDua);
+                //rp.SetParameterValue("tienThoi", etHD.TienThoi);
 
                 inHDViewer.ReportSource = rp;
                 inHDViewer.Show();

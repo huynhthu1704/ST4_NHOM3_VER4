@@ -18,21 +18,25 @@ namespace BLL
             _dal = new DAL_HoaDon();
         }
 
+        // Hiển thị hóa đơn nhập hàng
         public DataTable HienThiDS()
         {
             return _dal.HienThiDS("sp_LayHoaDon");
         }
 
+        // Lấy hóa đơn giảm dần
         public DataTable LayHDGiamDan()
         {
             return _dal.HienThiDS("sp_LayHoaDonGiamDan");
         }
 
+        // Thêm hóa đơn 
         public bool ThemHoaDon(ET_HoaDon et)
         {
             return _dal.ThemHD(et);
         }
 
+        // Lấy hóa đơn theo mã hóa đơn
         public DataTable LayHDTheoMaHD(string maHD)
         {
             return _dal.LayHDTheoMaHD(maHD);

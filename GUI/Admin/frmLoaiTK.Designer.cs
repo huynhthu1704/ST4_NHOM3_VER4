@@ -38,6 +38,7 @@ namespace GUI.Admin
             this.txtMaLoai = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoaiTK)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@ namespace GUI.Admin
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(436, 136);
+            this.btnThoat.Location = new System.Drawing.Point(480, 135);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 6;
@@ -64,7 +65,7 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(338, 136);
+            this.btnSua.Location = new System.Drawing.Point(382, 135);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
             this.btnSua.TabIndex = 5;
@@ -74,7 +75,7 @@ namespace GUI.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(240, 136);
+            this.btnXoa.Location = new System.Drawing.Point(284, 135);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(92, 39);
             this.btnXoa.TabIndex = 4;
@@ -84,7 +85,7 @@ namespace GUI.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(142, 136);
+            this.btnThem.Location = new System.Drawing.Point(186, 135);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 3;
@@ -125,10 +126,21 @@ namespace GUI.Admin
             this.label1.TabIndex = 23;
             this.label1.Text = "Mã loại";
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(88, 135);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 31;
+            this.btnMoi.Text = "Mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmLoaiTK
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dgvLoaiTK);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -161,5 +173,6 @@ namespace GUI.Admin
         private System.Windows.Forms.TextBox txtMaLoai;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnMoi;
     }
 }
