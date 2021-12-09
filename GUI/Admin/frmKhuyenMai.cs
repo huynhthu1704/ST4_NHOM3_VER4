@@ -26,26 +26,32 @@ namespace GUI.Admin
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ET_KhuyenMai KhuyenMai = new ET_KhuyenMai(txtMaKM.Text, txtTenKM.Text,int.Parse(txtGTKM.Text), Convert.ToDateTime(dtpBD.Text), Convert.ToDateTime(dtpKT.Text));
-
             try
             {
-                if (b.CheckTonTai(KhuyenMai) == true)
+                if (txtGTKM.Text == "" || txtMaKM.Text == "" || txtTenKM.Text == "")
                 {
-                    MessageBox.Show("Khuyễn Mãi đã tồn tại");
+                    MessageBox.Show("vui lòng nhập đủ thông tin");
                 }
                 else
                 {
-                    if (b.ThemKhuyenMai(KhuyenMai) == true)
+                    ET_KhuyenMai KhuyenMai = new ET_KhuyenMai(txtMaKM.Text, txtTenKM.Text, int.Parse(txtGTKM.Text), Convert.ToDateTime(dtpBD.Text), Convert.ToDateTime(dtpKT.Text));
+                    if (b.CheckTonTai(KhuyenMai) == true)
                     {
-                        MessageBox.Show("Thêm Thành Công");
-                        txtGTKM.Text = "";  
-                        txtMaKM.Text = "";
-                        txtTenKM.Text = "";
+                        MessageBox.Show("Khuyễn Mãi đã tồn tại");
                     }
                     else
                     {
-                        MessageBox.Show("Thêm Không Thành Công");
+                        if (b.ThemKhuyenMai(KhuyenMai) == true)
+                        {
+                            MessageBox.Show("Thêm Thành Công");
+                            txtGTKM.Text = "";
+                            txtMaKM.Text = "";
+                            txtTenKM.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thêm Không Thành Công");
+                        }
                     }
                 }
             }
@@ -62,46 +68,66 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaKM.Text;
-            try
+            DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
             {
-                if (b.XoaKhuyenMai(ma) == true)
+                try
                 {
-                    MessageBox.Show("Xoá Thành Công");
-                    txtGTKM.Text = "";
-                    txtMaKM.Text = "";
-                    txtTenKM.Text = "";
+                    if (ma == "")
+                    {
+                        MessageBox.Show("vui lòng nhập mã khuyễn mãi");
+                    }
+                    else
+                    {
+                        if (b.XoaKhuyenMai(ma) == true)
+                        {
+                            MessageBox.Show("Xoá Thành Công");
+                            txtGTKM.Text = "";
+                            txtMaKM.Text = "";
+                            txtTenKM.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xoá Không Thành Công");
+                        }
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Xoá Không Thành Công");
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    dvgDS.DataSource = b.LayDS();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dvgDS.DataSource = b.LayDS();
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            ET_KhuyenMai KhuyenMai = new ET_KhuyenMai(txtMaKM.Text, txtTenKM.Text, int.Parse(txtGTKM.Text), Convert.ToDateTime(dtpBD.Text), Convert.ToDateTime(dtpKT.Text));
-
             try
             {
-                if (b.SuaKhuyenMai(KhuyenMai) == true)
+                if (txtGTKM.Text == "" || txtMaKM.Text == "" || txtTenKM.Text == "")
                 {
-                    MessageBox.Show("Sửa Thành Công");
-                    txtGTKM.Text = "";
-                    txtMaKM.Text = "";
-                    txtTenKM.Text = "";
+                    MessageBox.Show("vui lòng nhập đủ thông tin");
                 }
                 else
                 {
-                    MessageBox.Show("Sửa Không Thành Công");
+                    ET_KhuyenMai KhuyenMai = new ET_KhuyenMai(txtMaKM.Text, txtTenKM.Text, int.Parse(txtGTKM.Text), Convert.ToDateTime(dtpBD.Text), Convert.ToDateTime(dtpKT.Text));
+                    if (b.SuaKhuyenMai(KhuyenMai) == true)
+                    {
+                        MessageBox.Show("Sửa Thành Công");
+                        txtGTKM.Text = "";
+                        txtMaKM.Text = "";
+                        txtTenKM.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sửa Không Thành Công");
+                    }
                 }
             }
             catch (Exception ex)

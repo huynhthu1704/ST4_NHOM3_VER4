@@ -21,54 +21,34 @@ namespace GUI.Admin
         BLL_BoPhan bBoPhan = new BLL_BoPhan();
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
             try
             {
-                if (bBoPhan.CheckTonTai(BoPhan))
+                if (txtMaBP.Text == "" || txtMaQL.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
-                    MessageBox.Show("Đã tồn tại bộ phận này");
+                    MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
                 else
                 {
-                    if (bBoPhan.ThemBoPhan(BoPhan) == true)
+                    ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
+                    if (bBoPhan.CheckTonTai(BoPhan))
                     {
-                        MessageBox.Show("Thêm Thành Công");
-                        txtMaBP.Text = "";
-                        txtMaQL.Text = "";
-                        txtSDT.Text = "";
-                        txtTenBP.Text = "";
+                        MessageBox.Show("Đã tồn tại bộ phận này");
                     }
                     else
                     {
-                        MessageBox.Show("Thêm Không Thành Công");
+                        if (bBoPhan.ThemBoPhan(BoPhan) == true)
+                        {
+                            MessageBox.Show("Thêm Thành Công");
+                            txtMaBP.Text = "";
+                            txtMaQL.Text = "";
+                            txtSDT.Text = "";
+                            txtTenBP.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thêm Không Thành Công");
+                        }
                     }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            } finally
-            {
-                dvgDS.DataSource = bBoPhan.LayDS();
-            }
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            string ma = txtMaBP.Text;
-            try
-            {
-                if (bBoPhan.XoaBoPhan(ma) == true)
-                {
-                    MessageBox.Show("Xoá Thành Công");               
-                    txtMaBP.Text = "";
-                    txtMaQL.Text = "";
-                    txtSDT.Text = "";
-                    txtTenBP.Text = "";
-                }
-                else
-                {
-                    MessageBox.Show("Xoá Không Thành Công");
                 }
             }
             catch (Exception ex)
@@ -81,22 +61,66 @@ namespace GUI.Admin
             }
         }
 
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            string ma = txtMaBP.Text;
+            DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
+            {
+                try
+                {
+                    if (bBoPhan.XoaBoPhan(ma) == true)
+                    {
+                        MessageBox.Show("Xoá Thành Công");
+                        txtMaBP.Text = "";
+                        txtMaQL.Text = "";
+                        txtSDT.Text = "";
+                        txtTenBP.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xoá Không Thành Công");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    dvgDS.DataSource = bBoPhan.LayDS();
+                }
+            }
+            else
+            {
+
+            }
+        }
+
         private void btnSua_Click(object sender, EventArgs e)
         {
-            ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
+
             try
             {
-                if (bBoPhan.SuaBoPhan(BoPhan) == true)
+                if (txtMaBP.Text == "" || txtMaQL.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
-                    MessageBox.Show("Sửa Thành Công");
-                    txtMaBP.Text = "";
-                    txtMaQL.Text = "";
-                    txtSDT.Text = "";
-                    txtTenBP.Text = "";
+                    MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
                 else
                 {
-                    MessageBox.Show("Sửa Không Thành Công");
+                    ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
+                    if (bBoPhan.SuaBoPhan(BoPhan) == true)
+                    {
+                        MessageBox.Show("Sửa Thành Công");
+                        txtMaBP.Text = "";
+                        txtMaQL.Text = "";
+                        txtSDT.Text = "";
+                        txtTenBP.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sửa Không Thành Công");
+                    }
                 }
             }
             catch (Exception ex)

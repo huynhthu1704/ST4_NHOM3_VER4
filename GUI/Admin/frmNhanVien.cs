@@ -56,42 +56,49 @@ namespace GUI.Admin
             string Gt;
             if (radNam.Checked == true)
             {
-                Gt="Nam";
+                Gt = "Nam";
             }
             else
             {
                 Gt = "Nữ";
             }
-            ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text,Gt,txtCCCD.Text, Convert.ToDateTime(dtpNS.Text),txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text),cboMaBP.SelectedValue.ToString(),txtMaTK.Text);
             try
             {
-                if (b.CheckTonTai(NV)== true && b.CheckTonTaiMaTK(txtMaTK.Text)==false)
+                if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtMaTK.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
                 {
-                    if(b.CheckTonTai(NV) == true)
-                    {
-                        MessageBox.Show("Tài khoản đã tồn tại");
-                    }
-                    if(b.CheckTonTaiMaTK(txtMaTK.Text) == false)
-                    {
-                        MessageBox.Show("Mã tài khoản không tồn tại");
-                    }
+                    MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
                 else
                 {
-                    if (b.ThemNhanVien(NV))
+                    ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
+                    if (b.CheckTonTai(NV) == true && b.CheckTonTaiMaTK(txtMaTK.Text) == false)
                     {
-                        MessageBox.Show("Thêm Thành Công");
-                        txtCCCD.Text = "";
-                        txtDiaChi.Text = "";
-                        txtHoNV.Text = "";
-                        txtMaNV.Text = "";
-                        txtMaTK.Text = "";
-                        txtSDT.Text = "";
-                        txtTenNV.Text = "";
+                        if (b.CheckTonTai(NV) == true)
+                        {
+                            MessageBox.Show("Tài khoản đã tồn tại");
+                        }
+                        if (b.CheckTonTaiMaTK(txtMaTK.Text) == false)
+                        {
+                            MessageBox.Show("Mã tài khoản không tồn tại");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Thêm Không Thành Công");
+                        if (b.ThemNhanVien(NV))
+                        {
+                            MessageBox.Show("Thêm Thành Công");
+                            txtCCCD.Text = "";
+                            txtDiaChi.Text = "";
+                            txtHoNV.Text = "";
+                            txtMaNV.Text = "";
+                            txtMaTK.Text = "";
+                            txtSDT.Text = "";
+                            txtTenNV.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Thêm Không Thành Công");
+                        }
                     }
                 }
             }
@@ -116,23 +123,30 @@ namespace GUI.Admin
             {
                 Gt = "Nữ";
             }
-            ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
             try
             {
-                if (b.SuaNhanVien(NV) == true)
+                if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtMaTK.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
                 {
-                    MessageBox.Show("Sửa Thành Công");
-                    txtCCCD.Text = "";
-                    txtDiaChi.Text = "";
-                    txtHoNV.Text = "";
-                    txtMaNV.Text = "";
-                    txtMaTK.Text = "";
-                    txtSDT.Text = "";
-                    txtTenNV.Text = "";
+                    MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
                 else
                 {
-                    MessageBox.Show("Sửa Không Thành Công");
+                    ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
+                    if (b.SuaNhanVien(NV) == true)
+                    {
+                        MessageBox.Show("Sửa Thành Công");
+                        txtCCCD.Text = "";
+                        txtDiaChi.Text = "";
+                        txtHoNV.Text = "";
+                        txtMaNV.Text = "";
+                        txtMaTK.Text = "";
+                        txtSDT.Text = "";
+                        txtTenNV.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sửa Không Thành Công");
+                    }
                 }
             }
             catch (Exception ex)
@@ -150,7 +164,7 @@ namespace GUI.Admin
             string ma = txtMaNV.Text;
             try
             {
-                DialogResult kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
                     try
@@ -212,6 +226,11 @@ namespace GUI.Admin
             dtpNVL.Text = dvgDS.Rows[index].Cells[8].Value.ToString();
             cboMaBP.SelectedValue = dvgDS.Rows[index].Cells[9].Value.ToString();
             txtMaTK.Text = dvgDS.Rows[index].Cells[10].Value.ToString();
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

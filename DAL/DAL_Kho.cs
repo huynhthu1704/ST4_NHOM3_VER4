@@ -34,9 +34,9 @@ namespace DAL
                 dt = new DataTable();
                 da.Fill(dt);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -61,8 +61,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -86,8 +87,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -96,7 +98,7 @@ namespace DAL
             return flag;
         }
 
-        public bool XoaKho(String et)
+        public bool XoaKho(string et)
         {
             bool flag = false;
             try
@@ -111,8 +113,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -139,7 +142,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {

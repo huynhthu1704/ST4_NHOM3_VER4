@@ -32,9 +32,9 @@ namespace DAL
                 dt = new DataTable();
                 da.Fill(dt);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -62,8 +62,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -90,8 +91,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -115,8 +117,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {

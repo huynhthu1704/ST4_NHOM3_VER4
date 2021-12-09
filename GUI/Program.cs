@@ -16,8 +16,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Admin.frmLoaiTheKH());
-            Application.Run(new ThuKho.frmHangHoa());
+            Application.Run(new Admin.frmKho());
         }
     }
 }

@@ -66,7 +66,7 @@ namespace GUI.Admin
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(47, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 19);
+            this.label1.Size = new System.Drawing.Size(67, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã NV";
             // 
@@ -75,7 +75,7 @@ namespace GUI.Admin
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(47, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 19);
+            this.label2.Size = new System.Drawing.Size(66, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "Họ NV";
             // 
@@ -84,7 +84,7 @@ namespace GUI.Admin
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(47, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 19);
+            this.label3.Size = new System.Drawing.Size(75, 24);
             this.label3.TabIndex = 0;
             this.label3.Text = "Tên NV";
             // 
@@ -93,7 +93,7 @@ namespace GUI.Admin
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(47, 152);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 19);
+            this.label4.Size = new System.Drawing.Size(47, 24);
             this.label4.TabIndex = 0;
             this.label4.Text = "SDT";
             // 
@@ -102,7 +102,7 @@ namespace GUI.Admin
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(460, 38);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 19);
+            this.label6.Size = new System.Drawing.Size(60, 24);
             this.label6.TabIndex = 0;
             this.label6.Text = "CCCD";
             // 
@@ -111,7 +111,7 @@ namespace GUI.Admin
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(460, 73);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 19);
+            this.label7.Size = new System.Drawing.Size(97, 24);
             this.label7.TabIndex = 0;
             this.label7.Text = "Ngày sinh";
             // 
@@ -120,7 +120,7 @@ namespace GUI.Admin
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(460, 114);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 19);
+            this.label8.Size = new System.Drawing.Size(71, 24);
             this.label8.TabIndex = 0;
             this.label8.Text = "Địa chỉ";
             // 
@@ -129,7 +129,7 @@ namespace GUI.Admin
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(460, 152);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(106, 19);
+            this.label9.Size = new System.Drawing.Size(132, 24);
             this.label9.TabIndex = 0;
             this.label9.Text = "Ngày vào làm";
             // 
@@ -138,7 +138,7 @@ namespace GUI.Admin
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(460, 196);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(92, 19);
+            this.label10.Size = new System.Drawing.Size(114, 24);
             this.label10.TabIndex = 0;
             this.label10.Text = "Mã bộ phận";
             // 
@@ -147,7 +147,7 @@ namespace GUI.Admin
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(460, 236);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(99, 19);
+            this.label11.Size = new System.Drawing.Size(125, 24);
             this.label11.TabIndex = 0;
             this.label11.Text = "Mã tài khoản";
             // 
@@ -155,49 +155,49 @@ namespace GUI.Admin
             // 
             this.txtMaNV.Location = new System.Drawing.Point(156, 25);
             this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(218, 27);
+            this.txtMaNV.Size = new System.Drawing.Size(218, 32);
             this.txtMaNV.TabIndex = 1;
             // 
             // txtHoNV
             // 
             this.txtHoNV.Location = new System.Drawing.Point(156, 65);
             this.txtHoNV.Name = "txtHoNV";
-            this.txtHoNV.Size = new System.Drawing.Size(218, 27);
+            this.txtHoNV.Size = new System.Drawing.Size(218, 32);
             this.txtHoNV.TabIndex = 2;
             // 
             // txtTenNV
             // 
             this.txtTenNV.Location = new System.Drawing.Point(156, 106);
             this.txtTenNV.Name = "txtTenNV";
-            this.txtTenNV.Size = new System.Drawing.Size(218, 27);
+            this.txtTenNV.Size = new System.Drawing.Size(218, 32);
             this.txtTenNV.TabIndex = 3;
             // 
             // txtSDT
             // 
             this.txtSDT.Location = new System.Drawing.Point(156, 149);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(218, 27);
+            this.txtSDT.Size = new System.Drawing.Size(218, 32);
             this.txtSDT.TabIndex = 4;
             // 
             // txtCCCD
             // 
             this.txtCCCD.Location = new System.Drawing.Point(611, 25);
             this.txtCCCD.Name = "txtCCCD";
-            this.txtCCCD.Size = new System.Drawing.Size(186, 27);
+            this.txtCCCD.Size = new System.Drawing.Size(186, 32);
             this.txtCCCD.TabIndex = 5;
             // 
             // txtDiaChi
             // 
             this.txtDiaChi.Location = new System.Drawing.Point(611, 106);
             this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(186, 27);
+            this.txtDiaChi.Size = new System.Drawing.Size(186, 32);
             this.txtDiaChi.TabIndex = 6;
             // 
             // txtMaTK
             // 
             this.txtMaTK.Location = new System.Drawing.Point(611, 236);
             this.txtMaTK.Name = "txtMaTK";
-            this.txtMaTK.Size = new System.Drawing.Size(186, 27);
+            this.txtMaTK.Size = new System.Drawing.Size(186, 32);
             this.txtMaTK.TabIndex = 7;
             // 
             // groupBox1
@@ -216,7 +216,7 @@ namespace GUI.Admin
             this.radNu.AutoSize = true;
             this.radNu.Location = new System.Drawing.Point(228, 20);
             this.radNu.Name = "radNu";
-            this.radNu.Size = new System.Drawing.Size(48, 23);
+            this.radNu.Size = new System.Drawing.Size(56, 28);
             this.radNu.TabIndex = 0;
             this.radNu.TabStop = true;
             this.radNu.Text = "Nữ";
@@ -227,7 +227,7 @@ namespace GUI.Admin
             this.radNam.AutoSize = true;
             this.radNam.Location = new System.Drawing.Point(105, 20);
             this.radNam.Name = "radNam";
-            this.radNam.Size = new System.Drawing.Size(60, 23);
+            this.radNam.Size = new System.Drawing.Size(72, 28);
             this.radNam.TabIndex = 0;
             this.radNam.TabStop = true;
             this.radNam.Text = "Nam";
@@ -238,7 +238,7 @@ namespace GUI.Admin
             this.dtpNS.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNS.Location = new System.Drawing.Point(611, 65);
             this.dtpNS.Name = "dtpNS";
-            this.dtpNS.Size = new System.Drawing.Size(186, 27);
+            this.dtpNS.Size = new System.Drawing.Size(186, 32);
             this.dtpNS.TabIndex = 3;
             // 
             // dtpNVL
@@ -246,7 +246,7 @@ namespace GUI.Admin
             this.dtpNVL.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNVL.Location = new System.Drawing.Point(611, 149);
             this.dtpNVL.Name = "dtpNVL";
-            this.dtpNVL.Size = new System.Drawing.Size(186, 27);
+            this.dtpNVL.Size = new System.Drawing.Size(186, 32);
             this.dtpNVL.TabIndex = 3;
             // 
             // cboMaBP
@@ -254,7 +254,7 @@ namespace GUI.Admin
             this.cboMaBP.FormattingEnabled = true;
             this.cboMaBP.Location = new System.Drawing.Point(611, 196);
             this.cboMaBP.Name = "cboMaBP";
-            this.cboMaBP.Size = new System.Drawing.Size(186, 27);
+            this.cboMaBP.Size = new System.Drawing.Size(186, 32);
             this.cboMaBP.TabIndex = 4;
             // 
             // dvgDS
@@ -307,6 +307,7 @@ namespace GUI.Admin
             this.btnThoat.TabIndex = 9;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // frmNhanVien
             // 
