@@ -17,7 +17,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ThuNgan.frmHoaDon());
+            Application.Run(new Report.frmRPKhachHang());
         }
     }
 }

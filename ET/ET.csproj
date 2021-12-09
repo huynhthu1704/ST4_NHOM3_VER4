@@ -65,6 +65,7 @@
     <Compile Include="ET_TheKH.cs" />
     <Compile Include="ET_HDNH.cs" />
     <Compile Include="ET_TonKho.cs" />
+    <Compile Include="ET_XuatDSKH.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

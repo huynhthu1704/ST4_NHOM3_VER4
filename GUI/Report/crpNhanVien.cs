@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GUI {
+namespace GUI.Report {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace GUI {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RPInHoaDon : ReportClass {
+    public class crpNhanVien : ReportClass {
         
-        public RPInHoaDon() {
+        public crpNhanVien() {
         }
         
         public override string ResourceName {
             get {
-                return "RPInHoaDon.rpt";
+                return "crpNhanVien.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GUI {
         
         public override string FullResourceName {
             get {
-                return "GUI.RPInHoaDon.rpt";
+                return "GUI.Report.crpNhanVien.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace GUI {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_MaHD {
+        public CrystalDecisions.Shared.IParameterField Parameter_MaBP {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,9 +98,9 @@ namespace GUI {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRPInHoaDon : Component, ICachedReport {
+    public class CachedcrpNhanVien : Component, ICachedReport {
         
-        public CachedRPInHoaDon() {
+        public CachedcrpNhanVien() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace GUI {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RPInHoaDon rpt = new RPInHoaDon();
+            crpNhanVien rpt = new crpNhanVien();
             rpt.Site = this.Site;
             return rpt;
         }

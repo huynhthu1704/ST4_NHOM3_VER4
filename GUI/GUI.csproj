@@ -75,18 +75,59 @@
     <Compile Include="CSKH\frmKH.Designer.cs">
       <DependentUpon>frmKH.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dataset\dsKH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsKH.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="RPInHoaDon.cs">
+    <Compile Include="Report\crpKhachHang.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RPInHoaDon.rpt</DependentUpon>
+      <DependentUpon>crpKhachHang.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\crpNhanVien.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpNhanVien.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\crpXuatHHTheoDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpXuatHHTheoDM.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\crpXuatTBNV.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpXuatTBNV.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\crpXuatToanBoHH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpXuatToanBoHH.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\frmRPHangHoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRPHangHoa.Designer.cs" />
+    <Compile Include="Report\frmRPKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRPKhachHang.Designer.cs" />
+    <Compile Include="Report\frmRPNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRPNhanVien.Designer.cs" />
     <Compile Include="ThuNgan\frmInHD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,9 +265,25 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RPInHoaDon.rpt">
+    <EmbeddedResource Include="Report\crpKhachHang.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RPInHoaDon.cs</LastGenOutput>
+      <LastGenOutput>crpKhachHang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\crpNhanVien.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpNhanVien.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\crpXuatHHTheoDM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpXuatHHTheoDM.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\crpXuatTBNV.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpXuatTBNV.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\crpXuatToanBoHH.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpXuatToanBoHH.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ThuNgan\frmInHD.resx">
       <DependentUpon>frmInHD.cs</DependentUpon>
@@ -258,6 +315,17 @@
     <EmbeddedResource Include="ThuNgan\frmHoaDon.resx">
       <DependentUpon>frmHoaDon.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Dataset\dsKH.xsc">
+      <DependentUpon>dsKH.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset\dsKH.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsKH.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Dataset\dsKH.xss">
+      <DependentUpon>dsKH.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -277,6 +345,10 @@
       <Project>{149b8002-4495-4b93-a9ef-fca45e28175b}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{9b98e960-7432-4a5c-95c4-b90d9511d10e}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ET\ET.csproj">
       <Project>{95cd842c-7b3c-4d94-83a0-a4ca9fa12fc5}</Project>
       <Name>ET</Name>
@@ -284,6 +356,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ThongKe\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
