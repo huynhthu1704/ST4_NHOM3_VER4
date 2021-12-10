@@ -37,9 +37,7 @@ namespace GUI.ThuKho
         // Sự kiện load form
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
-            // Làm mã hóa đơn tự động tăng
-            STT = (bllHDNH.HienThiDS().Rows.Count == 0) ? 1 : int.Parse(bllHDNH.HienThiDS().Rows[0]["MaHD"].ToString().Substring(2)) + 1;
-            txtMaHD.Text = "HD" + string.Format("{0:000}", STT);
+            
             if (bllNCC.LayDS().Rows.Count != 0)
             {
                 // Hiển thị dữ liệu nhà cung cấp lên combobox
@@ -65,7 +63,7 @@ namespace GUI.ThuKho
                 cboKho.SelectedIndex = 0;
             }
             txtMaHH.Focus();
-            numericSL.Minimum = 1; // cho giá trị của Số lượng là 1
+            Reset();
         }
 
         // Sự kiện trước khi đóng form
@@ -440,6 +438,8 @@ namespace GUI.ThuKho
         // Làm mới các fields
         public void Reset()
         {
+            // Làm mã hóa đơn tự động tăng
+            STT = (bllHDNH.HienThiDS().Rows.Count == 0) ? 1 : int.Parse(bllHDNH.HienThiDS().Rows[0]["MaHD"].ToString().Substring(2)) + 1;
             txtMaHD.Text = "HD" + string.Format("{0:000}", STT);
             txtMaHH.Text = "";
             txtMaHH.Focus();

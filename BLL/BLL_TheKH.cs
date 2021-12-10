@@ -23,6 +23,11 @@ namespace BLL
             return _dal.HienThi("sp_LayTheKhachHang");
         }
 
+        public DataTable HienThiDSTheKHGiamDan()
+        {
+            return _dal.HienThi("sp_LayTheKHGiamDan");
+        }
+
         public DataTable LayTheKHTheoMa(string maTheKH)
         {
             return _dal.LayTheKHTheoMa(maTheKH);
@@ -31,7 +36,7 @@ namespace BLL
         {
             return _dal.HienThi("sp_LayLoaiTheKH");
         }
-        
+
         public bool ThemTheKhachHang(string maThe, int tinhTrang)
         {
             return _dal.ThemTheKhachHang(maThe, tinhTrang);

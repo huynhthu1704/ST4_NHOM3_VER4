@@ -21,13 +21,13 @@ namespace DAL
             _conn = Connection.conn;
         }
         //method
-        public DataTable LayDS()
+        public DataTable LayDS(string tenSP)
         {
 
             try
             {
                 _conn.Open();
-                cmd = new SqlCommand("sp_LayNhanVien", _conn);
+                cmd = new SqlCommand(tenSP, _conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 da = new SqlDataAdapter(cmd);

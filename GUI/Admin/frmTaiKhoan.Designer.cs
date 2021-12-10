@@ -42,6 +42,7 @@ namespace GUI.Admin
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cboLoaiTK = new System.Windows.Forms.ComboBox();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@ namespace GUI.Admin
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(429, 148);
+            this.btnThoat.Location = new System.Drawing.Point(477, 151);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 12;
@@ -68,7 +69,7 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(331, 148);
+            this.btnSua.Location = new System.Drawing.Point(379, 151);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
             this.btnSua.TabIndex = 13;
@@ -78,7 +79,7 @@ namespace GUI.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(233, 148);
+            this.btnXoa.Location = new System.Drawing.Point(281, 151);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(92, 39);
             this.btnXoa.TabIndex = 14;
@@ -88,7 +89,7 @@ namespace GUI.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(135, 148);
+            this.btnThem.Location = new System.Drawing.Point(183, 151);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 15;
@@ -162,10 +163,21 @@ namespace GUI.Admin
             this.cboLoaiTK.Size = new System.Drawing.Size(176, 27);
             this.cboLoaiTK.TabIndex = 17;
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(85, 151);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 18;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmTaiKhoan
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.cboLoaiTK);
             this.Controls.Add(this.dgvTaiKhoan);
             this.Controls.Add(this.btnThoat);
@@ -180,9 +192,10 @@ namespace GUI.Admin
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmTaiKhoan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTaiKhoan";
+            this.Text = "Quản lý tài khoản";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTaiKhoan_FormClosing);
             this.Load += new System.EventHandler(this.frmTaiKhoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).EndInit();
@@ -206,5 +219,6 @@ namespace GUI.Admin
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboLoaiTK;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

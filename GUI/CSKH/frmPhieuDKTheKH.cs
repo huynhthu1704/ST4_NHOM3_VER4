@@ -15,6 +15,7 @@ namespace GUI.CSKH
 {
     public partial class frmPhieuDKTheKH : Form
     {
+        private int sTT;
         private BLL_PhieuDKTheKH _bll;
         private BLL_KH _bllKH;
         private BLL_TheKH _bllTheKH;
@@ -40,11 +41,7 @@ namespace GUI.CSKH
             cboMaKH.DataSource = _bll.HienThiDSKH();
             cboMaKH.DisplayMember = "MaKH";
             cboMaKH.ValueMember = "MaKH";
-
-            dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
-            //cboMaNV.SelectedIndex = 0;
-            cboMaTheKH.SelectedIndex = 0;
-            cboMaKH.SelectedIndex = 0;
+            Reset();
         }
 
         private void frmPhieuDKTheKH_FormClosing(object sender, FormClosingEventArgs e)
@@ -81,11 +78,12 @@ namespace GUI.CSKH
         }
         private void Reset()
         {
-            txtMaPhieu.Text = "";
+            sTT = _bll.HienThiDSPhieuDKTheKHGiam().Rows.Count != 0 ? int.Parse(_bll.HienThiDSPhieuDKTheKHGiam().Rows[0]["MaPhieu"].ToString().Substring(3)) + 1 : 1;
+            txtMaPhieu.Text = "PDK" + string.Format("{0:00}", sTT);
             cboMaNV.SelectedIndex = 0;
             cboMaTheKH.SelectedIndex = 0;
             cboMaKH.SelectedIndex = 0;
-            txtMaPhieu.Focus();
+            cboMaNV.Focus();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -108,6 +106,7 @@ namespace GUI.CSKH
                         _bllKH.SuaTheKH(et.MaKH, et.MaTheKH);
                         _bllTheKH.SuaTinhTrangThe(et.MaTheKH, 1);
                         MessageBox.Show("Thêm thành công");
+                        Reset();
                     }
                     else
                     {
@@ -118,11 +117,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
             }
         }
 
@@ -138,6 +132,7 @@ namespace GUI.CSKH
                     if (_bll.XoaPhieuDK(et))
                     {
                         MessageBox.Show("Xóa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -148,11 +143,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
             }
         }
 
@@ -170,6 +160,8 @@ namespace GUI.CSKH
                     if (_bll.SuaPhieuDK(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
+                        dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKHGiam();
                     }
                     else
                     {
@@ -180,11 +172,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
             }
         }
 

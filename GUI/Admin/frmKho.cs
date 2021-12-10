@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Đức Trí
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +16,7 @@ namespace GUI.Admin
 {
     public partial class frmKho : Form
     {
+        private int sTT;
         public frmKho()
         {
             InitializeComponent();
@@ -39,8 +42,7 @@ namespace GUI.Admin
                         if (bKho.ThemKho(Kho) == true)
                         {
                             MessageBox.Show("Thêm Thành Công");
-                            txtMaKho.Text = "";
-                            txtTenKho.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -52,10 +54,6 @@ namespace GUI.Admin
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dvgDS.DataSource = bKho.LayDS();
             }
         }
 
@@ -77,8 +75,7 @@ namespace GUI.Admin
                         if (bKho.XoaKho(ma) == true)
                         {
                             MessageBox.Show("Xoá Thành Công");
-                            txtMaKho.Text = "";
-                            txtTenKho.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -90,14 +87,6 @@ namespace GUI.Admin
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally
-                {
-                    dvgDS.DataSource = bKho.LayDS();
-                }
-            }
-            else
-            {
-
             }
         }
 
@@ -115,8 +104,7 @@ namespace GUI.Admin
                     if (bKho.SuaKho(Kho) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
-                        txtMaKho.Text = "";
-                        txtTenKho.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -128,15 +116,19 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                dvgDS.DataSource = bKho.LayDS();
-            }
         }
 
+        private void Reset()
+        {
+            dvgDS.DataSource = bKho.LayDSGiamDan();
+            sTT = bKho.LayDSGiamDan().Rows.Count != 0 ? int.Parse(bKho.LayDSGiamDan().Rows[0]["MaKho"].ToString().Substring(2)) + 1 : 1;
+            txtMaKho.Text = "K" + string.Format("{0:00}", sTT);
+            txtTenKho.Text = "";
+            txtTenKho.Focus();
+        }
         private void frmKho_Load(object sender, EventArgs e)
         {
-            dvgDS.DataSource = bKho.LayDS();
+            Reset();
         }
 
         private void frmKho_FormClosing(object sender, FormClosingEventArgs e)
@@ -169,6 +161,11 @@ namespace GUI.Admin
             int index = dvgDS.CurrentCell.RowIndex;
             txtMaKho.Text = dvgDS.Rows[index].Cells[0].Value.ToString();
             txtTenKho.Text = dvgDS.Rows[index].Cells[1].Value.ToString();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

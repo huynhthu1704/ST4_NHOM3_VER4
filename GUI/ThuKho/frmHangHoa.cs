@@ -16,6 +16,7 @@ namespace GUI.ThuKho
     public partial class frmHangHoa : Form
     {
         private BLL_HangHoa _bll;
+        private int sTT;
         public frmHangHoa()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace GUI.ThuKho
 
         private void frmHangHoa_Load(object sender, EventArgs e)
         {
+            Reset();
             cboDVT.DataSource = _bll.HienThiDSDVT();
             cboDVT.DisplayMember = "TenDVT";
             cboDVT.ValueMember = "MaDVT";
@@ -41,7 +43,7 @@ namespace GUI.ThuKho
             //cboMaKM.SelectedIndex = 0;
             txtMaKM.Visible = false;
             cboMaKM.Visible = false;
-            
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -52,15 +54,7 @@ namespace GUI.ThuKho
                 bh = 0;
             }
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
-            //MessageBox.Show(km);
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
-            //MessageBox.Show(et.MaHH);
-            //MessageBox.Show(et.TenHH);
-            //MessageBox.Show(et.Gia.ToString());
-            //MessageBox.Show(et.MaDM);
-            //MessageBox.Show(et.DonVT);
-            //MessageBox.Show(et.BaoHanh.ToString());
-            //MessageBox.Show(et.MaKM);
             try
             {
                 if (txtMaHH.Text == "" || txtTenHH.Text == "" || txtGia.Text == "")
@@ -78,6 +72,7 @@ namespace GUI.ThuKho
                         if (_bll.ThemHH(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -89,11 +84,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvHangHoa.DataSource = _bll.HienThiDSHH();
             }
         }
 
@@ -120,7 +110,8 @@ namespace GUI.ThuKho
                 if (string.IsNullOrEmpty(dgvHangHoa.Rows[dong].Cells[6].Value.ToString()))
                 {
                     radKMKhong.Checked = true;
-                } else
+                }
+                else
                 {
                     radKMCo.Checked = true;
                     cboMaKM.Text = dgvHangHoa.Rows[dong].Cells[6].Value.ToString();
@@ -134,6 +125,8 @@ namespace GUI.ThuKho
         }
         private void Reset()
         {
+            dgvHangHoa.DataSource = _bll.HienThiDSHH();
+            sTT = _bll.HienThiDSHH().Rows.Count != 0 ? int.Parse(_bll.HienThiDSHH().Rows[0]["MaHH"].ToString().Substring(2)) + 1 : 1;
             txtMaHH.Text = "";
             txtTenHH.Text = "";
             txtGia.Text = "0";
@@ -163,7 +156,6 @@ namespace GUI.ThuKho
                     {
                         MessageBox.Show("Xóa thành công");
                         Reset();
-                        dgvHangHoa.DataSource = _bll.HienThiDSHH();
                     }
                     else
                     {
@@ -194,11 +186,11 @@ namespace GUI.ThuKho
             {
                 bh = 0;
             }
-            //MessageBox.Show(bh.ToString());
             int gia = CheckGia(txtGia.Text) ? int.Parse(txtGia.Text) : -1;
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
-            try {
+            try
+            {
 
                 if (txtMaHH.Text == "" || txtTenHH.Text == "" || gia == -1)
                 {
@@ -210,7 +202,6 @@ namespace GUI.ThuKho
                     {
                         MessageBox.Show("Sửa thành công");
                         Reset();
-                        dgvHangHoa.DataSource = _bll.HienThiDSHH();
                     }
                     else
                     {

@@ -26,11 +26,7 @@ namespace GUI.Admin
 
         private void frmLoaiTheKH_Load(object sender, EventArgs e)
         {
-            // Tính STT dựa trên số thứ tự cũ + 1
-            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiThe"].ToString().Substring(2)) + 1;
-            // Set txtMaLoai = LT + STT
-            txtMaLoai.Text = "LT" + string.Format("{0:00}", STT);
-            dgvDS.DataSource = _bll.HienThiDS();
+            Reset();
         }
 
         // Sự kiện trước khi đóng form
@@ -83,7 +79,6 @@ namespace GUI.Admin
                             MessageBox.Show("Thêm thành công");
                             STT++;
                             Reset();
-                            dgvDS.DataSource = _bll.HienThiDS();
                         }
                         else
                         {
@@ -117,7 +112,6 @@ namespace GUI.Admin
                             // Làm lại mã loại thẻ mới
                             STT = _bll.HienThiDS().Rows.Count == 0 ? STT : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiThe"].ToString().Substring(2)) + 1;
                             Reset();
-                            dgvDS.DataSource = _bll.HienThiDS();
                         }
                         else
                         {
@@ -153,7 +147,6 @@ namespace GUI.Admin
                     {
                         MessageBox.Show("Sửa thành công");
                         Reset();
-                        dgvDS.DataSource = _bll.HienThiDS();
                     }
                     else
                     {
@@ -184,8 +177,13 @@ namespace GUI.Admin
         // Reset control 
         public void Reset()
         {
+            // Tính STT dựa trên số thứ tự cũ + 1
+            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiThe"].ToString().Substring(2)) + 1;
+            // Set txtMaLoai = LT + STT
             txtMaLoai.Text = "LT" + string.Format("{0:00}", STT);
+            dgvDS.DataSource = _bll.HienThiDS();
             txtTenLoai.Text = "";
+            txtTenLoai.Focus();
         }
 
         // Reset các field khi nhấn nút làm mới

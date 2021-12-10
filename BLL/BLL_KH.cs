@@ -18,9 +18,19 @@ namespace BLL
             _dal = new DAL_KH();
         }
 
-        public DataTable HienThiDSKH()
+        public DataTable LayDSKH()
         {
             return _dal.HienThi("sp_LayKhachHang");
+        }
+
+        public DataTable LayDSGiamDan()
+        {
+            return _dal.HienThi("sp_LayKhachHangGiamDan");
+        }
+
+        public DataSet LayDSKHChoRP()
+        {
+            return _dal.LayDSChoRP();
         }
         public bool ThemKH(ET_KH et)
         {

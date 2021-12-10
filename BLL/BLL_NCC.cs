@@ -14,8 +14,14 @@ namespace BLL
         DAL_NCC da = new DAL_NCC();
         public DataTable LayDS()
         {
-            return da.LayDSNCC();
+            return da.LayDS("sp_DSNCC");
         }
+
+        public DataTable LayDSGiamDan()
+        {
+            return da.LayDS("sp_DSNCCGiamDan");
+        }
+
         public bool ThemNCC(ET_NCC et)
         {
             return da.ThemNCC(et);

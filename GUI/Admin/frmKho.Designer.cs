@@ -38,6 +38,7 @@ namespace GUI.Admin
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,22 +46,24 @@ namespace GUI.Admin
             // 
             this.txtTenKho.Location = new System.Drawing.Point(292, 73);
             this.txtTenKho.Name = "txtTenKho";
-            this.txtTenKho.Size = new System.Drawing.Size(176, 32);
+            this.txtTenKho.Size = new System.Drawing.Size(176, 27);
             this.txtTenKho.TabIndex = 2;
             // 
             // txtMaKho
             // 
             this.txtMaKho.Location = new System.Drawing.Point(292, 21);
             this.txtMaKho.Name = "txtMaKho";
-            this.txtMaKho.Size = new System.Drawing.Size(176, 32);
+            this.txtMaKho.ReadOnly = true;
+            this.txtMaKho.Size = new System.Drawing.Size(176, 27);
             this.txtMaKho.TabIndex = 1;
+            this.txtMaKho.TabStop = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(200, 81);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 24);
+            this.label3.Size = new System.Drawing.Size(67, 19);
             this.label3.TabIndex = 2;
             this.label3.Text = "Tên kho";
             // 
@@ -69,7 +72,7 @@ namespace GUI.Admin
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(200, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 24);
+            this.label1.Size = new System.Drawing.Size(60, 19);
             this.label1.TabIndex = 3;
             this.label1.Text = "Mã kho";
             // 
@@ -87,7 +90,7 @@ namespace GUI.Admin
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(436, 147);
+            this.btnThoat.Location = new System.Drawing.Point(477, 148);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 17;
@@ -97,7 +100,7 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(338, 147);
+            this.btnSua.Location = new System.Drawing.Point(379, 148);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
             this.btnSua.TabIndex = 18;
@@ -107,7 +110,7 @@ namespace GUI.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(240, 147);
+            this.btnXoa.Location = new System.Drawing.Point(281, 148);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(92, 39);
             this.btnXoa.TabIndex = 19;
@@ -117,7 +120,7 @@ namespace GUI.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(142, 147);
+            this.btnThem.Location = new System.Drawing.Point(183, 148);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 20;
@@ -125,10 +128,21 @@ namespace GUI.Admin
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(85, 148);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 22;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmKho
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dvgDS);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -139,8 +153,10 @@ namespace GUI.Admin
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmKho";
-            this.Text = "frmKho";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý Kho";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmKho_FormClosing);
             this.Load += new System.EventHandler(this.frmKho_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).EndInit();
@@ -160,5 +176,6 @@ namespace GUI.Admin
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

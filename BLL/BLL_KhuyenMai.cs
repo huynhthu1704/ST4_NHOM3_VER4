@@ -17,6 +17,12 @@ namespace BLL
         {
             return da.LayDS();
         }
+
+        public DataTable LayDSGiamDan()
+        {
+            return da.LayDSGiamDan();
+        }
+
         public bool ThemKhuyenMai(ET_KhuyenMai et)
         {
             return da.ThemKhuyenMai(et);

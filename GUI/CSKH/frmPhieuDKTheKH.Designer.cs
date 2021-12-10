@@ -82,8 +82,10 @@ namespace GUI.CSKH
             // 
             this.txtMaPhieu.Location = new System.Drawing.Point(152, 54);
             this.txtMaPhieu.Name = "txtMaPhieu";
+            this.txtMaPhieu.ReadOnly = true;
             this.txtMaPhieu.Size = new System.Drawing.Size(176, 27);
             this.txtMaPhieu.TabIndex = 11;
+            this.txtMaPhieu.TabStop = false;
             // 
             // label4
             // 
@@ -189,9 +191,10 @@ namespace GUI.CSKH
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmPhieuDKTheKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmPhieuDKTheKH";
+            this.Text = "Phiếu đăng ký thẻ khách hàng";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPhieuDKTheKH_FormClosing);
             this.Load += new System.EventHandler(this.frmPhieuDKTheKH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuDK)).EndInit();

@@ -1,7 +1,7 @@
 ﻿
-namespace GUI.ThuNgan
+namespace GUI.CSKH
 {
-    partial class frmInHD
+    partial class frmThongKeKhachHang
     {
         /// <summary>
         /// Required designer variable.
@@ -29,36 +29,21 @@ namespace GUI.ThuNgan
         /// </summary>
         private void InitializeComponent()
         {
-            this.inHDViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.SuspendLayout();
             // 
-            // inHDViewer
-            // 
-            this.inHDViewer.ActiveViewIndex = -1;
-            this.inHDViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.inHDViewer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.inHDViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inHDViewer.Location = new System.Drawing.Point(0, 0);
-            this.inHDViewer.Name = "inHDViewer";
-            this.inHDViewer.Size = new System.Drawing.Size(800, 450);
-            this.inHDViewer.TabIndex = 0;
-            // 
-            // frmInHD
+            // frmThongKeKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.inHDViewer);
-            this.Name = "frmInHD";
+            this.ClientSize = new System.Drawing.Size(884, 561);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "frmThongKeKhachHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmInHD";
-            this.Load += new System.EventHandler(this.frmInHD_Load);
+            this.Text = "frmThongKeKhachHang";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer inHDViewer;
     }
 }

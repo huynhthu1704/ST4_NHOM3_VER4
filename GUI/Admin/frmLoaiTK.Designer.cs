@@ -153,7 +153,7 @@ namespace GUI.Admin
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmLoaiTK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmLoaiTk";
+            this.Text = "Quản lý loại tài khoản";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoaiTK_FormClosing);
             this.Load += new System.EventHandler(this.frmLoaiTK_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoaiTK)).EndInit();

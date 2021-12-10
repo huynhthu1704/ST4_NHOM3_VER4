@@ -10,5 +10,6 @@ namespace GUI
     {
         public static ET_LoaiTK LoaiTK;
         public static string MaNhanVien;
+       // public static string HoTenNV;
     }
 }

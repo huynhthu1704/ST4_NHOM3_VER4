@@ -16,6 +16,7 @@ namespace GUI.ThuKho
     public partial class frmDVTinh : Form
     {
         private BLL_DVT _bll;
+        private int sTT;
         public frmDVTinh()
         {
             InitializeComponent();
@@ -24,7 +25,8 @@ namespace GUI.ThuKho
 
         private void frmDVTinh_Load(object sender, EventArgs e)
         {
-            dgvDVT.DataSource = _bll.HienThiDS();
+           
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -47,6 +49,8 @@ namespace GUI.ThuKho
                         if (_bll.ThemDVT(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
+
                         }
                         else
                         {
@@ -58,10 +62,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dgvDVT.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -84,6 +84,7 @@ namespace GUI.ThuKho
                     if (_bll.XoaDVT(et))
                     {
                         MessageBox.Show("Xóa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -94,10 +95,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dgvDVT.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -115,6 +112,7 @@ namespace GUI.ThuKho
                     if (_bll.SuaDVT(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -125,11 +123,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                
-                dgvDVT.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -157,6 +150,20 @@ namespace GUI.ThuKho
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Reset()
+        {
+            dgvDVT.DataSource = _bll.HienThiDSGiamDan();
+            sTT = _bll.HienThiDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSGiamDan().Rows[0]["MaDVT"].ToString().Substring(3)) + 1 : 1;
+            txtMaDVT.Text = "DVT" + string.Format("{0:00}", sTT);
+            txtTenDVT.Text = "";
+            
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

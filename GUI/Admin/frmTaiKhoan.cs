@@ -27,9 +27,7 @@ namespace GUI.Admin
         // Sự kiện load form
         private void frmTaiKhoan_Load(object sender, EventArgs e)
         {
-            // Khởi tạo mã tự động tăng
-            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaTK"].ToString().Substring(2)) + 1;
-            txtMaTK.Text = "TK" + string.Format("{0:00}", STT);
+            Reset();
             // Hiển thị dữ liệu lên datagridview và combobox
             dgvTaiKhoan.DataSource = _bll.HienThiDS();
             cboLoaiTK.DataSource = _bll.HienThiLTK();
@@ -68,9 +66,12 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTenDN.Text) || string.IsNullOrEmpty(txtMK.Text)) {
+            if (string.IsNullOrEmpty(txtTenDN.Text) || string.IsNullOrEmpty(txtMK.Text))
+            {
                 MessageBox.Show("Tên đăng nhập / Mật khẩu không được trống");
-            } else {
+            }
+            else
+            {
                 ET_TaiKhoan et = new ET_TaiKhoan(txtMaTK.Text, txtTenDN.Text, txtMK.Text, cboLoaiTK.SelectedValue.ToString());
                 try
                 {
@@ -83,9 +84,7 @@ namespace GUI.Admin
                         if (_bll.ThemTaiKhoan(et))
                         {
                             MessageBox.Show("Thêm thành công");
-                            STT++;
                             Reset();
-                            dgvTaiKhoan.DataSource = _bll.HienThiDS();
                         }
                         else
                         {
@@ -98,7 +97,7 @@ namespace GUI.Admin
                     MessageBox.Show(ex.Message);
                 }
             }
-           
+
         }
 
         // Sự kiện khi nhấn nút Xóa, xác nhận người dùng có muốn xóa hay không
@@ -106,34 +105,42 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             ET_TaiKhoan et = new ET_TaiKhoan(txtMaTK.Text, txtTenDN.Text, txtMK.Text, cboLoaiTK.SelectedValue.ToString());
-            try
+
+            if (string.IsNullOrWhiteSpace(et.MaTK) || string.IsNullOrEmpty(et.TenDN) || string.IsNullOrEmpty(et.MatKhau))
             {
-                DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (kq == DialogResult.Yes)
+                MessageBox.Show("Vui lòng chọn tài khoản để xóa");
+            }
+            else
+            {
+                try
                 {
-                    if (_bll.XoaTaiKhoan(et))
+                    DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (kq == DialogResult.Yes)
                     {
-                        MessageBox.Show("Xóa thành công");
-                        Reset();
-                        dgvTaiKhoan.DataSource = _bll.HienThiDS();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa không thành công");
+                        if (_bll.XoaTaiKhoan(et))
+                        {
+                            MessageBox.Show("Xóa thành công");
+                            Reset();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa không thành công");
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         // Sự kiện khi nhấn nút sửa, xác nhận thông tin đầy đủ thì sửa vào csdl
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTenDN.Text) || string.IsNullOrEmpty(txtMK.Text)) {
+            if (string.IsNullOrEmpty(txtTenDN.Text) || string.IsNullOrEmpty(txtMK.Text))
+            {
                 MessageBox.Show("Tên đăng nhập / Mật khẩu không được trống");
             }
             else
@@ -145,7 +152,6 @@ namespace GUI.Admin
                     {
                         MessageBox.Show("Sửa thành công");
                         Reset();
-                        dgvTaiKhoan.DataSource = _bll.HienThiDS();
                     }
                     else
                     {
@@ -168,11 +174,11 @@ namespace GUI.Admin
         // Reset các field
         public void Reset()
         {
-            txtMaTK.Text = "";
+            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaTK"].ToString().Substring(2)) + 1;
+            txtMaTK.Text = "TK" + string.Format("{0:00}", STT);
             txtTenDN.Text = "";
             txtMK.Text = "";
             cboLoaiTK.SelectedIndex = 0;
-            txtMaTK.Text = "TK" + string.Format("{0:00}", STT);
         }
 
         // Hiển thi dữ liệu các fields khi click vào datagrid view
@@ -183,6 +189,11 @@ namespace GUI.Admin
             txtTenDN.Text = dgvTaiKhoan.Rows[index].Cells[1].Value.ToString();
             txtMK.Text = dgvTaiKhoan.Rows[index].Cells[2].Value.ToString();
             cboLoaiTK.SelectedValue = dgvTaiKhoan.Rows[index].Cells[3].Value.ToString();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

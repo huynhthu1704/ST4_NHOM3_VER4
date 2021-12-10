@@ -37,11 +37,12 @@ namespace GUI.Admin
             this.txtTenBP = new System.Windows.Forms.TextBox();
             this.txtSDT = new System.Windows.Forms.TextBox();
             this.txtMaQL = new System.Windows.Forms.TextBox();
-            this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.dvgDS = new System.Windows.Forms.DataGridView();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,8 +86,10 @@ namespace GUI.Admin
             // 
             this.txtMaBP.Location = new System.Drawing.Point(176, 43);
             this.txtMaBP.Name = "txtMaBP";
+            this.txtMaBP.ReadOnly = true;
             this.txtMaBP.Size = new System.Drawing.Size(176, 27);
             this.txtMaBP.TabIndex = 1;
+            this.txtMaBP.TabStop = false;
             // 
             // txtTenBP
             // 
@@ -109,19 +112,9 @@ namespace GUI.Admin
             this.txtMaQL.Size = new System.Drawing.Size(176, 27);
             this.txtMaQL.TabIndex = 4;
             // 
-            // btnThem
-            // 
-            this.btnThem.Location = new System.Drawing.Point(135, 170);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(96, 44);
-            this.btnThem.TabIndex = 2;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(233, 170);
+            this.btnXoa.Location = new System.Drawing.Point(272, 171);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(96, 44);
             this.btnXoa.TabIndex = 2;
@@ -131,7 +124,7 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(331, 170);
+            this.btnSua.Location = new System.Drawing.Point(370, 171);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(96, 44);
             this.btnSua.TabIndex = 2;
@@ -141,7 +134,7 @@ namespace GUI.Admin
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(429, 170);
+            this.btnThoat.Location = new System.Drawing.Point(468, 171);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(96, 44);
             this.btnThoat.TabIndex = 2;
@@ -161,10 +154,31 @@ namespace GUI.Admin
             this.dvgDS.TabIndex = 3;
             this.dvgDS.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgDS_CellClick);
             // 
+            // btnThem
+            // 
+            this.btnThem.Location = new System.Drawing.Point(174, 171);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(96, 44);
+            this.btnThem.TabIndex = 2;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(72, 171);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(96, 44);
+            this.btnMoi.TabIndex = 5;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmBoPhan
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dvgDS);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -179,9 +193,11 @@ namespace GUI.Admin
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmBoPhan";
-            this.Text = "frmBoPhan";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý Bộ phận";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmBoPhan_FormClosing);
             this.Load += new System.EventHandler(this.frmBoPhan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).EndInit();
@@ -200,10 +216,11 @@ namespace GUI.Admin
         private System.Windows.Forms.TextBox txtTenBP;
         private System.Windows.Forms.TextBox txtSDT;
         private System.Windows.Forms.TextBox txtMaQL;
-        private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.DataGridView dvgDS;
+        private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

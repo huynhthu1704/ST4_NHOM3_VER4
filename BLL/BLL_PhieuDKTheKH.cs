@@ -18,6 +18,11 @@ namespace BLL
             _dal = new DAL_PhieuDKTheKH();
         }
 
+        public DataTable HienThiDSPhieuDKTheKHGiam()
+        {
+            return _dal.HienThi("SP_LayPhieuDKTheKHTheoMaGiam");
+        }
+
         public DataTable HienThiDSPhieuDKTheKH()
         {
             return _dal.HienThi("SP_LayPhieuDKTheKH");

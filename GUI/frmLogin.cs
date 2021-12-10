@@ -30,9 +30,10 @@ namespace GUI
             
         }
 
+        // Sự kiện trước khi đóng form
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
             //try
             //{
             //    DialogResult kq = MessageBox.Show("Bạn có muốn thoát?", "Thông báo",
@@ -52,10 +53,11 @@ namespace GUI
             //}
         }
 
+        // Sự kiện khi nhấn btnDN
         private void btnDN_Click(object sender, EventArgs e)
         {
-            string tenDN = txtTenDN.Text;
-            string mk = txtMK.Text;
+            string tenDN = txtTenDN.Text; // Tên đăng nhập
+            string mk = txtMK.Text; // Mật khẩu
             try
             {
                 DataTable dt = bllTK.KiemTraDN(tenDN, mk);
@@ -69,6 +71,7 @@ namespace GUI
                     Const.LoaiTK = new ET_LoaiTK(maLoaiTK, tenLoaiTK);
                     DataTable dt2 = bllNV.TimNVTheoTKDN(maTK);
                     Const.MaNhanVien = dt2.Rows[0]["MaNV"].ToString();
+                    //Const.HoTenNV = dt2.Rows[0]["HoTen"].ToString();
                     th = new Thread(openFormMain);
                     this.Close();
                     th.SetApartmentState(ApartmentState.STA);

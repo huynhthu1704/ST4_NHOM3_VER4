@@ -44,6 +44,7 @@ namespace GUI.Admin
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,8 +102,10 @@ namespace GUI.Admin
             // 
             this.txtMaKM.Location = new System.Drawing.Point(179, 34);
             this.txtMaKM.Name = "txtMaKM";
+            this.txtMaKM.ReadOnly = true;
             this.txtMaKM.Size = new System.Drawing.Size(170, 26);
             this.txtMaKM.TabIndex = 7;
+            this.txtMaKM.TabStop = false;
             // 
             // txtTenKM
             // 
@@ -149,7 +152,7 @@ namespace GUI.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(122, 226);
+            this.btnThem.Location = new System.Drawing.Point(200, 231);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(95, 46);
             this.btnThem.TabIndex = 14;
@@ -159,7 +162,7 @@ namespace GUI.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(398, 227);
+            this.btnXoa.Location = new System.Drawing.Point(476, 232);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(95, 46);
             this.btnXoa.TabIndex = 15;
@@ -169,7 +172,7 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(254, 226);
+            this.btnSua.Location = new System.Drawing.Point(332, 231);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(95, 46);
             this.btnSua.TabIndex = 16;
@@ -179,7 +182,7 @@ namespace GUI.Admin
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(537, 226);
+            this.btnThoat.Location = new System.Drawing.Point(615, 231);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(95, 46);
             this.btnThoat.TabIndex = 17;
@@ -187,10 +190,21 @@ namespace GUI.Admin
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(67, 231);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(95, 46);
+            this.btnMoi.TabIndex = 18;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmKhuyenMai
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnXoa);
@@ -207,8 +221,10 @@ namespace GUI.Admin
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmKhuyenMai";
-            this.Text = "frmKhuyenMai";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý Khuyến mãi";
             this.Load += new System.EventHandler(this.frmKhuyenMai_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).EndInit();
             this.ResumeLayout(false);
@@ -233,5 +249,6 @@ namespace GUI.Admin
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThoat;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

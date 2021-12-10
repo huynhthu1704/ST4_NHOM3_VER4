@@ -304,8 +304,10 @@ namespace GUI.ThuKho
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmHangHoa";
-            this.Text = "frmHangHoa";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý hàng hóa";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHangHoa_FormClosing);
             this.Load += new System.EventHandler(this.frmHangHoa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHangHoa)).EndInit();

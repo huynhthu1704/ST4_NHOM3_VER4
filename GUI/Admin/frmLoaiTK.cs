@@ -30,11 +30,7 @@ namespace GUI.Admin
         // Sự kiện load form
         private void frmLoaiTK_Load(object sender, EventArgs e)
         {
-            // Nếu chưa có tài khoản nào tạo ra thì STT bắt đầu từ 1, ngược lại STT = STT cũ + 1
-            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
-            txtMaLoai.Text = "ML" + string.Format("{0:00}", STT);
-            dgvLoaiTK.DataSource = _bll.HienThiDS();
-            txtTenLoai.Focus();
+            Reset();
         }
 
         // Sự kiện đóng form
@@ -85,9 +81,7 @@ namespace GUI.Admin
                         if (_bll.ThemTaiKhoan(et))
                         {
                             MessageBox.Show("Thêm thành công");
-                            STT++;
                             Reset();
-                            dgvLoaiTK.DataSource = _bll.HienThiDS();
                         }
                         else
                         {
@@ -122,9 +116,7 @@ namespace GUI.Admin
                         if (_bll.XoaTaiKhoan(et))
                         {
                             MessageBox.Show("Xóa thành công");
-                            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
                             Reset();
-                            dgvLoaiTK.DataSource = _bll.HienThiDS();
                         }
                         else
                         {
@@ -164,7 +156,6 @@ namespace GUI.Admin
                     {
                         MessageBox.Show("Sửa thành công");
                         Reset();
-                        dgvLoaiTK.DataSource = _bll.HienThiDS();
                     }
                     else
                     {
@@ -186,9 +177,12 @@ namespace GUI.Admin
         // Reset trạng thái các control
         private void Reset()
         {
-            txtTenLoai.Text = "";
-            txtTenLoai.Focus();
+            // Nếu chưa có tài khoản nào tạo ra thì STT bắt đầu từ 1, ngược lại STT = STT cũ + 1
+            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
             txtMaLoai.Text = "ML" + string.Format("{0:00}", STT);
+            dgvLoaiTK.DataSource = _bll.HienThiDS();
+            txtTenLoai.Focus();
+            txtTenLoai.Text = "";
         }
 
         // Sự kiện khi click lên datagridview, hiển thị thông tin lên các textfield

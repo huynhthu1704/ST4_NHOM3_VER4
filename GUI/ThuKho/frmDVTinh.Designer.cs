@@ -38,6 +38,7 @@ namespace GUI.ThuKho
             this.txtMaDVT = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDVT)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,9 +55,9 @@ namespace GUI.ThuKho
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(435, 141);
+            this.btnThoat.Location = new System.Drawing.Point(502, 141);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(78, 36);
+            this.btnThoat.Size = new System.Drawing.Size(90, 36);
             this.btnThoat.TabIndex = 16;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -64,9 +65,9 @@ namespace GUI.ThuKho
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(337, 141);
+            this.btnSua.Location = new System.Drawing.Point(394, 141);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(78, 36);
+            this.btnSua.Size = new System.Drawing.Size(90, 36);
             this.btnSua.TabIndex = 15;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
@@ -74,9 +75,9 @@ namespace GUI.ThuKho
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(241, 141);
+            this.btnXoa.Location = new System.Drawing.Point(283, 141);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(78, 36);
+            this.btnXoa.Size = new System.Drawing.Size(90, 36);
             this.btnXoa.TabIndex = 14;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -84,9 +85,9 @@ namespace GUI.ThuKho
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(137, 141);
+            this.btnThem.Location = new System.Drawing.Point(175, 141);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(78, 36);
+            this.btnThem.Size = new System.Drawing.Size(90, 36);
             this.btnThem.TabIndex = 13;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
@@ -103,8 +104,10 @@ namespace GUI.ThuKho
             // 
             this.txtMaDVT.Location = new System.Drawing.Point(301, 21);
             this.txtMaDVT.Name = "txtMaDVT";
+            this.txtMaDVT.ReadOnly = true;
             this.txtMaDVT.Size = new System.Drawing.Size(154, 27);
             this.txtMaDVT.TabIndex = 11;
+            this.txtMaDVT.TabStop = false;
             // 
             // label2
             // 
@@ -124,10 +127,21 @@ namespace GUI.ThuKho
             this.label1.TabIndex = 9;
             this.label1.Text = "Mã DVT";
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(74, 141);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(90, 36);
+            this.btnMoi.TabIndex = 18;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmDVTinh
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dgvDVT);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -138,10 +152,11 @@ namespace GUI.ThuKho
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmDVTinh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmDVTinh";
+            this.Text = "Quản lý đơn vị tính";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDVTinh_FormClosing);
             this.Load += new System.EventHandler(this.frmDVTinh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDVT)).EndInit();
@@ -161,5 +176,6 @@ namespace GUI.ThuKho
         private System.Windows.Forms.TextBox txtMaDVT;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

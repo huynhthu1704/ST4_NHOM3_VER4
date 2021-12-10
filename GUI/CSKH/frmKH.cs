@@ -16,6 +16,7 @@ namespace GUI.CSKH
     public partial class frmKH : Form
     {
         private BLL_KH _bll;
+        private int sTT;
         public frmKH()
         {
             InitializeComponent();
@@ -24,8 +25,7 @@ namespace GUI.CSKH
         BLL_KH KhachHang = new BLL_KH();
         private void frmKH_Load(object sender, EventArgs e)
         {
-            dgvKhachHang.DataSource = _bll.HienThiDSKH();
-            rdbNam.Checked = true;
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -54,6 +54,7 @@ namespace GUI.CSKH
                         if (_bll.ThemKH(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -66,20 +67,18 @@ namespace GUI.CSKH
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Reset();
-                dgvKhachHang.DataSource = _bll.HienThiDSKH();
-            }
         }
 
         private void Reset()
         {
-            txtMaKH.Text = "";
+            sTT = _bll.LayDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.LayDSGiamDan().Rows[0]["MaKH"].ToString().Substring(2)) + 1 : 1;
+            txtMaKH.Text = "KH" + string.Format("{0:00}", sTT);
+            dgvKhachHang.DataSource = _bll.LayDSGiamDan();
+            rdbNam.Checked = true;
             txtHoTenKH.Text = "";
             txtSoDT.Text = "";
             txtDiaChi.Text = "";
-            txtMaKH.Focus();
+            txtHoTenKH.Focus();
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -105,6 +104,7 @@ namespace GUI.CSKH
                         if (_bll.XoaKH(et))
                         {
                             MessageBox.Show("Xóa thành công");
+                            Reset();
                         }
                         else
                         {
@@ -116,11 +116,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvKhachHang.DataSource = _bll.HienThiDSKH();
             }
         }
 
@@ -169,6 +164,7 @@ namespace GUI.CSKH
                     if (_bll.SuaKH(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -179,11 +175,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvKhachHang.DataSource = _bll.HienThiDSKH();
             }
         }
 
@@ -206,6 +197,11 @@ namespace GUI.CSKH
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

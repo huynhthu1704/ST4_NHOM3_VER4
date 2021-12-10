@@ -16,6 +16,7 @@ namespace GUI.CSKH
     public partial class frmPhieuBH : Form
     {
         private BLL_PhieuBH _bll;
+        private int sTT;
         public frmPhieuBH()
         {
             InitializeComponent();
@@ -24,16 +25,16 @@ namespace GUI.CSKH
 
         private void frmPhieuBH_Load(object sender, EventArgs e)
         {
+            Reset();
             cboMaKH.DataSource = _bll.HienThiDSKH();
             cboMaKH.DisplayMember = "MaKH";
             cboMaKH.ValueMember = "HoTenKH";
             cboMaHang.DataSource = _bll.HienThiDSHH();
             cboMaHang.DisplayMember = "MaHH";
-            cboMaHang.ValueMember = "TenHH";
-            dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
+            cboMaHang.ValueMember = "MaHH";
             cboMaHang.SelectedIndex = 0;
             cboMaKH.SelectedIndex = 0;
-            
+
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -55,6 +56,7 @@ namespace GUI.CSKH
                         if (_bll.ThemPhieuBH(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -66,11 +68,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
             }
         }
 
@@ -91,10 +88,12 @@ namespace GUI.CSKH
         }
         private void Reset()
         {
-            txtMaPhieu.Text = "";
+            sTT = _bll.HienThiDSPhieuBHGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSPhieuBHGiamDan().Rows[0]["MaPhieuBH"].ToString().Substring(3)) + 1 : 1;
+            txtMaPhieu.Text = "PBH" + string.Format("{0:000}", sTT);
+            dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBHGiamDan();
             cboMaHang.SelectedIndex = 0;
             cboMaKH.SelectedIndex = 0;
-            txtMaPhieu.Focus();
+            cboMaHang.Focus();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -109,6 +108,7 @@ namespace GUI.CSKH
                     if (_bll.XoaPhieuBH(et))
                     {
                         MessageBox.Show("Xóa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -119,11 +119,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
             }
         }
 
@@ -141,6 +136,7 @@ namespace GUI.CSKH
                     if (_bll.SuaPhieuBH(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -151,11 +147,6 @@ namespace GUI.CSKH
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
             }
         }
 
@@ -180,6 +171,11 @@ namespace GUI.CSKH
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

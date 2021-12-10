@@ -16,14 +16,14 @@ namespace GUI.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class crpNhanVien : ReportClass {
+    public class RPInHoaDon : ReportClass {
         
-        public crpNhanVien() {
+        public RPInHoaDon() {
         }
         
         public override string ResourceName {
             get {
-                return "crpNhanVien.rpt";
+                return "RPInHoaDon.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GUI.Report {
         
         public override string FullResourceName {
             get {
-                return "GUI.Report.crpNhanVien.rpt";
+                return "GUI.Report.RPInHoaDon.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace GUI.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_MaBP {
+        public CrystalDecisions.Shared.IParameterField Parameter_MaHD {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,9 +98,9 @@ namespace GUI.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedcrpNhanVien : Component, ICachedReport {
+    public class CachedRPInHoaDon : Component, ICachedReport {
         
-        public CachedcrpNhanVien() {
+        public CachedRPInHoaDon() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace GUI.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            crpNhanVien rpt = new crpNhanVien();
+            RPInHoaDon rpt = new RPInHoaDon();
             rpt.Site = this.Site;
             return rpt;
         }

@@ -16,6 +16,7 @@ namespace GUI.CSKH
     public partial class frmTheKH : Form
     {
         private BLL_TheKH _bll;
+        private int sTT;
         public frmTheKH()
         {
             InitializeComponent();
@@ -24,8 +25,7 @@ namespace GUI.CSKH
         
         private void frmTheKH_Load(object sender, EventArgs e)
         {
-            dgvTheKH.DataSource = _bll.HienThiDSTheKH();
-            rdbChuaKH.Checked = true;
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -55,6 +55,7 @@ namespace GUI.CSKH
                         if (_bll.ThemTheKhachHang(et.MaTheKH, et.TinhTrang))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -67,17 +68,13 @@ namespace GUI.CSKH
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Reset();
-                dgvTheKH.DataSource = _bll.HienThiDSTheKH();
-            }
         }
         private void Reset()
         {
-            txtMaThe.Text = "";
+            sTT = _bll.HienThiDSTheKHGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSTheKHGiamDan().Rows[0]["MaTheKH"].ToString().Substring(3)) + 1 : 1;
+            txtMaThe.Text = "TKH" + string.Format("{0:000}", sTT);
+            dgvTheKH.DataSource = _bll.HienThiDSTheKHGiamDan();
             rdbChuaKH.Checked = true;
-            txtMaThe.Focus();
         }
 
         private void dgvTheKH_Click(object sender, EventArgs e)
@@ -87,6 +84,14 @@ namespace GUI.CSKH
                 //Lay dong vua chon:
                 int dong = dgvTheKH.CurrentCell.RowIndex;
                 txtMaThe.Text = dgvTheKH.Rows[dong].Cells[0].Value.ToString();
+                bool check = Boolean.Parse(dgvTheKH.Rows[dong].Cells[2].Value.ToString());
+                if (check)
+                {
+                    rdbDaKH.Checked = true;
+                } else
+                {
+                    rdbChuaKH.Checked = true;
+                }
             }
             catch (Exception ex)
             {
@@ -133,6 +138,7 @@ namespace GUI.CSKH
                     if (_bll.SuaTinhTrangThe(txtMaThe.Text, tinhTrang))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -144,11 +150,11 @@ namespace GUI.CSKH
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Reset();
-                dgvTheKH.DataSource = _bll.HienThiDSTheKH();
-            }
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

@@ -15,7 +15,12 @@ namespace BLL
         DAL_BoPhan daBoPhan = new DAL_BoPhan();
         public DataTable LayDS()
         {
-            return daBoPhan.LayDSBoPhan();
+            return daBoPhan.LayDSBoPhan("sp_DSBoPhan");
+        }
+
+        public DataTable LayDSGiamDan()
+        {
+            return daBoPhan.LayDSBoPhan("sp_DSBoPhanGiamDan");
         }
         public bool ThemBoPhan(ET_BoPhan et)
         {

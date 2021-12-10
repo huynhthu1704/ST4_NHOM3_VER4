@@ -43,6 +43,28 @@ namespace DAL
             return dt;
         }
 
+        public DataTable LayDSGiamDan()
+        {
+            try
+            {
+                _conn.Open();
+                cmd = new SqlCommand("sp_DSKMGiamDan", _conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return dt;
+        }
+
         public bool ThemKhuyenMai(ET_KhuyenMai et)
         {
             bool flag = false;

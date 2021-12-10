@@ -35,6 +35,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -42,6 +43,31 @@ namespace DAL
             }
             return dt;
         }
+
+        public DataSet LayDSChoRP()
+        {
+            DataSet ds;
+            try
+            {
+                conn.Open();
+                ds = new DataSet();
+                ds.Tables.Add(new DataTable("KhachHang"));
+                SqlCommand cmd = new SqlCommand("sp_LayKhachHang", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds.Tables["KhachHang"]);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
         public bool ThemKH(ET_KH et)
         {
             try
@@ -144,7 +170,7 @@ namespace DAL
             }
             return false;
         }
-        public bool SuaTheKH(string maKH,string maThe)
+        public bool SuaTheKH(string maKH, string maThe)
         {
             try
             {

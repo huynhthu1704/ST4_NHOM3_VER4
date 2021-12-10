@@ -16,15 +16,16 @@ namespace GUI.ThuKho
     public partial class frmDanhMucHH : Form
     {
         private BLL_DanhMucHH _bll;
+        private int sTT;
         public frmDanhMucHH()
         {
             InitializeComponent();
             _bll = new BLL_DanhMucHH();
         }
-        
+
         private void frmDanhMucHH_Load(object sender, EventArgs e)
         {
-            dgvDanhMucHH.DataSource = _bll.HienThiDS();
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -47,6 +48,8 @@ namespace GUI.ThuKho
                         if (_bll.ThemDM(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
+                            
                         }
                         else
                         {
@@ -59,15 +62,12 @@ namespace GUI.ThuKho
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Reset();
-                dgvDanhMucHH.DataSource = _bll.HienThiDS();
-            }
         }
         private void Reset()
         {
-            txtMaDM.Text = "";
+            dgvDanhMucHH.DataSource = _bll.HienThiDSGiamDan();
+            sTT = _bll.HienThiDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSGiamDan().Rows[0]["MaDM"].ToString().Substring(2)) + 1 : 1;
+            txtMaDM.Text = "DM" + string.Format("{0:00}", sTT);
             txtTenDM.Text = "";
         }
         private void btnXoa_Click(object sender, EventArgs e)
@@ -82,6 +82,7 @@ namespace GUI.ThuKho
                     if (_bll.XoaDM(et))
                     {
                         MessageBox.Show("Xóa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -92,11 +93,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvDanhMucHH.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -129,6 +125,7 @@ namespace GUI.ThuKho
                     if (_bll.SuaDM(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -139,11 +136,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvDanhMucHH.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -166,6 +158,11 @@ namespace GUI.ThuKho
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

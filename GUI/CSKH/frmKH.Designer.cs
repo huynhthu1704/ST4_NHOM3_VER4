@@ -45,6 +45,7 @@ namespace GUI.CSKH
             this.label1 = new System.Windows.Forms.Label();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.btnMoi = new System.Windows.Forms.Button();
             this.gbGioiTinh.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +78,7 @@ namespace GUI.CSKH
             this.rdbNam.Location = new System.Drawing.Point(105, 20);
             this.rdbNam.Name = "rdbNam";
             this.rdbNam.Size = new System.Drawing.Size(60, 23);
-            this.rdbNam.TabIndex = 0;
+            this.rdbNam.TabIndex = 4;
             this.rdbNam.TabStop = true;
             this.rdbNam.Text = "Nam";
             this.rdbNam.UseVisualStyleBackColor = true;
@@ -95,20 +96,20 @@ namespace GUI.CSKH
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(459, 188);
+            this.btnThoat.Location = new System.Drawing.Point(514, 189);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
-            this.btnThoat.TabIndex = 60;
+            this.btnThoat.TabIndex = 9;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(116, 188);
+            this.btnThem.Location = new System.Drawing.Point(171, 189);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
-            this.btnThem.TabIndex = 63;
+            this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
@@ -118,28 +119,30 @@ namespace GUI.CSKH
             this.txtDiaChi.Location = new System.Drawing.Point(459, 59);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(176, 27);
-            this.txtDiaChi.TabIndex = 56;
+            this.txtDiaChi.TabIndex = 3;
             // 
             // txtSoDT
             // 
             this.txtSoDT.Location = new System.Drawing.Point(459, 12);
             this.txtSoDT.Name = "txtSoDT";
             this.txtSoDT.Size = new System.Drawing.Size(176, 27);
-            this.txtSoDT.TabIndex = 57;
+            this.txtSoDT.TabIndex = 2;
             // 
             // txtHoTenKH
             // 
             this.txtHoTenKH.Location = new System.Drawing.Point(176, 59);
             this.txtHoTenKH.Name = "txtHoTenKH";
             this.txtHoTenKH.Size = new System.Drawing.Size(176, 27);
-            this.txtHoTenKH.TabIndex = 58;
+            this.txtHoTenKH.TabIndex = 1;
             // 
             // txtMaKH
             // 
             this.txtMaKH.Location = new System.Drawing.Point(176, 12);
             this.txtMaKH.Name = "txtMaKH";
+            this.txtMaKH.ReadOnly = true;
             this.txtMaKH.Size = new System.Drawing.Size(176, 27);
             this.txtMaKH.TabIndex = 59;
+            this.txtMaKH.TabStop = false;
             // 
             // label4
             // 
@@ -179,29 +182,40 @@ namespace GUI.CSKH
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(346, 188);
+            this.btnSua.Location = new System.Drawing.Point(401, 189);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
-            this.btnSua.TabIndex = 61;
+            this.btnSua.TabIndex = 8;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(232, 188);
+            this.btnXoa.Location = new System.Drawing.Point(287, 189);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(92, 39);
-            this.btnXoa.TabIndex = 62;
+            this.btnXoa.TabIndex = 7;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(67, 189);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 5;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
             // 
             // frmKH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.gbGioiTinh);
             this.Controls.Add(this.dgvKhachHang);
             this.Controls.Add(this.btnThoat);
@@ -217,10 +231,11 @@ namespace GUI.CSKH
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmKH";
+            this.Text = "Quản lý khách hàng";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmKH_FormClosing);
             this.Load += new System.EventHandler(this.frmKH_Load);
             this.gbGioiTinh.ResumeLayout(false);
@@ -248,5 +263,6 @@ namespace GUI.CSKH
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

@@ -155,9 +155,10 @@ namespace GUI.Admin
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmLoaiTheKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmLoaiTheKH";
+            this.Text = "Quản lý loại thẻ KH";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoaiTheKH_FormClosing);
             this.Load += new System.EventHandler(this.frmLoaiTheKH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDS)).EndInit();
