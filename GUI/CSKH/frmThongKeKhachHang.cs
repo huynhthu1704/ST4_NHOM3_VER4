@@ -16,5 +16,16 @@ namespace GUI.CSKH
         {
             InitializeComponent();
         }
+
+        private void crystalReportViewer1_Load(object sender, EventArgs e)
+        {
+            Report.RPKhachHang cr = new Report.RPKhachHang();
+            crvKhachHang.ReportSource = cr;
+        }
+
+        private void frmThongKeKhachHang_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

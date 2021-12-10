@@ -26,21 +26,22 @@ namespace GUI.ThuKho
         private void frmHangHoa_Load(object sender, EventArgs e)
         {
             Reset();
+            //hiênr thị ds dvt
             cboDVT.DataSource = _bll.HienThiDSDVT();
             cboDVT.DisplayMember = "TenDVT";
             cboDVT.ValueMember = "MaDVT";
+            //hien thị ds dmhh
             cboDM.DataSource = _bll.HienThiDSDM();
             cboDM.DisplayMember = "TenDM";
             cboDM.ValueMember = "MaDM";
+            //hiện thị ds km
             cboMaKM.DataSource = _bll.HienThiDSKM();
             cboMaKM.DisplayMember = "TenKM";
             cboMaKM.ValueMember = "MaKM";
 
             dgvHangHoa.DataSource = _bll.HienThiDSHH();
             rdbCo.Checked = true;
-            //cboDVT.SelectedIndex = 0;
-            //cboDM.SelectedIndex = 0;
-            //cboMaKM.SelectedIndex = 0;
+            Reset();
             txtMaKM.Visible = false;
             cboMaKM.Visible = false;
 
@@ -48,15 +49,19 @@ namespace GUI.ThuKho
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra bảo hành
             int bh = 1;
             if (rdbKhong.Checked == true)
             {
                 bh = 0;
             }
+            //kiểm tra km
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
+            //kiểm tra control
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaHH.Text == "" || txtTenHH.Text == "" || txtGia.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
@@ -130,24 +135,27 @@ namespace GUI.ThuKho
             txtMaHH.Text = "";
             txtTenHH.Text = "";
             txtGia.Text = "0";
-            cboDVT.SelectedIndex = 0;
-            cboDM.SelectedIndex = 0;
-            cboMaKM.SelectedIndex = 0;
+            //cboDM.SelectedIndex = 0;
+            //cboDVT.SelectedIndex = 0;
+            //cboMaKM.SelectedIndex = 0;
             txtMaHH.Focus();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            //kiểm tra bh
             int bh = 1;
             if (rdbKhong.Checked == true)
             {
                 bh = 0;
             }
+            //kiểm tra km
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
-
+            //kiểm tra control
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
             try
             {
+                //hiển thị xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -181,17 +189,20 @@ namespace GUI.ThuKho
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra bh
             int bh = 1;
             if (rdbKhong.Checked == true)
             {
                 bh = 0;
             }
+            //kiểm tra km
             int gia = CheckGia(txtGia.Text) ? int.Parse(txtGia.Text) : -1;
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
+            //kiểm tra control
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
             try
             {
-
+                //kiểm tra dữ liệu
                 if (txtMaHH.Text == "" || txtTenHH.Text == "" || gia == -1)
                 {
                     MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin Cần Sửa !");
@@ -246,6 +257,11 @@ namespace GUI.ThuKho
         {
             txtMaKM.Visible = false;
             cboMaKM.Visible = false;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

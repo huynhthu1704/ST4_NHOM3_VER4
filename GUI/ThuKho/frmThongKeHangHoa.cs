@@ -10,23 +10,21 @@ using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using BLL;
-using ET;
-
-namespace GUI.Admin
+namespace GUI.ThuKho
 {
-    public partial class frmThongKeNhanVien : Form
+    public partial class frmThongKeHangHoa : Form
     {
-        public frmThongKeNhanVien()
+        public frmThongKeHangHoa()
         {
             InitializeComponent();
         }
-        BLL_BoPhan bBoPhan = new BLL_BoPhan();
-        private void frmThongKeNhanVien_Load(object sender, EventArgs e)
+        BLL_DanhMucHH mucHH = new BLL_DanhMucHH();
+        private void frmThongKeHangHoa_Load(object sender, EventArgs e)
         {
-            cboMaBP.DataSource = bBoPhan.LayDS();
-            cboMaBP.DisplayMember = "MaBP";
-            cboMaBP.ValueMember = "MaBP";
-            cboMaBP.SelectedIndex = 0;
+            cboDM.DataSource = mucHH.HienThiDS();
+            cboDM.DisplayMember = "MaDM";
+            cboDM.ValueMember = "MaDM";
+            cboDM.SelectedIndex = 0;
             rdbInTatCa.Checked = true;
         }
 
@@ -34,24 +32,24 @@ namespace GUI.Admin
         {
             if (rdbInTatCa.Checked == true)
             {
-                 Report.RPNhanVien rptbnv = new Report.RPNhanVien();
+                Report.RPAllHangHoa rptbhh = new Report.RPAllHangHoa();
                 ParameterValues para = new ParameterValues();
                 ParameterDiscreteValue val = new ParameterDiscreteValue();
-                crvNhanVien.ReportSource = rptbnv;
+                crvHangHoa.ReportSource = rptbhh;
             }
             else
             {
-                    Report.RPNVTheoBP rpnvbp = new Report.RPNVTheoBP();
-                    ParameterValues para = new ParameterValues();
-                    ParameterDiscreteValue val = new ParameterDiscreteValue();
-                    val.Value = cboMaBP.Text;
-                    para.Add(val);
-                    rpnvbp.DataDefinition.ParameterFields["@MaBP"].ApplyCurrentValues(para);
-                    crvNhanVien.ReportSource = rpnvbp;
+                Report.RPHHTheoDM rphhdm = new Report.RPHHTheoDM();
+                ParameterValues para = new ParameterValues();
+                ParameterDiscreteValue val = new ParameterDiscreteValue();
+                val.Value = cboDM.Text;
+                para.Add(val);
+                rphhdm.DataDefinition.ParameterFields["@MaDM"].ApplyCurrentValues(para);
+                crvHangHoa.ReportSource = rphhdm;
             }
         }
 
-        private void frmThongKeNhanVien_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmThongKeHangHoa_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)

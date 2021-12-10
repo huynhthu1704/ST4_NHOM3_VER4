@@ -25,21 +25,24 @@ namespace GUI.ThuKho
 
         private void frmDVTinh_Load(object sender, EventArgs e)
         {
-           
+            dgvDVT.DataSource = _bll.HienThiDS();
             Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DVT et = new ET_DVT(txtMaDVT.Text, txtTenDVT.Text);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaDVT.Text == "" && txtTenDVT.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã
                     if (_bll.CheckTonTai(et))
                     {
                         MessageBox.Show("Đã tồn tại Đơn vị tính này");
@@ -61,6 +64,7 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -74,9 +78,11 @@ namespace GUI.ThuKho
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DVT et = new ET_DVT(txtMaDVT.Text, txtTenDVT.Text);
             try
             {
+                //hiển thị xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -94,15 +100,18 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DVT et = new ET_DVT(txtMaDVT.Text, txtTenDVT.Text);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaDVT.Text == "" && txtTenDVT.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần sửa!");
@@ -122,6 +131,7 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -130,6 +140,7 @@ namespace GUI.ThuKho
         {
             try
             {
+                //hiển thij xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
