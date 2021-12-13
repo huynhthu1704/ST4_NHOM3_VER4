@@ -16,6 +16,7 @@ namespace GUI.ThuKho
     public partial class frmHangHoa : Form
     {
         private BLL_HangHoa _bll;
+        private int sTT;
         public frmHangHoa()
         {
             InitializeComponent();
@@ -24,45 +25,43 @@ namespace GUI.ThuKho
 
         private void frmHangHoa_Load(object sender, EventArgs e)
         {
+            Reset();
+            //hiênr thị ds dvt
             cboDVT.DataSource = _bll.HienThiDSDVT();
             cboDVT.DisplayMember = "TenDVT";
             cboDVT.ValueMember = "MaDVT";
+            //hien thị ds dmhh
             cboDM.DataSource = _bll.HienThiDSDM();
             cboDM.DisplayMember = "TenDM";
             cboDM.ValueMember = "MaDM";
+            //hiện thị ds km
             cboMaKM.DataSource = _bll.HienThiDSKM();
             cboMaKM.DisplayMember = "TenKM";
             cboMaKM.ValueMember = "MaKM";
 
             dgvHangHoa.DataSource = _bll.HienThiDSHH();
             rdbCo.Checked = true;
-            //cboDVT.SelectedIndex = 0;
-            //cboDM.SelectedIndex = 0;
-            //cboMaKM.SelectedIndex = 0;
+            Reset();
             txtMaKM.Visible = false;
             cboMaKM.Visible = false;
-            
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra bảo hành
             int bh = 1;
             if (rdbKhong.Checked == true)
             {
                 bh = 0;
             }
+            //kiểm tra km
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
-            //MessageBox.Show(km);
+            //kiểm tra control
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
-            //MessageBox.Show(et.MaHH);
-            //MessageBox.Show(et.TenHH);
-            //MessageBox.Show(et.Gia.ToString());
-            //MessageBox.Show(et.MaDM);
-            //MessageBox.Show(et.DonVT);
-            //MessageBox.Show(et.BaoHanh.ToString());
-            //MessageBox.Show(et.MaKM);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaHH.Text == "" || txtTenHH.Text == "" || txtGia.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
@@ -78,6 +77,7 @@ namespace GUI.ThuKho
                         if (_bll.ThemHH(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -89,11 +89,6 @@ namespace GUI.ThuKho
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvHangHoa.DataSource = _bll.HienThiDSHH();
             }
         }
 
@@ -120,7 +115,8 @@ namespace GUI.ThuKho
                 if (string.IsNullOrEmpty(dgvHangHoa.Rows[dong].Cells[6].Value.ToString()))
                 {
                     radKMKhong.Checked = true;
-                } else
+                }
+                else
                 {
                     radKMCo.Checked = true;
                     cboMaKM.Text = dgvHangHoa.Rows[dong].Cells[6].Value.ToString();
@@ -134,27 +130,32 @@ namespace GUI.ThuKho
         }
         private void Reset()
         {
+            dgvHangHoa.DataSource = _bll.HienThiDSHH();
+            sTT = _bll.HienThiDSHH().Rows.Count != 0 ? int.Parse(_bll.HienThiDSHH().Rows[0]["MaHH"].ToString().Substring(2)) + 1 : 1;
             txtMaHH.Text = "";
             txtTenHH.Text = "";
             txtGia.Text = "0";
-            cboDVT.SelectedIndex = 0;
-            cboDM.SelectedIndex = 0;
-            cboMaKM.SelectedIndex = 0;
+            //cboDM.SelectedIndex = 0;
+            //cboDVT.SelectedIndex = 0;
+            //cboMaKM.SelectedIndex = 0;
             txtMaHH.Focus();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            //kiểm tra bh
             int bh = 1;
             if (rdbKhong.Checked == true)
             {
                 bh = 0;
             }
+            //kiểm tra km
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
-
+            //kiểm tra control
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
             try
             {
+                //hiển thị xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -163,7 +164,6 @@ namespace GUI.ThuKho
                     {
                         MessageBox.Show("Xóa thành công");
                         Reset();
-                        dgvHangHoa.DataSource = _bll.HienThiDSHH();
                     }
                     else
                     {
@@ -189,17 +189,20 @@ namespace GUI.ThuKho
         }
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra bh
             int bh = 1;
             if (rdbKhong.Checked == true)
             {
                 bh = 0;
             }
-            //MessageBox.Show(bh.ToString());
+            //kiểm tra km
             int gia = CheckGia(txtGia.Text) ? int.Parse(txtGia.Text) : -1;
             string km = radKMCo.Checked == true ? cboMaKM.SelectedValue.ToString() : "";
+            //kiểm tra control
             ET_HangHoa et = new ET_HangHoa(txtMaHH.Text, txtTenHH.Text, cboDVT.SelectedValue.ToString(), int.Parse(txtGia.Text), cboDM.SelectedValue.ToString(), bh, km);
-            try {
-
+            try
+            {
+                //kiểm tra dữ liệu
                 if (txtMaHH.Text == "" || txtTenHH.Text == "" || gia == -1)
                 {
                     MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin Cần Sửa !");
@@ -210,7 +213,6 @@ namespace GUI.ThuKho
                     {
                         MessageBox.Show("Sửa thành công");
                         Reset();
-                        dgvHangHoa.DataSource = _bll.HienThiDSHH();
                     }
                     else
                     {
@@ -255,6 +257,11 @@ namespace GUI.ThuKho
         {
             txtMaKM.Visible = false;
             cboMaKM.Visible = false;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

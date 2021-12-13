@@ -16,6 +16,7 @@ namespace GUI.Admin
 {
     public partial class frmNhanVien : Form
     {
+        private int sTT;
         public frmNhanVien()
         {
             InitializeComponent();
@@ -30,10 +31,7 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void frmNhanVien_Load(object sender, EventArgs e)
         {
-            //Lấy dữ liệu lên DataGirdView
-            dvgDS.DataSource = b.LayDS();
-            radNam.Checked = true;
-            //Lấy dữ liệu lên combobox
+            Reset();
             cboMaBP.DataSource = BP.LayDS();
             cboMaBP.DisplayMember = "TenBP";
             cboMaBP.ValueMember = "MaBP";
@@ -110,13 +108,7 @@ namespace GUI.Admin
                         if (b.ThemNhanVien(NV))
                         {
                             MessageBox.Show("Thêm Thành Công");
-                            txtCCCD.Text = "";
-                            txtDiaChi.Text = "";
-                            txtHoNV.Text = "";
-                            txtMaNV.Text = "";
-                            txtMaTK.Text = "";
-                            txtSDT.Text = "";
-                            txtTenNV.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -166,13 +158,7 @@ namespace GUI.Admin
                     if (b.SuaNhanVien(NV) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
-                        txtCCCD.Text = "";
-                        txtDiaChi.Text = "";
-                        txtHoNV.Text = "";
-                        txtMaNV.Text = "";
-                        txtMaTK.Text = "";
-                        txtSDT.Text = "";
-                        txtTenNV.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -210,13 +196,7 @@ namespace GUI.Admin
                         if (b.XoaNhanVien(ma) == true)
                         {
                             MessageBox.Show("Xoá Thành Công");
-                            txtCCCD.Text = "";
-                            txtDiaChi.Text = "";
-                            txtHoNV.Text = "";
-                            txtMaNV.Text = "";
-                            txtMaTK.Text = "";
-                            txtSDT.Text = "";
-                            txtTenNV.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -233,15 +213,28 @@ namespace GUI.Admin
                         dvgDS.DataSource = b.LayDS();
                     }
                 }
-                else
-                {
-
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Reset()
+        {
+            sTT = b.LayDSGiamDan().Rows.Count != 0 ? int.Parse(b.LayDSGiamDan().Rows[0]["MaNV"].ToString().Substring(2)) + 1 : 1;
+            txtMaNV.Text = "NV" + string.Format("{0:00}", sTT);
+            dvgDS.DataSource = b.LayDSGiamDan();
+            cboMaBP.SelectedIndex = 0;
+            txtCCCD.Text = "";
+            txtDiaChi.Text = "";
+            txtHoNV.Text = "";
+            txtMaTK.Text = "";
+            txtSDT.Text = "";
+            radNam.Checked = true;
+            txtTenNV.Text = "";
+            dtpNS.ResetText();
+            dtpNVL.ResetText();
         }
 
         /// <summary>
@@ -279,6 +272,11 @@ namespace GUI.Admin
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

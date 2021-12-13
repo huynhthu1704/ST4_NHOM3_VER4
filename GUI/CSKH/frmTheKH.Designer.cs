@@ -36,8 +36,9 @@ namespace GUI.CSKH
             this.txtMaThe = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rdbDaKH = new System.Windows.Forms.RadioButton();
             this.rdbChuaKH = new System.Windows.Forms.RadioButton();
+            this.rdbDaKH = new System.Windows.Forms.RadioButton();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTheKH)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@ namespace GUI.CSKH
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(434, 167);
+            this.btnThoat.Location = new System.Drawing.Point(496, 167);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 8;
@@ -65,7 +66,7 @@ namespace GUI.CSKH
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(286, 167);
+            this.btnSua.Location = new System.Drawing.Point(348, 167);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
             this.btnSua.TabIndex = 9;
@@ -75,7 +76,7 @@ namespace GUI.CSKH
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(140, 167);
+            this.btnThem.Location = new System.Drawing.Point(202, 167);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 11;
@@ -87,8 +88,10 @@ namespace GUI.CSKH
             // 
             this.txtMaThe.Location = new System.Drawing.Point(221, 30);
             this.txtMaThe.Name = "txtMaThe";
+            this.txtMaThe.ReadOnly = true;
             this.txtMaThe.Size = new System.Drawing.Size(176, 27);
             this.txtMaThe.TabIndex = 7;
+            this.txtMaThe.TabStop = false;
             // 
             // label1
             // 
@@ -110,17 +113,6 @@ namespace GUI.CSKH
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tình Trạng";
             // 
-            // rdbDaKH
-            // 
-            this.rdbDaKH.AutoSize = true;
-            this.rdbDaKH.Location = new System.Drawing.Point(22, 41);
-            this.rdbDaKH.Name = "rdbDaKH";
-            this.rdbDaKH.Size = new System.Drawing.Size(118, 23);
-            this.rdbDaKH.TabIndex = 0;
-            this.rdbDaKH.TabStop = true;
-            this.rdbDaKH.Text = "Đã Kích Hoạt";
-            this.rdbDaKH.UseVisualStyleBackColor = true;
-            // 
             // rdbChuaKH
             // 
             this.rdbChuaKH.AutoSize = true;
@@ -132,10 +124,32 @@ namespace GUI.CSKH
             this.rdbChuaKH.Text = "Chưa Kích Hoạt";
             this.rdbChuaKH.UseVisualStyleBackColor = true;
             // 
+            // rdbDaKH
+            // 
+            this.rdbDaKH.AutoSize = true;
+            this.rdbDaKH.Location = new System.Drawing.Point(22, 41);
+            this.rdbDaKH.Name = "rdbDaKH";
+            this.rdbDaKH.Size = new System.Drawing.Size(118, 23);
+            this.rdbDaKH.TabIndex = 0;
+            this.rdbDaKH.TabStop = true;
+            this.rdbDaKH.Text = "Đã Kích Hoạt";
+            this.rdbDaKH.UseVisualStyleBackColor = true;
+            // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(65, 167);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 14;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmTheKH
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTheKH);
             this.Controls.Add(this.btnThoat);
@@ -144,9 +158,10 @@ namespace GUI.CSKH
             this.Controls.Add(this.txtMaThe);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmTheKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTheKH";
+            this.Text = "Quản lý thẻ Khách hàng";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTheKH_FormClosing);
             this.Load += new System.EventHandler(this.frmTheKH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTheKH)).EndInit();
@@ -168,5 +183,6 @@ namespace GUI.CSKH
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rdbChuaKH;
         private System.Windows.Forms.RadioButton rdbDaKH;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

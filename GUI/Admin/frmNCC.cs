@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ngọc Thư
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,7 @@ namespace GUI.Admin
 {
     public partial class frmNCC : Form
     {
+        private int sTT;
         public frmNCC()
         {
             InitializeComponent();
@@ -39,11 +42,7 @@ namespace GUI.Admin
                     if (b.ThemNCC(NCC) == true)
                     {
                         MessageBox.Show("Thêm Thành Công");
-                        txtMa.Text = "";
-                        txtSDT.Text = "";
-                        txtTen.Text = "";
-                        txtEmail.Text = "";
-                        txtDiaChi.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -55,12 +54,18 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                dgvDS.DataSource = b.LayDS();
-            }
         }
 
+        private void Reset()
+        {
+            sTT = b.LayDSGiamDan().Rows.Count != 0 ? int.Parse(b.LayDSGiamDan().Rows[0]["MaNCC"].ToString().Substring(3)) + 1 : 1;
+            dgvDS.DataSource = b.LayDSGiamDan();
+            txtMa.Text = "NCC" + string.Format("{0:00}", sTT);
+            txtSDT.Text = "";
+            txtTen.Text = "";
+            txtEmail.Text = "";
+            txtDiaChi.Text = "";
+        }
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMa.Text;
@@ -69,11 +74,7 @@ namespace GUI.Admin
                 if (b.XoaNCC(ma) == true)
                 {
                     MessageBox.Show("Xoá Thành Công");
-                    txtMa.Text = "";
-                    txtSDT.Text = "";
-                    txtTen.Text = "";
-                    txtEmail.Text = "";
-                    txtDiaChi.Text = "";
+                    Reset();
                 }
                 else
                 {
@@ -83,10 +84,6 @@ namespace GUI.Admin
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dgvDS.DataSource = b.LayDS();
             }
         }
 
@@ -100,33 +97,26 @@ namespace GUI.Admin
             ET_NCC NCC = new ET_NCC(ma, ten, diachi, sdt, email);
             try
             {
-                    if (b.SuaNCC(NCC) == true)
-                    {
-                        MessageBox.Show("Sửa Thành Công");
-                        txtMa.Text = "";
-                        txtSDT.Text = "";
-                        txtTen.Text = "";
-                        txtEmail.Text = "";
-                        txtDiaChi.Text = "";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sửa Không Thành Công");
-                    }           
+                if (b.SuaNCC(NCC) == true)
+                {
+                    MessageBox.Show("Sửa Thành Công");
+                    Reset();
+                }
+                else
+                {
+                    MessageBox.Show("Sửa Không Thành Công");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                dgvDS.DataSource = b.LayDS();
-            }
+            
         }
 
         private void frmNCC_Load(object sender, EventArgs e)
         {
-            dgvDS.DataSource = b.LayDS();
+            Reset();
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -157,6 +147,11 @@ namespace GUI.Admin
             {
                 e.Cancel = true;
             }
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

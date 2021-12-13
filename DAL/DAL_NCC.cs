@@ -19,22 +19,21 @@ namespace DAL
         {
             _conn = Connection.conn;
         }
-        public DataTable LayDSNCC()
+        public DataTable LayDS(string tenSP)
         {
-
             try
             {
                 _conn.Open();
-                cmd = new SqlCommand("sp_DSNCC", _conn);
+                cmd = new SqlCommand(tenSP, _conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {

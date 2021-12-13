@@ -16,6 +16,7 @@ namespace GUI.CSKH
     public partial class frmTheKH : Form
     {
         private BLL_TheKH _bll;
+        private int sTT;
         public frmTheKH()
         {
             InitializeComponent();
@@ -24,12 +25,13 @@ namespace GUI.CSKH
         
         private void frmTheKH_Load(object sender, EventArgs e)
         {
+            Reset();
             dgvTheKH.DataSource = _bll.HienThiDSTheKH();
-            rdbChuaKH.Checked = true;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra thì trạng
             int tinhTrang = 0;
             if (rdbDaKH.Checked == true)
             {
@@ -40,12 +42,14 @@ namespace GUI.CSKH
             ET_TheKH et = new ET_TheKH(txtMaThe.Text,"", tinhTrang, 0);
             try
             {
+                //kiểm tra dư liệu
                 if (txtMaThe.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã
                     if (_bll.CheckTonTai(txtMaThe.Text))
                     {
                         MessageBox.Show("Đã tồn tại thẻ KH này");
@@ -55,6 +59,7 @@ namespace GUI.CSKH
                         if (_bll.ThemTheKhachHang(et.MaTheKH, et.TinhTrang))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -65,19 +70,16 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvTheKH.DataSource = _bll.HienThiDSTheKH();
             }
         }
         private void Reset()
         {
-            txtMaThe.Text = "";
+            sTT = _bll.HienThiDSTheKHGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSTheKHGiamDan().Rows[0]["MaTheKH"].ToString().Substring(3)) + 1 : 1;
+            txtMaThe.Text = "TKH" + string.Format("{0:000}", sTT);
+            dgvTheKH.DataSource = _bll.HienThiDSTheKHGiamDan();
             rdbChuaKH.Checked = true;
-            txtMaThe.Focus();
         }
 
         private void dgvTheKH_Click(object sender, EventArgs e)
@@ -87,6 +89,14 @@ namespace GUI.CSKH
                 //Lay dong vua chon:
                 int dong = dgvTheKH.CurrentCell.RowIndex;
                 txtMaThe.Text = dgvTheKH.Rows[dong].Cells[0].Value.ToString();
+                bool check = Boolean.Parse(dgvTheKH.Rows[dong].Cells[2].Value.ToString());
+                if (check)
+                {
+                    rdbDaKH.Checked = true;
+                } else
+                {
+                    rdbChuaKH.Checked = true;
+                }
             }
             catch (Exception ex)
             {
@@ -116,14 +126,17 @@ namespace GUI.CSKH
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra tình trạng
             int tinhTrang = 0;
             if (rdbDaKH.Checked == true)
             {
                 tinhTrang = 1;
             }
+            //kiểm tra các control
             ET_TheKH et = new ET_TheKH(txtMaThe.Text, "", tinhTrang, 0);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaThe.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin !");
@@ -133,6 +146,7 @@ namespace GUI.CSKH
                     if (_bll.SuaTinhTrangThe(txtMaThe.Text, tinhTrang))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -142,13 +156,14 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Reset();
-                dgvTheKH.DataSource = _bll.HienThiDSTheKH();
-            }
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

@@ -21,14 +21,13 @@ namespace DAL
             _conn = Connection.conn;
         }
         //method
-        //lấy danh sách Nhân viên
-        public DataTable LayDS()
+        public DataTable LayDS(string tenSp)
         {
 
             try
             {
                 _conn.Open();
-                cmd = new SqlCommand("sp_LayNhanVien", _conn);
+                cmd = new SqlCommand(tenSP, _conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 da = new SqlDataAdapter(cmd);

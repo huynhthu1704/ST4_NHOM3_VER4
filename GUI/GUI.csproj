@@ -68,6 +68,12 @@
     <Compile Include="Admin\frmNCC.Designer.cs">
       <DependentUpon>frmNCC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\frmThongKeNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\frmThongKeNhanVien.Designer.cs">
+      <DependentUpon>frmThongKeNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Const.cs" />
     <Compile Include="CSKH\frmKH.cs">
       <SubType>Form</SubType>
@@ -75,17 +81,71 @@
     <Compile Include="CSKH\frmKH.Designer.cs">
       <DependentUpon>frmKH.cs</DependentUpon>
     </Compile>
+    <Compile Include="CSKH\frmThongKeKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CSKH\frmThongKeKhachHang.Designer.cs">
+      <DependentUpon>frmThongKeKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="RPInHoaDon.cs">
+    <Compile Include="Report\RPAllHangHoa.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPAllHangHoa.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPHHTheoDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPHHTheoDM.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPInHoaDon.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RPInHoaDon.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPKhachHang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPKhachHang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPNhanVien.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPNhanVien.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPNVTheoBP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPNVTheoBP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frmInHDNhapHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frmInHDNhapHang.Designer.cs">
+      <DependentUpon>frmInHDNhapHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThuKho\frmThongKeHangHoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frmThongKeHangHoa.Designer.cs">
+      <DependentUpon>frmThongKeHangHoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThuKho\frmThongKeTonKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frmThongKeTonKho.Designer.cs">
+      <DependentUpon>frmThongKeTonKho.cs</DependentUpon>
     </Compile>
     <Compile Include="ThuNgan\frmInHD.cs">
       <SubType>Form</SubType>
@@ -209,6 +269,9 @@
     <EmbeddedResource Include="Admin\frmTaiKhoan.resx">
       <DependentUpon>frmTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin\frmThongKeNhanVien.resx">
+      <DependentUpon>frmThongKeNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CSKH\frmKH.resx">
       <DependentUpon>frmKH.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,12 +284,44 @@
     <EmbeddedResource Include="CSKH\frmTheKH.resx">
       <DependentUpon>frmTheKH.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CSKH\frmThongKeKhachHang.resx">
+      <DependentUpon>frmThongKeKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RPInHoaDon.rpt">
+    <EmbeddedResource Include="Report\RPAllHangHoa.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPAllHangHoa.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPHHTheoDM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPHHTheoDM.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPInHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPInHoaDon.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPKhachHang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPKhachHang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPNhanVien.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPNhanVien.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPNVTheoBP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPNVTheoBP.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThuKho\frmInHDNhapHang.resx">
+      <DependentUpon>frmInHDNhapHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThuKho\frmThongKeHangHoa.resx">
+      <DependentUpon>frmThongKeHangHoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThuKho\frmThongKeTonKho.resx">
+      <DependentUpon>frmThongKeTonKho.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThuNgan\frmInHD.resx">
       <DependentUpon>frmInHD.cs</DependentUpon>
@@ -277,6 +372,10 @@
       <Project>{149b8002-4495-4b93-a9ef-fca45e28175b}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{9b98e960-7432-4a5c-95c4-b90d9511d10e}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ET\ET.csproj">
       <Project>{95cd842c-7b3c-4d94-83a0-a4ca9fa12fc5}</Project>
       <Name>ET</Name>
@@ -285,5 +384,6 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

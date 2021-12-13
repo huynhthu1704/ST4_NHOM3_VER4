@@ -16,6 +16,7 @@ namespace GUI.ThuKho
     public partial class frmDVTinh : Form
     {
         private BLL_DVT _bll;
+        private int sTT;
         public frmDVTinh()
         {
             InitializeComponent();
@@ -25,19 +26,23 @@ namespace GUI.ThuKho
         private void frmDVTinh_Load(object sender, EventArgs e)
         {
             dgvDVT.DataSource = _bll.HienThiDS();
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DVT et = new ET_DVT(txtMaDVT.Text, txtTenDVT.Text);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaDVT.Text == "" && txtTenDVT.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã
                     if (_bll.CheckTonTai(et))
                     {
                         MessageBox.Show("Đã tồn tại Đơn vị tính này");
@@ -47,6 +52,8 @@ namespace GUI.ThuKho
                         if (_bll.ThemDVT(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
+
                         }
                         else
                         {
@@ -57,11 +64,8 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dgvDVT.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -74,9 +78,11 @@ namespace GUI.ThuKho
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DVT et = new ET_DVT(txtMaDVT.Text, txtTenDVT.Text);
             try
             {
+                //hiển thị xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -84,6 +90,7 @@ namespace GUI.ThuKho
                     if (_bll.XoaDVT(et))
                     {
                         MessageBox.Show("Xóa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -93,19 +100,18 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dgvDVT.DataSource = _bll.HienThiDS();
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DVT et = new ET_DVT(txtMaDVT.Text, txtTenDVT.Text);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaDVT.Text == "" && txtTenDVT.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần sửa!");
@@ -115,6 +121,7 @@ namespace GUI.ThuKho
                     if (_bll.SuaDVT(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -124,12 +131,8 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                
-                dgvDVT.DataSource = _bll.HienThiDS();
             }
         }
 
@@ -137,6 +140,7 @@ namespace GUI.ThuKho
         {
             try
             {
+                //hiển thij xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -157,6 +161,20 @@ namespace GUI.ThuKho
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Reset()
+        {
+            dgvDVT.DataSource = _bll.HienThiDSGiamDan();
+            sTT = _bll.HienThiDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSGiamDan().Rows[0]["MaDVT"].ToString().Substring(3)) + 1 : 1;
+            txtMaDVT.Text = "DVT" + string.Format("{0:00}", sTT);
+            txtTenDVT.Text = "";
+            
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

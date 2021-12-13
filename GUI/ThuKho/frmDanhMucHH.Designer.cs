@@ -38,6 +38,7 @@ namespace GUI.ThuKho
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.dgvDanhMucHH = new System.Windows.Forms.DataGridView();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhMucHH)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,8 +64,10 @@ namespace GUI.ThuKho
             // 
             this.txtMaDM.Location = new System.Drawing.Point(254, 47);
             this.txtMaDM.Name = "txtMaDM";
+            this.txtMaDM.ReadOnly = true;
             this.txtMaDM.Size = new System.Drawing.Size(154, 27);
             this.txtMaDM.TabIndex = 2;
+            this.txtMaDM.TabStop = false;
             // 
             // txtTenDM
             // 
@@ -75,9 +78,9 @@ namespace GUI.ThuKho
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(150, 157);
+            this.btnThem.Location = new System.Drawing.Point(191, 155);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(75, 28);
+            this.btnThem.Size = new System.Drawing.Size(84, 28);
             this.btnThem.TabIndex = 4;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
@@ -85,9 +88,9 @@ namespace GUI.ThuKho
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(254, 157);
+            this.btnXoa.Location = new System.Drawing.Point(295, 155);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(75, 28);
+            this.btnXoa.Size = new System.Drawing.Size(84, 28);
             this.btnXoa.TabIndex = 5;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -95,9 +98,9 @@ namespace GUI.ThuKho
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(350, 157);
+            this.btnSua.Location = new System.Drawing.Point(391, 155);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(75, 28);
+            this.btnSua.Size = new System.Drawing.Size(84, 28);
             this.btnSua.TabIndex = 6;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
@@ -105,9 +108,9 @@ namespace GUI.ThuKho
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(448, 157);
+            this.btnThoat.Location = new System.Drawing.Point(489, 155);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(75, 28);
+            this.btnThoat.Size = new System.Drawing.Size(84, 28);
             this.btnThoat.TabIndex = 7;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -124,11 +127,22 @@ namespace GUI.ThuKho
             this.dgvDanhMucHH.TabIndex = 8;
             this.dgvDanhMucHH.Click += new System.EventHandler(this.dgvDanhMucHH_Click);
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(87, 155);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(84, 28);
+            this.btnMoi.TabIndex = 9;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmDanhMucHH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dgvDanhMucHH);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -139,10 +153,11 @@ namespace GUI.ThuKho
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmDanhMucHH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmDanhMucHH";
+            this.Text = "Quản lý danh mục ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDanhMucHH_FormClosing);
             this.Load += new System.EventHandler(this.frmDanhMucHH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhMucHH)).EndInit();
@@ -162,5 +177,6 @@ namespace GUI.ThuKho
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.DataGridView dgvDanhMucHH;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

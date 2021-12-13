@@ -19,11 +19,13 @@ namespace BLL
             _dal = new DAL_ChiTietHD();
         }
 
+        // Thêm chi tiết hóa đơn
         public bool ThemCTHD(ET_ChiTietHD et)
         {
             return _dal.ThemCTHD(et);
         }
 
+        // Lấy chi tiết hóa đơn
         public DataTable LayCTHDTheoMaHD(string ma)
         {
             return _dal.LayCTHDTheoMaHD(ma);

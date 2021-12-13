@@ -13,6 +13,11 @@ namespace BLL
     public class BLL_Kho
     {
         DAL_Kho da = new DAL_Kho();
+        public DataTable LayDSGiamDan()
+        {
+            return da.LayDSKhoTheoMaGiamDan();
+        }
+
         public DataTable LayDS()
         {
             return da.LayDSKho();

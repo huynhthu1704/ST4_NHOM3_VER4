@@ -16,6 +16,7 @@ namespace GUI.CSKH
     public partial class frmPhieuBH : Form
     {
         private BLL_PhieuBH _bll;
+        private int sTT;
         public frmPhieuBH()
         {
             InitializeComponent();
@@ -24,28 +25,34 @@ namespace GUI.CSKH
 
         private void frmPhieuBH_Load(object sender, EventArgs e)
         {
+            //tạo mới
+            Reset();
+            //hiện thị ds khách hàng
             cboMaKH.DataSource = _bll.HienThiDSKH();
             cboMaKH.DisplayMember = "MaKH";
             cboMaKH.ValueMember = "HoTenKH";
+            //hiện thị ds hàng hóa
             cboMaHang.DataSource = _bll.HienThiDSHH();
             cboMaHang.DisplayMember = "MaHH";
-            cboMaHang.ValueMember = "TenHH";
-            dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
+            cboMaHang.ValueMember = "MaHH";
             cboMaHang.SelectedIndex = 0;
             cboMaKH.SelectedIndex = 0;
-            
+
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra các tham số truyền vào
             ET_PhieuBH et = new ET_PhieuBH(txtMaPhieu.Text, cboMaHang.Text, cboMaKH.Text, dtpNgayMua.Value, dtpHanBH.Value);
             try
             {
+                //kiểm tra dữ liệu đc thêm vào
                 if (txtMaPhieu.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã 
                     if (_bll.CheckTonTai(et))
                     {
                         MessageBox.Show("Đã tồn tại Phiếu bảo hành này");
@@ -55,6 +62,7 @@ namespace GUI.CSKH
                         if (_bll.ThemPhieuBH(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -65,12 +73,8 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
             }
         }
 
@@ -91,17 +95,19 @@ namespace GUI.CSKH
         }
         private void Reset()
         {
-            txtMaPhieu.Text = "";
-            cboMaHang.SelectedIndex = 0;
-            cboMaKH.SelectedIndex = 0;
-            txtMaPhieu.Focus();
+            sTT = _bll.HienThiDSPhieuBHGiamDan().Rows.Count != 0 ? int.Parse(_bll.HienThiDSPhieuBHGiamDan().Rows[0]["MaPhieuBH"].ToString().Substring(3)) + 1 : 1;
+            txtMaPhieu.Text = "PBH" + string.Format("{0:000}", sTT);
+            dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBHGiamDan();
+            cboMaHang.Focus();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            // kiểm tra tham số truyền vào
             ET_PhieuBH et = new ET_PhieuBH(txtMaPhieu.Text, cboMaHang.Text, cboMaKH.Text, dtpNgayMua.Value, dtpHanBH.Value);
             try
             {
+                // hiện thị sách nhận 
                 DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -109,6 +115,7 @@ namespace GUI.CSKH
                     if (_bll.XoaPhieuBH(et))
                     {
                         MessageBox.Show("Xóa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -118,29 +125,29 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                // ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_PhieuBH et = new ET_PhieuBH(txtMaPhieu.Text, cboMaHang.Text, cboMaKH.Text, dtpNgayMua.Value, dtpHanBH.Value);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaPhieu.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần Sửa!");
                 }
                 else
                 {
+                    // kiểm tra mã pbh
                     if (_bll.SuaPhieuBH(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -150,12 +157,8 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvPhieuBH.DataSource = _bll.HienThiDSPhieuBH();
             }
         }
 
@@ -173,6 +176,7 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show("Lỗi " + ex.Message);
             }
         }
@@ -180,6 +184,11 @@ namespace GUI.CSKH
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

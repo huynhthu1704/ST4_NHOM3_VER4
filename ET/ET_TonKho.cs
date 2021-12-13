@@ -9,9 +9,9 @@ namespace ET
 {
     public class ET_TonKho
     {
-        private string maKho;
-        private string maHH;
-        private int soLuong;
+        private string maKho; // mã kho
+        private string maHH; // mã hàng hóa
+        private int soLuong; // số lượng
 
         public ET_TonKho(string maHH, string maKho, int soLuong)
         {

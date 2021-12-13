@@ -15,6 +15,7 @@ namespace GUI.Admin
 {
     public partial class frmBoPhan : Form
     {
+        private int sTT;
         public frmBoPhan()
         {
             InitializeComponent();
@@ -27,16 +28,20 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
+            
             try
             {
-                if (txtMaBP.Text == "" || txtMaQL.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
+                if (txtMaBP.Text == ""  || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
                 else
                 {
-                    ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
-                    //Kiểm tra bộ phận tồn tại chưa
+                    string maBP = txtMaBP.Text;
+                    string tenBP = txtTenBP.Text;
+                    string sDT = string.IsNullOrEmpty(txtSDT.Text) ? "" : txtSDT.Text;
+                    string maQL = string.IsNullOrEmpty(txtMaQL.Text) ? "" : txtMaQL.Text;
+                    ET_BoPhan BoPhan = new ET_BoPhan(maBP, tenBP, sDT, maQL);
                     if (bBoPhan.CheckTonTai(BoPhan))
                     {
                         MessageBox.Show("Đã tồn tại bộ phận này");
@@ -47,10 +52,7 @@ namespace GUI.Admin
                         if (bBoPhan.ThemBoPhan(BoPhan) == true)
                         {
                             MessageBox.Show("Thêm Thành Công");
-                            txtMaBP.Text = "";
-                            txtMaQL.Text = "";
-                            txtSDT.Text = "";
-                            txtTenBP.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -62,11 +64,6 @@ namespace GUI.Admin
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                // lấy dự liệu lên DataGirdView
-                dvgDS.DataSource = bBoPhan.LayDS();
             }
         }
         /// <summary>
@@ -87,10 +84,7 @@ namespace GUI.Admin
                     {
                         //Báo đã xoá
                         MessageBox.Show("Xoá Thành Công");
-                        txtMaBP.Text = "";
-                        txtMaQL.Text = "";
-                        txtSDT.Text = "";
-                        txtTenBP.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -103,15 +97,6 @@ namespace GUI.Admin
                     // báo lỗi
                     MessageBox.Show(ex.Message);
                 }
-                finally
-                {
-                    // lấy dự liệu lên DataGirdView
-                    dvgDS.DataSource = bBoPhan.LayDS();
-                }
-            }
-            else
-            {
-
             }
         }
 
@@ -137,10 +122,7 @@ namespace GUI.Admin
                     if (bBoPhan.SuaBoPhan(BoPhan) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
-                        txtMaBP.Text = "";
-                        txtMaQL.Text = "";
-                        txtSDT.Text = "";
-                        txtTenBP.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -153,11 +135,6 @@ namespace GUI.Admin
                 //Báo lỗi
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                // lấy dự liệu lên DataGirdView
-                dvgDS.DataSource = bBoPhan.LayDS();
-            }
         }
 
         /// <summary>
@@ -167,10 +144,18 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void frmBoPhan_Load(object sender, EventArgs e)
         {
-            // lấy dự liệu lên DataGirdView
-            dvgDS.DataSource = bBoPhan.LayDS();
+            Reset();
         }
 
+        public void Reset()
+        {
+            dvgDS.DataSource = bBoPhan.LayDSGiamDan();
+            sTT = bBoPhan.LayDSGiamDan().Rows.Count != 0 ? int.Parse(bBoPhan.LayDSGiamDan().Rows[0]["MaBP"].ToString().Substring(2)) + 1 : 1;
+            txtMaBP.Text = "BP" + string.Format("{0:00}", sTT);
+            txtMaQL.Text = "";
+            txtSDT.Text = "";
+            txtTenBP.Text = "";
+        }
         /// <summary>
         /// Sự kiện khi bấm vào nút thoát
         /// </summary>
@@ -218,6 +203,11 @@ namespace GUI.Admin
             txtTenBP.Text = dvgDS.Rows[index].Cells[1].Value.ToString();
             txtSDT.Text = dvgDS.Rows[index].Cells[2].Value.ToString();
             txtMaQL.Text = dvgDS.Rows[index].Cells[3].Value.ToString();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

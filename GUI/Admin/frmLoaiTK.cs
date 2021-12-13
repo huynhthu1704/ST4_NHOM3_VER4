@@ -30,10 +30,7 @@ namespace GUI.Admin
         // Sự kiện load form
         private void frmLoaiTK_Load(object sender, EventArgs e)
         {
-            // Nếu chưa có tài khoản nào tạo ra thì STT bắt đầu từ 1, ngược lại STT = STT cũ + 1
-            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
-            txtMaLoai.Text = "ML" + string.Format("{0:00}", STT);
-            dgvLoaiTK.DataSource = _bll.HienThiDS();
+            Reset();
         }
 
         // Sự kiện đóng form
@@ -84,9 +81,7 @@ namespace GUI.Admin
                         if (_bll.ThemTaiKhoan(et))
                         {
                             MessageBox.Show("Thêm thành công");
-                            STT++;
                             Reset();
-                            dgvLoaiTK.DataSource = _bll.HienThiDS();
                         }
                         else
                         {
@@ -112,22 +107,27 @@ namespace GUI.Admin
             ET_LoaiTK et = new ET_LoaiTK(txtMaLoai.Text, txtTenLoai.Text);
             try
             {
-                DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (kq == DialogResult.Yes)
+                if (et.TenLoai != "" && et.TenLoai != "")
                 {
-                    if (_bll.XoaTaiKhoan(et))
+                    DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (kq == DialogResult.Yes)
                     {
-                        MessageBox.Show("Xóa thành công");
-                        STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
-                        Reset();
-                        dgvLoaiTK.DataSource = _bll.HienThiDS();
+                        if (_bll.XoaTaiKhoan(et))
+                        {
+                            MessageBox.Show("Xóa thành công");
+                            Reset();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa không thành công");
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Xóa không thành công");
-                    }
+                } else
+                {
+                    MessageBox.Show("Vui lòng chọn tài khoản cần xóa");
                 }
+               
             }
             catch (Exception ex)
             {
@@ -156,7 +156,6 @@ namespace GUI.Admin
                     {
                         MessageBox.Show("Sửa thành công");
                         Reset();
-                        dgvLoaiTK.DataSource = _bll.HienThiDS();
                     }
                     else
                     {
@@ -178,10 +177,12 @@ namespace GUI.Admin
         // Reset trạng thái các control
         private void Reset()
         {
-            txtMaLoai.Text = "";
-            txtTenLoai.Text = "";
-            txtMaLoai.Focus();
+            // Nếu chưa có tài khoản nào tạo ra thì STT bắt đầu từ 1, ngược lại STT = STT cũ + 1
+            STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
             txtMaLoai.Text = "ML" + string.Format("{0:00}", STT);
+            dgvLoaiTK.DataSource = _bll.HienThiDS();
+            txtTenLoai.Focus();
+            txtTenLoai.Text = "";
         }
 
         // Sự kiện khi click lên datagridview, hiển thị thông tin lên các textfield
@@ -197,6 +198,11 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

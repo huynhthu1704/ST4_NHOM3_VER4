@@ -1,13 +1,24 @@
---Storeprocedure
+set dateformat dmy
+GO
+--Stored procedure
 ---------------------------- BỘ PHẬN ----------------------------
 --Lấy danh sách bảng bộ phận
+drop database NHOM3_QLSIEUTHICOOPMART
 CREATE PROC sp_DSBoPhan
 	AS
 		BEGIN 
-			SELECT * FROM BoPhan
+			SELECT * FROM BoPhan 
 	END
 
 GO
+
+CREATE PROC sp_DSBoPhanGiamDan
+	AS
+		BEGIN 
+			SELECT * FROM BoPhan ORDER BY MaBP DESC
+	END
+GO
+
 
 --Thêm ds bộ phận
 CREATE PROC sp_ThemBoPhan(@MaBP varchar(10),@TenBP nvarchar(30),@SDT varchar(11),@MaQL varchar(10))
@@ -16,10 +27,17 @@ AS
 		INSERT INTO BoPhan(MaBP, TenBP, SDT, MaQL)
 		VALUES(@MaBP, @TenBP, @SDT, @MaQL)
 	END
-
 GO
-exec sp_ThemBoPhan 'BP03', N'Chăm sóc khách hàng', '123456787', NULL
-exec sp_ThemBoPhan 'BP02', N'Thu Ngân', '123456788', NULL	
+
+--Thêm ds bộ phận
+CREATE PROC sp_ThemBoPhanKhCoQL(@MaBP varchar(10),@TenBP nvarchar(30),@SDT varchar(11))
+AS
+	BEGIN 
+		INSERT INTO BoPhan(MaBP, TenBP, SDT)
+		VALUES(@MaBP, @TenBP, @SDT)
+	END
+GO
+
 --Sửa ds bộ phận
 CREATE PROC sp_SuaBoPhan(@MaBP varchar(10),@TenBP nvarchar(30),@SDT varchar(11),@MaQL varchar(10))
 AS
@@ -28,7 +46,6 @@ AS
 		SET TenBP=@TenBP,SDT=@SDT,MaQL=@MaQL
 		WHERE MaBP=@MaBP
 	END
-
 GO
 
 -- Xóa ds bộ phận
@@ -38,12 +55,10 @@ AS
 		DELETE 
 		FROM BoPhan
 		Where MaBP = @MaBP
-END
-
+	END
 GO
 
 -- Tìm mã bộ phận
-GO
 CREATE PROC sp_TimBoPhan(@MaBP varchar(10))
 AS
 	BEGIN 
@@ -51,21 +66,162 @@ AS
 		FROM BoPhan
 		WHERE MaBP = @MaBP
 	END
+GO
 
----------------------------- NHÂN VIÊN ----------------------------
+--- Add values
+exec sp_ThemBoPhan 'BP01', N'Ban quản lý', '123456787', NULL
+exec sp_ThemBoPhan 'BP02', N'Thu Ngân', '123456788', NULL	
+exec sp_ThemBoPhan 'BP03', N'Thủ Kho', '123456789', NULL
+exec sp_ThemBoPhan 'BP04', N'Chăm sóc khách hàng', '123456787', NULL	
+	
+GO
+
+---------------------------- LOẠI TÀI KHOẢN ----------------------------
+-- Lấy LoaiTaiKhoan
+CREATE PROC sp_LayLoaiTaiKhoan
+AS
+	BEGIN
+		SELECT * FROM LoaiTaiKhoan
+		ORDER BY MaLoaiTK desc
+	END
+GO
+
+--Thêm LoaiTaiKhoan
+CREATE PROC sp_ThemLoaiTaiKhoan(@MaLoaiTK varchar(10), @TenLoaiTK nvarchar(50))
+AS
+	BEGIN
+		INSERT INTO LoaiTaiKhoan(MaLoaiTK,TenLoaiTK)
+		VALUES (@MaLoaiTK, @TenLoaiTK)	
+	END
+GO
+
+--Sửa LoaiTaiKhoan
+CREATE PROC sp_SuaLoaiTaiKhoan(@MaLoaiTK varchar(10), @TenLoaiTK nvarchar(50))
+AS
+	BEGIN
+		UPDATE LoaiTaiKhoan
+		SET  TenLoaiTK = @TenLoaiTK
+		WHERE MaLoaiTK = @MaLoaiTK
+	END
+GO
+
+--Xóa LoaiTaiKhoan
+CREATE PROC sp_XoaLoaiTaiKhoan(@MaLoaiTK varchar(10))
+AS
+	BEGIN
+		DELETE 
+		FROM LoaiTaiKhoan
+		WHERE MaLoaiTK = @MaLoaiTK
+	END
+GO
+
+--Tìm LoaiTaiKhoan
+CREATE PROC sp_TimLoaiTaiKhoan(@MaLoaiTK varchar(10))
+AS
+	BEGIN
+		SELECT * 
+		FROM LoaiTaiKhoan
+		WHERE MaLoaiTK = @MaLoaiTK
+	 END
+GO
+
+exec sp_ThemLoaiTaiKhoan 'ML01',N'Admin'
+exec sp_ThemLoaiTaiKhoan 'ML02',N'ThuNgan'
+exec sp_ThemLoaiTaiKhoan 'ML03',N'ThuKho'
+exec sp_ThemLoaiTaiKhoan 'ML04',N'CSKH'
+
+GO
+
+---------------------------- TÀI KHOẢN ----------------------------
+--Lấy danh sách tài khoản
+GO
+CREATE PROC sp_LayTaiKhoan
+AS
+	BEGIN
+		SELECT * FROM TaiKhoan
+		ORDER BY MaTK DESC
+	END
+GO
+
+--Thêm tài khoản
+CREATE PROC sp_ThemTaiKhoan(@MaTK varchar(10), @TenDangNhap varchar(20), @MatKhau varchar(20), @MaLoaiTK varchar(10))
+AS
+	BEGIN
+		INSERT INTO TaiKhoan(MaTK, TenDangNhap, MatKhau, MaLoaiTK)
+		VALUES (@MaTK, @TenDangNhap, @MatKhau, @MaLoaiTK)	
+	END
+GO
+
+--Sửa tài khoản
+CREATE PROC sp_SuaTaiKhoan(@MaTK varchar(10), @TenDangNhap varchar(20), @MatKhau varchar(20), @MaLoaiTK varchar(10))
+AS
+	BEGIN
+		UPDATE TaiKhoan
+		SET TenDangNhap = @TenDangNhap ,MatKhau = @MatKhau, MaLoaiTK = @MaLoaiTK
+		WHERE MaTK = @MaTK
+	END
+GO
+
+--Xóa tài khoản
+CREATE PROC sp_XoaTaiKhoan(@MaTK varchar(10))
+AS
+	BEGIN
+		DELETE 
+		FROM TaiKhoan
+		WHERE MaTK = @MaTK
+	END
+GO
+
+-- Tìm tài khoản
+CREATE PROC sp_TimTaiKhoan(@MaTK varchar(10))
+AS
+	BEGIN
+		SELECT * 
+		FROM TaiKhoan
+		WHERE MaTK = @MaTK
+	END
+GO
+
+-- Kiểm tra tài khoản đăng nhập
+CREATE PROC sp_KiemTraDN(@TenDangNhap varchar(20), @MatKhau varchar(20))
+AS
+	BEGIN
+		SELECT * 
+		FROM TaiKhoan
+		WHERE TenDangNhap = @TenDangNhap AND MatKhau =@MatKhau
+	END
+GO
+
+-- Insert mẫu
+exec sp_ThemTaiKhoan 'TK01', 'admin', '1234', 'ML01'
+exec sp_ThemTaiKhoan 'TK02', 'thungan', '1234', 'ML02'
+exec sp_ThemTaiKhoan 'TK03', 'thukho', '1234', 'ML03'
+exec sp_ThemTaiKhoan 'TK04', 'cskh', '1234', 'ML04'
+GO
+
+---------------------------- NH N VIÊN ----------------------------
 --Lấy ds bảng nhân viên
 GO 
 CREATE PROC sp_LayNhanVien
 AS
 	BEGIN 
-		SELECT * 
+		SELECT *, HoNV + ' ' +TenNV as 'HoTen' 
 		FROM NhanVien
 	END
+GO
+
+
+CREATE PROC sp_LayNhanVienGiamDan
+AS
+	BEGIN 
+		SELECT *, HoNV + ' ' +TenNV as 'HoTen' 
+		FROM NhanVien
+		ORDER BY MaNV desc
+	END
+GO
 
 
 --Thêm nhân viên
-GO
-
 CREATE PROC sp_ThemNhanVien(@MaNV varchar(10), @HoNV nvarchar(50), @TenNV nvarchar(10), @SDT varchar(11), @GioiTinh nvarchar(3),
  @CCCD varchar(12), @NgaySinh date, @DiaChi nvarchar(100), @NgayVaoLam date, @MaBP varchar(10), @MaTK varchar(10))
 AS
@@ -73,14 +229,9 @@ AS
 		INSERT INTO NhanVien(MaNV, HoNV, TenNV, SDT, GioiTinh, CCCD, NgaySinh, DiaChi, NgayVaoLam, MaBP, MaTK)
 		VALUES(@MaNV, @HoNV, @TenNV, @SDT, @GioiTinh, @CCCD, @NgaySinh, @DiaChi, @NgayVaoLam, @MaBP, @MaTK)
 	END
-	INSERT INTO NhanVien(MaNV, HoNV, TenNV, SDT, GioiTinh, CCCD, NgaySinh, DiaChi, NgayVaoLam, MaBP, MaTK)
-		VALUES('NV01', N'Nguyễn', N'Thanh Long', '012365478', 'Nam', '216547851', '2002-11-01', N'Quận 2', '2021-11-05', 'MaBP', 'TK02')
---Sửa nhân viên
-exec sp_ThemNhanVien 'NV01', N'Nguyễn', N'Thanh Long', '012365478', 'Nam', '216547851', '2002-11-01', N'Quận 2', '2021-11-05', 'BP01', 'TK02'
-exec sp_ThemNhanVien 'NV03', N'Nguyễn', N'Thanh Long', '012365478', 'Nam', '216547851', '2002-11-01', N'Quận 2', '2021-11-05', 'BP02', 'TK02'
-exec sp_ThemNhanVien 'NV04', N'Nguyễn', N'Thanh Long', '012365478', 'Nam', '216547851', '2002-11-01', N'Quận 2', '2021-11-05', 'BP03', 'TK02'
-exec sp_LayNhanVien
 GO
+
+--Sửa nhân viên
 CREATE PROC sp_SuaNhanVien(@MaNV varchar(10), @HoNV nvarchar(50), @TenNV nvarchar(10), @SDT varchar(11), @GioiTinh nvarchar(3),
  @CCCD varchar(12), @NgaySinh date, @DiaChi nvarchar(100), @NgayVaoLam date, @MaBP varchar(10), @MaTK varchar(10))
 AS
@@ -99,18 +250,9 @@ AS
 		FROM NhanVien
 		WHERE MaNV= @MaNV
 	 END
---láy nhân viên theo mã bp
 GO
-CREATE PROC sp_LayNhanVienTheoBP(@MaBP varchar(10))
-AS
-	BEGIN
-		SELECT * 
-		FROM NhanVien
-		WHERE MaBP= @MaBP
-	 END
-	 exec sp_LayNhanVienTheoBP 'BP02'
+
 --Tìm Nhân viên
-GO
 CREATE PROC sp_TimNhanVien(@MaNV varchar(10))
 AS
 	BEGIN
@@ -118,434 +260,50 @@ AS
 		FROM NhanVien
 		WHERE MaNV= @MaNV
 	 END
-
----------------------------- TÀI KHOẢN ----------------------------
---Lấy danh sách tài khoản
-GO
-CREATE PROC sp_LayTaiKhoan
-AS
-	BEGIN
-		SELECT * FROM TaiKhoan
-	END
-
---Thêm tài khoản
 GO
 
-CREATE PROC sp_ThemTaiKhoan(@MaTK varchar(10), @TenDangNhap varchar(20), @MatKhau varchar(20), @MaLoaiTK varchar(10))
-AS
-	BEGIN
-		INSERT INTO TaiKhoan(MaTK, TenDangNhap, MatKhau, MaLoaiTK)
-		VALUES (@MaTK, @TenDangNhap, @MatKhau, @MaLoaiTK)	
-	END
-GO
--- Insert mẫu
-	INSERT INTO TaiKhoan(MaTK, TenDangNhap, MatKhau, MaLoaiTK)
-		VALUES ('TK01', 'ngocthu', '1234', 'ML01')	
-
-	exec sp_ThemTaiKhoan 'TK02', 'ductri', '1234', 'ML01'
-
---Sửa tài khoản
-GO
-
-CREATE PROC sp_SuaTaiKhoan(@MaTK varchar(10), @TenDangNhap varchar(20), @MatKhau varchar(20), @MaLoaiTK varchar(10))
-AS
-	BEGIN
-		UPDATE TaiKhoan
-		SET TenDangNhap = @TenDangNhap ,MatKhau = @MatKhau, MaLoaiTK = @MaLoaiTK
-		WHERE MaTK = @MaTK
-	END
-GO
-
---UPDATE TaiKhoan
---		SET TenDangNhap = 'thanhquoc' ,MatKhau = '1234', MaLoaiTK = 'ML01'
---		WHERE MaTK = 'TK03'
-
---Xóa tài khoản
-
-CREATE PROC sp_XoaTaiKhoan(@MaTK varchar(10))
-AS
-	BEGIN
-		DELETE 
-		FROM TaiKhoan
-		WHERE MaTK = @MaTK
-	END
-GO
-
--- Tìm tài khoản
-CREATE PROC sp_TimTaiKhoan(@MaTK varchar(10))
+--lấy nhân viên theo mã bp
+CREATE PROC sp_LayNhanVienTheoBP(@MaBP varchar(10))
 AS
 	BEGIN
 		SELECT * 
-		FROM TaiKhoan
-		WHERE MaTK = @MaTK
-	END
-	
----------------------------- LOẠI TÀI KHOẢN ----------------------------
--- Lấy LoaiTaiKhoan
-CREATE PROC sp_LayLoaiTaiKhoan
-AS
-	BEGIN
-		SELECT * FROM LoaiTaiKhoan
-	END
-
---Thêm LoaiTaiKhoan
-GO
-CREATE PROC sp_ThemLoaiTaiKhoan(@MaLoaiTK varchar(10), @TenLoaiTK nvarchar(50))
-AS
-	BEGIN
-		INSERT INTO LoaiTaiKhoan(MaLoaiTK,TenLoaiTK)
-		VALUES (@MaLoaiTK, @TenLoaiTK)	
-	END
-exec sp_ThemLoaiTaiKhoan 'ML01','Admin'
---Sửa LoaiTaiKhoan
-GO
-CREATE PROC sp_SuaLoaiTaiKhoan(@MaLoaiTK varchar(10), @TenLoaiTK nvarchar(50))
-AS
-	BEGIN
-		UPDATE LoaiTaiKhoan
-		SET  TenLoaiTK = @TenLoaiTK
-		WHERE MaLoaiTK = @MaLoaiTK
-	END
-
---Xóa LoaiTaiKhoan
-GO
-CREATE PROC sp_XoaLoaiTaiKhoan(@MaLoaiTK varchar(10))
-AS
-	BEGIN
-		DELETE 
-		FROM LoaiTaiKhoan
-		WHERE MaLoaiTK = @MaLoaiTK
-	END
-GO
-
---Tìm LoaiTaiKhoan
-CREATE PROC sp_TimLoaiTaiKhoan(@MaLoaiTK varchar(10))
-AS
-	BEGIN
-		SELECT * 
-		FROM LoaiTaiKhoan
-		WHERE MaLoaiTK = @MaLoaiTK
+		FROM NhanVien
+		WHERE MaBP= @MaBP
 	 END
-
----------------------------- KHÁCH HÀNG ----------------------------
---Lấy danh sách khách hàng
 GO
-CREATE PROC sp_LayKhachHang
+
+--lấy nhân viên theo tài khoản đăng nhập
+CREATE PROC sp_TimNVTheoTKDN(@MaTK varchar(10))
 AS
 	BEGIN
-		SELECT * FROM KhachHang
-	END
-
---Thêm khách hàng
+		SELECT * 
+		FROM NhanVien
+		WHERE MaTK= @MaTK
+	 END
 GO
-CREATE PROC sp_ThemKhachHang(@MaKH varchar(10), @HoTenKH nvarchar(50), @GioiTinh nvarchar(3), @SDT varchar(11), @DiaChi nvarchar(100)
-, @DiemTL int)
-AS
-	BEGIN
-		INSERT INTO KhachHang(MaKH, HoTenKH, GioiTinh, SDT, DiaChi, DiemTL)
-		VALUES (@MaKH, @HoTenKH, @GioiTinh, @SDT, @DiaChi, @DiemTL)	
-	END
 
---Sửa khách hàng
+--	 exec sp_LayNhanVienTheoBP 'BP02'
+
+exec sp_ThemNhanVien 'NV01', N'Huỳnh Thị Ngọc', N'Thư', '123456789', N'Nữ',
+ '123456789012', '17/04/2001', N'Thủ Đức', '01/12/2021', 'BP01', 'TK01'
+ exec sp_ThemNhanVien 'NV02', N'Nguyễn Thành Đức', N'Trí', '123456789', N'Nam',
+ '123456789012', '14/09/2001', N'Thủ Đức', '01/02/2021', 'BP02', 'TK02'
+ exec sp_ThemNhanVien 'NV03', N'Đàng Thanh', N'Quốc', '123456789', N'Nam',
+ '123456789012', '18/08/2002', N'Quận 9', '21/05/2021', 'BP03', 'TK03'
+  exec sp_ThemNhanVien 'NV04', N'Nguyễn Ngọc', N'Vân', '123456789', N'Nữ',
+ '123456789012', '18/08/2002', N'Quận 7', '21/05/2021', 'BP04', 'TK04'
+
 GO
-CREATE PROC sp_SuaKhachHang(@MaKH varchar(10), @HoTenKH nvarchar(50), @GioiTinh nvarchar(3), @SDT varchar(11), @DiaChi nvarchar(100)
-, @DiemTL int)
-AS
-	BEGIN
-		UPDATE KhachHang
-		SET HoTenKH = @HoTenKH,GioiTinh = @GioiTinh,SDT = @SDT, DiaChi = @DiaChi, DiemTL = @DiemTL
-		WHERE MaKH = @MaKH
-	END
-
---Xóa khách hàng
-GO
-CREATE PROC SP_XoaKhachHang(@MaKH varchar(10))
-AS
-	BEGIN
-		DELETE KhachHang
-		WHERE MaKH = @MaKH
-	END
 
 
-
----------------------------- HÀNG HÓA ----------------------------
-drop proc sp_ThemHangHoa
---lấy ds bảng hành hóa
-GO
-CREATE PROC sp_LayHangHoa
-AS
-	BEGIN 
-		SELECT * FROM HangHoa
-	END
-
---Thêm hàng hóa
-GO
-CREATE PROC sp_ThemHangHoa(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit, @MaKM varchar(10))
-AS
-	BEGIN
-		INSERT INTO HangHoa(MaHH ,TenHH, DVTinh, Gia, MaDM, BaoHanh, MaKM)
-		VALUES(@MaHH ,@TenHH, @DVTinh, @Gia, @MaDM, @BaoHanh, @MaKM)
-	END
-	exec sp_ThemHangHoa 'HH01', N'Thực Phẩm', 'DVT01', 23000, 'DM01',1,'KM01'
-	exec sp_ThemHangHoa 'HH010', N'Coca', 'DVT01', 23000, 'DM02',1,'KM01'
-	exec sp_ThemHangHoa 'HH011', N'Chổi', 'DVT01', 23000, 'DM03',1,'KM01'
---Sửa hàng hóa
-GO
-CREATE PROC sp_SuaHangHoa(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit, @MaKM varchar(10))
-AS
-	BEGIN
-		UPDATE HangHoa 
-		SET TenHH = @TenHH, DVTinh = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh, MaKM = @MaKM
-		WHERE MaHH = @MaHH
-	END
-
---Xóa hàng hóa
-GO
-CREATE PROC sp_XoaHangHoa(@MaHH varchar(10))
-AS
-	BEGIN
-		DELETE 
-		FROM HangHoa
-		WHERE MaHH = @MaHH
-	END
-GO
-CREATE PROC sp_TimHangHoa(@MaHH varchar(10))
-AS
-	BEGIN
-		SELECT *
-		FROM HangHoa
-		WHERE MaHH = @MaHH
-	END
---Lấy ds hàng hóa theo dmhh
-CREATE PROC sp_LayDSHangHoaTheoDM(@MaDM varchar(10))
-AS
-	BEGIN
-		SELECT *
-		FROM HangHoa
-		WHERE MaDM = @MaDM
-	END
-exec sp_LayDSHangHoaTheoDM 'DM03'
-
-
----------------------------- ĐƠN VỊ TÍNH ----------------------------
---Lấy dánh sách đơn vị tính
-GO
-CREATE PROC sp_LayDonViTinh
-AS
-	BEGIN
-		SELECT * FROM DonViTinh
-	END
-
--- Thêm Đơn vị tính
-GO
-CREATE PROC sp_ThemDonViTinh(@MaDVT varchar(10), @TenDVT nvarchar(50))
-AS
-	BEGIN	 
-	INSERT INTO DonViTinh(MaDVT, TenDVT)
-	VALUES(@MaDVT, @TenDVT)
-	END
-
---Sửa đơn vị tính
-GO
-CREATE PROC sp_SuaDonViTinh(@MaDVT varchar(10), @TenDVT nvarchar(50))
-AS
-	BEGIN
-		UPDATE DonViTinh
-		SET TenDVT = @TenDVT
-		WHERE MaDVT = @MaDVT
-	END
-
---Xóa đơn vị tính 
-GO
-CREATE PROC sp_XoaDonViTinh(@MaDVT varchar(10))
-AS
-	BEGIN
-		DELETE
-		FROM DonViTinh
-		WHERE MaDVT = @MaDVT
-	END
-
-
----------------------------- DANH MỤC HÀNG HÓA ----------------------------
---Lấy ds Danh mục hàng hóa
-GO
-CREATE PROC sp_LayDanhMucHH
-AS
-	BEGIN
-		SELECT * FROM DanhMucHH
-	END
-
---Thêm danh mục hàng hoá
-GO
-CREATE PROC sp_ThemDanhMucHH(@MaDM varchar(10), @TenDM nvarchar(50))
-AS
-	BEGIN 
-		INSERT INTO DanhMucHH(MaDM, TenDM)
-		VALUES(@MaDM, @TenDM)
-	END
-
---Sửa danh mục hàng hóa
-GO
-CREATE PROC sp_SuaDanhMucHH(@MaDM varchar(10), @TenDM nvarchar(50))
-AS
-	BEGIN 
-		UPDATE DanhMucHH
-		SET  TenDM = @TenDM
-		WHERE MaDM = @MaDM
-	END
-
---Xóa danh mục hàng hóa
-GO
-CREATE PROC sp_XoaDanhMucHH(@MaDM varchar(10))
-AS
-	BEGIN 
-		DELETE
-		FROM DanhMucHH
-		WHERE MaDM = @MaDM
-	END
-
-
----------------------------- KHUYẾN MÃI ----------------------------
-drop proc sp_LayKhuyenMai
---lấy danh sách Khuyến mãi
-GO
-CREATE PROC sp_LayKhuyenMai
-AS
-	BEGIN 
-		SELECT * FROM KhuyenMai
-	END
-
---Thêm khuyến mãi
-GO
-CREATE PROC sp_ThemKhuyenMai(@MaKM varchar(10), @TenKM nvarchar(50), @LoaiKM varchar(10), @NgayBatDauKM  smalldatetime, @NgayKetThucKM smalldatetime)
-AS
-	BEGIN 
-		INSERT INTO KhuyenMai(MaKM, TenKM, LoaiKM, GiaTriKM, NgayBatDauKM, NgayKetThucKM)
-		VALUES(@MaKM, @TenKM, @LoaiKM, @NgayBatDauKM, @NgayKetThucKM)
-	END
-
-	INSERT INTO KhuyenMai(MaKM, TenKM, LoaiKM, GiaTriKM, NgayBatDauKM, NgayKetThucKM)
-		VALUES('KM01',	N'KM Ngày Lễ',	'LKM01', 2 ,	'2021-04-12',	'2021-10-29')
--- Sửa khuyến mãi
-GO 
-CREATE PROC sp_SuaKhuyenMai(@MaKM varchar(10), @TenKM nvarchar(50), @LoaiKM varchar(10), @NgayBatDauKM  smalldatetime, @NgayKetThucKM smalldatetime)
-AS
-	BEGIN 
-		UPDATE KhuyenMai 
-		SET TenKM = @TenKM, LoaiKM = @LoaiKM, NgayBatDauKM = @NgayBatDauKM, NgayKetThucKM = @NgayKetThucKM
-		WHERE MaKM = @MaKM
-	END
-
---Xóa khuyến mãi
-GO 
-CREATE PROC sp_XoaKhuyenMai(@MaKM varchar(10))
-AS
-	BEGIN 
-		DELETE 
-		FROM KhuyenMai 
-		WHERE MaKM = @MaKM
-	END
-
-
-
-
----------------------------- LOẠI HÌNH KHUYẾN MÃI ----------------------------
---Lấy dánh sách loại hình khuyến mãi 
-GO
-CREATE PROC sp_LayLoaiHinhKM
-AS
-	BEGIN
-		SELECT * FROM LoaiHinhKM
-	END
-
---Thêm loại hình khuyến mãi
-GO 
-CREATE PROC sp_ThemLoaiHinhKM(@MaLoaiKM varchar(10), @MoTaKM nvarchar(100), @GiaTriKM decimal(2,2))
-AS
-	BEGIN
-		INSERT INTO LoaiHinhKM(MaLoaiKM, MoTaKM, GiaTriKM)
-		VALUES(@MaLoaiKM, @MoTaKM, @GiaTriKM)
-	END
-
---Sửa Loại hình km
-GO 
-CREATE PROC sp_SuaLoaiHinhKM(@MaLoaiKM varchar(10), @MoTaKM nvarchar(100), @GiaTriKM decimal(2,2))
-AS
-	BEGIN
-		UPDATE LoaiHinhKM 
-		SET  MoTaKM = @MaLoaiKM, GiaTriKM= @GiaTriKM
-		where MaLoaiKM = @MaLoaiKM
-	END
-
---Xóa loại hình khuyến mãi
-GO 
-CREATE PROC sp_XoaLoaiHinhKM(@MaLoaiKM varchar(10))
-AS
-	BEGIN
-		DELETE 
-		FROM LoaiHinhKM 
-		where MaLoaiKM = @MaLoaiKM
-	END
-
-
-
----------------------------- THẺ KHÁCH HÀNG ----------------------------
---Lấy danh sách Thẻ khách hàng
-Go
-CREATE PROC sp_LayTheKhachHang
-AS
-	BEGIN
-		SELECT * FROM TheKhachHang
-	END
-	
---Thêm thẻ khách hàng
-GO
-CREATE PROC sp_ThemTheKhachHang(@MaTheKH varchar(16), @LoaiThe varchar(10), @TinhTrang bit)
-AS
-	BEGIN
-		INSERT INTO TheKhachHang(MaTheKH, LoaiThe, TinhTrang)
-		VALUES(@MaTheKH, @LoaiThe, @TinhTrang)
-	END
-	--exec sp_ThemTheKhachHang 'MT01', ''
---Sửa thẻ khách hàng
-GO
-CREATE PROC sp_SuaTheKhachHang(@MaTheKH varchar(16), @LoaiThe varchar(10), @TinhTrang bit)
-AS
-	BEGIN
-		UPDATE TheKhachHang 
-		SET LoaiThe = @LoaiThe, TinhTrang = @TinhTrang
-		WHERE MaTheKH = @MaTheKH
-	END
-
---Xóa thẻ khách hàng
-GO
-CREATE PROC sp_XoaTheKhachHang(@MaTheKH varchar(16))
-AS
-	BEGIN
-		DELETE 
-		FROM TheKhachHang
-		WHERE MaTheKH =  @MaTheKH
-	END
-GO
---tìm thẻ kh
-GO
-CREATE PROC sp_TimTheKhachHang(@MaTheKH varchar(16))
-AS
-	BEGIN
-		SELECT *
-		FROM TheKhachHang
-		WHERE MaTheKH =  @MaTheKH
-	END
-GO
 ---------------------------- LOẠI THẺ KHÁCH HÀNG ----------------------------
 --- Lấy LoaiTheKH
 CREATE PROC sp_LayLoaiTheKH
 AS
 	BEGIN
-		SELECT * FROM LoaiTheKH
+		SELECT * FROM LoaiTheKH ORDER BY MaLoaiThe desc
 	END
 GO
---exec sp_LayLoaiTheKH
 
 ---Thêm LoaiTheKH
 CREATE PROC sp_ThemLoaiTheKH(@Ma char(10), @Ten nvarchar(10))
@@ -555,7 +313,6 @@ AS
 		VALUES(@Ma,@Ten)
 	END
 GO
-EXEC sp_ThemLoaiTheKH 'LT01', 'Vàng'
 
 --- Sửa LoaiTheKH
 CREATE PROC sp_SuaLoaiTheKH(@Ma char(10), @Ten nvarchar(10))
@@ -584,90 +341,571 @@ AS
 	END
 GO
 
----------------------------- HÓA ĐƠN ----------------------------
---Lấy HoaDon
-CREATE PROC sp_LayHoaDon
-AS 
+exec sp_ThemLoaiTheKH 'LT01', N'Đồng'
+exec sp_ThemLoaiTheKH 'LT02', N'Bạc'
+exec sp_ThemLoaiTheKH 'LT03', N'Vàng'
+exec sp_ThemLoaiTheKH 'LT04', N'Bạch Kim'
+GO
+
+---------------------------- THẺ KHÁCH HÀNG ----------------------------
+--Lấy danh sách Thẻ khách hàng
+Go
+CREATE PROC sp_LayTheKhachHang
+AS
 	BEGIN
-		SELECT * FROM HoaDon
+		SELECT * FROM TheKhachHang
+	END
+GO	
+
+CREATE PROC sp_LayTheKHGiamDan
+AS
+	BEGIN
+		SELECT * FROM TheKhachHang ORDER BY MaTheKH DESC
+	END
+GO	
+
+--Lấy danh sách Thẻ khách hàng theo mã thẻ
+CREATE PROC sp_LayTheKHTheoMa(@MaTheKH varchar(16))
+AS
+	BEGIN
+		SELECT * FROM TheKhachHang where MaTheKH = @MaTheKH
 	END
 GO
 
---Them HoaDon
-CREATE PROC sp_ThemHoaDon(@MaHD varchar(20) ,@MaTheKH varchar(16),@MaNV varchar(10),@Thoigian smalldatetime)
-AS 
+--Thêm thẻ khách hàng
+CREATE PROC sp_ThemTheKhachHang(@MaTheKH varchar(16))
+AS
 	BEGIN
-		INSERT INTO HoaDon(MaHD,MaTheKH,MaNV,ThoiGianTT)
-		VALUES(@MaHD,@MaTheKH,@MaNV,@Thoigian)
+		INSERT INTO TheKhachHang(MaTheKH, LoaiThe)
+		VALUES(@MaTheKH, 'LT01')
 	END
 GO
 
----Sua HoaDon
-CREATE PROC sp_SuaHoaDon(@MaHD varchar(20) ,@MaTheKH varchar(16),@MaNV varchar(10),@Thoigian smalldatetime)
-AS 
+--Sửa thẻ khách hàng
+CREATE PROC sp_SuaTheKhachHang(@MaTheKH varchar(16), @LoaiThe varchar(10), @TinhTrang bit)
+AS
 	BEGIN
-		UPDATE HoaDon
-		SET MaTheKH=@MaTheKH , MaNV=@MaNV , ThoiGianTT=@Thoigian
-		WHERE MaHD=@MaHD
+		UPDATE TheKhachHang 
+		SET LoaiThe = @LoaiThe, TinhTrang = @TinhTrang
+		WHERE MaTheKH = @MaTheKH
 	END
 GO
 
----Xoa HoaDon
-CREATE PROC sp_XoaHoaDon(@MaHD varchar(20))
+--Sửa tình trạng thẻ khách hàng
+CREATE PROC sp_SuaTinhTrangTheKH(@MaTheKH varchar(16), @TinhTrang bit)
+AS
+	BEGIN
+		UPDATE TheKhachHang 
+		SET TinhTrang = @TinhTrang
+		WHERE MaTheKH = @MaTheKH
+	END
+GO
+
+--Sửa điểm thẻ khách hàng
+CREATE PROC sp_SuaDiemTheKH(@MaTheKH varchar(16), @DiemTL int)
+AS
+	BEGIN
+		UPDATE TheKhachHang 
+		SET DiemTL = @DiemTL
+		WHERE MaTheKH = @MaTheKH
+	END
+GO
+
+--Xóa thẻ khách hàng
+CREATE PROC sp_XoaTheKhachHang(@MaTheKH varchar(16))
+AS
+	BEGIN
+		DELETE 
+		FROM TheKhachHang
+		WHERE MaTheKH =  @MaTheKH
+	END
+GO
+
+CREATE PROC sp_TimTheKhachHang(@MaTheKH varchar(16)) 
+AS
+	BEGIN
+		SELECT * FROM TheKhachHang WHERE MaTheKH = @MaTheKH
+	END
+GO
+
+exec sp_ThemTheKhachHang 'TKH001'
+exec sp_ThemTheKhachHang 'TKH002'
+exec sp_ThemTheKhachHang 'TKH003'
+exec sp_ThemTheKhachHang 'TKH004'
+GO
+
+---------------------------- KHÁCH HÀNG ----------------------------
+--Lấy danh sách khách hàng
+GO
+CREATE PROC sp_LayKhachHang
+AS
+	BEGIN
+		SELECT * FROM KhachHang
+	END
+GO
+
+CREATE PROC sp_LayKhachHangGiamDan
+AS
+	BEGIN
+		SELECT * FROM KhachHang ORDER BY MaKH DESC
+	END
+GO
+
+--Thêm khách hàng
+CREATE PROC sp_ThemKhachHang(@MaKH varchar(10), @HoTenKH nvarchar(50), @GioiTinh nvarchar(3), @SDT varchar(11), @DiaChi nvarchar(100))
+AS
+	BEGIN
+		INSERT INTO KhachHang(MaKH, HoTenKH, GioiTinh, SDT, DiaChi)
+		VALUES (@MaKH, @HoTenKH, @GioiTinh, @SDT, @DiaChi)	
+	END
+GO
+
+--Sửa khách hàng
+CREATE PROC sp_SuaKhachHang(@MaKH varchar(10), @HoTenKH nvarchar(50), @GioiTinh nvarchar(3), @SDT varchar(11), @DiaChi nvarchar(100))
+AS
+	BEGIN
+		UPDATE KhachHang
+		SET HoTenKH = @HoTenKH,GioiTinh = @GioiTinh,SDT = @SDT, DiaChi = @DiaChi
+		WHERE MaKH = @MaKH
+	END
+GO
+
+--Sửa thẻ khách hàng
+CREATE PROC sp_SuaTheKH(@MaKH varchar(10),@MaTheKH varchar(16))
+AS
+	BEGIN
+		UPDATE KhachHang
+		SET MaTheKH = @MaTheKH
+		WHERE MaKH = @MaKH
+	END
+GO
+
+--Xóa kh
+CREATE PROC sp_XoaKhachHang(@MaKH varchar(10))
+AS
+	BEGIN
+		DELETE FROM KhachHang
+		WHERE MaKH = @MaKH
+	END
+GO
+
+--Tìm kh
+CREATE PROC sp_TimKhachHang(@MaKH varchar(10))
+AS
+	BEGIN
+		SELECT * FROM KhachHang
+		WHERE MaKH = @MaKH
+	END
+GO
+
+EXEC sp_ThemKhachHang 'KH01',	N'Nguyễn My',	N'Nữ',	'96354785',	N'Quận 2 - HCM'
+EXEC sp_ThemKhachHang 'KH02',	N'Nguyễn Nê',	N'Nam',	'026354785',	N'Quận 5 - HCM'
+EXEC sp_ThemKhachHang 'KH03',	N'Trần Hoàng Nam',	N'Nam',	'026354755',	N'Quận 9 - HCM'
+GO
+
+---------------------------- PHIẾU ĐĂNG KÝ THẺ KHÁCH HÀNG----------------------------
+
+--lấy phieu dk thẻ kh
+GO
+CREATE PROC SP_LayPhieuDKTheKHTheoMaGiam
 AS
 	BEGIN 
-		DELETE FROM HoaDon
-		WHERE MaHD=@MaHD
+		SELECT * FROM PhieuDangKyTheKH ORDER BY MaPhieu DESC
 	END
 GO
 
-
----------------------------- CHI TIẾT HÓA ĐƠN ----------------------------
---Lấy HoaDon
-CREATE PROC sp_LayChiTietHoaDon
-AS 
-	BEGIN
-		SELECT * FROM ChiTietHoaDon
+CREATE PROC SP_LayPhieuDKTheKH
+AS
+	BEGIN 
+		SELECT * FROM PhieuDangKyTheKH
 	END
 GO
 
----Them ChiTietHoaDon
-CREATE PROC sp_ThemChiTietHoaDon(@MaHD varchar(20) ,@MaHH varchar(16),@SL int,@Gia int,@Thanhtien int)
-AS 
-	BEGIN
-		INSERT INTO ChiTietHoaDon(MaHD,MaHH,SL,Gia,ThanhTien)
-		VALUES(@MaHD,@MaHH,@SL,@Gia,@Thanhtien)
-	END
-GO
-
----Sua ChiTietHoaDon
-CREATE PROC sp_SuaChiTietHoaDon(@MaHD varchar(20) ,@MaHH varchar(16),@SL int,@Gia int,@Thanhtien int)
+--Thêm phiếu dk
+CREATE PROC sp_ThemPhieuDKTheKH(@MaPhieu varchar(10),@MaNV varchar(10) ,@MaTheKH varchar(16) , @MaKH varchar(10))
 AS
 	BEGIN
-		UPDATE ChiTietHoaDon
-		SET SL=@SL , Gia=@Gia,ThanhTien=@Thanhtien
-		WHERE MaHD=@MaHD and MaHH=@MaHH
+		INSERT INTO PhieuDangKyTheKH(MaPhieu ,MaNV ,MaTheKH, MaKH)
+		VALUES(@MaPhieu ,@MaNV ,@MaTheKH, @MaKH)
 	END
 GO
 
----Xoa ChiTietHoaDon
-CREATE PROC sp_XoaChiTietHoaDon(@MaHD varchar(20) ,@MaHH varchar(16))
+--Tìm phiếu dk
+CREATE PROC sp_TimPhieuDKTheKH(@MaPhieu varchar(10))
 AS
 	BEGIN
-		DELETE FROM ChiTietHoaDon
-		WHERE MaHD=@MaHD and MaHH=@MaHH
+		SELECT * 
+		FROM PhieuDangKyTheKH
+		WHERE MaPhieu = @MaPhieu
 	END
+GO
+
+-------------------------- ĐƠN VỊ TÍNH ----------------------------
+--Lấy dánh sách đơn vị tính
+GO
+CREATE PROC sp_LayDonViTinh
+AS
+	BEGIN
+		SELECT * FROM DonViTinh
+	END
+GO
+
+CREATE PROC sp_LayDonViTinhGiamDan
+AS
+	BEGIN
+		SELECT * FROM DonViTinh ORDER BY MaDVT DESC
+	END
+GO
+
+-- Thêm Đơn vị tính
+CREATE PROC sp_ThemDonViTinh(@MaDVT varchar(10), @TenDVT nvarchar(50))
+AS
+	BEGIN	 
+	INSERT INTO DonViTinh(MaDVT, TenDVT)
+	VALUES(@MaDVT, @TenDVT)
+	END
+GO
+
+--Sửa đơn vị tính
+CREATE PROC sp_SuaDonViTinh(@MaDVT varchar(10), @TenDVT nvarchar(50))
+AS
+	BEGIN
+		UPDATE DonViTinh
+		SET TenDVT = @TenDVT
+		WHERE MaDVT = @MaDVT
+	END
+GO
+
+--Xóa đơn vị tính 
+CREATE PROC sp_XoaDonViTinh(@MaDVT varchar(10))
+AS
+	BEGIN
+		DELETE
+		FROM DonViTinh
+		WHERE MaDVT = @MaDVT
+	END
+GO
+
+exec sp_ThemDonViTinh 'DVT01', N'Gói'
+exec sp_ThemDonViTinh 'DVT02', N'Cái'
+exec sp_ThemDonViTinh 'DVT03', N'Chiếc'
+exec sp_ThemDonViTinh 'DVT04', N'Chai'
+exec sp_ThemDonViTinh 'DVT05', N'Kg'
+exec sp_ThemDonViTinh 'DVT06', N'Hộp'
+exec sp_ThemDonViTinh 'DVT07', N'Tuýp'
+exec sp_ThemDonViTinh 'DVT08', N'Đôi'
+
+---------------------------- DANH MỤC HÀNG HÓA ----------------------------
+--Lấy ds Danh mục hàng hóa
+GO
+CREATE PROC sp_LayDanhMucHH
+AS
+	BEGIN
+		SELECT * FROM DanhMucHH
+	END
+GO
+
+CREATE PROC sp_LayDanhMucHHGiamDan
+AS
+	BEGIN
+		SELECT * FROM DanhMucHH ORDER BY MaDM DESC
+	END
+GO
+
+--Thêm danh mục hàng hoá
+CREATE PROC sp_ThemDanhMucHH(@MaDM varchar(10), @TenDM nvarchar(50))
+AS
+	BEGIN 
+		INSERT INTO DanhMucHH(MaDM, TenDM)
+		VALUES(@MaDM, @TenDM)
+	END
+GO
+
+--Sửa danh mục hàng hóa
+CREATE PROC sp_SuaDanhMucHH(@MaDM varchar(10), @TenDM nvarchar(50))
+AS
+	BEGIN 
+		UPDATE DanhMucHH
+		SET  TenDM = @TenDM
+		WHERE MaDM = @MaDM
+	END
+GO
+
+--Xóa danh mục hàng hóa
+CREATE PROC sp_XoaDanhMucHH(@MaDM varchar(10))
+AS
+	BEGIN 
+		DELETE
+		FROM DanhMucHH
+		WHERE MaDM = @MaDM
+	END
+
+GO
+exec sp_ThemDanhMucHH 'DM01', N'Bánh Ngọt'
+exec sp_ThemDanhMucHH 'DM02', N'Đồ Khô'
+exec sp_ThemDanhMucHH 'DM03', N'Trái Cây'
+exec sp_ThemDanhMucHH 'DM04', N'Rau Củ'
+exec sp_ThemDanhMucHH 'DM05', N'Gia Vị'
+exec sp_ThemDanhMucHH 'DM06', N'Gia Dụng'
+exec sp_ThemDanhMucHH 'DM07', N'Điện Tử'
+exec sp_ThemDanhMucHH 'DM08', N'Thời Trang'
+exec sp_ThemDanhMucHH 'DM09', N'Chăm Sóc Cá Nhân'
+exec sp_ThemDanhMucHH 'DM10', N'Vệ Sinh Gia Đình'
+GO
+
+---------------------------- KHUYẾN MÃI ----------------------------
+--lấy danh sách Khuyến mãi
+CREATE PROC sp_DSKM
+AS
+	BEGIN 
+		SELECT * FROM KhuyenMai 
+	END
+GO
+
+CREATE PROC sp_DSKMGiamDan
+AS
+	BEGIN 
+		SELECT * FROM KhuyenMai ORDER BY MaKM DESC
+	END
+GO
+
+--Thêm khuyến mãi
+CREATE PROC sp_ThemKhuyenMai(@MaKM varchar(10), @TenKM nvarchar(50),@GiaTriKM int, @NgayBatDauKM  smalldatetime, @NgayKetThucKM smalldatetime)
+AS
+	BEGIN 
+		INSERT INTO KhuyenMai(MaKM, TenKM, GiaTriKM, NgayBatDauKM, NgayKetThucKM)
+		VALUES(@MaKM, @TenKM, @GiaTriKM, @NgayBatDauKM, @NgayKetThucKM)
+	END
+GO
+
+-- Sửa khuyến mãi
+CREATE PROC sp_SuaKhuyenMai(@MaKM varchar(10), @TenKM nvarchar(50), @GiaTriKM int, @NgayBatDauKM  smalldatetime, @NgayKetThucKM smalldatetime)
+AS
+	BEGIN 
+		UPDATE KhuyenMai 
+		SET TenKM = @TenKM, NgayBatDauKM = @NgayBatDauKM, NgayKetThucKM = @NgayKetThucKM ,GiaTriKM=@GiaTriKM
+		WHERE MaKM = @MaKM
+	END
+GO
+
+--Xóa khuyến mãi
+CREATE PROC sp_XoaKhuyenMai(@MaKM varchar(10))
+AS
+	BEGIN 
+		DELETE 
+		FROM KhuyenMai 
+		WHERE MaKM = @MaKM
+	END
+GO
+
+--Tìm KhuyenMai
+CREATE PROC sp_TimKhuyenMai(@MaKM varchar(10))
+AS
+	BEGIN
+		SELECT * FROM KhuyenMai
+		WHERE MaKM = @MaKM
+	END
+GO
+
+-- Add values
+GO
+
+--EXEC sp_SuaKhuyenMai 'KM01', N'Chào mừng giáng sinh', 5 , '2021-12-01 00:00:00', '2021-12-20 00:00:00'
+EXEC sp_ThemKhuyenMai 'KM01', N'Chào mừng giáng sinh', 5 , '06-12-2021 00:00:00', '30-12-2021 00:00:00'
+EXEC sp_ThemKhuyenMai 'KM02', N'Mừng năm mới 2022', 10 , '01-12-2021 00:00:00', '30-12-2021 00:00:00'
+EXEC sp_ThemKhuyenMai 'KM03', N'Mừng sinh nhật Co.opmart', 10 , '01-12-2021 00:00:00', '20-12-2021 00:00:00'
+GO
+
+---------------------------- HÀNG HÓA ----------------------------
+--lấy ds bảng hành hóa
+GO
+CREATE PROC SP_LayHangHoa
+AS
+	BEGIN 
+		SELECT * FROM HangHoa ORDER BY MaHH DESC
+	END
+
+--Thêm hàng hóa
+GO
+CREATE PROC sp_ThemHangHoa(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit, @MaKM varchar(10))
+AS
+	BEGIN
+		INSERT INTO HangHoa(MaHH ,TenHH, DVTinh, Gia, MaDM, BaoHanh, MaKM)
+		VALUES(@MaHH ,@TenHH, @DVTinh, @Gia, @MaDM, @BaoHanh, @MaKM)
+	END
+GO
+
+---- Thêm hàng hóa không có khuyến mãi
+CREATE PROC sp_ThemHangHoaKhKM(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit)
+AS
+	BEGIN
+		INSERT INTO HangHoa(MaHH ,TenHH, DVTinh, Gia, MaDM, BaoHanh)
+		VALUES(@MaHH ,@TenHH, @DVTinh, @Gia, @MaDM, @BaoHanh)
+	END
+GO
+
+--Sửa hàng hóa
+CREATE PROC sp_SuaHangHoa(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit, @MaKM varchar(10))
+AS
+	BEGIN
+		UPDATE HangHoa 
+		SET TenHH = @TenHH, DVTinh = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh, MaKM = @MaKM
+		WHERE MaHH = @MaHH
+	END
+GO
+
+--Sửa hàng hóa không khuyến mãi
+CREATE PROC sp_SuaHangHoaKhKM(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit)
+AS
+	BEGIN
+		UPDATE HangHoa 
+		SET TenHH = @TenHH, DVTinh = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh
+		WHERE MaHH = @MaHH
+	END
+GO
+
+--Xóa hàng hóa
+GO
+CREATE PROC sp_XoaHangHoa(@MaHH varchar(10))
+AS
+	BEGIN
+		DELETE 
+		FROM HangHoa
+		WHERE MaHH = @MaHH
+	END
+GO
+
+--Xóa hàng hóa
+CREATE PROC sp_TimHangHoa(@MaHH varchar(10))
+AS
+	BEGIN
+		SELECT * 
+		FROM HangHoa
+		WHERE MaHH = @MaHH
+	END
+GO
+
+--Lấy ds hàng hóa theo dmhh
+CREATE PROC sp_LayDSHangHoaTheoDM(@MaDM varchar(10))
+AS
+	BEGIN
+		SELECT *
+		FROM HangHoa
+		WHERE MaDM = @MaDM 
+	END
+GO
+
+-- Tìm tên hàng hóa
+CREATE PROC sp_TimTenHH(@Ten nvarchar(50))
+AS
+	BEGIN
+		SELECT * 
+		FROM HangHoa
+		WHERE TenHH= @Ten
+	 END
+GO
+-- Lấy ds hàng hóa có bảo hành
+CREATE PROC sp_LayHHCoBaoHanh
+AS
+	BEGIN
+		SELECT *  FROM HangHoa
+		WHERE BaoHanh = 1
+	END
+GO
+
+EXEC sp_ThemHangHoa 'HH01',N'Choco Pie', 'DVT06', 40000, 'DM01', 0, 'KM01'
+EXEC sp_ThemHangHoa 'HH02',N'Bánh gạo Kichi', 'DVT01',20000 , 'DM01', 0, 'KM02'
+EXEC sp_ThemHangHoa 'HH03',N'Cháo gói Gấu đỏ', 'DVT01', 4000, 'DM01', 0, 'KM03'
+EXEC sp_ThemHangHoa 'HH04',N'Mì 3 miền Gold', 'DVT01',3000 , 'DM02', 0, NULL
+EXEC sp_ThemHangHoa 'HH05',N'Chuối', 'DVT05',20000 , 'DM03', 0, NULL
+EXEC sp_ThemHangHoa 'HH06',N'Cà rốt', 'DVT05',30000 , 'DM04', 0, NULL
+EXEC sp_ThemHangHoa 'HH07',N'Dầu ăn Tường An', 'DVT04',35000 , 'DM05', 0, 'KM01'
+EXEC sp_ThemHangHoa 'HH08',N'Thớt gỗ Đức Thành', 'DVT02',50000 , 'DM06', 0, NULL
+EXEC sp_ThemHangHoa 'HH09',N'Coca Cola', 'DVT05',10000 , 'DM07', 0, NULL
+EXEC sp_ThemHangHoa 'HH10',N'Nồi cơm điện Toshiba', 'DVT02', 500000, 'DM08', 1, NULL
+EXEC sp_ThemHangHoa 'HH11',N'Máy sấy tóc Panasonic', 'DVT02', 350000, 'DM08', 1, NULL
+GO
+
+---------------------------- Nhà Cung Cấp ----------------------------
+-- Lấy Danh sách NCC
+CREATE PROC sp_DSNCC
+	AS
+		BEGIN 
+			SELECT * FROM NhaCungCap
+	END
+GO
+
+CREATE PROC sp_DSNCCGiamDan
+	AS
+		BEGIN 
+			SELECT * FROM NhaCungCap ORDER BY MaNCC DESC
+	END
+GO
+
+
+-- Thêm NCC
+CREATE PROC sp_ThemNCC(@MaNCC varchar(10),@TenNCC nvarchar(50),@DiaChi nvarchar(100),@SDT varchar(11),@Email varchar(50))
+AS
+
+	BEGIN 
+		INSERT INTO NhaCungCap(MaNCC, TenNCC,DiaChi, SDT, Email)
+		VALUES(@MaNCC, @TenNCC, @DiaChi, @SDT,@Email)
+	END
+GO
+
+-- Sửa NCC
+CREATE PROC sp_SuaNCC(@MaNCC varchar(10),@TenNCC nvarchar(50),@DiaChi nvarchar(100),@SDT varchar(11),@Email varchar(50))
+AS
+	BEGIN 
+		UPDATE NhaCungCap
+		SET TenNCC=@TenNCC,DiaChi=@DiaChi,SDT=@SDT,Email=@Email
+		WHERE MaNCC=@MaNCC
+	END
+GO
+
+-- Xóa NCC
+CREATE PROC sp_XoaNCC(@MaNCC varchar(10))
+AS
+	BEGIN 
+		DELETE 
+		FROM NhaCungCap
+		Where MaNCC = @MaNCC
+END
+GO
+
+--Tìm NCC
+CREATE PROC sp_TimNCC(@MaNCC varchar(10))
+AS
+	BEGIN 
+		SELECT * 
+		FROM NhaCungCap
+		WHERE MaNCC = @MaNCC
+	END
+GO
+
+exec sp_ThemNCC 'NCC01', N'CTy TNHH An Lạc', N'Nha Trang','096532145','anlaccompany@gmail.com'
+exec sp_ThemNCC 'NCC02', N'Nhà phân phối Hòa Bình', N'TP.HCM','036598514','hoabinhcompany@gmail'
+exec sp_ThemNCC 'NCC03', N'Nhập khẩu Nguyễn Hòa', N'Bến Tre','039652254','nhapkhaungyenhoa@gmail.com'
+exec sp_ThemNCC 'NCC04', N'Nước Ngọt Bình Dương', N'Bình Dương','096532542','nuocngotbinhduong@gmail.com'
+exec sp_ThemNCC 'NCC05', N'Vinasoy', N'TP.HCM','039443833','vinasoy@gmail.com'
 GO
 
 ---------------------------- KHO ----------------------------
---Lấy HoaDon
-CREATE PROC sp_LayKho
+--Lấy kho
+CREATE PROC sp_DSKhoGiamDan
+AS 
+	BEGIN
+		SELECT * FROM Kho ORDER BY MaKho DESC
+	END
+GO
+
+--Lấy kho
+CREATE PROC sp_DSKho
 AS 
 	BEGIN
 		SELECT * FROM Kho
 	END
 GO
-
 
 ---Them Kho
 CREATE PROC sp_ThemKho(@MaKho varchar(10) ,@TenKho nvarchar(50))
@@ -689,7 +927,7 @@ AS
 GO
 
 ---Xoa Kho
-CREATE PROC sp_XoaKho(@MaKho varchar(20))
+CREATE PROC sp_XoaKho(@MaKho varchar(10))
 AS
 	BEGIN 
 		delete from Kho
@@ -697,195 +935,205 @@ AS
 	END
 GO
 
+--Tim Kho
+CREATE PROC sp_TimKho(@MaKho varchar(10))
+AS
+BEGIN 
+		SELECT * 
+		FROM Kho
+		WHERE MaKho= @MaKho
+	END
+GO
+
+
+-- Tìm kho
+CREATE PROC sp_TimMaKho(@MaKho varchar(10))
+AS
+	BEGIN
+		SELECT * 
+		FROM Kho
+		WHERE MaKho  = @MaKho
+	 END
+GO
+
+---Add value
+EXEC sp_ThemKho 'K01', N'Kho Tầng 1'
+EXEC sp_ThemKho 'K02', N'Kho Tầng 2'
+GO
+
+
+---------------------------- HÓA ĐƠN NHẬP HÀNG ----------------------------
+--lấy ds HDNH
+GO
+CREATE PROC sp_LayHDNH
+AS
+	BEGIN 
+		SELECT * FROM HoaDonNhapHang
+		ORDER BY MaHD desc
+	END
+GO
+
+--Thêm HDNH
+CREATE PROC sp_ThemHDNH(@MaHD varchar(10),@MaNCC varchar(10), @MaNV varchar(10), @TongTien int, @TraTruoc int, @CongNo int)
+AS
+	BEGIN
+		INSERT INTO HoaDonNhapHang(MaHD ,MaNCC, MaNV, TongTien, TraTruoc, CongNo)
+		VALUES(@MaHD ,@MaNCC, @MaNV, @TongTien, @TraTruoc, @CongNo)
+	END
+GO
+
+--Sửa HDNH
+CREATE PROC sp_SuaHDNH(@MaHD varchar(10),@MaNCC varchar(10), @MaNV varchar(10), @TongTien int, @TraTruoc int, @CongNo int)
+AS
+	BEGIN
+		UPDATE HoaDonNhapHang 
+		SET MaNCC = @MaNCC, MaNV = @MaNV, TongTien= @TongTien, TraTruoc = @TraTruoc, CongNo = @CongNo
+		WHERE MaHD = @MaHD
+	END
+GO
+
+--Xóa HDNH
+CREATE PROC sp_XoaHDNH(@MaHD varchar(10))
+AS
+	BEGIN
+		DELETE 
+		FROM HoaDonNhapHang
+		WHERE MaHD = @MaHD
+	END
+GO
+
+--- Tìm HDNH
+CREATE PROC sp_TimHDNH(@MaHD varchar(10))
+AS
+	BEGIN
+		SELECT * FROM HoaDonNhapHang WHERE MaHD = @MaHD
+	END
+GO
+
+exec sp_ThemHDNH 'HD001','NCC01', 'NV02',212000 , 212000, 0
+
+---------------------------- CHI TIẾT HÓA ĐƠN NHẬP HÀNG ----------------------------
+--lấy ds HDNH
+GO
+CREATE PROC SP_LayChiTietNhapHang
+AS
+	BEGIN 
+		SELECT * FROM ChiTietNhapHang
+	END
+GO
+
+--Thêm HDNH
+CREATE PROC sp_ThemChiTietNhapHang(@MaHD varchar(10) ,
+									@MaHH varchar(10),
+									@SL int , 
+									@Gia int,
+									@ThanhTien int, 
+									@MaKho varchar(10))
+AS
+	BEGIN
+		INSERT INTO ChiTietNhapHang(MaHD ,MaHH, SL, Gia, ThanhTien, MaKho)
+		VALUES(@MaHD ,@MaHH, @SL,@Gia ,@ThanhTien ,@MaKho)
+	END
+GO
+
+--Sửa HDNH
+CREATE PROC sp_SuaChiTietNhapHang(@MaHD varchar(10) ,
+									@MaHH varchar(10),
+									@SL int , 
+									@Gia int ,
+									@ThanhTien int, 
+									@MaKho varchar(10))
+AS
+	BEGIN
+		UPDATE ChiTietNhapHang 
+		SET @SL = @SL, @Gia = @Gia, @ThanhTien = @ThanhTien, MaKho = @MaKho
+		WHERE MaHD = @MaHD AND MaHH = @MaHH
+	END
+GO
+
+--Xóa HDNH
+CREATE PROC sp_XoaChiTietNhapHang(@MaHD varchar(10), @MaHH varchar(10))
+AS
+	BEGIN
+		DELETE 
+		FROM ChiTietNhapHang
+		WHERE MaHD = @MaHD AND MaHH = @MaHH
+	END
+GO
+
+--- Tìm HDNH
+CREATE PROC sp_TimChiTietNhapHang(@MaHD varchar(10), @MaHH varchar(10))
+AS
+	BEGIN
+		SELECT * FROM ChiTietNhapHang WHERE MaHD = @MaHD AND MaHH = @MaHH
+	END
+GO
+
+exec sp_ThemChiTietNhapHang 'HD001' ,'HH01', 4,36000, 144000 ,'K01'
+exec sp_ThemChiTietNhapHang 'HD001' ,'HH02', 3,18000, 54000 ,'K01'
+exec sp_ThemChiTietNhapHang 'HD001' ,'HH03', 4,3500, 14000 ,'K01'
+GO
 
 ---------------------------- TỒN KHO ----------------------------
---Lấy HoaDon
+--- Lấy TonKho
 CREATE PROC sp_LayTonKho
-AS 
+AS
 	BEGIN
 		SELECT * FROM TonKho
 	END
 GO
 
----Them tonKho
-CREATE PROC sp_ThemTonKho(@MaHH varchar(10),@MaKho varchar(10),@SL int)
+---Thêm TonKho
+CREATE PROC sp_ThemTonKho(@MaHH varchar(10), @MaKho varchar(10), @SL int)
 AS 
-	 BEGIN
-		 INSERT INTO TonKho(MaHH,MaKho,SL)
-		 VALUES(@MaHH,@MaKho,@SL)
-	 END
+	BEGIN
+		INSERT INTO TonKho(MaHH,MaKho,SL)
+		VALUES(@MaHH,@MaKho, @SL)
+	END
 GO
 
- ---Sua TonKho
- CREATE PROC sp_SuaTonKho(@MaHH varchar(10),@MaKho varchar(10),@SL int)
- AS 
-	 BEGIN
-		 UPDATE TonKho
-		 SET SL=@SL
-		 WHERE MaHH=@MaHH and  MaKho=@MaKho
-	 END
+--- Sửa TonKho
+CREATE PROC sp_SuaTonKho(@MaHH varchar(10), @MaKho varchar(10), @SL int)
+AS
+	BEGIN
+		UPDATE TonKho
+		SET SL=@SL
+		WHERE MaHH=@MaHH and MaKho =@MaKho
+	END
 GO
 
- --- Xoa tonKho
- CREATE PROC sp_XoaTonKho(@maHH varchar(10))
+--- Tìm TonKho
+CREATE PROC sp_TimTonKhoTheoKho(@MaHH varchar(10), @MaKho varchar(10))
+AS
+	BEGIN
+		SELECT * FROM TonKho WHERE MaHH = @MaHH AND MaKho = @MaKho
+	END
+GO
+
+  --- Tìm tonKho
+ CREATE PROC sp_TimTonKho(@MaHH varchar(10))
  AS
 	 BEGIN
-		 DELETE FROM TonKho
-		 WHERE MaHH=@maHH
+		 SELECT * FROM TonKho
+		 WHERE MaHH=@MaHH 
+	 END
+ GO
+
+   --- Đếm số lượng tồn
+ CREATE PROC sp_DemTonKho(@MaHH varchar(10))
+ AS
+	 BEGIN
+		 SELECT SUM(SL) as 'TongSL' FROM TonKho
+		 WHERE MaHH=@MaHH 
 	 END
  GO
 
 
----------------------------- NHÀ CUNG CẤP ----------------------------
---Lấy HoaDon
-CREATE PROC sp_LayNhaCungCap
-AS 
-	BEGIN
-		SELECT * FROM NhaCungCap
-	END
-GO
-
- --Them NhaCungCap
- CREATE PROC sp_ThemNhaCungCap(@Ma varchar(10),@Ten varchar(50),@DiaChi nvarchar(100),@SDT varchar(11),@Email varchar(50))
- AS
-	 BEGIN 
-		 INSERT INTO NhaCungCap(MaNCC,TenNCC,DiaChi	,SDT,Email)
-		 VALUES(@Ma,@Ten,@DiaChi,@SDT,@Email)
-	 END
-GO
-
- ---Sua NhaCungCap
- CREATE PROC sp_SuaNhaCungCap(@Ma varchar(10),@Ten varchar(50),@DiaChi nvarchar(100),@SDT varchar(11),@Email varchar(50))
- AS
-	 BEGIN
-		 UPDATE NhaCungCap
-		 SET TenNCC=@Ten,DiaChi=@DiaChi,SDT=@SDT,Email=@Email
-		 WHERE MaNCC=@Ma
-	 END
-GO
-
- ---Xoa NhaCungCap
- CREATE PROC sp_XoaNhaCungCap(@Ma varchar(10))
- AS
-	 BEGIN
-		 DELETE FROM NhaCungCap
-		 WHERE MaNCC=@Ma
-	 END
-GO
- 
- ---------------------------- HÓA ĐƠN NHẬP HÀNG ----------------------------
- --Lay HoaDonNhapHang
-CREATE PROC sp_LayHoaDonNhapHang
-AS
-	BEGIN
-		SELECT* FROM HoaDonNhapHang
-	END
-GO
-
- ---Them HoaDonNhapHang
- CREATE PROC sp_ThemHoaDonNhapHang(@MaHD varchar(10),@MaNCC varchar(10),@MaNV varchar(10),@MaKho varchar(10),@Thoigian smalldatetime)
- AS
-	 BEGIN
-		 INSERT INTO HoaDonNhapHang(MaHD,MaNCC,MaNV,MaKho,ThoiGian)
-		 VALUES(@MaHD,@MaNCC,@MaNV,@MaKho,@Thoigian)
-	 END
-GO
-
- ---Sua HoaDonNhapHang
- CREATE PROC sp_SuaHoaDonNhapHang(@MaHD varchar(10),@MaNCC varchar(10),@MaNV varchar(10),@MaKho varchar(10),@Thoigian smalldatetime)
- AS
-	 BEGIN
-		 UPDATE HoaDonNhapHang
-		 SET MaNCC=@MaNCC,MaNV=@MaNV,MaKho=@MaKho,ThoiGian=@Thoigian
-		 WHERE MaHD=@MaHD
-	 END	
+-- Thêm tồn kho
+ exec sp_ThemTonKho 'HH01', 'K01', 4
+ exec sp_ThemTonKho 'HH02', 'K01', 3
+ exec sp_ThemTonKho 'HH03', 'K01', 4
  GO
-
- ---Xoa HoaDonNhapHang
- CREATE PROC sp_XoaHoaDonNhapHang(@MaHD varchar(10))
- AS
-	 BEGIN
-		 DELETE FROM HoaDonNhapHang
-		 WHERE MaHD=@MaHD
-	 END
-GO
-
-
----------------------------- CHI TIẾT NHẬP HÀNG ----------------------------
---Lay ChiTietNhapHang
-CREATE PROC sp_LayChiTietNhapHang
-AS
-	BEGIN
-		SELECT* FROM ChiTietNhapHang
-	END
-GO
-
- -- Them ChiTietNhapHang
-CREATE PROC sp_NhapChiTietNhapHang(@MaHD varchar(10),@MaHH varchar(10),@SL int,@Gia int,@ThanhTien int)
-AS
-	BEGIN
-		INSERT INTO ChiTietNhapHang(MaHD,MaHH,SL,Gia,ThanhTien)
-		VALUES(@MaHD,@MaHH,@SL,@Gia,@ThanhTien)
-	END
-GO
-
----Sua ChiTietNhapHang
-CREATE PROC sp_SuaChiTietNhapHang(@MaHD varchar(10),@MaHH varchar(10),@SL int,@Gia int,@ThanhTien int)
-AS
-	BEGIN
-		UPDATE ChiTietNhapHang
-		SET SL=@SL,Gia=@Gia,ThanhTien=@ThanhTien
-		WHERE MaHD=@MaHD and MaHH=@MaHH
-	END
-GO
-
----Xoa ChiTietNhapHang
-CREATE PROC sp_XoaChiTietNhapHang(@MaHD varchar(10),@MaHH varchar(10))
-AS
-	BEGIN
-		DELETE FROM ChiTietNhapHang
-		WHERE MaHD=@MaHD and MaHH=@MaHH
-	END
-GO
-
-
----------------------------- NHÀ SẢN XUẤT ----------------------------
---Lay NhaSanXuat
-CREATE PROC sp_LayNhaSanXuat
-AS
-	BEGIN
-		SELECT* FROM NhaSanXuat
-	END
-GO
-
- ---Them NhaSanXuat
-  GO
-CREATE PROC sp_ThemNhaSanXuat(@MaNSX varchar(10),@TenNSX nvarchar(50),@DiaChi nvarchar(100),@SDT varchar(10),@MaQG varchar(2))
-AS
-	BEGIN
-		INSERT INTO NhaSanXuat(MaNSX,TenNSX,DiaChi,SDT,MaQG)
-		VALUES(@MaNSX,@TenNSX,@DiaChi,@SDT,@MaQG)
-	END
-GO
-
---- Sua NhaSanXuat
-CREATE PROC sp_SuaNhaSanXuat(@MaNSX varchar(10),@TenNSX nvarchar(50),@DiaChi nvarchar(100),@SDT varchar(10),@MaQG varchar(2))
-AS
-	BEGIN
-		UPDATE NhaSanXuat
-		SET TenNSX=@TenNSX,DiaChi=@DiaChi,SDT=@SDT,MaQG=@MaQG
-		WHERE MaNSX=@MaNSX
-	END
-GO
-
----Xoa NhaSanXuat
-CREATE PROC sp_XoaNhaSanXuat(@MaNSX varchar(10))
-AS
-	BEGIN
-		DELETE FROM NhaSanXuat
-		WHERE MaNSX=@MaNSX
-	END
-
 
 ---------------------------- PHIẾU BẢO HÀNH ----------------------------
 --Lay PhieuBaoHanh
@@ -897,6 +1145,13 @@ AS
 	END
 GO
 
+
+CREATE PROC sp_LayPhieuBaoHanhGiamDan
+AS
+	BEGIN
+		SELECT* FROM PhieuBaoHanh ORDER BY MaPhieuBH DESC
+	END
+GO
 ---Them PhieuBaoHanh
 CREATE PROC sp_ThemPhieuBaoHanh(@MaPhieuBH varchar(10),@MaHH varchar(10),@MaKH varchar(10),@NgayMua date,@ThoiHanBH date)
 AS
@@ -906,7 +1161,6 @@ AS
 	END
 GO
 
-exec sp_ThemPhieuBaoHanh 'BH01','HH01','KH01','2021-11-02','2022-11-07'
 ---Sua PhieuBaoHanh
 CREATE PROC sp_SuaPhieuBaoHanh(@MaPhieuBH varchar(10),@MaHH varchar(10),@MaKH varchar(10),@NgayMua date,@ThoiHanBH date)
 AS
@@ -922,52 +1176,146 @@ CREATE PROC sp_XoaPhieuBaoHanh(@MaPhieuBH varchar(10))
 AS
 	BEGIN
 		DELETE FROM PhieuBaoHanh
-		WHERE MaPhieuBH = @MaPhieuBH
+		WHERE MaPhieuBH=@MaPhieuBH
 	END
 GO
---tìm 
+---tìm PhieuBaoHanh
 CREATE PROC sp_TimPhieuBaoHanh(@MaPhieuBH varchar(10))
 AS
 	BEGIN
 		SELECT * FROM PhieuBaoHanh
-		WHERE MaPhieuBH = @MaPhieuBH
-	END
-GO
-drop proc sp_TimPhieuBaoHanh
-
----------------------------- XUẤT XỨ ----------------------------
---Lay XuatXu
-CREATE PROC sp_LayXuatXu
-AS
-	BEGIN
-		SELECT* FROM XuatXu
+		WHERE MaPhieuBH=@MaPhieuBH
 	END
 GO
 
----Them XuatXu
-CREATE PROC sp_ThemXuatXu(@MaQuocGia varchar(2),@TenQuocGia nvarchar(20))
-AS
-	BEGIN
-		INSERT INTO XuatXu(MaQuocGia,TenQuocGia)
-		VALUES(@MaQuocGia,@TenQuocGia)
-	END
-GO
 
----Sua XuatXu
-CREATE PROC sp_SuaXuatXu(@MaQuocGia varchar(2),@TenQuocGia nvarchar(20))
+------------------------------ HÓA ĐƠN ----------------------------
+--Lấy HoaDon
+CREATE PROC sp_LayHoaDon
 AS 
 	BEGIN
-		UPDATE XuatXu
-		SET TenQuocGia=@TenQuocGia
-		WHERE MaQuocGia=@MaQuocGia
+		SELECT * FROM HoaDon 
+	END
+GO
+--Lấy HoaDon
+CREATE PROC sp_LayHoaDonTheoMaHD(@MaHD varchar(10))
+AS 
+	BEGIN
+		SELECT * FROM HoaDon WHERE MaHD = @MaHD
 	END
 GO
 
----Xoa XuatXu
-CREATE PROC sp_XoaXuatXu(@MaQuocGia varchar(2))
+
+--Lấy HoaDonTheoMaGiamDan
+CREATE PROC sp_LayHoaDonGiamDan
+AS 
+	BEGIN
+		SELECT * FROM HoaDon ORDER BY MaHD DESC
+	END
+GO
+
+--Them HoaDon đối với khách vãng lai
+CREATE PROC sp_ThemHoaDonKhachVL(@MaHD varchar(20),
+	@MaNV varchar(10) ,
+	@GhiChu nvarchar(200),
+	@TienHang int,
+	@KhuyenMai int,
+	@ChietKhau int,
+	@TongTien int,
+	@TienKhachDua int,
+	@TienThoi int)
+AS 
+	BEGIN
+		INSERT INTO HoaDon(MaHD,MaTheKH,MaNV ,GhiChu,TienHang, KhuyenMai, ChietKhau, TongTien,TienKhachDua, TienThoi)
+		VALUES(@MaHD, NULL,@MaNV,@GhiChu,@TienHang, @KhuyenMai, @ChietKhau, @TongTien, @TienKhachDua, @TienThoi)
+	END
+GO
+
+--Them HoaDon
+CREATE PROC sp_ThemHoaDonTheoMaKH(@MaHD varchar(20),
+	@MaTheKH varchar(10),
+	@MaNV varchar(10) ,
+	@GhiChu nvarchar(200),
+	@TienHang int,
+	@KhuyenMai int,
+	@ChietKhau int,
+	@TongTien int,
+	@DiemTL int,
+	@TienKhachDua int,
+	@TienThoi int)
+AS 
+	BEGIN
+		INSERT INTO HoaDon(MaHD,MaTheKH,MaNV ,GhiChu,TienHang, KhuyenMai, ChietKhau, TongTien, DiemTL, TienKhachDua, TienThoi)
+		VALUES(@MaHD,@MaTheKH,@MaNV ,@GhiChu,@TienHang, @KhuyenMai, @ChietKhau, @TongTien, @DiemTL, @TienKhachDua, @TienThoi)
+	END
+GO
+
+---Xoa HoaDon
+CREATE PROC sp_XoaHoaDon(@MaHD varchar(20))
 AS
 	BEGIN 
-		DELETE FROM XuatXu
-		WHERE MaQuocGia=@MaQuocGia
+		DELETE FROM HoaDon
+		WHERE MaHD=@MaHD
 	END
+GO
+
+
+------------------------------ CHI TIẾT HÓA ĐƠN ----------------------------
+--Lấy HoaDon
+CREATE PROC sp_LayChiTietHD
+AS 
+	BEGIN
+		SELECT * FROM ChiTietHoaDon
+	END
+GO
+
+--Lấy Chi tiết hóa đơn theo mã hóa đơn
+CREATE PROC sp_LayCTHDThemMaHD(@MaHD varchar(10))
+AS 
+	BEGIN
+		SELECT * FROM ChiTietHoaDon WHERE MaHD = @MaHD
+	END
+GO
+
+
+---Them ChiTietHoaDon
+CREATE PROC sp_ThemChiTietHD(@MaHD varchar(20) ,@MaHH varchar(10),@SL int,@Gia int,@KhuyenMai int,@Thanhtien int)
+AS 
+	BEGIN
+		INSERT INTO ChiTietHoaDon(MaHD,MaHH,SL,Gia,KhuyenMai,ThanhTien)
+		VALUES(@MaHD,@MaHH,@SL,@Gia, @KhuyenMai,@Thanhtien)
+	END
+GO
+
+--Sua ChiTietHoaDon
+CREATE PROC sp_SuaChiTietHD(@MaHD varchar(20) ,@MaHH varchar(16),@SL int,@Gia int,@Thanhtien int)
+AS
+	BEGIN
+		UPDATE ChiTietHoaDon
+		SET SL=@SL , Gia=@Gia,ThanhTien=@Thanhtien
+		WHERE MaHD=@MaHD and MaHH=@MaHH
+	END
+GO
+
+--Xoa ChiTietHoaDon
+CREATE PROC sp_XoaChiTietHoaDon(@MaHD varchar(20) ,@MaHH varchar(16))
+AS
+	BEGIN
+		DELETE FROM ChiTietHoaDon
+		WHERE MaHD=@MaHD and MaHH=@MaHH
+	END
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
 

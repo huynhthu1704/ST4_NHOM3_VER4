@@ -50,6 +50,7 @@ namespace GUI.ThuNgan
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.inHDViewer);
             this.Name = "frmInHD";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmInHD";
             this.Load += new System.EventHandler(this.frmInHD_Load);
             this.ResumeLayout(false);

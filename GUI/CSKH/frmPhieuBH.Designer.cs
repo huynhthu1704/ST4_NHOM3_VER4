@@ -44,6 +44,7 @@ namespace GUI.CSKH
             this.dtpNgayMua = new System.Windows.Forms.DateTimePicker();
             this.cboMaHang = new System.Windows.Forms.ComboBox();
             this.cboMaKH = new System.Windows.Forms.ComboBox();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuBH)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@ namespace GUI.CSKH
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(430, 175);
+            this.btnThoat.Location = new System.Drawing.Point(479, 175);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 12;
@@ -70,7 +71,7 @@ namespace GUI.CSKH
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(332, 175);
+            this.btnSua.Location = new System.Drawing.Point(381, 175);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
             this.btnSua.TabIndex = 13;
@@ -80,7 +81,7 @@ namespace GUI.CSKH
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(234, 175);
+            this.btnXoa.Location = new System.Drawing.Point(283, 175);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(92, 39);
             this.btnXoa.TabIndex = 14;
@@ -90,7 +91,7 @@ namespace GUI.CSKH
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(136, 175);
+            this.btnThem.Location = new System.Drawing.Point(185, 175);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 15;
@@ -102,8 +103,10 @@ namespace GUI.CSKH
             // 
             this.txtMaPhieu.Location = new System.Drawing.Point(122, 21);
             this.txtMaPhieu.Name = "txtMaPhieu";
+            this.txtMaPhieu.ReadOnly = true;
             this.txtMaPhieu.Size = new System.Drawing.Size(176, 27);
             this.txtMaPhieu.TabIndex = 11;
+            this.txtMaPhieu.TabStop = false;
             // 
             // label4
             // 
@@ -184,10 +187,21 @@ namespace GUI.CSKH
             this.cboMaKH.Size = new System.Drawing.Size(176, 27);
             this.cboMaKH.TabIndex = 21;
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(87, 175);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 22;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmPhieuBH
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.cboMaKH);
             this.Controls.Add(this.cboMaHang);
             this.Controls.Add(this.dtpNgayMua);
@@ -204,9 +218,10 @@ namespace GUI.CSKH
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmPhieuBH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmPhieuBH";
+            this.Text = "Quản lý phiếu bảo hành";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPhieuBH_FormClosing);
             this.Load += new System.EventHandler(this.frmPhieuBH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuBH)).EndInit();
@@ -232,5 +247,6 @@ namespace GUI.CSKH
         private System.Windows.Forms.DateTimePicker dtpNgayMua;
         private System.Windows.Forms.ComboBox cboMaHang;
         private System.Windows.Forms.ComboBox cboMaKH;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

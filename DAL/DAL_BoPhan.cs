@@ -26,12 +26,13 @@ namespace DAL
         /// Lấy Danh Sách Bộ phận
         /// </summary>
         /// <returns></returns>
-        public DataTable LayDSBoPhan()
+
+        public DataTable LayDSBoPhan(string tenSP)
         {
             try
             {
                 _conn.Open();
-                cmdBoPhan = new SqlCommand("sp_DSBoPhan", _conn);
+                cmdBoPhan = new SqlCommand(tenSP, _conn);
                 cmdBoPhan.CommandType = CommandType.StoredProcedure;
                 daBoPhan = new SqlDataAdapter(cmdBoPhan);
                 dtBoPhan = new DataTable();
@@ -58,13 +59,23 @@ namespace DAL
             try
             {
                 _conn.Open();
-                cmdBoPhan = new SqlCommand("sp_ThemBoPhan", _conn);
+                if (string.IsNullOrEmpty(et.MaQL))
+                {
+                    cmdBoPhan = new SqlCommand("sp_ThemBoPhanKhCoQL", _conn);
+                } else
+                {
+                    cmdBoPhan = new SqlCommand("sp_ThemBoPhan", _conn);
+                }
+               
                 cmdBoPhan.CommandType = CommandType.StoredProcedure;
                 //them tham so
                 cmdBoPhan.Parameters.Add(new SqlParameter("@MaBP", et.MaBP));
                 cmdBoPhan.Parameters.Add(new SqlParameter("@TenBP", et.TenBP));
                 cmdBoPhan.Parameters.Add(new SqlParameter("@SDT", et.SoDT));
-                cmdBoPhan.Parameters.Add(new SqlParameter("@MaQL", et.MaQL));
+                if (!string.IsNullOrEmpty(et.MaQL))
+                {
+                    cmdBoPhan.Parameters.Add(new SqlParameter("@MaQL", et.MaQL));
+                }
                 if (cmdBoPhan.ExecuteNonQuery() > 0)
                 {
                     flag = true;

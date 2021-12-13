@@ -16,6 +16,7 @@ namespace GUI.CSKH
     public partial class frmKH : Form
     {
         private BLL_KH _bll;
+        private int sTT;
         public frmKH()
         {
             InitializeComponent();
@@ -24,8 +25,8 @@ namespace GUI.CSKH
         BLL_KH KhachHang = new BLL_KH();
         private void frmKH_Load(object sender, EventArgs e)
         {
-            dgvKhachHang.DataSource = _bll.HienThiDSKH();
-            rdbNam.Checked = true;
+            dgvKhachHang.DataSource = _bll.LayDSKH();
+            rdbNu.Checked = true;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -35,16 +36,18 @@ namespace GUI.CSKH
             {
                 gt = "Nữ";
             }
-            //kiem tra cac control cho dung:
+            //kiểm tra tham số
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text, "");
             try
             {
-                if (txtMaKH.Text == "" && txtHoTenKH.Text == "" && txtSoDT.Text == "" && txtDiaChi.Text == "")
+                //bắt lỗi
+                if (txtMaKH.Text == "" || txtHoTenKH.Text == "" || txtSoDT.Text == "" || txtDiaChi.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã khách hàng đã có chưa
                     if (_bll.CheckTonTai(et))
                     {
                         MessageBox.Show("Đã tồn  Khách Hàng này");
@@ -54,6 +57,7 @@ namespace GUI.CSKH
                         if (_bll.ThemKH(et))
                         {
                             MessageBox.Show("Thêm thành công");
+                            Reset();
                         }
                         else
                         {
@@ -64,22 +68,21 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                // ném lỗi
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                Reset();
-                dgvKhachHang.DataSource = _bll.HienThiDSKH();
-            }
         }
-
+        // làm mới tất cả sau khi sửa dụng
         private void Reset()
         {
-            txtMaKH.Text = "";
+            sTT = _bll.LayDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.LayDSGiamDan().Rows[0]["MaKH"].ToString().Substring(2)) + 1 : 1;
+            txtMaKH.Text = "KH" + string.Format("{0:00}", sTT);
+            dgvKhachHang.DataSource = _bll.LayDSGiamDan();
+            rdbNam.Checked = true;
             txtHoTenKH.Text = "";
             txtSoDT.Text = "";
             txtDiaChi.Text = "";
-            txtMaKH.Focus();
+            txtHoTenKH.Focus();
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -88,16 +91,18 @@ namespace GUI.CSKH
             {
                 gt = "Nữ";
             }
-            //kiem tra cac control cho dung:
+            //kiem tra cac tham số
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text,"");
             try
             {
-                if (txtMaKH.Text == "")
+                //kiểm tra dữ liệu
+                if (txtMaKH.Text == "" || txtHoTenKH.Text == "")
                 {
                     MessageBox.Show("Vui Lòng nhập đủ thông tin cần xóa");
                 }
                 else
                 {
+                    //xác nhận muốn xóa hay không
                     DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (kq == DialogResult.Yes)
@@ -105,6 +110,7 @@ namespace GUI.CSKH
                         if (_bll.XoaKH(et))
                         {
                             MessageBox.Show("Xóa thành công");
+                            Reset();
                         }
                         else
                         {
@@ -115,12 +121,8 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvKhachHang.DataSource = _bll.HienThiDSKH();
             }
         }
 
@@ -145,22 +147,25 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show("Lỗi " + ex.Message);
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra giới tính
             string gt = "Nam";
             if (rdbNu.Checked == true)
             {
                 gt = "Nữ";
             }
-            //kiem tra cac control cho dung:
+            //kiem tra cac tham số
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text,"");
             try
             {
-                if (txtMaKH.Text == "" && txtHoTenKH.Text == "" && txtSoDT.Text == "" && txtDiaChi.Text == "")
+                //kiểm tra dữ liệu
+                if (txtMaKH.Text == "" || txtHoTenKH.Text == "" || txtSoDT.Text == "" || txtDiaChi.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần Sửa!");
                 }
@@ -169,6 +174,7 @@ namespace GUI.CSKH
                     if (_bll.SuaKH(et))
                     {
                         MessageBox.Show("Sửa thành công");
+                        Reset();
                     }
                     else
                     {
@@ -178,12 +184,8 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Reset();
-                dgvKhachHang.DataSource = _bll.HienThiDSKH();
             }
         }
 
@@ -206,6 +208,11 @@ namespace GUI.CSKH
         private void btnThoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

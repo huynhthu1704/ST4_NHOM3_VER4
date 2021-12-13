@@ -20,7 +20,31 @@ namespace DAL
         {
             _conn = Connection.conn;
         }
-        // Lấy danh sách kho
+        //method
+        public DataTable LayDSKhoTheoMaGiamDan()
+        {
+
+            try
+            {
+                _conn.Open();
+                cmd = new SqlCommand("sp_DSKhoGiamDan", _conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+            return dt;
+        }
+
         public DataTable LayDSKho()
         {
 

@@ -38,6 +38,7 @@ namespace GUI.Admin
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTenLoai = new System.Windows.Forms.TextBox();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@ namespace GUI.Admin
             // btnThoat
             // 
             this.btnThoat.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnThoat.Location = new System.Drawing.Point(431, 135);
+            this.btnThoat.Location = new System.Drawing.Point(473, 139);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 18;
@@ -66,7 +67,7 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(333, 135);
+            this.btnSua.Location = new System.Drawing.Point(375, 139);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(92, 39);
             this.btnSua.TabIndex = 19;
@@ -76,7 +77,7 @@ namespace GUI.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(235, 135);
+            this.btnXoa.Location = new System.Drawing.Point(277, 139);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(92, 39);
             this.btnXoa.TabIndex = 20;
@@ -86,7 +87,7 @@ namespace GUI.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(137, 135);
+            this.btnThem.Location = new System.Drawing.Point(179, 139);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 21;
@@ -127,12 +128,23 @@ namespace GUI.Admin
             this.txtTenLoai.Size = new System.Drawing.Size(176, 27);
             this.txtTenLoai.TabIndex = 17;
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(81, 139);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(92, 39);
+            this.btnMoi.TabIndex = 23;
+            this.btnMoi.Text = "Mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmLoaiTheKH
             // 
             this.AcceptButton = this.btnThem;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnThoat;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dgvDS);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -143,9 +155,10 @@ namespace GUI.Admin
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmLoaiTheKH";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmLoaiTheKH";
+            this.Text = "Quản lý loại thẻ KH";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoaiTheKH_FormClosing);
             this.Load += new System.EventHandler(this.frmLoaiTheKH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDS)).EndInit();
@@ -165,5 +178,6 @@ namespace GUI.Admin
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTenLoai;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

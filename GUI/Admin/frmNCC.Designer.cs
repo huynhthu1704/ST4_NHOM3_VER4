@@ -44,6 +44,7 @@ namespace GUI.Admin
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.dgvDS = new System.Windows.Forms.DataGridView();
+            this.btnMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDS)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,15 +101,17 @@ namespace GUI.Admin
             // txtMa
             // 
             this.txtMa.Location = new System.Drawing.Point(157, 28);
-            this.txtMa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMa.Margin = new System.Windows.Forms.Padding(2);
             this.txtMa.Name = "txtMa";
+            this.txtMa.ReadOnly = true;
             this.txtMa.Size = new System.Drawing.Size(166, 26);
             this.txtMa.TabIndex = 5;
+            this.txtMa.TabStop = false;
             // 
             // txtTen
             // 
             this.txtTen.Location = new System.Drawing.Point(157, 81);
-            this.txtTen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTen.Margin = new System.Windows.Forms.Padding(2);
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(166, 26);
             this.txtTen.TabIndex = 6;
@@ -116,7 +119,7 @@ namespace GUI.Admin
             // txtSDT
             // 
             this.txtSDT.Location = new System.Drawing.Point(435, 34);
-            this.txtSDT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSDT.Margin = new System.Windows.Forms.Padding(2);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(166, 26);
             this.txtSDT.TabIndex = 7;
@@ -124,7 +127,7 @@ namespace GUI.Admin
             // txtDiaChi
             // 
             this.txtDiaChi.Location = new System.Drawing.Point(157, 137);
-            this.txtDiaChi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDiaChi.Margin = new System.Windows.Forms.Padding(2);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(166, 26);
             this.txtDiaChi.TabIndex = 8;
@@ -132,15 +135,15 @@ namespace GUI.Admin
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(435, 87);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(166, 26);
             this.txtEmail.TabIndex = 9;
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(483, 198);
-            this.btnThoat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnThoat.Location = new System.Drawing.Point(532, 201);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(2);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(85, 33);
             this.btnThoat.TabIndex = 21;
@@ -150,8 +153,8 @@ namespace GUI.Admin
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(362, 198);
-            this.btnSua.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSua.Location = new System.Drawing.Point(411, 201);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(2);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(85, 33);
             this.btnSua.TabIndex = 22;
@@ -161,8 +164,8 @@ namespace GUI.Admin
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(238, 198);
-            this.btnXoa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnXoa.Location = new System.Drawing.Point(287, 201);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(2);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(85, 33);
             this.btnXoa.TabIndex = 23;
@@ -172,8 +175,8 @@ namespace GUI.Admin
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(119, 198);
-            this.btnThem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnThem.Location = new System.Drawing.Point(168, 201);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(2);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(85, 33);
             this.btnThem.TabIndex = 24;
@@ -187,7 +190,7 @@ namespace GUI.Admin
             this.dgvDS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDS.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvDS.Location = new System.Drawing.Point(0, 253);
-            this.dgvDS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvDS.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDS.Name = "dgvDS";
             this.dgvDS.RowHeadersWidth = 51;
             this.dgvDS.RowTemplate.Height = 24;
@@ -195,10 +198,22 @@ namespace GUI.Admin
             this.dgvDS.TabIndex = 25;
             this.dgvDS.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDS_CellClick);
             // 
+            // btnMoi
+            // 
+            this.btnMoi.Location = new System.Drawing.Point(60, 201);
+            this.btnMoi.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMoi.Name = "btnMoi";
+            this.btnMoi.Size = new System.Drawing.Size(85, 33);
+            this.btnMoi.TabIndex = 26;
+            this.btnMoi.Text = "Làm mới";
+            this.btnMoi.UseVisualStyleBackColor = true;
+            this.btnMoi.Click += new System.EventHandler(this.btnMoi_Click);
+            // 
             // frmNCC
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnMoi);
             this.Controls.Add(this.dgvDS);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
@@ -215,9 +230,11 @@ namespace GUI.Admin
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmNCC";
-            this.Text = "frmNCC";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý nhà cung cấp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmNCC_FormClosing);
             this.Load += new System.EventHandler(this.frmNCC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDS)).EndInit();
@@ -243,5 +260,6 @@ namespace GUI.Admin
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.DataGridView dgvDS;
+        private System.Windows.Forms.Button btnMoi;
     }
 }

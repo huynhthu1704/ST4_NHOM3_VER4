@@ -15,7 +15,12 @@ namespace BLL
         DAL_NhanVien da = new DAL_NhanVien();
         public DataTable LayDS()
         {
-            return da.LayDS();
+            return da.LayDS("sp_LayNhanVien");
+        }
+
+        public DataTable LayDSGiamDan()
+        {
+            return da.LayDS("sp_LayNhanVienGiamDan");
         }
         public bool ThemNhanVien(ET_NhanVien et)
         {

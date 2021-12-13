@@ -21,6 +21,8 @@ namespace DAL
         {
             conn = Connection.conn;
         }
+
+        // Hiển thị chi tiết hóa đơn
         public DataTable HienThiDS(string tenSP)
         {
             dt = null;
@@ -44,6 +46,7 @@ namespace DAL
             return dt;
         }  
         
+        // Lấy chi tiết hóa đơn theo mã hóa đơn
         public DataTable LayCTHDTheoMaHD(string maHD)
         {
             dt = null;
@@ -67,6 +70,8 @@ namespace DAL
             }
             return dt;
         }
+
+        // Thêm chi tiết hóa đơn
         public bool ThemCTHD(ET_ChiTietHD et)
         {
             try
@@ -95,7 +100,5 @@ namespace DAL
             }
             return false;
         }
-
-
     }
 }

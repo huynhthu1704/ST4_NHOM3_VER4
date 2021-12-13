@@ -15,6 +15,7 @@ namespace GUI.Admin
 {
     public partial class frmKho : Form
     {
+        private int sTT;
         public frmKho()
         {
             InitializeComponent();
@@ -48,8 +49,7 @@ namespace GUI.Admin
                         if (bKho.ThemKho(Kho) == true)
                         {
                             MessageBox.Show("Thêm Thành Công");
-                            txtMaKho.Text = "";
-                            txtTenKho.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -62,11 +62,8 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                //Lấy dữ liệu lên DataGirdView
-                dvgDS.DataSource = bKho.LayDS();
-            }
+        }
+
         }
         /// <summary>
         /// Sự kiện khi click vào nút xoá
@@ -94,8 +91,7 @@ namespace GUI.Admin
                         if (bKho.XoaKho(ma) == true)
                         {
                             MessageBox.Show("Xoá Thành Công");
-                            txtMaKho.Text = "";
-                            txtTenKho.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -107,14 +103,8 @@ namespace GUI.Admin
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally
-                {
-                    //Lấy dữ liệu lên DataGirdView
-                    dvgDS.DataSource = bKho.LayDS();
-                }
             }
-            else
-            {
+        }
 
             }
         }
@@ -140,8 +130,7 @@ namespace GUI.Admin
                     if (bKho.SuaKho(Kho) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
-                        txtMaKho.Text = "";
-                        txtTenKho.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -153,11 +142,15 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
-            finally
-            {
-                //Lấy dữ liệu lên DataGirdView
-                dvgDS.DataSource = bKho.LayDS();
-            }
+        }
+
+        private void Reset()
+        {
+            dvgDS.DataSource = bKho.LayDSGiamDan();
+            sTT = bKho.LayDSGiamDan().Rows.Count != 0 ? int.Parse(bKho.LayDSGiamDan().Rows[0]["MaKho"].ToString().Substring(2)) + 1 : 1;
+            txtMaKho.Text = "K" + string.Format("{0:00}", sTT);
+            txtTenKho.Text = "";
+            txtTenKho.Focus();
         }
 
         /// <summary>
@@ -167,7 +160,7 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void frmKho_Load(object sender, EventArgs e)
         {
-            dvgDS.DataSource = bKho.LayDS();
+            Reset();
         }
         /// <summary>
         /// sự kiện trước khi đóng form
@@ -213,6 +206,11 @@ namespace GUI.Admin
             int index = dvgDS.CurrentCell.RowIndex;
             txtMaKho.Text = dvgDS.Rows[index].Cells[0].Value.ToString();
             txtTenKho.Text = dvgDS.Rows[index].Cells[1].Value.ToString();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }

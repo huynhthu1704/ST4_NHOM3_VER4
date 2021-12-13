@@ -9,12 +9,13 @@ namespace ET
 {
     public class ET_PhieuDKTheKH
     {
+        //field
         private string _maPhieu;
         private string _maNV;
         private string _maTheKH;
         private string _maKH;
         private DateTime _ngayDK;
-
+        //constructor
         public ET_PhieuDKTheKH(string maPhieu, string maNV, string maTheKH, string maKH, DateTime ngayDK)
         {
             _maPhieu = maPhieu;
@@ -23,7 +24,7 @@ namespace ET
             _maKH = maKH;
             _ngayDK = ngayDK;
         }
-
+        //properties
         public string MaPhieu { get => _maPhieu; set => _maPhieu = value; }
         public string MaNV { get => _maNV; set => _maNV = value; }
         public string MaTheKH { get => _maTheKH; set => _maTheKH = value; }

@@ -52,6 +52,7 @@ namespace GUI.ThuKho
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radKMKhong = new System.Windows.Forms.RadioButton();
             this.radKMCo = new System.Windows.Forms.RadioButton();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHangHoa)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,7 +72,7 @@ namespace GUI.ThuKho
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(522, 262);
+            this.btnThoat.Location = new System.Drawing.Point(636, 262);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(94, 43);
             this.btnThoat.TabIndex = 25;
@@ -81,7 +82,7 @@ namespace GUI.ThuKho
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(407, 262);
+            this.btnSua.Location = new System.Drawing.Point(522, 262);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(94, 43);
             this.btnSua.TabIndex = 26;
@@ -91,7 +92,7 @@ namespace GUI.ThuKho
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(294, 262);
+            this.btnXoa.Location = new System.Drawing.Point(410, 262);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(94, 43);
             this.btnXoa.TabIndex = 27;
@@ -101,7 +102,7 @@ namespace GUI.ThuKho
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(183, 262);
+            this.btnThem.Location = new System.Drawing.Point(301, 262);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(94, 43);
             this.btnThem.TabIndex = 28;
@@ -280,10 +281,21 @@ namespace GUI.ThuKho
             this.radKMCo.UseVisualStyleBackColor = true;
             this.radKMCo.CheckedChanged += new System.EventHandler(this.radKMCo_CheckedChanged);
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(190, 262);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(94, 43);
+            this.btnReset.TabIndex = 34;
+            this.btnReset.Text = "Làm Mới";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // frmHangHoa
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(884, 561);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.cboMaKM);
             this.Controls.Add(this.groupBox1);
@@ -304,8 +316,10 @@ namespace GUI.ThuKho
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmHangHoa";
-            this.Text = "frmHangHoa";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý hàng hóa";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHangHoa_FormClosing);
             this.Load += new System.EventHandler(this.frmHangHoa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHangHoa)).EndInit();
@@ -343,5 +357,6 @@ namespace GUI.ThuKho
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radKMKhong;
         private System.Windows.Forms.RadioButton radKMCo;
+        private System.Windows.Forms.Button btnReset;
     }
 }

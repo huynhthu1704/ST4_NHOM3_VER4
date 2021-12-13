@@ -24,12 +24,12 @@ namespace BLL
         {
             return _dal.HienThiDS("sp_LayLoaiTheKH");
         }
-      // Thêm LoaiThe, nếu thành công trả về true
+        // Thêm LoaiThe, nếu thành công trả về true
         public bool ThemLoaiTheKH(ET_LoaiTheKH et)
         {
             return _dal.ThemLoaiTheKH(et);
         }
-        
+
         // Xóa LoaiTheKH, nếu thành công trả về true
         public bool XoaLoaiTheKH(ET_LoaiTheKH et)
         {

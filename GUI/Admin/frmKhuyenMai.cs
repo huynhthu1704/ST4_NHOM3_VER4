@@ -15,6 +15,7 @@ namespace GUI.Admin
 {
     public partial class frmKhuyenMai : Form
     {
+        private int sTT;
         public frmKhuyenMai()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void frmKhuyenMai_Load(object sender, EventArgs e)
         {
-            dvgDS.DataSource = b.LayDS();
+            Reset();
         }
         /// <summary>
         /// Sự kiện khi click vào nút thêm
@@ -57,9 +58,7 @@ namespace GUI.Admin
                         if (b.ThemKhuyenMai(KhuyenMai) == true)
                         {
                             MessageBox.Show("Thêm Thành Công");
-                            txtGTKM.Text = "";
-                            txtMaKM.Text = "";
-                            txtTenKM.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -71,11 +70,6 @@ namespace GUI.Admin
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //Lấy dữ liệu lên DataGirdView
-                dvgDS.DataSource = b.LayDS();
             }
         }
 
@@ -104,9 +98,7 @@ namespace GUI.Admin
                         if (b.XoaKhuyenMai(ma) == true)
                         {
                             MessageBox.Show("Xoá Thành Công");
-                            txtGTKM.Text = "";
-                            txtMaKM.Text = "";
-                            txtTenKM.Text = "";
+                            Reset();
                         }
                         else
                         {
@@ -118,15 +110,11 @@ namespace GUI.Admin
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally
-                {
-                    //Lấy dữ liệu lên DataGirdView
-                    dvgDS.DataSource = b.LayDS();
-                }
             }
-            else
-            {
-            }
+           
+        }
+
+              
         }
         /// <summary>
         /// Sự kiện khi click nút sửa
@@ -149,9 +137,7 @@ namespace GUI.Admin
                     if (b.SuaKhuyenMai(KhuyenMai) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
-                        txtGTKM.Text = "";
-                        txtMaKM.Text = "";
-                        txtTenKM.Text = "";
+                        Reset();
                     }
                     else
                     {
@@ -162,11 +148,6 @@ namespace GUI.Admin
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //Lấy dữ liệu lên DataGirdView
-                dvgDS.DataSource = b.LayDS();
             }
         }
         /// <summary>
@@ -216,6 +197,23 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+
+        private void Reset()
+        {
+            dvgDS.DataSource = b.LayDSGiamDan();
+            sTT = b.LayDSGiamDan().Rows.Count != 0 ? int.Parse(b.LayDSGiamDan().Rows[0]["MaKM"].ToString().Substring(2)) + 1 : 1;
+            txtMaKM.Text = "KM" + string.Format("{0:00}", sTT);
+            txtGTKM.Text = "";
+            txtTenKM.Text = "";
+            dtpBD.ResetText();
+            dtpKT.ResetText();
+        }
+
+        private void btnMoi_Click(object sender, EventArgs e)
+        {
+            Reset();
         }
     }
 }
