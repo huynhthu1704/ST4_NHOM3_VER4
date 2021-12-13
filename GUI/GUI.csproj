@@ -93,10 +93,40 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\RPAllHangHoa.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPAllHangHoa.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPHHTheoDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPHHTheoDM.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\RPInHoaDon.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RPInHoaDon.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPKhachHang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPKhachHang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPNhanVien.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPNhanVien.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPNVTheoBP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPNVTheoBP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ThuKho\frmInHDNhapHang.cs">
@@ -104,6 +134,12 @@
     </Compile>
     <Compile Include="ThuKho\frmInHDNhapHang.Designer.cs">
       <DependentUpon>frmInHDNhapHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThuKho\frmThongKeHangHoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frmThongKeHangHoa.Designer.cs">
+      <DependentUpon>frmThongKeHangHoa.cs</DependentUpon>
     </Compile>
     <Compile Include="ThuKho\frmThongKeTonKho.cs">
       <SubType>Form</SubType>
@@ -254,12 +290,35 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPAllHangHoa.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPAllHangHoa.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPHHTheoDM.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPHHTheoDM.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\RPInHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPInHoaDon.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPKhachHang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPKhachHang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPNhanVien.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPNhanVien.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPNVTheoBP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPNVTheoBP.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ThuKho\frmInHDNhapHang.resx">
       <DependentUpon>frmInHDNhapHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThuKho\frmThongKeHangHoa.resx">
+      <DependentUpon>frmThongKeHangHoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThuKho\frmThongKeTonKho.resx">
       <DependentUpon>frmThongKeTonKho.cs</DependentUpon>

@@ -44,6 +44,7 @@ namespace GUI.CSKH
             this.label5 = new System.Windows.Forms.Label();
             this.lblThoiGian = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuDK)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@ namespace GUI.CSKH
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(362, 167);
+            this.btnThoat.Location = new System.Drawing.Point(517, 167);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(92, 39);
             this.btnThoat.TabIndex = 12;
@@ -70,7 +71,7 @@ namespace GUI.CSKH
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(199, 167);
+            this.btnThem.Location = new System.Drawing.Point(320, 167);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(92, 39);
             this.btnThem.TabIndex = 15;
@@ -173,10 +174,21 @@ namespace GUI.CSKH
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(103, 167);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(92, 39);
+            this.btnReset.TabIndex = 23;
+            this.btnReset.Text = "Làm Mới";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // frmPhieuDKTheKH
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(684, 411);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblThoiGian);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cboMaKH);
@@ -219,5 +231,6 @@ namespace GUI.CSKH
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblThoiGian;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnReset;
     }
 }

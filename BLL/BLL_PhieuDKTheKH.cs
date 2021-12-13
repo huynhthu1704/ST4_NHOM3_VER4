@@ -17,47 +17,40 @@ namespace BLL
         {
             _dal = new DAL_PhieuDKTheKH();
         }
-
+        //method hiện thị ds giam dần
         public DataTable HienThiDSPhieuDKTheKHGiam()
         {
             return _dal.HienThi("SP_LayPhieuDKTheKHTheoMaGiam");
         }
-
+        //method hiện thị ds phiếu dk thẻ kh
         public DataTable HienThiDSPhieuDKTheKH()
         {
             return _dal.HienThi("SP_LayPhieuDKTheKH");
         }
+        //method hiển thị danh sách nhân viên
         public DataTable HienThiDSNV()
         {
             return _dal.HienThi("sp_LayNhanVien");
         }
+        //method hiển thị danh sách thẻ khách hàng
         public DataTable HienThiDSTheKH()
         {
-            return _dal.HienThi("sp_LayTheKhachHang");
+            return _dal.HienThi("sp_LaySDChuaKH");
         }
+        // method hiện thị dánh sách khach hang
         public DataTable HienThiDSKH()
         {
             return _dal.HienThi("sp_LayKhachHang");
         }
+        //method thêm phiêu dk thẻ kh
         public bool ThemPhieuDK(ET_PhieuDKTheKH et)
         {
             return _dal.ThemPhieuDK(et);
         }
-        public bool XoaPhieuDK(ET_PhieuDKTheKH et)
-        {
-            return _dal.XoaPhieuDK(et);
-        }
-        public bool SuaPhieuDK(ET_PhieuDKTheKH et)
-        {
-            return _dal.Sua(et);
-        }
+        //method check mã phiêu dk 
         public bool CheckTonTai(ET_PhieuDKTheKH et)
         {
             return _dal.CheckTonTai(et);
-        }
-        public bool CapNhatTKH(string et)
-        {
-            return _dal.CapNhatTKH(et);
         }
     }
 }

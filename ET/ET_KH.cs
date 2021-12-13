@@ -17,6 +17,7 @@ namespace ET
         private string _diaChi;
         private string _maTheKH;
 
+        //constructor
         public ET_KH(string maKH, string hoTenKH, string gioiTinh, string sDT, string diaChi, string maTheKH)
         {
             _maKH = maKH;
@@ -26,7 +27,7 @@ namespace ET
             _diaChi = diaChi;
             _maTheKH = maTheKH;
         }
-
+        //properties:
         public string MaKH { get => _maKH; set => _maKH = value; }
         public string HoTenKH { get => _hoTenKH; set => _hoTenKH = value; }
         public string GioiTinh { get => _gioiTinh; set => _gioiTinh = value; }

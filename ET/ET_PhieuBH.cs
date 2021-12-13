@@ -9,12 +9,14 @@ namespace ET
 {
     public class ET_PhieuBH
     {
+        //field
         private string _maBH;
         private string _maHH;
         private string _maKH;
         private DateTime _ngayMua;
         private DateTime _thoiHanBH;
 
+        //constructor
         public ET_PhieuBH(string maBH, string maHH, string maKH, DateTime ngayMua, DateTime thoiHanBH)
         {
             _maBH = maBH;
@@ -24,6 +26,7 @@ namespace ET
             _thoiHanBH = thoiHanBH;
         }
 
+        //properties:
         public string MaBH { get => _maBH; set => _maBH = value; }
         public string MaHH { get => _maHH; set => _maHH = value; }
         public string MaKH { get => _maKH; set => _maKH = value; }

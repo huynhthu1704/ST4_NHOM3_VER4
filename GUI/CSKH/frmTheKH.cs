@@ -26,10 +26,12 @@ namespace GUI.CSKH
         private void frmTheKH_Load(object sender, EventArgs e)
         {
             Reset();
+            dgvTheKH.DataSource = _bll.HienThiDSTheKH();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra thì trạng
             int tinhTrang = 0;
             if (rdbDaKH.Checked == true)
             {
@@ -40,12 +42,14 @@ namespace GUI.CSKH
             ET_TheKH et = new ET_TheKH(txtMaThe.Text,"", tinhTrang, 0);
             try
             {
+                //kiểm tra dư liệu
                 if (txtMaThe.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã
                     if (_bll.CheckTonTai(txtMaThe.Text))
                     {
                         MessageBox.Show("Đã tồn tại thẻ KH này");
@@ -66,6 +70,7 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -121,14 +126,17 @@ namespace GUI.CSKH
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra tình trạng
             int tinhTrang = 0;
             if (rdbDaKH.Checked == true)
             {
                 tinhTrang = 1;
             }
+            //kiểm tra các control
             ET_TheKH et = new ET_TheKH(txtMaThe.Text, "", tinhTrang, 0);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaThe.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin !");
@@ -148,6 +156,7 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }

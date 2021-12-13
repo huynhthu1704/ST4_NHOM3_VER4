@@ -30,17 +30,19 @@ namespace GUI.CSKH
 
         private void frmPhieuDKTheKH_Load(object sender, EventArgs e)
         {
+            //hiển thị danh sách nhân viên
             cboMaNV.DataSource = _bll.HienThiDSNV();
             cboMaNV.DisplayMember = "HoTen";
             cboMaNV.ValueMember = "MaNV";
-
+            //hiển thị danh sách thẻ khách hàng
             cboMaTheKH.DataSource = _bll.HienThiDSTheKH();
             cboMaTheKH.DisplayMember = "MaTheKH";
             cboMaTheKH.ValueMember = "MaTheKH";
-
+            //hiển thị ds khách hàng
             cboMaKH.DataSource = _bll.HienThiDSKH();
             cboMaKH.DisplayMember = "MaKH";
             cboMaKH.ValueMember = "MaKH";
+            dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
             Reset();
         }
 
@@ -78,6 +80,7 @@ namespace GUI.CSKH
         }
         private void Reset()
         {
+            dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKHGiam();
             sTT = _bll.HienThiDSPhieuDKTheKHGiam().Rows.Count != 0 ? int.Parse(_bll.HienThiDSPhieuDKTheKHGiam().Rows[0]["MaPhieu"].ToString().Substring(3)) + 1 : 1;
             txtMaPhieu.Text = "PDK" + string.Format("{0:00}", sTT);
             cboMaNV.SelectedIndex = 0;
@@ -88,13 +91,16 @@ namespace GUI.CSKH
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control 
             ET_PhieuDKTheKH et = new ET_PhieuDKTheKH(txtMaPhieu.Text, cboMaNV.SelectedValue.ToString(), cboMaTheKH.SelectedValue.ToString(), cboMaKH.SelectedValue.ToString(), DateTime.Now);
             try
             {
+                //kiểm tra dư liệu
                 if (txtMaPhieu.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
+                //kiểm tra mã
                 else if (_bll.CheckTonTai(et))
                 {
                     MessageBox.Show("Đã tồn tại Phiếu Đăng Ký này");
@@ -116,61 +122,7 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            ET_PhieuDKTheKH et = new ET_PhieuDKTheKH(txtMaPhieu.Text, cboMaNV.Text, cboMaTheKH.Text, cboMaKH.Text, DateTime.Now);
-            try
-            {
-                DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (kq == DialogResult.Yes)
-                {
-                    if (_bll.XoaPhieuDK(et))
-                    {
-                        MessageBox.Show("Xóa thành công");
-                        Reset();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa không thành công");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            ET_PhieuDKTheKH et = new ET_PhieuDKTheKH(txtMaPhieu.Text, cboMaNV.Text, cboMaTheKH.Text, cboMaKH.Text, DateTime.Now);
-            try
-            {
-                if (txtMaPhieu.Text == "")
-                {
-                    MessageBox.Show("Vui lòng nhập đủ thông tin cần Sửa!");
-                }
-                else
-                {
-                    if (_bll.SuaPhieuDK(et))
-                    {
-                        MessageBox.Show("Sửa thành công");
-                        Reset();
-                        dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKHGiam();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sửa không thành công");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -185,5 +137,9 @@ namespace GUI.CSKH
             lblThoiGian.Text = DateTime.Now.ToString();
         }
 
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
     }
 }

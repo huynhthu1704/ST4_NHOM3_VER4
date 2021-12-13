@@ -12,11 +12,13 @@ namespace DAL
 {
     public class DAL_KH
     {
+        //connection
         private SqlConnection conn;
         private DataTable dt;
         private SqlCommand cmd;
         private SqlDataAdapter da;
 
+        //method
         public DAL_KH()
         {
             conn = Connection.conn;
@@ -26,6 +28,7 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand(tenSP, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -35,51 +38,31 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //Ném lỗi
                 throw ex;
             }
             finally
             {
+                // đóng kết nối
                 conn.Close();
             }
             return dt;
         }
-
-        public DataSet LayDSChoRP()
-        {
-            DataSet ds;
-            try
-            {
-                conn.Open();
-                ds = new DataSet();
-                ds.Tables.Add(new DataTable("KhachHang"));
-                SqlCommand cmd = new SqlCommand("sp_LayKhachHang", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(ds.Tables["KhachHang"]);
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return ds;
-        }
-
         public bool ThemKH(ET_KH et)
         {
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_ThemKhachHang", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm vào các tham số
                 cmd.Parameters.Add(new SqlParameter("@MaKH", et.MaKH));
                 cmd.Parameters.Add(new SqlParameter("@HoTenKH", et.HoTenKH));
                 cmd.Parameters.Add(new SqlParameter("@GioiTinh", et.GioiTinh));
                 cmd.Parameters.Add(new SqlParameter("@SDT", et.SDT));
                 cmd.Parameters.Add(new SqlParameter("@DiaChi", et.DiaChi));
+                //thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -87,9 +70,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -100,13 +86,16 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_TimKhachHang", conn);
+                //thêm tham số
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@MaKH", et.MaKH));
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
+                //thực thi
                 if (dt.Rows.Count > 0)
                 {
                     return true;
@@ -114,10 +103,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
                 throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -126,10 +117,13 @@ namespace DAL
         {
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_XoaKhachHang", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaKH", et.MaKH));
+                //thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -140,6 +134,7 @@ namespace DAL
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -148,14 +143,17 @@ namespace DAL
         {
             try
             {
+                // mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_SuaKhachHang", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                // truyền tham số
                 cmd.Parameters.Add(new SqlParameter("@MaKH", et.MaKH));
                 cmd.Parameters.Add(new SqlParameter("@HoTenKH", et.HoTenKH));
                 cmd.Parameters.Add(new SqlParameter("@GioiTinh", et.GioiTinh));
                 cmd.Parameters.Add(new SqlParameter("@SDT", et.SDT));
                 cmd.Parameters.Add(new SqlParameter("@DiaChi", et.DiaChi));
+                // thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -166,6 +164,7 @@ namespace DAL
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -174,11 +173,13 @@ namespace DAL
         {
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_SuaTheKH", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@MaKH", maKH));
                 cmd.Parameters.Add(new SqlParameter("@MaTheKH", maThe));
+                //thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -186,10 +187,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
                 throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;

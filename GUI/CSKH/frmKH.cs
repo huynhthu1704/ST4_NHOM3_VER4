@@ -25,7 +25,8 @@ namespace GUI.CSKH
         BLL_KH KhachHang = new BLL_KH();
         private void frmKH_Load(object sender, EventArgs e)
         {
-            Reset();
+            dgvKhachHang.DataSource = _bll.LayDSKH();
+            rdbNu.Checked = true;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -35,16 +36,18 @@ namespace GUI.CSKH
             {
                 gt = "Nữ";
             }
-            //kiem tra cac control cho dung:
+            //kiểm tra tham số
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text, "");
             try
             {
-                if (txtMaKH.Text == "" && txtHoTenKH.Text == "" && txtSoDT.Text == "" && txtDiaChi.Text == "")
+                //bắt lỗi
+                if (txtMaKH.Text == "" || txtHoTenKH.Text == "" || txtSoDT.Text == "" || txtDiaChi.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần thêm!");
                 }
                 else
                 {
+                    //kiểm tra mã khách hàng đã có chưa
                     if (_bll.CheckTonTai(et))
                     {
                         MessageBox.Show("Đã tồn  Khách Hàng này");
@@ -65,10 +68,11 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                // ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
-
+        // làm mới tất cả sau khi sửa dụng
         private void Reset()
         {
             sTT = _bll.LayDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.LayDSGiamDan().Rows[0]["MaKH"].ToString().Substring(2)) + 1 : 1;
@@ -87,16 +91,18 @@ namespace GUI.CSKH
             {
                 gt = "Nữ";
             }
-            //kiem tra cac control cho dung:
+            //kiem tra cac tham số
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text,"");
             try
             {
-                if (txtMaKH.Text == "")
+                //kiểm tra dữ liệu
+                if (txtMaKH.Text == "" || txtHoTenKH.Text == "")
                 {
                     MessageBox.Show("Vui Lòng nhập đủ thông tin cần xóa");
                 }
                 else
                 {
+                    //xác nhận muốn xóa hay không
                     DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (kq == DialogResult.Yes)
@@ -115,6 +121,7 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -140,22 +147,25 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show("Lỗi " + ex.Message);
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra giới tính
             string gt = "Nam";
             if (rdbNu.Checked == true)
             {
                 gt = "Nữ";
             }
-            //kiem tra cac control cho dung:
+            //kiem tra cac tham số
             ET_KH et = new ET_KH(txtMaKH.Text, txtHoTenKH.Text, gt, txtSoDT.Text, txtDiaChi.Text,"");
             try
             {
-                if (txtMaKH.Text == "" && txtHoTenKH.Text == "" && txtSoDT.Text == "" && txtDiaChi.Text == "")
+                //kiểm tra dữ liệu
+                if (txtMaKH.Text == "" || txtHoTenKH.Text == "" || txtSoDT.Text == "" || txtDiaChi.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đủ thông tin cần Sửa!");
                 }
@@ -174,6 +184,7 @@ namespace GUI.CSKH
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }

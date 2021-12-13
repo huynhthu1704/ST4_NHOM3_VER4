@@ -30,15 +30,18 @@ namespace GUI.ThuKho
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DanhMucHH et = new ET_DanhMucHH(txtMaDM.Text, txtTenDM.Text);
             try
             {
+                //kiểm tra mã
                 if (_bll.CheckTonTai(et))
                 {
                     MessageBox.Show("Đã tồn tại Danh Mục này");
                 }
                 else
                 {
+                    //kiểm tra dữ liệu
                     if (txtMaDM.Text == "" && txtTenDM.Text == "")
                     {
                         MessageBox.Show("Vui lòng nhập đầy đủ thông tin Cần Thêm!");
@@ -60,6 +63,7 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //enms lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -72,9 +76,11 @@ namespace GUI.ThuKho
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DanhMucHH et = new ET_DanhMucHH(txtMaDM.Text, txtTenDM.Text);
             try
             {
+                //hiển thị xác nhận
                 DialogResult kq = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -92,6 +98,7 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }
@@ -113,9 +120,11 @@ namespace GUI.ThuKho
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            //kiểm tra các control
             ET_DanhMucHH et = new ET_DanhMucHH(txtMaDM.Text, txtTenDM.Text);
             try
             {
+                //kiểm tra dữ liệu
                 if (txtMaDM.Text == "" && txtTenDM.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đầy đủ thông tin Cần sửa Thêm!");
@@ -135,6 +144,7 @@ namespace GUI.ThuKho
             }
             catch (Exception ex)
             {
+                //ném lỗi
                 MessageBox.Show(ex.Message);
             }
         }

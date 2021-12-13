@@ -9,6 +9,7 @@ namespace ET
 {
     public class ET_HangHoa
     {
+        //field
         private string _maHH;
         private string _tenHH;
         private string _donVT;
@@ -16,7 +17,7 @@ namespace ET
         private string _maDM;
         private int _baoHanh;
         private string _maKM;
-
+        //constructor
         public ET_HangHoa(string maHH, string tenHH, string donVT, int gia, string maDM, int baoHanh, string maKM)
         {
             _maHH = maHH;
@@ -27,7 +28,7 @@ namespace ET
             _baoHanh = baoHanh;
             _maKM = maKM;
         }
-
+        //properties
         public string MaHH { get => _maHH; set => _maHH = value; }
         public string TenHH { get => _tenHH; set => _tenHH = value; }
         public string DonVT { get => _donVT; set => _donVT = value; }

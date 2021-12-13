@@ -12,11 +12,12 @@ namespace DAL
 {
     public class DAL_DVT
     {
+        //connection
         private SqlConnection conn;
         private DataTable dt;
         private SqlCommand cmd;
         private SqlDataAdapter da;
-
+        //method
         public DAL_DVT()
         {
             conn = Connection.conn;
@@ -27,6 +28,7 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand(tenSP, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -36,9 +38,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return dt;
@@ -48,11 +53,14 @@ namespace DAL
         {
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_ThemDonViTinh", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaDVT", et.MaDVT));
                 cmd.Parameters.Add(new SqlParameter("@TenDVT", et.TenDVT));
+                //thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -60,9 +68,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -71,10 +82,13 @@ namespace DAL
         {
             try
             {
+                //mở kêt nối
                 conn.Open();
                 cmd = new SqlCommand("sp_XoaDonViTinh", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaDVT", et.MaDVT));
+                //thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -82,9 +96,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -94,12 +111,14 @@ namespace DAL
         {
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_SuaDonViTinh", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaDVT", et.MaDVT));
                 cmd.Parameters.Add(new SqlParameter("@TenDVT", et.TenDVT));
-                
+                //thục thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -107,9 +126,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -119,13 +141,16 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_TimDonViTinh", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //them tham số
                 cmd.Parameters.Add(new SqlParameter("@MaDVT", et.MaDVT));
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
+                //thực thi
                 if (dt.Rows.Count > 0)
                 {
                     return true;
@@ -133,10 +158,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;

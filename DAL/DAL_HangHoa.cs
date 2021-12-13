@@ -12,11 +12,13 @@ namespace DAL
 {
     public class DAL_HangHoa
     {
+        //connection
         private SqlConnection conn;
         private DataTable dt;
         private SqlCommand cmd;
         private SqlDataAdapter da;
 
+        //method
         public DAL_HangHoa()
         {
             conn = Connection.conn;
@@ -26,6 +28,7 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand(tenSP, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -35,9 +38,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kêt nối
                 conn.Close();
             }
             return dt;
@@ -48,9 +54,12 @@ namespace DAL
         {
             try
             {
+                //mở kết nối
                 conn.Open();
+                //kiểm tra constructor
                 if (string.IsNullOrEmpty(et.MaKM))
                 {
+                    //thêm các tham số
                     cmd = new SqlCommand("sp_ThemHangHoaKhKM", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@MaHH", et.MaHH));
@@ -66,6 +75,7 @@ namespace DAL
                 }
                 else
                 {
+                    //thêm các tham số
                     cmd = new SqlCommand("sp_ThemHangHoa", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@MaHH", et.MaHH));
@@ -83,9 +93,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //enms lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -96,13 +109,16 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_TimHangHoa", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaHH", maHH));
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
+                //thực thi
                 if (dt.Rows.Count > 0)
                 {
                     return true;
@@ -110,10 +126,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kêts nối
                 conn.Close();
             }
             return false;
@@ -123,10 +141,13 @@ namespace DAL
         {
             try
             {
+                //mở kết nói
                 conn.Open();
                 cmd = new SqlCommand("sp_XoaHangHoa", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaHH", et.MaHH));
+                //thực thi
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     return true;
@@ -134,9 +155,12 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                //ném lỗi
+                throw ex;
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return false;
@@ -145,9 +169,12 @@ namespace DAL
         {
             try
             {
+                //mở kết nối
                 conn.Open();
+                //kiểm tra constructor
                 if (string.IsNullOrEmpty(et.MaKM))
                 {
+                    //them tham số
                     cmd = new SqlCommand("sp_ThemHangHoaKhKM", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@MaHH", et.MaHH));
@@ -180,6 +207,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -192,9 +220,11 @@ namespace DAL
             dt = null;
             try
             {
+                //mở kết nối
                 conn.Open();
                 cmd = new SqlCommand("sp_TimHangHoa", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //thêm tham số
                 cmd.Parameters.Add(new SqlParameter("@MaHH", maHH));
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
@@ -206,6 +236,7 @@ namespace DAL
             }
             finally
             {
+                //đóng kết nối
                 conn.Close();
             }
             return dt;
