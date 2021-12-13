@@ -1,5 +1,4 @@
-﻿// Ngọc Thư
-
+﻿//Duc Tri
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +24,11 @@ namespace GUI.Admin
 
         BLL_NhanVien b = new BLL_NhanVien();
         BLL_BoPhan BP = new BLL_BoPhan();
+        /// <summary>
+        /// Sự kiện khi bắt đầu form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmNhanVien_Load(object sender, EventArgs e)
         {
             Reset();
@@ -33,10 +37,16 @@ namespace GUI.Admin
             cboMaBP.ValueMember = "MaBP";
         }
 
+        /// <summary>
+        /// Sự kiện trước khi đóng form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmNhanVien_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
+                //Thông báo muốn thoát hay không
                 DialogResult kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
@@ -53,9 +63,15 @@ namespace GUI.Admin
             }
         }
 
+        /// <summary>
+        /// sự kiện khi nhấn nút thêm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
             string Gt;
+            //kiểm tra radio là nam hay nữ
             if (radNam.Checked == true)
             {
                 Gt = "Nam";
@@ -66,6 +82,7 @@ namespace GUI.Admin
             }
             try
             {
+                //kiểm tra các trường đã nhập đủ dữ liệu chưa
                 if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtMaTK.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
@@ -73,6 +90,7 @@ namespace GUI.Admin
                 else
                 {
                     ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
+                    //Kiểm tra nhân viên và Tài khoản đã tồn tại chưa
                     if (b.CheckTonTai(NV) == true && b.CheckTonTaiMaTK(txtMaTK.Text) == false)
                     {
                         if (b.CheckTonTai(NV) == true)
@@ -86,6 +104,7 @@ namespace GUI.Admin
                     }
                     else
                     {
+                        //Kiểm tra có thêm nhân viên thành công không
                         if (b.ThemNhanVien(NV))
                         {
                             MessageBox.Show("Thêm Thành Công");
@@ -104,10 +123,16 @@ namespace GUI.Admin
             }
             finally
             {
+                //Lấy dữ liệu lên DataGirdView
                 dvgDS.DataSource = b.LayDS();
             }
         }
 
+        /// <summary>
+        /// Sự kiện khi nhấn nút sửa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSua_Click(object sender, EventArgs e)
         {
             string Gt;
@@ -121,6 +146,7 @@ namespace GUI.Admin
             }
             try
             {
+                //Kiểm tra các trường có được nhập đủ không
                 if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtMaTK.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
@@ -128,6 +154,7 @@ namespace GUI.Admin
                 else
                 {
                     ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
+
                     if (b.SuaNhanVien(NV) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
@@ -145,15 +172,22 @@ namespace GUI.Admin
             }
             finally
             {
+                //Lấy dữ liệu lên DataGirdView
                 dvgDS.DataSource = b.LayDS();
             }
         }
 
+        /// <summary>
+        /// sự kiện khi nhấn nút xoá
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaNV.Text;
             try
             {
+                //Thông báo có muốn xoá không
                 DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
@@ -175,6 +209,7 @@ namespace GUI.Admin
                     }
                     finally
                     {
+                        //Lấy dữ liệu lên DataGirdView
                         dvgDS.DataSource = b.LayDS();
                     }
                 }
@@ -202,6 +237,11 @@ namespace GUI.Admin
             dtpNVL.ResetText();
         }
 
+        /// <summary>
+        /// sự kiện khi click vào DataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dvgDS_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = dvgDS.CurrentCell.RowIndex;
@@ -224,7 +264,11 @@ namespace GUI.Admin
             cboMaBP.SelectedValue = dvgDS.Rows[index].Cells[9].Value.ToString();
             txtMaTK.Text = dvgDS.Rows[index].Cells[10].Value.ToString();
         }
-
+        /// <summary>
+        /// sự kiện khi click vào nút thoát
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Close();

@@ -1,4 +1,4 @@
-﻿// Ngọc Thư
+﻿///DucTri
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +21,11 @@ namespace GUI.Admin
             InitializeComponent();
         }
         BLL_BoPhan bBoPhan = new BLL_BoPhan();
+        /// <summary>
+        /// Sự kiện khi bấm nút thêm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
             
@@ -43,6 +48,7 @@ namespace GUI.Admin
                     }
                     else
                     {
+                        //kiểm tra có thêm được dữ liệu không
                         if (bBoPhan.ThemBoPhan(BoPhan) == true)
                         {
                             MessageBox.Show("Thêm Thành Công");
@@ -60,10 +66,15 @@ namespace GUI.Admin
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Sự kiện khi bấm nút xoá
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaBP.Text;
+            //Thông báo muốn xoá hay không
             DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
@@ -71,33 +82,43 @@ namespace GUI.Admin
                 {
                     if (bBoPhan.XoaBoPhan(ma) == true)
                     {
+                        //Báo đã xoá
                         MessageBox.Show("Xoá Thành Công");
                         Reset();
                     }
                     else
                     {
+                        //Báo không xoá được
                         MessageBox.Show("Xoá Không Thành Công");
                     }
                 }
                 catch (Exception ex)
                 {
+                    // báo lỗi
                     MessageBox.Show(ex.Message);
                 }
             }
         }
 
+        /// <summary>
+        /// Sự kiện khi bấm nút sửa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSua_Click(object sender, EventArgs e)
         {
 
             try
-            {
-                if (txtMaBP.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
+            {   
+                //Kiểm tra các trường có bỏ trống hay không
+                if (txtMaBP.Text == "" || txtMaQL.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
                 else
                 {
                     ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
+                    //Kiểm tra sửa được bộ phận không
                     if (bBoPhan.SuaBoPhan(BoPhan) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
@@ -111,10 +132,16 @@ namespace GUI.Admin
             }
             catch (Exception ex)
             {
+                //Báo lỗi
                 MessageBox.Show(ex.Message);
             }
         }
 
+        /// <summary>
+        /// sự kiện khi bắt đầu form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmBoPhan_Load(object sender, EventArgs e)
         {
             Reset();
@@ -129,11 +156,21 @@ namespace GUI.Admin
             txtSDT.Text = "";
             txtTenBP.Text = "";
         }
+        /// <summary>
+        /// Sự kiện khi bấm vào nút thoát
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Sự kiện trước khi đóng form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmBoPhan_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -154,6 +191,11 @@ namespace GUI.Admin
             }
         }
 
+        /// <summary>
+        /// Sự kiện khi click vào datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dvgDS_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = dvgDS.CurrentCell.RowIndex;
