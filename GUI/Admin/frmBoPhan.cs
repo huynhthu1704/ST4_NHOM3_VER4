@@ -1,4 +1,5 @@
-﻿using System;
+﻿///DucTri
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,11 @@ namespace GUI.Admin
             InitializeComponent();
         }
         BLL_BoPhan bBoPhan = new BLL_BoPhan();
+        /// <summary>
+        /// Sự kiện khi bấm nút thêm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -30,12 +36,14 @@ namespace GUI.Admin
                 else
                 {
                     ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
+                    //Kiểm tra bộ phận tồn tại chưa
                     if (bBoPhan.CheckTonTai(BoPhan))
                     {
                         MessageBox.Show("Đã tồn tại bộ phận này");
                     }
                     else
                     {
+                        //kiểm tra có thêm được dữ liệu không
                         if (bBoPhan.ThemBoPhan(BoPhan) == true)
                         {
                             MessageBox.Show("Thêm Thành Công");
@@ -57,13 +65,19 @@ namespace GUI.Admin
             }
             finally
             {
+                // lấy dự liệu lên DataGirdView
                 dvgDS.DataSource = bBoPhan.LayDS();
             }
         }
-
+        /// <summary>
+        /// Sự kiện khi bấm nút xoá
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaBP.Text;
+            //Thông báo muốn xoá hay không
             DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
@@ -71,6 +85,7 @@ namespace GUI.Admin
                 {
                     if (bBoPhan.XoaBoPhan(ma) == true)
                     {
+                        //Báo đã xoá
                         MessageBox.Show("Xoá Thành Công");
                         txtMaBP.Text = "";
                         txtMaQL.Text = "";
@@ -79,15 +94,18 @@ namespace GUI.Admin
                     }
                     else
                     {
+                        //Báo không xoá được
                         MessageBox.Show("Xoá Không Thành Công");
                     }
                 }
                 catch (Exception ex)
                 {
+                    // báo lỗi
                     MessageBox.Show(ex.Message);
                 }
                 finally
                 {
+                    // lấy dự liệu lên DataGirdView
                     dvgDS.DataSource = bBoPhan.LayDS();
                 }
             }
@@ -97,11 +115,17 @@ namespace GUI.Admin
             }
         }
 
+        /// <summary>
+        /// Sự kiện khi bấm nút sửa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSua_Click(object sender, EventArgs e)
         {
 
             try
-            {
+            {   
+                //Kiểm tra các trường có bỏ trống hay không
                 if (txtMaBP.Text == "" || txtMaQL.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
@@ -109,6 +133,7 @@ namespace GUI.Admin
                 else
                 {
                     ET_BoPhan BoPhan = new ET_BoPhan(txtMaBP.Text, txtTenBP.Text, txtSDT.Text, txtMaQL.Text);
+                    //Kiểm tra sửa được bộ phận không
                     if (bBoPhan.SuaBoPhan(BoPhan) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");
@@ -125,24 +150,42 @@ namespace GUI.Admin
             }
             catch (Exception ex)
             {
+                //Báo lỗi
                 MessageBox.Show(ex.Message);
             }
             finally
             {
+                // lấy dự liệu lên DataGirdView
                 dvgDS.DataSource = bBoPhan.LayDS();
             }
         }
 
+        /// <summary>
+        /// sự kiện khi bắt đầu form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmBoPhan_Load(object sender, EventArgs e)
         {
+            // lấy dự liệu lên DataGirdView
             dvgDS.DataSource = bBoPhan.LayDS();
         }
 
+        /// <summary>
+        /// Sự kiện khi bấm vào nút thoát
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Sự kiện trước khi đóng form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmBoPhan_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -163,6 +206,11 @@ namespace GUI.Admin
             }
         }
 
+        /// <summary>
+        /// Sự kiện khi click vào datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dvgDS_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = dvgDS.CurrentCell.RowIndex;

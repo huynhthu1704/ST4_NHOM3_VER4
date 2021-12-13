@@ -20,7 +20,7 @@ namespace DAL
         {
             _conn = Connection.conn;
         }
-        //method
+        // Lấy danh sách kho
         public DataTable LayDSKho()
         {
 
@@ -29,7 +29,6 @@ namespace DAL
                 _conn.Open();
                 cmd = new SqlCommand("sp_DSKho", _conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -44,7 +43,7 @@ namespace DAL
             }
             return dt;
         }
-
+        // Thêm Kho
         public bool ThemKho(ET_Kho et)
         {
             bool flag = false;
@@ -71,6 +70,7 @@ namespace DAL
             }
             return flag;
         }
+        //Sửa kho
         public bool SuaKho(ET_Kho et)
         {
             bool flag = false;
@@ -97,7 +97,7 @@ namespace DAL
             }
             return flag;
         }
-
+        //Xoá kho
         public bool XoaKho(string et)
         {
             bool flag = false;
@@ -123,6 +123,7 @@ namespace DAL
             }
             return flag;
         }
+        //Kiểm tra kho đã tồn tại chưa
         public bool CheckTonTai(ET_Kho et)
         {
             dt = null;
@@ -131,6 +132,7 @@ namespace DAL
                 _conn.Open();
                 cmd = new SqlCommand("sp_TimKho", _conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //them tham so
                 cmd.Parameters.Add(new SqlParameter("@MaKho", et.MaKho));
                 da = new SqlDataAdapter(cmd);
                 dt = new DataTable();

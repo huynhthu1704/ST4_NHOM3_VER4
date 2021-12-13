@@ -53,7 +53,7 @@ namespace GUI.Admin
             this.label1.Font = new System.Drawing.Font("Tahoma", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(45, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 22);
+            this.label1.Size = new System.Drawing.Size(86, 27);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã KM:";
             // 
@@ -63,7 +63,7 @@ namespace GUI.Admin
             this.label2.Font = new System.Drawing.Font("Tahoma", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(45, 102);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 22);
+            this.label2.Size = new System.Drawing.Size(94, 27);
             this.label2.TabIndex = 2;
             this.label2.Text = "Tên KM:";
             // 
@@ -73,7 +73,7 @@ namespace GUI.Admin
             this.label3.Font = new System.Drawing.Font("Tahoma", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(45, 168);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 22);
+            this.label3.Size = new System.Drawing.Size(122, 27);
             this.label3.TabIndex = 4;
             this.label3.Text = "Giá Trị KM:";
             // 
@@ -83,7 +83,7 @@ namespace GUI.Admin
             this.label5.Font = new System.Drawing.Font("Tahoma", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(390, 102);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 22);
+            this.label5.Size = new System.Drawing.Size(163, 27);
             this.label5.TabIndex = 6;
             this.label5.Text = "Ngày Kết Thúc:";
             // 
@@ -93,7 +93,7 @@ namespace GUI.Admin
             this.label6.Font = new System.Drawing.Font("Tahoma", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(390, 38);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 22);
+            this.label6.Size = new System.Drawing.Size(155, 27);
             this.label6.TabIndex = 5;
             this.label6.Text = "Ngày Bắt Đầu:";
             // 
@@ -101,21 +101,21 @@ namespace GUI.Admin
             // 
             this.txtMaKM.Location = new System.Drawing.Point(179, 34);
             this.txtMaKM.Name = "txtMaKM";
-            this.txtMaKM.Size = new System.Drawing.Size(170, 26);
+            this.txtMaKM.Size = new System.Drawing.Size(170, 30);
             this.txtMaKM.TabIndex = 7;
             // 
             // txtTenKM
             // 
             this.txtTenKM.Location = new System.Drawing.Point(179, 101);
             this.txtTenKM.Name = "txtTenKM";
-            this.txtTenKM.Size = new System.Drawing.Size(170, 26);
+            this.txtTenKM.Size = new System.Drawing.Size(170, 30);
             this.txtTenKM.TabIndex = 8;
             // 
             // txtGTKM
             // 
             this.txtGTKM.Location = new System.Drawing.Point(179, 164);
             this.txtGTKM.Name = "txtGTKM";
-            this.txtGTKM.Size = new System.Drawing.Size(170, 26);
+            this.txtGTKM.Size = new System.Drawing.Size(170, 30);
             this.txtGTKM.TabIndex = 10;
             // 
             // dtpBD
@@ -123,7 +123,7 @@ namespace GUI.Admin
             this.dtpBD.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBD.Location = new System.Drawing.Point(558, 32);
             this.dtpBD.Name = "dtpBD";
-            this.dtpBD.Size = new System.Drawing.Size(167, 26);
+            this.dtpBD.Size = new System.Drawing.Size(167, 30);
             this.dtpBD.TabIndex = 11;
             // 
             // dtpKT
@@ -131,7 +131,7 @@ namespace GUI.Admin
             this.dtpKT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpKT.Location = new System.Drawing.Point(558, 96);
             this.dtpKT.Name = "dtpKT";
-            this.dtpKT.Size = new System.Drawing.Size(167, 26);
+            this.dtpKT.Size = new System.Drawing.Size(167, 30);
             this.dtpKT.TabIndex = 12;
             // 
             // dvgDS
@@ -209,6 +209,7 @@ namespace GUI.Admin
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmKhuyenMai";
             this.Text = "frmKhuyenMai";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmKhuyenMai_FormClosing);
             this.Load += new System.EventHandler(this.frmKhuyenMai_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgDS)).EndInit();
             this.ResumeLayout(false);

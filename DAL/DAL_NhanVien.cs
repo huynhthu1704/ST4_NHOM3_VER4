@@ -21,6 +21,7 @@ namespace DAL
             _conn = Connection.conn;
         }
         //method
+        //lấy danh sách Nhân viên
         public DataTable LayDS()
         {
 
@@ -44,7 +45,7 @@ namespace DAL
             }
             return dt;
         }
-
+        //Thêm nhÂN viên
         public bool ThemNhanVien(ET_NhanVien et)
         {
             bool flag = false;
@@ -80,6 +81,7 @@ namespace DAL
             }
             return flag;
         }
+        //Sửa nhân viên
         public bool SuaNhanVien(ET_NhanVien et)
         {
             bool flag = false;
@@ -115,7 +117,7 @@ namespace DAL
             }
             return flag;
         }
-
+        //Xoá nhân viên
         public bool XoaNhanVien(string et)
         {
             bool flag = false;
@@ -141,6 +143,7 @@ namespace DAL
             }
             return flag;
         }
+        //Kiểm tra nhân viên đã tồn tại chưa
         public bool CheckTonTai(ET_NhanVien et)
         {
             dt = null;

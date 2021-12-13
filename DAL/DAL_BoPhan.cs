@@ -22,22 +22,24 @@ namespace DAL
             _conn = Connection.conn;
         }
         //method
+        /// <summary>
+        /// Lấy Danh Sách Bộ phận
+        /// </summary>
+        /// <returns></returns>
         public DataTable LayDSBoPhan()
         {
-
             try
             {
                 _conn.Open();
                 cmdBoPhan = new SqlCommand("sp_DSBoPhan", _conn);
                 cmdBoPhan.CommandType = CommandType.StoredProcedure;
-
                 daBoPhan = new SqlDataAdapter(cmdBoPhan);
                 dtBoPhan = new DataTable();
                 daBoPhan.Fill(dtBoPhan);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -45,7 +47,11 @@ namespace DAL
             }
             return dtBoPhan;
         }
-
+        /// <summary>
+        /// Thêm Bộ phận vào database
+        /// </summary>
+        /// <param name="et">Class Bộ phận</param>
+        /// <returns></returns>
         public bool ThemBoPhan(ET_BoPhan et)
         {
             bool flag = false;
@@ -74,6 +80,11 @@ namespace DAL
             }
             return flag;
         }
+        /// <summary>
+        /// Sửa lại Bộ phận 
+        /// </summary>
+        /// <param name="et">class Bộ phận</param>
+        /// <returns></returns>
         public bool SuaBoPhan(ET_BoPhan et)
         {
             bool flag = false;
@@ -103,6 +114,11 @@ namespace DAL
             return flag;
         }
 
+        /// <summary>
+        /// Xoá bộ Phận
+        /// </summary>
+        /// <param name="et">Mã bộ phận cần xoá</param>
+        /// <returns></returns>
         public bool XoaBoPhan(string et)
         {
             bool flag = false;
@@ -130,6 +146,11 @@ namespace DAL
             }
             return flag;
         }
+        /// <summary>
+        /// Kiểm tra Bộ phận có chưa
+        /// </summary>
+        /// <param name="et">class bộ phận</param>
+        /// <returns></returns>
         public bool CheckTonTai(ET_BoPhan et)
         {
             dtBoPhan = null;
