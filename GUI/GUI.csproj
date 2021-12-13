@@ -129,6 +129,18 @@
       <DependentUpon>RPNVTheoBP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\RP_TimMaKho.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP_TimMaKho.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RP_TimTenHH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP_TimTenHH.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ThuKho\frmInHDNhapHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +159,13 @@
     <Compile Include="ThuKho\frmThongKeTonKho.Designer.cs">
       <DependentUpon>frmThongKeTonKho.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThuKho\frm_RPTimMKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frm_RPTimTenHH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThuKho\frm_RPTimTenHH.Designer.cs" />
     <Compile Include="ThuNgan\frmInHD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +332,14 @@
     <EmbeddedResource Include="Report\RPNVTheoBP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPNVTheoBP.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RP_TimMaKho.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_TimMaKho.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RP_TimTenHH.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_TimTenHH.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ThuKho\frmInHDNhapHang.resx">
       <DependentUpon>frmInHDNhapHang.cs</DependentUpon>
