@@ -436,12 +436,9 @@ namespace GUI.ThuNgan
                                 {
                                     // Lấy mã kho
                                     string maKho = dsKho.Rows[k][0].ToString();
-                                    MessageBox.Show(maKho);
                                     if (bllTonKho.CheckTonTaiTheoKho(maSP, maKho))
                                     {
                                         int slTonKho = bllTonKho.LaySL(maSP, maKho);
-                                        MessageBox.Show("Sl ton kho" + slTonKho.ToString());
-                                        MessageBox.Show("SL" + sL.ToString());
                                         if (slTonKho > sL)
                                         {
                                             ET_TonKho etTonKho = new ET_TonKho(maSP, maKho, slTonKho - sL);

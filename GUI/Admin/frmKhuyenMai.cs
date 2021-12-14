@@ -111,10 +111,6 @@ namespace GUI.Admin
                     MessageBox.Show(ex.Message);
                 }
             }
-           
-        }
-
-              
         }
         /// <summary>
         /// Sự kiện khi click nút sửa
@@ -157,7 +153,7 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
         /// <summary>
         /// sự kiện khi click vào DataGridView
@@ -214,6 +210,27 @@ namespace GUI.Admin
         private void btnMoi_Click(object sender, EventArgs e)
         {
             Reset();
+        }
+
+        private void frmKhuyenMai_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                //Thông báo muốn thoát hay không
+                DialogResult kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

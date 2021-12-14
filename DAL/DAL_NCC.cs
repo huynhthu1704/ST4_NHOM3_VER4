@@ -19,6 +19,8 @@ namespace DAL
         {
             _conn = Connection.conn;
         }
+
+        // Lấy nhà cung cấp
         public DataTable LayDS(string tenSP)
         {
             try
@@ -42,6 +44,7 @@ namespace DAL
             return dt;
         }
 
+        // Thêm nhà cung cấp
         public bool ThemNCC(ET_NCC et)
         {
             bool flag = false;
@@ -61,8 +64,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -70,6 +74,8 @@ namespace DAL
             }
             return flag;
         }
+
+        // Sửa nhà cung cấp
         public bool SuaNCC(ET_NCC et)
         {
             bool flag = false;
@@ -89,8 +95,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -99,6 +106,7 @@ namespace DAL
             return flag;
         }
 
+        // Xóa nhà cung cấp
         public bool XoaNCC(string et)
         {
             bool flag = false;
@@ -114,8 +122,9 @@ namespace DAL
                     flag = true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
+                throw ex;
             }
             finally
             {
@@ -123,6 +132,8 @@ namespace DAL
             }
             return flag;
         }
+
+        // Check tồn tại
         public bool CheckTonTai(ET_NCC et)
         {
             dt = null;
@@ -140,9 +151,9 @@ namespace DAL
                     return true;
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                throw ex;
             }
             finally
             {

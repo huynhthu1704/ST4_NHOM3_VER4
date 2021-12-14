@@ -42,7 +42,7 @@ namespace GUI.ThuKho
                 else
                 {
                     //kiểm tra dữ liệu
-                    if (txtMaDM.Text == "" && txtTenDM.Text == "")
+                    if (txtMaDM.Text == "" || txtTenDM.Text == "")
                     {
                         MessageBox.Show("Vui lòng nhập đầy đủ thông tin Cần Thêm!");
                     }
@@ -125,7 +125,7 @@ namespace GUI.ThuKho
             try
             {
                 //kiểm tra dữ liệu
-                if (txtMaDM.Text == "" && txtTenDM.Text == "")
+                if (txtMaDM.Text == "" || txtTenDM.Text == "")
                 {
                     MessageBox.Show("Vui lòng nhập đầy đủ thông tin Cần sửa Thêm!");
                 }

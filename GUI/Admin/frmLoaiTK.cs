@@ -181,8 +181,8 @@ namespace GUI.Admin
             STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaLoaiTK"].ToString().Substring(2)) + 1;
             txtMaLoai.Text = "ML" + string.Format("{0:00}", STT);
             dgvLoaiTK.DataSource = _bll.HienThiDS();
-            txtTenLoai.Focus();
             txtTenLoai.Text = "";
+            txtTenLoai.Focus();
         }
 
         // Sự kiện khi click lên datagridview, hiển thị thông tin lên các textfield

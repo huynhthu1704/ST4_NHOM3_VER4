@@ -16,14 +16,14 @@ namespace GUI.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RP_TimTenHH : ReportClass {
+    public class CrystalReport1 : ReportClass {
         
-        public RP_TimTenHH() {
+        public CrystalReport1() {
         }
         
         public override string ResourceName {
             get {
-                return "RP_TimTenHH.rpt";
+                return "CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GUI.Report {
         
         public override string FullResourceName {
             get {
-                return "GUI.Report.RP_TimTenHH.rpt";
+                return "GUI.Report.CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace GUI.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Ten {
+        public CrystalDecisions.Shared.IParameterField Parameter_MaHD {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,9 +98,9 @@ namespace GUI.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRP_TimTenHH : Component, ICachedReport {
+    public class CachedCrystalReport1 : Component, ICachedReport {
         
-        public CachedRP_TimTenHH() {
+        public CachedCrystalReport1() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace GUI.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RP_TimTenHH rpt = new RP_TimTenHH();
+            CrystalReport1 rpt = new CrystalReport1();
             rpt.Site = this.Site;
             return rpt;
         }

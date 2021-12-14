@@ -31,10 +31,10 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void frmNhanVien_Load(object sender, EventArgs e)
         {
-            Reset();
             cboMaBP.DataSource = BP.LayDS();
             cboMaBP.DisplayMember = "TenBP";
             cboMaBP.ValueMember = "MaBP";
+            Reset();
         }
 
         /// <summary>

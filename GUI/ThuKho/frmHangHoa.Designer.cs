@@ -75,7 +75,7 @@ namespace GUI.ThuKho
             this.btnThoat.Location = new System.Drawing.Point(636, 262);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(94, 43);
-            this.btnThoat.TabIndex = 25;
+            this.btnThoat.TabIndex = 13;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
@@ -85,7 +85,7 @@ namespace GUI.ThuKho
             this.btnSua.Location = new System.Drawing.Point(522, 262);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(94, 43);
-            this.btnSua.TabIndex = 26;
+            this.btnSua.TabIndex = 12;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
@@ -95,7 +95,7 @@ namespace GUI.ThuKho
             this.btnXoa.Location = new System.Drawing.Point(410, 262);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(94, 43);
-            this.btnXoa.TabIndex = 27;
+            this.btnXoa.TabIndex = 11;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -105,7 +105,7 @@ namespace GUI.ThuKho
             this.btnThem.Location = new System.Drawing.Point(301, 262);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(94, 43);
-            this.btnThem.TabIndex = 28;
+            this.btnThem.TabIndex = 10;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
@@ -115,7 +115,7 @@ namespace GUI.ThuKho
             this.txtGia.Location = new System.Drawing.Point(205, 162);
             this.txtGia.Name = "txtGia";
             this.txtGia.Size = new System.Drawing.Size(176, 26);
-            this.txtGia.TabIndex = 22;
+            this.txtGia.TabIndex = 3;
             this.txtGia.Text = "0";
             // 
             // txtTenHH
@@ -123,14 +123,16 @@ namespace GUI.ThuKho
             this.txtTenHH.Location = new System.Drawing.Point(205, 59);
             this.txtTenHH.Name = "txtTenHH";
             this.txtTenHH.Size = new System.Drawing.Size(176, 26);
-            this.txtTenHH.TabIndex = 23;
+            this.txtTenHH.TabIndex = 1;
             // 
             // txtMaHH
             // 
             this.txtMaHH.Location = new System.Drawing.Point(205, 12);
             this.txtMaHH.Name = "txtMaHH";
+            this.txtMaHH.ReadOnly = true;
             this.txtMaHH.Size = new System.Drawing.Size(176, 26);
             this.txtMaHH.TabIndex = 24;
+            this.txtMaHH.TabStop = false;
             // 
             // txtMaKM
             // 
@@ -184,7 +186,7 @@ namespace GUI.ThuKho
             this.cboDVT.Location = new System.Drawing.Point(205, 109);
             this.cboDVT.Name = "cboDVT";
             this.cboDVT.Size = new System.Drawing.Size(176, 28);
-            this.cboDVT.TabIndex = 30;
+            this.cboDVT.TabIndex = 2;
             // 
             // label6
             // 
@@ -202,7 +204,7 @@ namespace GUI.ThuKho
             this.cboDM.Location = new System.Drawing.Point(588, 10);
             this.cboDM.Name = "cboDM";
             this.cboDM.Size = new System.Drawing.Size(221, 28);
-            this.cboDM.TabIndex = 30;
+            this.cboDM.TabIndex = 4;
             // 
             // groupBox1
             // 
@@ -221,7 +223,7 @@ namespace GUI.ThuKho
             this.rdbKhong.Location = new System.Drawing.Point(209, 23);
             this.rdbKhong.Name = "rdbKhong";
             this.rdbKhong.Size = new System.Drawing.Size(73, 24);
-            this.rdbKhong.TabIndex = 1;
+            this.rdbKhong.TabIndex = 6;
             this.rdbKhong.TabStop = true;
             this.rdbKhong.Text = "Không";
             this.rdbKhong.UseVisualStyleBackColor = true;
@@ -232,7 +234,7 @@ namespace GUI.ThuKho
             this.rdbCo.Location = new System.Drawing.Point(106, 23);
             this.rdbCo.Name = "rdbCo";
             this.rdbCo.Size = new System.Drawing.Size(47, 24);
-            this.rdbCo.TabIndex = 0;
+            this.rdbCo.TabIndex = 5;
             this.rdbCo.TabStop = true;
             this.rdbCo.Text = "Có";
             this.rdbCo.UseVisualStyleBackColor = true;
@@ -264,7 +266,7 @@ namespace GUI.ThuKho
             this.radKMKhong.Location = new System.Drawing.Point(209, 24);
             this.radKMKhong.Name = "radKMKhong";
             this.radKMKhong.Size = new System.Drawing.Size(73, 24);
-            this.radKMKhong.TabIndex = 1;
+            this.radKMKhong.TabIndex = 8;
             this.radKMKhong.TabStop = true;
             this.radKMKhong.Text = "Không";
             this.radKMKhong.UseVisualStyleBackColor = true;
@@ -276,7 +278,7 @@ namespace GUI.ThuKho
             this.radKMCo.Location = new System.Drawing.Point(106, 25);
             this.radKMCo.Name = "radKMCo";
             this.radKMCo.Size = new System.Drawing.Size(47, 24);
-            this.radKMCo.TabIndex = 0;
+            this.radKMCo.TabIndex = 7;
             this.radKMCo.Text = "Có";
             this.radKMCo.UseVisualStyleBackColor = true;
             this.radKMCo.CheckedChanged += new System.EventHandler(this.radKMCo_CheckedChanged);
@@ -286,7 +288,7 @@ namespace GUI.ThuKho
             this.btnReset.Location = new System.Drawing.Point(190, 262);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(94, 43);
-            this.btnReset.TabIndex = 34;
+            this.btnReset.TabIndex = 9;
             this.btnReset.Text = "Làm Mới";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);

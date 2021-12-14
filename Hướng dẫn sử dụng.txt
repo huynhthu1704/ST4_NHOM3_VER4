@@ -1,0 +1,16 @@
+Tụi em đã có 4 tài khoản theo phân quyền:
+- Admin: 
+	Tên đăng nhập: admin
+	Mật khẩu: 1234
+- Thủ kho:
+	Tên đăng nhập: thukho
+	Mật khẩu: 1234
+- Thu ngân:
+	Tên đăng nhập: thungan
+	Mật khẩu: 1234
+- CSKH:
+	Tên đăng nhập: cskh
+	Mật khẩu: 1234
+
+- Trong ET có 1 file cấu hình là Connection, thầy thay đổi connection string strong đó để chạy bài nha thầy
+

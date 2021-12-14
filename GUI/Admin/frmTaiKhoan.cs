@@ -27,13 +27,12 @@ namespace GUI.Admin
         // Sự kiện load form
         private void frmTaiKhoan_Load(object sender, EventArgs e)
         {
-            Reset();
-            // Hiển thị dữ liệu lên datagridview và combobox
-            dgvTaiKhoan.DataSource = _bll.HienThiDS();
+          
             cboLoaiTK.DataSource = _bll.HienThiLTK();
             cboLoaiTK.DisplayMember = "TenLoaiTK";
             cboLoaiTK.ValueMember = "MaLoaiTK";
             cboLoaiTK.SelectedIndex = 0;
+            Reset();
         }
 
         // Sự kiện trước khi đóng form
@@ -174,10 +173,13 @@ namespace GUI.Admin
         // Reset các field
         public void Reset()
         {
+            // Hiển thị dữ liệu lên datagridview và combobox
+            dgvTaiKhoan.DataSource = _bll.HienThiDS();
             STT = _bll.HienThiDS().Rows.Count == 0 ? 1 : int.Parse(_bll.HienThiDS().Rows[0]["MaTK"].ToString().Substring(2)) + 1;
             txtMaTK.Text = "TK" + string.Format("{0:00}", STT);
             txtTenDN.Text = "";
             txtMK.Text = "";
+            txtTenDN.Focus();
             cboLoaiTK.SelectedIndex = 0;
         }
 

@@ -30,19 +30,7 @@ namespace GUI.CSKH
 
         private void frmPhieuDKTheKH_Load(object sender, EventArgs e)
         {
-            //hiển thị danh sách nhân viên
-            cboMaNV.DataSource = _bll.HienThiDSNV();
-            cboMaNV.DisplayMember = "HoTen";
-            cboMaNV.ValueMember = "MaNV";
-            //hiển thị danh sách thẻ khách hàng
-            cboMaTheKH.DataSource = _bll.HienThiDSTheKH();
-            cboMaTheKH.DisplayMember = "MaTheKH";
-            cboMaTheKH.ValueMember = "MaTheKH";
-            //hiển thị ds khách hàng
-            cboMaKH.DataSource = _bll.HienThiDSKH();
-            cboMaKH.DisplayMember = "MaKH";
-            cboMaKH.ValueMember = "MaKH";
-            dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
+           
             Reset();
         }
 
@@ -80,6 +68,19 @@ namespace GUI.CSKH
         }
         private void Reset()
         {
+            //hiển thị danh sách nhân viên
+            cboMaNV.DataSource = _bll.HienThiDSNV();
+            cboMaNV.DisplayMember = "HoTen";
+            cboMaNV.ValueMember = "MaNV";
+            //hiển thị danh sách thẻ khách hàng
+            cboMaTheKH.DataSource = _bll.HienThiDSTheKH();
+            cboMaTheKH.DisplayMember = "MaTheKH";
+            cboMaTheKH.ValueMember = "MaTheKH";
+            //hiển thị ds khách hàng
+            cboMaKH.DataSource = _bll.HienThiDSKH();
+            cboMaKH.DisplayMember = "MaKH";
+            cboMaKH.ValueMember = "MaKH";
+            dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKH();
             dgvPhieuDK.DataSource = _bll.HienThiDSPhieuDKTheKHGiam();
             sTT = _bll.HienThiDSPhieuDKTheKHGiam().Rows.Count != 0 ? int.Parse(_bll.HienThiDSPhieuDKTheKHGiam().Rows[0]["MaPhieu"].ToString().Substring(3)) + 1 : 1;
             txtMaPhieu.Text = "PDK" + string.Format("{0:00}", sTT);

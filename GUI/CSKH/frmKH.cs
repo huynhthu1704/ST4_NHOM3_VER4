@@ -25,8 +25,7 @@ namespace GUI.CSKH
         BLL_KH KhachHang = new BLL_KH();
         private void frmKH_Load(object sender, EventArgs e)
         {
-            dgvKhachHang.DataSource = _bll.LayDSKH();
-            rdbNu.Checked = true;
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -77,7 +76,7 @@ namespace GUI.CSKH
         {
             sTT = _bll.LayDSGiamDan().Rows.Count != 0 ? int.Parse(_bll.LayDSGiamDan().Rows[0]["MaKH"].ToString().Substring(2)) + 1 : 1;
             txtMaKH.Text = "KH" + string.Format("{0:00}", sTT);
-            dgvKhachHang.DataSource = _bll.LayDSGiamDan();
+            dgvKhachHang.DataSource = _bll.LayDSKH();
             rdbNam.Checked = true;
             txtHoTenKH.Text = "";
             txtSoDT.Text = "";

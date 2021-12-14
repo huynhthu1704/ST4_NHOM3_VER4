@@ -5,7 +5,7 @@ Thành viên:
 	Nguyễn Thành Đức Trí
 	Đàng Thanh Quốc
 */
-drop database NHOM3_QLSIEUTHICOOPMART
+--drop database NHOM3_QLSIEUTHICOOPMART
 CREATE DATABASE NHOM3_QLSIEUTHICOOPMART
 GO
 USE NHOM3_QLSIEUTHICOOPMART
@@ -17,7 +17,7 @@ CREATE TABLE BoPhan
 	MaBP varchar(10) primary key,-- Mã bộ phận 
 	TenBP nvarchar(30) not null, -- Tên bộ phận 
 	SDT varchar(11) not null, -- Số điện thoại 
-	MaQL varchar(10) -- Mã quản lý 
+	MaQL varchar(10) default null -- Mã quản lý 
 )
 GO
 
@@ -63,7 +63,7 @@ CREATE TABLE KhachHang
 	GioiTinh nvarchar(3), -- Giới tính
 	SDT varchar(11) not null, -- Số điện thoại 
 	DiaChi nvarchar(100), -- Địa chỉ 
-	DiemTL int default 0 -- Điểm tích lũy
+	MaTheKH varchar(16) NULL -- Mã thẻ KH
 )
 GO
 
@@ -76,7 +76,7 @@ CREATE TABLE HangHoa
 	Gia int not null, -- Đơn giá
 	MaDM varchar(10) , -- Mã danh mục
 	BaoHanh bit, -- Có bảo hành hay không
-	MaKM varchar(10) -- Mã khuyến mãi
+	MaKM varchar(10) null -- Mã khuyến mãi
 )
 
 GO
@@ -103,9 +103,8 @@ CREATE TABLE KhuyenMai
 (
 	MaKM varchar(10) primary key, -- Mã khuyến mãi
 	TenKM nvarchar(50) not null, -- Tên khuyến mãi
-	LoaiKM varchar(10), -- Loại hình khuyến mãi
 	GiaTriKM int not null, -- Giá trị khuyến mãi
-	NgayBatDauKM  smalldatetime not null, -- Ngày bắt đầu khuyến mãi
+	NgayBatDauKM  smalldatetime not null, -- Ngày bắt đầu khuyến mãi
 	NgayKetThucKM smalldatetime not null, -- Ngày kết thúc khuyến mãi
 )
 GO
@@ -127,7 +126,8 @@ CREATE TABLE TheKhachHang
 (
 	MaTheKH varchar(16) primary key, -- Mã thẻ khách hàng
 	LoaiThe varchar(10) not null, -- Loại thẻ
-	TinhTrang bit default 0 -- Tình trạng thẻ (Sử dụng hay chưa)
+	TinhTrang bit default 0 ,-- Tình trạng thẻ (Sử dụng hay chưa)
+	DiemTL int default 0,-- Điểm tích lũy
 )
 GO
 
@@ -143,7 +143,7 @@ GO
 CREATE TABLE HoaDon
 (
 	MaHD varchar(20) primary key, -- Mã hóa đơn
-	MaKH varchar(10) default 'KVL', -- Mã khách hàng
+	MaTheKH varchar(16),  -- Mã thẻ khách hàng
 	MaNV varchar(10) , -- Mã nhân viên
 	ThoiGianTT smalldatetime not null default CURRENT_TIMESTAMP, -- Thời gian thanh toán
 	GhiChu nvarchar(200),
@@ -151,6 +151,7 @@ CREATE TABLE HoaDon
 	KhuyenMai int,
 	ChietKhau int,
 	TongTien int,
+	DiemTL int default 0,
 	TienKhachDua int,
 	TienThoi int,
 )
@@ -163,8 +164,8 @@ CREATE TABLE ChiTietHoaDon
 	MaHH varchar(10), -- Mã hàng hóa
 	SL int, -- Số lượng
 	Gia int, -- Giá
-	ThanhTien int, -- Thành tiền
 	KhuyenMai int,
+	ThanhTien int, -- Thành tiền
 	primary key(MaHD, MaHH)
 )
 GO
@@ -204,7 +205,10 @@ CREATE TABLE HoaDonNhapHang
 	MaHD varchar(10) primary key , -- Mã hóa đơn nhập
 	MaNCC varchar(10), -- Mã nhà cung cấp
 	MaNV varchar(10), -- Mã nhân viên nhập hàng
-	ThoiGian smalldatetime not null default CURRENT_TIMESTAMP -- Thời gian nhập hàng
+	ThoiGian smalldatetime not null default CURRENT_TIMESTAMP ,-- Thời gian nhập hàng
+	TongTien int,
+	TraTruoc int,
+	CongNo int
 )
 
 GO
@@ -218,7 +222,7 @@ CREATE TABLE ChiTietNhapHang
 	Gia int not null, -- Đơn giá
 	ThanhTien int, -- Thành tiền
 	MaKho varchar(10), -- Mã kho
-	primary key(MaHD,MaHH),
+	primary key(MaHD,MaHH, MaKho)
 )
 GO
 
@@ -236,9 +240,9 @@ GO
 
 
 -- Thêm khóa ngoại cho cột MaBP của bảng BoPhan
---ALTER TABLE BoPhan
---ADD CONSTRAINT FK_BoPhan_NhanVien
---FOREIGN KEY (MaQL) REFERENCES NhanVien(MaNV) on delete set null
+ALTER TABLE BoPhan
+ADD CONSTRAINT FK_BoPhan_NhanVien
+FOREIGN KEY (MaQL) REFERENCES NhanVien(MaNV) on delete set null
 --GO
 
 -- Thêm khóa ngoại cho cột MaBP của bảng Nhân Viên
@@ -251,6 +255,13 @@ GO
 ALTER TABLE NhanVien
 ADD CONSTRAINT FK_NhanVien_TaiKhoan
 FOREIGN KEY (MaTK) REFERENCES TaiKhoan(MaTK) on delete set null
+GO
+
+
+-- Thêm khóa ngoại cho cột MaTheKH của bảng Khách hàng
+ALTER TABLE KhachHang
+ADD CONSTRAINT FK_KhachHang_TheKH
+FOREIGN KEY (MaTheKH) REFERENCES TheKhachHang(MaTheKH) on delete set null
 GO
 
 -- Thêm khóa ngoại cho cột LoaiVaiTro của bảng Nhân Viên
@@ -291,7 +302,7 @@ GO
 --Thêm khóa ngoại cho cột MaKH của bảng Phiếu đăng ký Thẻ KH 
 ALTER TABLE PhieuDangKyTheKH
 ADD CONSTRAINT FK_PhieuDangKyTheKH_KhachHang
-FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH) 
+FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH) on delete set null
 GO
 
 -- Thêm khóa ngoại cho cột LoaiThe của bảng Thẻ Khách Hàng
@@ -308,8 +319,8 @@ GO
 
 -- Thêm khóa ngoại cho cột MaTheKH của bảng Hóa Đơn
 ALTER TABLE HoaDon
-ADD CONSTRAINT FK_HoaDon_KhachHang
-FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH) on delete set null
+ADD CONSTRAINT FK_HoaDon_TheKhachHang
+FOREIGN KEY (MaTheKH) REFERENCES TheKhachHang(MaTheKH) on delete set null
 GO
 
 -- Thêm khóa ngoại cho cột MaHD của bảng Chi Tiết Hóa Đơn
@@ -350,7 +361,7 @@ GO
 -- Thêm khóa ngoại cho cột MaKho của bảng Hóa Đơn Nhập Hàng
 ALTER TABLE ChiTietNhapHang
 ADD CONSTRAINT FK_ChiTietNhapHang_Kho
-FOREIGN KEY (MaKho) REFERENCES Kho(MaKho) on delete set null
+FOREIGN KEY (MaKho) REFERENCES Kho(MaKho) on delete no action
 GO
 
 -- Thêm khóa ngoại cho cột MaHD của bảng Chi Tiết Nhập Hàng
@@ -376,3 +387,19 @@ ALTER TABLE PhieuBaoHanh
 ADD CONSTRAINT FK_PhieuBaoHanh_KhachHang
 FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH)  on delete set null
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

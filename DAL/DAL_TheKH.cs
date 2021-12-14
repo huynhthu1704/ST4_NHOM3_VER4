@@ -87,7 +87,6 @@ namespace DAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 //thêm các tham số
                 cmd.Parameters.Add(new SqlParameter("@MaTheKH", maThe));
-                //cmd.Parameters.Add(new SqlParameter("@LoaiThe", et.LoaiThe));
                 cmd.Parameters.Add(new SqlParameter("@TinhTrang", tinhTrang));
                 //thực thi
                 if (cmd.ExecuteNonQuery() > 0)

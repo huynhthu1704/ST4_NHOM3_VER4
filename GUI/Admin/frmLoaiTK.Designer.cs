@@ -107,6 +107,7 @@ namespace GUI.Admin
             this.txtMaLoai.ReadOnly = true;
             this.txtMaLoai.Size = new System.Drawing.Size(176, 27);
             this.txtMaLoai.TabIndex = 1;
+            this.txtMaLoai.TabStop = false;
             // 
             // label3
             // 
