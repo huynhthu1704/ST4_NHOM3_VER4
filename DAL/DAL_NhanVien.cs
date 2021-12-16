@@ -64,7 +64,10 @@ namespace DAL
                 cmd.Parameters.Add(new SqlParameter("@DiaChi", et.DiaChi));
                 cmd.Parameters.Add(new SqlParameter("@NgayVaoLam", et.NgayVaoLam));
                 cmd.Parameters.Add(new SqlParameter("@MaBP", et.MaBP));
-                cmd.Parameters.Add(new SqlParameter("@MaTK", et.MaTK));
+                if (!string.IsNullOrEmpty(et.MaTK))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@MaTK", et.MaTK));
+                }
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     flag = true;
@@ -80,6 +83,7 @@ namespace DAL
             }
             return flag;
         }
+
         //Sửa nhân viên
         public bool SuaNhanVien(ET_NhanVien et)
         {
@@ -116,6 +120,7 @@ namespace DAL
             }
             return flag;
         }
+
         //Xoá nhân viên
         public bool XoaNhanVien(string et)
         {

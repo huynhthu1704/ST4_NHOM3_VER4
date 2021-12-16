@@ -37,13 +37,13 @@ namespace BLL
         {
             return da.ThemNhanVien(et);
         }
+        
 
         // Sửa nhân viên
         public bool SuaNhanVien(ET_NhanVien et)
         {
             return da.SuaNhanVien(et);
         }
-
         // Xóa nhân viên
         public bool XoaNhanVien(string Ma)
         {

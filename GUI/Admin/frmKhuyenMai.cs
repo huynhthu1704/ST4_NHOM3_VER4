@@ -81,18 +81,14 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaKM.Text;
-            //thông báo có muốn xoá Khuyễn mãi không
-            DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (kq == DialogResult.Yes)
+            // Kiểm tra các trường
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(txtTenKM.Text) || !string.IsNullOrEmpty(txtMaKM.Text) || !string.IsNullOrEmpty(txtGTKM.Text))
                 {
-                    //kiểm tra trường mã đã dc nhập chưa
-                    if (ma == "")
-                    {
-                        MessageBox.Show("vui lòng nhập mã khuyễn mãi");
-                    }
-                    else
+                    //thông báo có muốn xoá Khuyễn mãi không
+                    DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (kq == DialogResult.Yes)
                     {
                         //kiểm tra xoá khuyễn mãi thành công không
                         if (b.XoaKhuyenMai(ma) == true)
@@ -106,10 +102,14 @@ namespace GUI.Admin
                         }
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Vui lòng chọn khuyễn mãi để xóa");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         /// <summary>
@@ -231,6 +231,12 @@ namespace GUI.Admin
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void txtGTKM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }

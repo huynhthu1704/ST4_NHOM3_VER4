@@ -51,7 +51,7 @@ namespace GUI.Admin
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(49, 51);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 19);
+            this.label1.Size = new System.Drawing.Size(114, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã bộ phận";
             // 
@@ -60,7 +60,7 @@ namespace GUI.Admin
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(49, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 19);
+            this.label2.Size = new System.Drawing.Size(122, 24);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tên bộ phận";
             // 
@@ -69,7 +69,7 @@ namespace GUI.Admin
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(385, 51);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 19);
+            this.label3.Size = new System.Drawing.Size(64, 24);
             this.label3.TabIndex = 0;
             this.label3.Text = "Số ĐT";
             // 
@@ -78,7 +78,7 @@ namespace GUI.Admin
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(385, 98);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 19);
+            this.label4.Size = new System.Drawing.Size(66, 24);
             this.label4.TabIndex = 0;
             this.label4.Text = "Mã QL";
             // 
@@ -87,7 +87,7 @@ namespace GUI.Admin
             this.txtMaBP.Location = new System.Drawing.Point(176, 43);
             this.txtMaBP.Name = "txtMaBP";
             this.txtMaBP.ReadOnly = true;
-            this.txtMaBP.Size = new System.Drawing.Size(176, 27);
+            this.txtMaBP.Size = new System.Drawing.Size(176, 32);
             this.txtMaBP.TabIndex = 1;
             this.txtMaBP.TabStop = false;
             // 
@@ -95,21 +95,22 @@ namespace GUI.Admin
             // 
             this.txtTenBP.Location = new System.Drawing.Point(176, 90);
             this.txtTenBP.Name = "txtTenBP";
-            this.txtTenBP.Size = new System.Drawing.Size(176, 27);
+            this.txtTenBP.Size = new System.Drawing.Size(176, 32);
             this.txtTenBP.TabIndex = 2;
             // 
             // txtSDT
             // 
             this.txtSDT.Location = new System.Drawing.Point(459, 43);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(176, 27);
+            this.txtSDT.Size = new System.Drawing.Size(176, 32);
             this.txtSDT.TabIndex = 3;
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
             // txtMaQL
             // 
             this.txtMaQL.Location = new System.Drawing.Point(459, 90);
             this.txtMaQL.Name = "txtMaQL";
-            this.txtMaQL.Size = new System.Drawing.Size(176, 27);
+            this.txtMaQL.Size = new System.Drawing.Size(176, 32);
             this.txtMaQL.TabIndex = 4;
             // 
             // btnXoa
