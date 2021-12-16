@@ -72,35 +72,42 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaKho.Text;
-            //Thông báo có muốn xoá hay không
-            DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (kq == DialogResult.Yes)
+            if (!string.IsNullOrEmpty(txtTenKho.Text) || string.IsNullOrWhiteSpace(txtMaKho.Text))
             {
-                try
+                MessageBox.Show("Vui lòng chọn kho để xóa");
+            }
+            else
+            {
+                //Thông báo có muốn xoá hay không
+                DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
                 {
-                    //kiểm tra trường mã được nhập chưa
-                    if (ma == "")
+                    try
                     {
-                        MessageBox.Show("Vui lòng nhập Mã kho");
-                    }
-                    else
-                    {
-                        ET_Kho Kho = new ET_Kho(txtMaKho.Text, txtTenKho.Text);
-                        //kiểm tra có xoá được Kho không
-                        if (bKho.XoaKho(ma) == true)
+                        //kiểm tra trường mã được nhập chưa
+                        if (ma == "")
                         {
-                            MessageBox.Show("Xoá Thành Công");
-                            Reset();
+                            MessageBox.Show("Vui lòng nhập Mã kho");
                         }
                         else
                         {
-                            MessageBox.Show("Xoá Không Thành Công");
+                            ET_Kho Kho = new ET_Kho(txtMaKho.Text, txtTenKho.Text);
+                            //kiểm tra có xoá được Kho không
+                            if (bKho.XoaKho(ma) == true)
+                            {
+                                MessageBox.Show("Xoá Thành Công");
+                                Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Xoá Không Thành Công");
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }

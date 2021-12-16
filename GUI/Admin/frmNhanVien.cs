@@ -83,7 +83,7 @@ namespace GUI.Admin
             try
             {
                 //kiểm tra các trường đã nhập đủ dữ liệu chưa
-                if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtMaTK.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
+                if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
@@ -91,15 +91,11 @@ namespace GUI.Admin
                 {
                     ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
                     //Kiểm tra nhân viên và Tài khoản đã tồn tại chưa
-                    if (b.CheckTonTai(NV) == true && b.CheckTonTaiMaTK(txtMaTK.Text) == false)
+                    if (b.CheckTonTai(NV) == true)
                     {
                         if (b.CheckTonTai(NV) == true)
                         {
                             MessageBox.Show("Tài khoản đã tồn tại");
-                        }
-                        if (b.CheckTonTaiMaTK(txtMaTK.Text) == false)
-                        {
-                            MessageBox.Show("Mã tài khoản không tồn tại");
                         }
                     }
                     else
@@ -185,7 +181,11 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaNV.Text;
-            try
+            if (!string.IsNullOrEmpty(txtCCCD.Text) || !string.IsNullOrEmpty(txtSDT.Text) || !string.IsNullOrEmpty(txtDiaChi.Text) || !string.IsNullOrEmpty(txtHoNV.Text) || !string.IsNullOrEmpty(txtTenNV.Text))
+            {
+                MessageBox.Show("Vui lòng chọn nhân viên để xóa");
+            }
+            else
             {
                 //Thông báo có muốn xoá không
                 DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -213,10 +213,6 @@ namespace GUI.Admin
                         dvgDS.DataSource = b.LayDS();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -277,6 +273,18 @@ namespace GUI.Admin
         private void btnMoi_Click(object sender, EventArgs e)
         {
             Reset();
+        }
+
+        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtCCCD_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace GUI
         ThuKho.frmHangHoa frmHangHoa = null;
         ThuKho.frmHDNH frmHDNH = null;
         ThuNgan.frmHoaDon frmHoaDon = null;
+        ThuKho.frmThongKeTonKho frmThuKho =null;
         public frmMain()
         {
             InitializeComponent();
@@ -406,6 +407,20 @@ namespace GUI
                 frmInKH = new CSKH.frmThongKeKhachHang();
                 frmInKH.MdiParent = this;
                 frmInKH.Show();
+            }
+        }
+
+        private void mnuBC_TK_Click(object sender, EventArgs e)
+        {
+            if (CheckFormOpen("frmThongKeTonKho"))
+            {
+                frmInKH.Focus();
+            }
+            else
+            {
+                frmThuKho = new ThuKho.frmThongKeTonKho();
+                frmThuKho.MdiParent = this;
+                frmThuKho.Show();
             }
         }
     }

@@ -17,7 +17,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ThuKho.frmThongKeTonKho());
+            Application.Run(new frmLogin());
         }
     }
 }

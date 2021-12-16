@@ -28,10 +28,10 @@ namespace GUI.Admin
         /// <param name="e"></param>
         private void btnThem_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
-                if (txtMaBP.Text == ""  || txtSDT.Text == "" || txtTenBP.Text == "")
+                if (txtMaBP.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
@@ -74,29 +74,35 @@ namespace GUI.Admin
         private void btnXoa_Click(object sender, EventArgs e)
         {
             string ma = txtMaBP.Text;
-            //Thông báo muốn xoá hay không
-            DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (kq == DialogResult.Yes)
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(txtMaBP.Text)|| !string.IsNullOrEmpty(txtSDT.Text) || !string.IsNullOrEmpty(txtTenBP.Text))
                 {
-                    if (bBoPhan.XoaBoPhan(ma) == true)
+                    //Thông báo muốn xoá hay không
+                    DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (kq == DialogResult.Yes)
                     {
-                        //Báo đã xoá
-                        MessageBox.Show("Xoá Thành Công");
-                        Reset();
-                    }
-                    else
-                    {
-                        //Báo không xoá được
-                        MessageBox.Show("Xoá Không Thành Công");
+                        if (bBoPhan.XoaBoPhan(ma) == true)
+                        {
+                            //Báo đã xoá
+                            MessageBox.Show("Xoá Thành Công");
+                            Reset();
+                        }
+                        else
+                        {
+                            //Báo không xoá được
+                            MessageBox.Show("Xoá Không Thành Công");
+                        }
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    // báo lỗi
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Vui lòng chọn bộ phận để xóa");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -109,9 +115,9 @@ namespace GUI.Admin
         {
 
             try
-            {   
+            {
                 //Kiểm tra các trường có bỏ trống hay không
-                if (txtMaBP.Text == "" || txtMaQL.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
+                if (txtMaBP.Text == "" || txtSDT.Text == "" || txtTenBP.Text == "")
                 {
                     MessageBox.Show("Vui lòng điền đủ thông tin");
                 }
@@ -208,6 +214,12 @@ namespace GUI.Admin
         private void btnMoi_Click(object sender, EventArgs e)
         {
             Reset();
+        }
+
+        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }
