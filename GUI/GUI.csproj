@@ -99,6 +99,12 @@
       <DependentUpon>RPHoaDonNhapHang.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\RPDSHangHoaTheoKho.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPDSHangHoaTheoKho.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\RPHoaDonNhapHang.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -139,6 +145,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RPNVTheoBP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\RPThongKeTonKho.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPThongKeTonKho.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ThuKho\frmInHDNhapHang.cs">
@@ -302,6 +314,10 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPDSHangHoaTheoKho.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPDSHangHoaTheoKho.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\RPHoaDonNhapHang.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPHoaDonNhapHang.cs</LastGenOutput>
@@ -329,6 +345,10 @@
     <EmbeddedResource Include="Report\RPNVTheoBP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPNVTheoBP.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPThongKeTonKho.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPThongKeTonKho.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ThuKho\frmInHDNhapHang.resx">
       <DependentUpon>frmInHDNhapHang.cs</DependentUpon>

@@ -44,6 +44,7 @@ namespace GUI.ThuKho
             // 
             this.crvHangHoa.ActiveViewIndex = -1;
             this.crvHangHoa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crvHangHoa.Cursor = System.Windows.Forms.Cursors.Default;
             this.crvHangHoa.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.crvHangHoa.Location = new System.Drawing.Point(0, 124);
             this.crvHangHoa.Name = "crvHangHoa";
