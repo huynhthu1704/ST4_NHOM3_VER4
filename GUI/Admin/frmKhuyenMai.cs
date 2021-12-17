@@ -44,6 +44,10 @@ namespace GUI.Admin
                 {
                     MessageBox.Show("vui lòng nhập đủ thông tin");
                 }
+                 if (int.Parse(txtGTKM.Text) > 100 || int.Parse(txtGTKM.Text) < 0)
+                {
+                    MessageBox.Show("Khuyễn mãi nằm trong khoảng 0->100");
+                }
                 else
                 {
                     ET_KhuyenMai KhuyenMai = new ET_KhuyenMai(txtMaKM.Text, txtTenKM.Text, int.Parse(txtGTKM.Text), Convert.ToDateTime(dtpBD.Text), Convert.ToDateTime(dtpKT.Text));
@@ -126,10 +130,15 @@ namespace GUI.Admin
                 {
                     MessageBox.Show("vui lòng nhập đủ thông tin");
                 }
+                else if (int.Parse(txtGTKM.Text) <= 100 && int.Parse(txtGTKM.Text) >= 0)
+                {
+                    MessageBox.Show("Khuyễn mãi nằm trong khoảng 0->100");
+                }
                 else
                 {
                     ET_KhuyenMai KhuyenMai = new ET_KhuyenMai(txtMaKM.Text, txtTenKM.Text, int.Parse(txtGTKM.Text), Convert.ToDateTime(dtpBD.Text), Convert.ToDateTime(dtpKT.Text));
-                    //kiểm tra sửa  thành công không                   
+                    //kiểm tra sửa  thành công không
+
                     if (b.SuaKhuyenMai(KhuyenMai) == true)
                     {
                         MessageBox.Show("Sửa Thành Công");

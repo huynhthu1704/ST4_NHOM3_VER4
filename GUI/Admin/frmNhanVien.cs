@@ -82,33 +82,45 @@ namespace GUI.Admin
             }
             try
             {
-                //kiểm tra các trường đã nhập đủ dữ liệu chưa
-                if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
+                DateTime ns = dtpNS.Value;
+                DateTime nl = dtpNVL.Value;
+                if (ns >= DateTime.Today)
                 {
-                    MessageBox.Show("Vui lòng điền đủ thông tin");
+                    MessageBox.Show("Ngày sinh phải bé hơn hiện tại");
                 }
-                else
+                else if (nl > DateTime.Today.AddDays(1))
                 {
-                    ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
-                    //Kiểm tra nhân viên và Tài khoản đã tồn tại chưa
-                    if (b.CheckTonTai(NV) == true)
+                    MessageBox.Show("Ngày vào làm phải bé hơn ngày" + (DateTime.Today).AddDays(1)).ToString();
+                }
+                else { 
+                    //kiểm tra các trường đã nhập đủ dữ liệu chưa
+                    if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
                     {
-                        if (b.CheckTonTai(NV) == true)
-                        {
-                            MessageBox.Show("Tài khoản đã tồn tại");
-                        }
+                        MessageBox.Show("Vui lòng điền đủ thông tin");
                     }
                     else
                     {
-                        //Kiểm tra có thêm nhân viên thành công không
-                        if (b.ThemNhanVien(NV))
+                        ET_NhanVien NV = new ET_NhanVien(txtMaNV.Text, txtHoNV.Text, txtTenNV.Text, txtSDT.Text, Gt, txtCCCD.Text, Convert.ToDateTime(dtpNS.Text), txtDiaChi.Text, Convert.ToDateTime(dtpNVL.Text), cboMaBP.SelectedValue.ToString(), txtMaTK.Text);
+                        //Kiểm tra nhân viên và Tài khoản đã tồn tại chưa
+                        if (b.CheckTonTai(NV) == true)
                         {
-                            MessageBox.Show("Thêm Thành Công");
-                            Reset();
+                            if (b.CheckTonTai(NV) == true)
+                            {
+                                MessageBox.Show("Tài khoản đã tồn tại");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Thêm Không Thành Công");
+                            //Kiểm tra có thêm nhân viên thành công không
+                            if (b.ThemNhanVien(NV))
+                            {
+                                MessageBox.Show("Thêm Thành Công");
+                                Reset();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Thêm Không Thành Công");
+                            }
                         }
                     }
                 }
@@ -142,10 +154,16 @@ namespace GUI.Admin
             }
             try
             {
+                DateTime ns = dtpNS.Value;
+                DateTime nl = dtpNVL.Value;
                 //Kiểm tra các trường có được nhập đủ không
-                if (txtCCCD.Text == "" || txtDiaChi.Text == "" || txtHoNV.Text == "" || txtMaNV.Text == "" || txtMaTK.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "")
+                if (ns >= DateTime.Today)
                 {
-                    MessageBox.Show("Vui lòng điền đủ thông tin");
+                    MessageBox.Show("Ngày sinh phải bé hơn hiện tại");
+                }
+                else if (nl > DateTime.Today)
+                {
+                    MessageBox.Show("Ngày vào làm phải bé hơn ngày"+ (DateTime.Today).AddDays(1)).ToString();
                 }
                 else
                 {
@@ -183,10 +201,6 @@ namespace GUI.Admin
             string ma = txtMaNV.Text;
             if (!string.IsNullOrEmpty(txtCCCD.Text) || !string.IsNullOrEmpty(txtSDT.Text) || !string.IsNullOrEmpty(txtDiaChi.Text) || !string.IsNullOrEmpty(txtHoNV.Text) || !string.IsNullOrEmpty(txtTenNV.Text))
             {
-                MessageBox.Show("Vui lòng chọn nhân viên để xóa");
-            }
-            else
-            {
                 //Thông báo có muốn xoá không
                 DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -213,6 +227,10 @@ namespace GUI.Admin
                         dvgDS.DataSource = b.LayDS();
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn nhân viên để xóa");
             }
         }
 

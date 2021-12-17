@@ -96,7 +96,7 @@ namespace GUI.Admin
             this.txtTenBP.Location = new System.Drawing.Point(176, 90);
             this.txtTenBP.Name = "txtTenBP";
             this.txtTenBP.Size = new System.Drawing.Size(176, 32);
-            this.txtTenBP.TabIndex = 2;
+            this.txtTenBP.TabIndex = 1;
             // 
             // txtSDT
             // 

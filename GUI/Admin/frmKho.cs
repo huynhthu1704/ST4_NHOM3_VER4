@@ -74,10 +74,6 @@ namespace GUI.Admin
             string ma = txtMaKho.Text;
             if (!string.IsNullOrEmpty(txtTenKho.Text) || string.IsNullOrWhiteSpace(txtMaKho.Text))
             {
-                MessageBox.Show("Vui lòng chọn kho để xóa");
-            }
-            else
-            {
                 //Thông báo có muốn xoá hay không
                 DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
@@ -109,6 +105,10 @@ namespace GUI.Admin
                         MessageBox.Show(ex.Message);
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn kho để xóa");
             }
         }
 

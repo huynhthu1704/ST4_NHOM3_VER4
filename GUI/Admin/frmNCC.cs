@@ -90,27 +90,32 @@ namespace GUI.Admin
 
             if (!string.IsNullOrEmpty(txtDiaChi.Text) || !string.IsNullOrEmpty(txtEmail.Text) || !string.IsNullOrEmpty(txtDiaChi.Text) || !string.IsNullOrEmpty(txtMa.Text) || !string.IsNullOrEmpty(txtSDT.Text) || !string.IsNullOrEmpty(txtTen.Text))
             {
-                MessageBox.Show("Vui lòng chọn nhà cung cấp để xóa");
+                DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string ma = txtMa.Text;
+                        if (b.XoaNCC(ma) == true)
+                        {
+                            MessageBox.Show("Xoá Thành Công");
+                            Reset();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xoá Không Thành Công");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+               
             }
             else
             {
-                try
-                {
-                    string ma = txtMa.Text;
-                    if (b.XoaNCC(ma) == true)
-                    {
-                        MessageBox.Show("Xoá Thành Công");
-                        Reset();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xoá Không Thành Công");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                MessageBox.Show("Vui lòng chọn nhà cung cấp để xóa");
             }
         }
 
