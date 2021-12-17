@@ -51,7 +51,7 @@ namespace GUI
                     mnuQL_QLKho.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
-                    //mnuBaoCao_QLKho.Visible = false;
+                    mnuBaoCaoThuKho.Visible = false;
                     break;
                 case "ThuKho":
                     mnuQL_ThuNgan.Visible = false;
@@ -66,7 +66,7 @@ namespace GUI
                     mnuQL_QLKho.Visible = false;
                     mnuQL_Admin.Visible = false;
                     //mnuBaoCao_ThuNgan.Visible = false;
-                    // mnuBaoCao_QLKho.Visible = false;
+                    mnuBaoCaoThuKho.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     break;
                 default:
@@ -77,7 +77,7 @@ namespace GUI
                     //mnuBaoCao_ThuNgan.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
-                    //mnuBaoCao_QLKho.Visible = false;
+                    mnuBaoCaoThuKho.Visible = false;
                     break;
             }
         }
@@ -423,5 +423,6 @@ namespace GUI
                 frmThuKho.Show();
             }
         }
+
     }
 }
