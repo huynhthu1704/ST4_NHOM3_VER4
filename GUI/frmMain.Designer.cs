@@ -75,7 +75,8 @@ namespace GUI
             this.inBáoCáoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 36);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 29);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,20 +86,20 @@ namespace GUI
             this.mnuHT_DN,
             this.mnuHT_Thoat});
             this.mnuHT.Name = "mnuHT";
-            this.mnuHT.Size = new System.Drawing.Size(108, 32);
+            this.mnuHT.Size = new System.Drawing.Size(86, 25);
             this.mnuHT.Text = "Hệ thống";
             // 
             // mnuHT_DN
             // 
             this.mnuHT_DN.Name = "mnuHT_DN";
-            this.mnuHT_DN.Size = new System.Drawing.Size(187, 32);
+            this.mnuHT_DN.Size = new System.Drawing.Size(150, 26);
             this.mnuHT_DN.Text = "Đăng xuất";
             this.mnuHT_DN.Click += new System.EventHandler(this.mnuHT_DN_Click);
             // 
             // mnuHT_Thoat
             // 
             this.mnuHT_Thoat.Name = "mnuHT_Thoat";
-            this.mnuHT_Thoat.Size = new System.Drawing.Size(187, 32);
+            this.mnuHT_Thoat.Size = new System.Drawing.Size(150, 26);
             this.mnuHT_Thoat.Text = "Thoát";
             this.mnuHT_Thoat.Click += new System.EventHandler(this.mnuHT_Thoat_Click);
             // 
@@ -110,7 +111,7 @@ namespace GUI
             this.mnuQL_ThuNgan,
             this.mnuQL_CSKH});
             this.mnuQL.Name = "mnuQL";
-            this.mnuQL.Size = new System.Drawing.Size(93, 32);
+            this.mnuQL.Size = new System.Drawing.Size(76, 25);
             this.mnuQL.Text = "Quản lý";
             // 
             // mnuQL_Admin
@@ -125,62 +126,62 @@ namespace GUI
             this.mnuQL_NV,
             this.mnuQL_TK});
             this.mnuQL_Admin.Name = "mnuQL_Admin";
-            this.mnuQL_Admin.Size = new System.Drawing.Size(183, 32);
+            this.mnuQL_Admin.Size = new System.Drawing.Size(148, 26);
             this.mnuQL_Admin.Text = "Admin";
             // 
             // mnuQLBoPhan
             // 
             this.mnuQLBoPhan.Name = "mnuQLBoPhan";
-            this.mnuQLBoPhan.Size = new System.Drawing.Size(286, 32);
+            this.mnuQLBoPhan.Size = new System.Drawing.Size(230, 26);
             this.mnuQLBoPhan.Text = "QL Bộ phận";
             this.mnuQLBoPhan.Click += new System.EventHandler(this.mnuQLBoPhan_Click);
             // 
             // mnuQLKho
             // 
             this.mnuQLKho.Name = "mnuQLKho";
-            this.mnuQLKho.Size = new System.Drawing.Size(286, 32);
+            this.mnuQLKho.Size = new System.Drawing.Size(230, 26);
             this.mnuQLKho.Text = "QL Kho";
             this.mnuQLKho.Click += new System.EventHandler(this.mnuQLKho_Click);
             // 
             // mnuQLKhuyenMai
             // 
             this.mnuQLKhuyenMai.Name = "mnuQLKhuyenMai";
-            this.mnuQLKhuyenMai.Size = new System.Drawing.Size(286, 32);
+            this.mnuQLKhuyenMai.Size = new System.Drawing.Size(230, 26);
             this.mnuQLKhuyenMai.Text = "QL Khuyến mãi";
             this.mnuQLKhuyenMai.Click += new System.EventHandler(this.mnuQLKhuyenMai_Click);
             // 
             // mnuQLLoaiTheKH
             // 
             this.mnuQLLoaiTheKH.Name = "mnuQLLoaiTheKH";
-            this.mnuQLLoaiTheKH.Size = new System.Drawing.Size(286, 32);
+            this.mnuQLLoaiTheKH.Size = new System.Drawing.Size(230, 26);
             this.mnuQLLoaiTheKH.Text = "QL Loại Thẻ KH";
             this.mnuQLLoaiTheKH.Click += new System.EventHandler(this.mnuQLLoaiTheKH_Click);
             // 
             // mnuLoaiTKDN
             // 
             this.mnuLoaiTKDN.Name = "mnuLoaiTKDN";
-            this.mnuLoaiTKDN.Size = new System.Drawing.Size(286, 32);
+            this.mnuLoaiTKDN.Size = new System.Drawing.Size(230, 26);
             this.mnuLoaiTKDN.Text = "QL Loại Tài Khoản DN";
             this.mnuLoaiTKDN.Click += new System.EventHandler(this.mnuLoaiTKDN_Click);
             // 
             // mnuQL_NCC
             // 
             this.mnuQL_NCC.Name = "mnuQL_NCC";
-            this.mnuQL_NCC.Size = new System.Drawing.Size(286, 32);
+            this.mnuQL_NCC.Size = new System.Drawing.Size(230, 26);
             this.mnuQL_NCC.Text = "QL Nhà Cung Cấp";
             this.mnuQL_NCC.Click += new System.EventHandler(this.mnuQL_NCC_Click);
             // 
             // mnuQL_NV
             // 
             this.mnuQL_NV.Name = "mnuQL_NV";
-            this.mnuQL_NV.Size = new System.Drawing.Size(286, 32);
+            this.mnuQL_NV.Size = new System.Drawing.Size(230, 26);
             this.mnuQL_NV.Text = "QL Nhân Viên";
             this.mnuQL_NV.Click += new System.EventHandler(this.mnuQL_NV_Click);
             // 
             // mnuQL_TK
             // 
             this.mnuQL_TK.Name = "mnuQL_TK";
-            this.mnuQL_TK.Size = new System.Drawing.Size(286, 32);
+            this.mnuQL_TK.Size = new System.Drawing.Size(230, 26);
             this.mnuQL_TK.Text = "QL Tài Khoản";
             this.mnuQL_TK.Click += new System.EventHandler(this.mnuQL_TK_Click);
             // 
@@ -192,34 +193,34 @@ namespace GUI
             this.mnuQLHangHoa,
             this.mnuQL_NhapHang});
             this.mnuQL_QLKho.Name = "mnuQL_QLKho";
-            this.mnuQL_QLKho.Size = new System.Drawing.Size(183, 32);
+            this.mnuQL_QLKho.Size = new System.Drawing.Size(148, 26);
             this.mnuQL_QLKho.Text = "Thủ Kho";
             // 
             // mnuQL_DanhMuc
             // 
             this.mnuQL_DanhMuc.Name = "mnuQL_DanhMuc";
-            this.mnuQL_DanhMuc.Size = new System.Drawing.Size(224, 32);
+            this.mnuQL_DanhMuc.Size = new System.Drawing.Size(181, 26);
             this.mnuQL_DanhMuc.Text = "QL Danh mục";
             this.mnuQL_DanhMuc.Click += new System.EventHandler(this.mnuQL_DanhMuc_Click);
             // 
             // mnuQL_DonViTinh
             // 
             this.mnuQL_DonViTinh.Name = "mnuQL_DonViTinh";
-            this.mnuQL_DonViTinh.Size = new System.Drawing.Size(224, 32);
+            this.mnuQL_DonViTinh.Size = new System.Drawing.Size(181, 26);
             this.mnuQL_DonViTinh.Text = "QL Đơn vị tính";
             this.mnuQL_DonViTinh.Click += new System.EventHandler(this.mnuQL_DonViTinh_Click);
             // 
             // mnuQLHangHoa
             // 
             this.mnuQLHangHoa.Name = "mnuQLHangHoa";
-            this.mnuQLHangHoa.Size = new System.Drawing.Size(224, 32);
+            this.mnuQLHangHoa.Size = new System.Drawing.Size(181, 26);
             this.mnuQLHangHoa.Text = "QL Hàng hóa";
             this.mnuQLHangHoa.Click += new System.EventHandler(this.mnuQLHangHoa_Click);
             // 
             // mnuQL_NhapHang
             // 
             this.mnuQL_NhapHang.Name = "mnuQL_NhapHang";
-            this.mnuQL_NhapHang.Size = new System.Drawing.Size(224, 32);
+            this.mnuQL_NhapHang.Size = new System.Drawing.Size(181, 26);
             this.mnuQL_NhapHang.Text = "QL Nhập hàng";
             this.mnuQL_NhapHang.Click += new System.EventHandler(this.mnuQL_NhapHang_Click);
             // 
@@ -228,13 +229,13 @@ namespace GUI
             this.mnuQL_ThuNgan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuTinhTien});
             this.mnuQL_ThuNgan.Name = "mnuQL_ThuNgan";
-            this.mnuQL_ThuNgan.Size = new System.Drawing.Size(183, 32);
+            this.mnuQL_ThuNgan.Size = new System.Drawing.Size(148, 26);
             this.mnuQL_ThuNgan.Text = "Thu Ngân";
             // 
             // mnuTinhTien
             // 
             this.mnuTinhTien.Name = "mnuTinhTien";
-            this.mnuTinhTien.Size = new System.Drawing.Size(176, 32);
+            this.mnuTinhTien.Size = new System.Drawing.Size(143, 26);
             this.mnuTinhTien.Text = "Tính Tiền";
             this.mnuTinhTien.Click += new System.EventHandler(this.mnuTinhTien_Click);
             // 
@@ -246,34 +247,34 @@ namespace GUI
             this.mnuQLKH,
             this.mnuQLBaoHanh});
             this.mnuQL_CSKH.Name = "mnuQL_CSKH";
-            this.mnuQL_CSKH.Size = new System.Drawing.Size(183, 32);
+            this.mnuQL_CSKH.Size = new System.Drawing.Size(148, 26);
             this.mnuQL_CSKH.Text = "CSKH";
             // 
             // mnuDKTheKH
             // 
             this.mnuDKTheKH.Name = "mnuDKTheKH";
-            this.mnuDKTheKH.Size = new System.Drawing.Size(264, 32);
+            this.mnuDKTheKH.Size = new System.Drawing.Size(214, 26);
             this.mnuDKTheKH.Text = "Đăng Ký Thẻ KH";
             this.mnuDKTheKH.Click += new System.EventHandler(this.mnuDKTheKH_Click);
             // 
             // mnuQL_TheKH
             // 
             this.mnuQL_TheKH.Name = "mnuQL_TheKH";
-            this.mnuQL_TheKH.Size = new System.Drawing.Size(264, 32);
+            this.mnuQL_TheKH.Size = new System.Drawing.Size(214, 26);
             this.mnuQL_TheKH.Text = "QL Thẻ KH";
             this.mnuQL_TheKH.Click += new System.EventHandler(this.mnuQL_TheKH_Click);
             // 
             // mnuQLKH
             // 
             this.mnuQLKH.Name = "mnuQLKH";
-            this.mnuQLKH.Size = new System.Drawing.Size(264, 32);
+            this.mnuQLKH.Size = new System.Drawing.Size(214, 26);
             this.mnuQLKH.Text = "QL Khách Hàng";
             this.mnuQLKH.Click += new System.EventHandler(this.mnuQLKH_Click);
             // 
             // mnuQLBaoHanh
             // 
             this.mnuQLBaoHanh.Name = "mnuQLBaoHanh";
-            this.mnuQLBaoHanh.Size = new System.Drawing.Size(264, 32);
+            this.mnuQLBaoHanh.Size = new System.Drawing.Size(214, 26);
             this.mnuQLBaoHanh.Text = "QL Phiếu Bảo Hành";
             this.mnuQLBaoHanh.Click += new System.EventHandler(this.mnuQLBaoHanh_Click);
             // 
@@ -284,7 +285,7 @@ namespace GUI
             this.mnuBaoCaoCSKH,
             this.mnuBaoCaoThuKho});
             this.inBáoCáoToolStripMenuItem.Name = "inBáoCáoToolStripMenuItem";
-            this.inBáoCáoToolStripMenuItem.Size = new System.Drawing.Size(119, 32);
+            this.inBáoCáoToolStripMenuItem.Size = new System.Drawing.Size(96, 25);
             this.inBáoCáoToolStripMenuItem.Text = "In Báo Cáo";
             // 
             // mnuBaoCao_Admin
@@ -292,13 +293,13 @@ namespace GUI
             this.mnuBaoCao_Admin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuBC_NV});
             this.mnuBaoCao_Admin.Name = "mnuBaoCao_Admin";
-            this.mnuBaoCao_Admin.Size = new System.Drawing.Size(224, 32);
+            this.mnuBaoCao_Admin.Size = new System.Drawing.Size(180, 26);
             this.mnuBaoCao_Admin.Text = "Admin";
             // 
             // mnuBC_NV
             // 
             this.mnuBC_NV.Name = "mnuBC_NV";
-            this.mnuBC_NV.Size = new System.Drawing.Size(188, 32);
+            this.mnuBC_NV.Size = new System.Drawing.Size(180, 26);
             this.mnuBC_NV.Text = "Nhân Viên";
             this.mnuBC_NV.Click += new System.EventHandler(this.mnuBC_NV_Click);
             // 
@@ -307,13 +308,13 @@ namespace GUI
             this.mnuBaoCaoCSKH.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuBC_KH});
             this.mnuBaoCaoCSKH.Name = "mnuBaoCaoCSKH";
-            this.mnuBaoCaoCSKH.Size = new System.Drawing.Size(224, 32);
+            this.mnuBaoCaoCSKH.Size = new System.Drawing.Size(180, 26);
             this.mnuBaoCaoCSKH.Text = "CSKH";
             // 
             // mnuBC_KH
             // 
             this.mnuBC_KH.Name = "mnuBC_KH";
-            this.mnuBC_KH.Size = new System.Drawing.Size(224, 32);
+            this.mnuBC_KH.Size = new System.Drawing.Size(180, 26);
             this.mnuBC_KH.Text = "Khách Hàng";
             this.mnuBC_KH.Click += new System.EventHandler(this.mnuBC_KH_Click);
             // 
@@ -322,25 +323,24 @@ namespace GUI
             this.mnuBaoCaoThuKho.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuBC_TK});
             this.mnuBaoCaoThuKho.Name = "mnuBaoCaoThuKho";
-            this.mnuBaoCaoThuKho.Size = new System.Drawing.Size(224, 32);
+            this.mnuBaoCaoThuKho.Size = new System.Drawing.Size(180, 26);
             this.mnuBaoCaoThuKho.Text = "Thủ Kho";
             // 
             // mnuBC_TK
             // 
             this.mnuBC_TK.Name = "mnuBC_TK";
-            this.mnuBC_TK.Size = new System.Drawing.Size(224, 32);
+            this.mnuBC_TK.Size = new System.Drawing.Size(180, 26);
             this.mnuBC_TK.Text = "Thống Kê";
             this.mnuBC_TK.Click += new System.EventHandler(this.mnuBC_TK_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.Text = "frmMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

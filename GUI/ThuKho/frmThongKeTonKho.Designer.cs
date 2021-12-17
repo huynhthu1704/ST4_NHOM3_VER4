@@ -84,16 +84,16 @@ namespace GUI.ThuKho
             this.cboKho.Location = new System.Drawing.Point(277, 87);
             this.cboKho.Margin = new System.Windows.Forms.Padding(4);
             this.cboKho.Name = "cboKho";
-            this.cboKho.Size = new System.Drawing.Size(160, 21);
+            this.cboKho.Size = new System.Drawing.Size(160, 28);
             this.cboKho.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(212, 68);
+            this.label1.Location = new System.Drawing.Point(176, 91);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Chọn Kho";
             // 
@@ -103,7 +103,7 @@ namespace GUI.ThuKho
             this.rdbTheoKho.Location = new System.Drawing.Point(212, 38);
             this.rdbTheoKho.Margin = new System.Windows.Forms.Padding(4);
             this.rdbTheoKho.Name = "rdbTheoKho";
-            this.rdbTheoKho.Size = new System.Drawing.Size(136, 17);
+            this.rdbTheoKho.Size = new System.Drawing.Size(190, 24);
             this.rdbTheoKho.TabIndex = 1;
             this.rdbTheoKho.TabStop = true;
             this.rdbTheoKho.Text = "In Hàng Hoá Theo Kho";
@@ -115,7 +115,7 @@ namespace GUI.ThuKho
             this.rdbInTatCa.Location = new System.Drawing.Point(27, 38);
             this.rdbInTatCa.Margin = new System.Windows.Forms.Padding(4);
             this.rdbInTatCa.Name = "rdbInTatCa";
-            this.rdbInTatCa.Size = new System.Drawing.Size(125, 17);
+            this.rdbInTatCa.Size = new System.Drawing.Size(172, 24);
             this.rdbInTatCa.TabIndex = 0;
             this.rdbInTatCa.TabStop = true;
             this.rdbInTatCa.Text = "In Toàn Bộ  Tồn Kho";
@@ -125,22 +125,25 @@ namespace GUI.ThuKho
             // 
             this.crvKho.ActiveViewIndex = -1;
             this.crvKho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crvKho.Cursor = System.Windows.Forms.Cursors.Default;
             this.crvKho.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.crvKho.Location = new System.Drawing.Point(0, 163);
             this.crvKho.Name = "crvKho";
             this.crvKho.Size = new System.Drawing.Size(1036, 399);
             this.crvKho.TabIndex = 10;
+            this.crvKho.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // frmThongKeTonKho
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1036, 562);
             this.Controls.Add(this.crvKho);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnIN);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmThongKeTonKho";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmThongKeTonKho";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmThongKeTonKho_FormClosing);
             this.Load += new System.EventHandler(this.frmThongKeTonKho_Load);
