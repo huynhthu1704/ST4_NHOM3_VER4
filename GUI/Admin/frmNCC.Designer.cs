@@ -54,7 +54,7 @@ namespace GUI.Admin
             this.label1.Location = new System.Drawing.Point(65, 34);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 20);
+            this.label1.Size = new System.Drawing.Size(95, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã NCC:";
             // 
@@ -64,7 +64,7 @@ namespace GUI.Admin
             this.label2.Location = new System.Drawing.Point(65, 87);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 20);
+            this.label2.Size = new System.Drawing.Size(102, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Tên NCC:";
             // 
@@ -74,7 +74,7 @@ namespace GUI.Admin
             this.label3.Location = new System.Drawing.Point(346, 35);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 20);
+            this.label3.Size = new System.Drawing.Size(59, 25);
             this.label3.TabIndex = 3;
             this.label3.Text = "SDT:";
             // 
@@ -84,7 +84,7 @@ namespace GUI.Admin
             this.label4.Location = new System.Drawing.Point(68, 140);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 20);
+            this.label4.Size = new System.Drawing.Size(82, 25);
             this.label4.TabIndex = 2;
             this.label4.Text = "Địa Chỉ:";
             // 
@@ -94,7 +94,7 @@ namespace GUI.Admin
             this.label6.Location = new System.Drawing.Point(346, 88);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 20);
+            this.label6.Size = new System.Drawing.Size(66, 25);
             this.label6.TabIndex = 4;
             this.label6.Text = "Email:";
             // 
@@ -104,7 +104,7 @@ namespace GUI.Admin
             this.txtMa.Margin = new System.Windows.Forms.Padding(2);
             this.txtMa.Name = "txtMa";
             this.txtMa.ReadOnly = true;
-            this.txtMa.Size = new System.Drawing.Size(166, 26);
+            this.txtMa.Size = new System.Drawing.Size(166, 30);
             this.txtMa.TabIndex = 5;
             this.txtMa.TabStop = false;
             // 
@@ -113,7 +113,7 @@ namespace GUI.Admin
             this.txtTen.Location = new System.Drawing.Point(157, 81);
             this.txtTen.Margin = new System.Windows.Forms.Padding(2);
             this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(166, 26);
+            this.txtTen.Size = new System.Drawing.Size(166, 30);
             this.txtTen.TabIndex = 6;
             // 
             // txtSDT
@@ -121,15 +121,16 @@ namespace GUI.Admin
             this.txtSDT.Location = new System.Drawing.Point(435, 34);
             this.txtSDT.Margin = new System.Windows.Forms.Padding(2);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(166, 26);
+            this.txtSDT.Size = new System.Drawing.Size(166, 30);
             this.txtSDT.TabIndex = 7;
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
             // txtDiaChi
             // 
             this.txtDiaChi.Location = new System.Drawing.Point(157, 137);
             this.txtDiaChi.Margin = new System.Windows.Forms.Padding(2);
             this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(166, 26);
+            this.txtDiaChi.Size = new System.Drawing.Size(166, 30);
             this.txtDiaChi.TabIndex = 8;
             // 
             // txtEmail
@@ -137,7 +138,7 @@ namespace GUI.Admin
             this.txtEmail.Location = new System.Drawing.Point(435, 87);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(166, 26);
+            this.txtEmail.Size = new System.Drawing.Size(166, 30);
             this.txtEmail.TabIndex = 9;
             // 
             // btnThoat
@@ -203,7 +204,7 @@ namespace GUI.Admin
             this.btnMoi.Location = new System.Drawing.Point(60, 201);
             this.btnMoi.Margin = new System.Windows.Forms.Padding(2);
             this.btnMoi.Name = "btnMoi";
-            this.btnMoi.Size = new System.Drawing.Size(85, 33);
+            this.btnMoi.Size = new System.Drawing.Size(100, 33);
             this.btnMoi.TabIndex = 26;
             this.btnMoi.Text = "Làm mới";
             this.btnMoi.UseVisualStyleBackColor = true;

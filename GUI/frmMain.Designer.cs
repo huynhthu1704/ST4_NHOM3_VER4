@@ -60,18 +60,22 @@ namespace GUI
             this.mnuBC_NV = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBaoCaoCSKH = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBC_KH = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBaoCaoThuKho = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBC_TK = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuHT,
             this.mnuQL,
             this.inBáoCáoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(800, 29);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
@@ -278,7 +282,8 @@ namespace GUI
             // 
             this.inBáoCáoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuBaoCao_Admin,
-            this.mnuBaoCaoCSKH});
+            this.mnuBaoCaoCSKH,
+            this.mnuBaoCaoThuKho});
             this.inBáoCáoToolStripMenuItem.Name = "inBáoCáoToolStripMenuItem";
             this.inBáoCáoToolStripMenuItem.Size = new System.Drawing.Size(96, 25);
             this.inBáoCáoToolStripMenuItem.Text = "In Báo Cáo";
@@ -312,6 +317,21 @@ namespace GUI
             this.mnuBC_KH.Size = new System.Drawing.Size(180, 26);
             this.mnuBC_KH.Text = "Khách Hàng";
             this.mnuBC_KH.Click += new System.EventHandler(this.mnuBC_KH_Click);
+            // 
+            // mnuBaoCaoThuKho
+            // 
+            this.mnuBaoCaoThuKho.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuBC_TK});
+            this.mnuBaoCaoThuKho.Name = "mnuBaoCaoThuKho";
+            this.mnuBaoCaoThuKho.Size = new System.Drawing.Size(180, 26);
+            this.mnuBaoCaoThuKho.Text = "Thủ Kho";
+            // 
+            // mnuBC_TK
+            // 
+            this.mnuBC_TK.Name = "mnuBC_TK";
+            this.mnuBC_TK.Size = new System.Drawing.Size(180, 26);
+            this.mnuBC_TK.Text = "Thống Kê";
+            this.mnuBC_TK.Click += new System.EventHandler(this.mnuBC_TK_Click);
             // 
             // frmMain
             // 
@@ -366,5 +386,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem mnuBaoCaoCSKH;
         private System.Windows.Forms.ToolStripMenuItem mnuBC_NV;
         private System.Windows.Forms.ToolStripMenuItem mnuBC_KH;
+        private System.Windows.Forms.ToolStripMenuItem mnuBaoCaoThuKho;
+        private System.Windows.Forms.ToolStripMenuItem mnuBC_TK;
     }
 }

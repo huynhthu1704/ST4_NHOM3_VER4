@@ -33,6 +33,7 @@ namespace GUI
         ThuKho.frmHangHoa frmHangHoa = null;
         ThuKho.frmHDNH frmHDNH = null;
         ThuNgan.frmHoaDon frmHoaDon = null;
+        ThuKho.frmThongKeTonKho frmThuKho =null;
         public frmMain()
         {
             InitializeComponent();
@@ -50,7 +51,7 @@ namespace GUI
                     mnuQL_QLKho.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
-                    //mnuBaoCao_QLKho.Visible = false;
+                    mnuBaoCaoThuKho.Visible = false;
                     break;
                 case "ThuKho":
                     mnuQL_ThuNgan.Visible = false;
@@ -65,7 +66,7 @@ namespace GUI
                     mnuQL_QLKho.Visible = false;
                     mnuQL_Admin.Visible = false;
                     //mnuBaoCao_ThuNgan.Visible = false;
-                    // mnuBaoCao_QLKho.Visible = false;
+                    mnuBaoCaoThuKho.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     break;
                 default:
@@ -76,7 +77,7 @@ namespace GUI
                     //mnuBaoCao_ThuNgan.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
-                    //mnuBaoCao_QLKho.Visible = false;
+                    mnuBaoCaoThuKho.Visible = false;
                     break;
             }
         }
@@ -408,5 +409,20 @@ namespace GUI
                 frmInKH.Show();
             }
         }
+
+        private void mnuBC_TK_Click(object sender, EventArgs e)
+        {
+            if (CheckFormOpen("frmThongKeTonKho"))
+            {
+                frmInKH.Focus();
+            }
+            else
+            {
+                frmThuKho = new ThuKho.frmThongKeTonKho();
+                frmThuKho.MdiParent = this;
+                frmThuKho.Show();
+            }
+        }
+
     }
 }

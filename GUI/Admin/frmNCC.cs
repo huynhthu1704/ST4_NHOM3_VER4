@@ -1,4 +1,4 @@
-﻿// Ngọc Thư
+﻿//DucTri
 
 using System;
 using System.Collections.Generic;
@@ -38,7 +38,8 @@ namespace GUI.Admin
                     if (!CheckSo(txtSDT.Text))
                     {
                         MessageBox.Show("Số điện thoại kh hợp lệ");
-                    } else
+                    }
+                    else
                     {
                         string ma = txtMa.Text;
                         string ten = txtTen.Text;
@@ -86,32 +87,36 @@ namespace GUI.Admin
         // Sự kiện khi nhấn btnXoa
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            string tenNCC = txtTen.Text;
-            if (!string.IsNullOrEmpty(tenNCC))
+
+            if (!string.IsNullOrEmpty(txtDiaChi.Text) || !string.IsNullOrEmpty(txtEmail.Text) || !string.IsNullOrEmpty(txtDiaChi.Text) || !string.IsNullOrEmpty(txtMa.Text) || !string.IsNullOrEmpty(txtSDT.Text) || !string.IsNullOrEmpty(txtTen.Text))
             {
-                string ma = txtMa.Text;
-                try
+                DialogResult kq = MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
                 {
-                    if (b.XoaNCC(ma) == true)
+                    try
                     {
-                        MessageBox.Show("Xoá Thành Công");
-                        Reset();
+                        string ma = txtMa.Text;
+                        if (b.XoaNCC(ma) == true)
+                        {
+                            MessageBox.Show("Xoá Thành Công");
+                            Reset();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xoá Không Thành Công");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Xoá Không Thành Công");
+                        MessageBox.Show(ex.Message);
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+               
             }
             else
             {
                 MessageBox.Show("Vui lòng chọn nhà cung cấp để xóa");
             }
-
         }
 
         // Check số
@@ -120,7 +125,7 @@ namespace GUI.Admin
             if (string.IsNullOrEmpty(so))
             {
                 return false;
-            } 
+            }
             for (int i = 0; i < so.Length; i++)
             {
                 if (!char.IsDigit(so[i]))
@@ -210,11 +215,16 @@ namespace GUI.Admin
             }
         }
 
-
         // Nhấn btnMoi
         private void btnMoi_Click(object sender, EventArgs e)
         {
             Reset();
+        }
+        //chỉ nhập số
+        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }

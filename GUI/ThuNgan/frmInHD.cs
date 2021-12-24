@@ -31,7 +31,6 @@ namespace GUI.ThuNgan
             DataTable dt = null;
             try
             {
-                MessageBox.Show(etHD.MaHD);
                 dt = bllCTHD.LayCTHDTheoMaHD(etHD.MaHD);
                 foreach (DataRow dr in dt.Rows)
                 {

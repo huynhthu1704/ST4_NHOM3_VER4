@@ -103,7 +103,7 @@ namespace GUI.Admin
             this.txtMaKM.Location = new System.Drawing.Point(179, 34);
             this.txtMaKM.Name = "txtMaKM";
             this.txtMaKM.ReadOnly = true;
-            this.txtMaKM.Size = new System.Drawing.Size(170, 26);
+            this.txtMaKM.Size = new System.Drawing.Size(170, 30);
             this.txtMaKM.TabIndex = 7;
             this.txtMaKM.TabStop = false;
             // 
@@ -120,6 +120,7 @@ namespace GUI.Admin
             this.txtGTKM.Name = "txtGTKM";
             this.txtGTKM.Size = new System.Drawing.Size(170, 26);
             this.txtGTKM.TabIndex = 10;
+            this.txtGTKM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtGTKM_KeyPress);
             // 
             // dtpBD
             // 
