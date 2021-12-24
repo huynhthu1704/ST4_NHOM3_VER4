@@ -30,9 +30,6 @@ namespace GUI.CSKH
         private void InitializeComponent()
         {
             this.crvKhachHang = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.RPKhachHang3 = new GUI.Report.RPKhachHang();
-            this.RPKhachHang1 = new GUI.Report.RPKhachHang();
-            this.RPKhachHang2 = new GUI.Report.RPKhachHang();
             this.SuspendLayout();
             // 
             // crvKhachHang
@@ -43,10 +40,9 @@ namespace GUI.CSKH
             this.crvKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crvKhachHang.Location = new System.Drawing.Point(0, 0);
             this.crvKhachHang.Name = "crvKhachHang";
-            this.crvKhachHang.ReportSource = this.RPKhachHang3;
             this.crvKhachHang.Size = new System.Drawing.Size(884, 561);
             this.crvKhachHang.TabIndex = 0;
-            this.crvKhachHang.Load += new System.EventHandler(this.crystalReportViewer1_Load);
+            this.crvKhachHang.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // frmThongKeKhachHang
             // 
@@ -66,8 +62,5 @@ namespace GUI.CSKH
         #endregion
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crvKhachHang;
-        private Report.RPKhachHang RPKhachHang2;
-        private Report.RPKhachHang RPKhachHang1;
-        private Report.RPKhachHang RPKhachHang3;
     }
 }

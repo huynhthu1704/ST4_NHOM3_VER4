@@ -27,7 +27,7 @@ namespace DAL
             try
             {
                 _conn.Open();
-                cmd = new SqlCommand(tenSP, _conn);
+                cmd = new SqlCommand(tenSp, _conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 da = new SqlDataAdapter(cmd);

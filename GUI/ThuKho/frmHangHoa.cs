@@ -25,7 +25,7 @@ namespace GUI.ThuKho
 
         private void frmHangHoa_Load(object sender, EventArgs e)
         {
-            Reset();
+           
             //hiênr thị ds dvt
             cboDVT.DataSource = _bll.HienThiDSDVT();
             cboDVT.DisplayMember = "TenDVT";
@@ -39,12 +39,11 @@ namespace GUI.ThuKho
             cboMaKM.DisplayMember = "TenKM";
             cboMaKM.ValueMember = "MaKM";
 
-            dgvHangHoa.DataSource = _bll.HienThiDSHH();
-            rdbCo.Checked = true;
+           
             Reset();
             txtMaKM.Visible = false;
             cboMaKM.Visible = false;
-
+            Reset();
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -103,7 +102,6 @@ namespace GUI.ThuKho
                 cboDVT.Text = dgvHangHoa.Rows[dong].Cells[2].Value.ToString();
                 txtGia.Text = dgvHangHoa.Rows[dong].Cells[3].Value.ToString();
                 cboDM.Text = dgvHangHoa.Rows[dong].Cells[4].Value.ToString();
-                MessageBox.Show(dgvHangHoa.Rows[dong].Cells[5].Value.ToString());
                 if (dgvHangHoa.Rows[dong].Cells[5].Value.ToString() == "True")
                 {
                     rdbCo.Checked = true;
@@ -131,13 +129,14 @@ namespace GUI.ThuKho
         private void Reset()
         {
             dgvHangHoa.DataSource = _bll.HienThiDSHH();
+            rdbCo.Checked = true;
             sTT = _bll.HienThiDSHH().Rows.Count != 0 ? int.Parse(_bll.HienThiDSHH().Rows[0]["MaHH"].ToString().Substring(2)) + 1 : 1;
-            txtMaHH.Text = "";
+            txtMaHH.Text = "HH" + string.Format("{0:00}", sTT);
             txtTenHH.Text = "";
             txtGia.Text = "0";
-            //cboDM.SelectedIndex = 0;
-            //cboDVT.SelectedIndex = 0;
-            //cboMaKM.SelectedIndex = 0;
+            cboDM.SelectedIndex = 0;
+            cboDVT.SelectedIndex = 0;
+            cboMaKM.SelectedIndex = 0;
             txtMaHH.Focus();
         }
 

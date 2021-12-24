@@ -16,14 +16,14 @@ namespace GUI.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RP_TimMaKho : ReportClass {
+    public class RPHoaDonNhapHang : ReportClass {
         
-        public RP_TimMaKho() {
+        public RPHoaDonNhapHang() {
         }
         
         public override string ResourceName {
             get {
-                return "RP_TimMaKho.rpt";
+                return "RPHoaDonNhapHang.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GUI.Report {
         
         public override string FullResourceName {
             get {
-                return "GUI.Report.RP_TimMaKho.rpt";
+                return "GUI.Report.RPHoaDonNhapHang.rpt";
             }
             set {
                 // Do nothing
@@ -90,7 +90,7 @@ namespace GUI.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_MaKho {
+        public CrystalDecisions.Shared.IParameterField Parameter_MaHD {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,9 +98,9 @@ namespace GUI.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRP_TimMaKho : Component, ICachedReport {
+    public class CachedRPHoaDonNhapHang : Component, ICachedReport {
         
-        public CachedRP_TimMaKho() {
+        public CachedRPHoaDonNhapHang() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace GUI.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RP_TimMaKho rpt = new RP_TimMaKho();
+            RPHoaDonNhapHang rpt = new RPHoaDonNhapHang();
             rpt.Site = this.Site;
             return rpt;
         }

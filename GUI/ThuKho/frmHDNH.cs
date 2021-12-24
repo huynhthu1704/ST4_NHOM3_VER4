@@ -27,7 +27,7 @@ namespace GUI.ThuKho
         int traTruoc = 0; // Trả trước
         int congNo = 0; // Công nợ
         int STT = 0; // Số thứ tự hàng (để làm tự động tăng)
-       
+
         public frmHDNH()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace GUI.ThuKho
         // Sự kiện load form
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
-            
+
             if (bllNCC.LayDS().Rows.Count != 0)
             {
                 // Hiển thị dữ liệu nhà cung cấp lên combobox
@@ -93,18 +93,29 @@ namespace GUI.ThuKho
         {
 
             txtTenHH.Text = "";
-            string maHH = txtMaHH.Text;
             try
             {
-                if (bllHH.CheckTonTai(maHH))
+                if (bllHH.CheckTonTai(txtMaHH.Text))
                 {
                     errorProvider1.Clear();
-                    DataTable dt = bllHH.LayTT(maHH);
+                    DataTable dt = bllHH.LayTT(txtMaHH.Text);
                     txtMaHH.Text = dt.Rows[0]["MaHH"].ToString();
                     txtTenHH.Text = dt.Rows[0]["TenHH"].ToString();
-                } else
+                    if (LayGiaHHDaThem(txtMaHH.Text) != 0)
+                    {
+                        txtGia.ReadOnly = true;
+                        txtGia.Text = LayGiaHHDaThem(txtMaHH.Text).ToString();
+                    } else
+                    {
+                        txtGia.ReadOnly = false;
+                        txtGia.Text = "";
+                    }
+                }
+                else
                 {
                     errorProvider1.SetError(txtMaHH, "Chưa tồn tại hàng hóa này");
+                    txtGia.Text = "";
+                    txtGia.ReadOnly = false;
                 }
             }
             catch (Exception ex)
@@ -113,10 +124,30 @@ namespace GUI.ThuKho
             }
         }
 
+        private int LayGiaHHDaThem(string maHH)
+        {
+            int rowCount = dgvHDNH.Rows.Count;
+            if (rowCount < 1)
+            {
+                return 0;
+            }
+            else
+            {
+                for (int i = 0; i < rowCount - 1; i++)
+                {
+                    if (dgvHDNH.Rows[i].Cells[0].Value.ToString().CompareTo(maHH) == 0)
+                    {
+                        return int.Parse(dgvHDNH.Rows[i].Cells[3].Value.ToString()); ;
+                    }
+                }
+            }
+            return 0;
+
+        }
         // Khi nhấn btnReset, các trường được trả về như ban đầu load form
         private void btnReset_Click(object sender, EventArgs e)
         {
-           // txtMaHD.Text = "HD" + string.Format("{0:000}", STT);
+            // txtMaHD.Text = "HD" + string.Format("{0:000}", STT);
             dgvHDNH.Rows.Clear();
             tongTien = 0;
             txtMaHD.Text = "";
@@ -250,11 +281,12 @@ namespace GUI.ThuKho
                         txtCongNo.Text = congNo.ToString(); // tiền công nợ
                         if (CheckCoHH(maSP, maKho) != -1)
                         {
-                            int row = CheckCoHH(maSP,maKho);
+                            int row = CheckCoHH(maSP, maKho);
                             int slCu = int.Parse(dgvHDNH.Rows[row].Cells[2].Value.ToString());
                             dgvHDNH.Rows[row].Cells[2].Value = sL + slCu; // thêm vào csdl
-                            
-                        } else
+
+                        }
+                        else
                         {
                             dgvHDNH.Rows.Add(maSP, tenSP, sL, gia, maKho); // thêm vào csdl
                         }
@@ -268,7 +300,8 @@ namespace GUI.ThuKho
                 else if (string.IsNullOrEmpty(maSP))
                 {
                     MessageBox.Show("Vui lòng nhập thông tin sản phẩm");
-                } else
+                }
+                else
                 {
                     DialogResult kq = MessageBox.Show("Chưa có thông tin liên quan đến hàng hóa này, bạn có muốn thêm hàng hóa?",
                          "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -325,7 +358,7 @@ namespace GUI.ThuKho
                             {
                                 bool kq = true;
                                 ET_HDNH et = new ET_HDNH(maHD, nCC, maNV, DateTime.Now, tongTien, traTruoc, congNo);
-                                bllHDNH.ThemHDNH(et);
+                                kq = bllHDNH.ThemHDNH(et);
                                 for (int i = 0; i < count - 1; i++)
                                 {
                                     int sLTonKho = 0;
@@ -358,8 +391,9 @@ namespace GUI.ThuKho
                                 if (kq) // nếu thêm thành công thì reset các fields
                                 {
                                     MessageBox.Show("Thêm thành công");
-                                   
                                     btnReset_Click(null, null);
+                                    frmInHDNhapHang frm = new frmInHDNhapHang(maHD);
+                                    frm.Show();
                                 }
                                 else
                                 {
@@ -459,14 +493,14 @@ namespace GUI.ThuKho
         {
             this.Close();
         }
-         
+
         // Timer tick thì thay đổi thời gian trên màn hình
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time = DateTime.Now;
             lblTime.Text = time.ToString("dd/MM/yyyy HH:mm:ss");
         }
-         
+
 
         // Sự kiện khi txtTienTraTruoc thay đổi, tính tiền công nợ
         private void txtTienTraTruoc_TextChanged(object sender, EventArgs e)

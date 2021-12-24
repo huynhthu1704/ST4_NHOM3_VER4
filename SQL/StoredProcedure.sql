@@ -3,7 +3,6 @@ GO
 --Stored procedure
 ---------------------------- BỘ PHẬN ----------------------------
 --Lấy danh sách bảng bộ phận
-drop database NHOM3_QLSIEUTHICOOPMART
 CREATE PROC sp_DSBoPhan
 	AS
 		BEGIN 
@@ -210,11 +209,10 @@ AS
 	END
 GO
 
-
 CREATE PROC sp_LayNhanVienGiamDan
 AS
 	BEGIN 
-		SELECT *, HoNV + ' ' +TenNV as 'HoTen' 
+		SELECT * 
 		FROM NhanVien
 		ORDER BY MaNV desc
 	END
@@ -373,11 +371,11 @@ AS
 GO
 
 --Thêm thẻ khách hàng
-CREATE PROC sp_ThemTheKhachHang(@MaTheKH varchar(16))
+CREATE PROC sp_ThemTheKhachHang(@MaTheKH varchar(16), @TinhTrang bit)
 AS
 	BEGIN
-		INSERT INTO TheKhachHang(MaTheKH, LoaiThe)
-		VALUES(@MaTheKH, 'LT01')
+		INSERT INTO TheKhachHang(MaTheKH, LoaiThe, TinhTrang)
+		VALUES(@MaTheKH, 'LT01', @TinhTrang)
 	END
 GO
 
@@ -428,10 +426,10 @@ AS
 	END
 GO
 
-exec sp_ThemTheKhachHang 'TKH001'
-exec sp_ThemTheKhachHang 'TKH002'
-exec sp_ThemTheKhachHang 'TKH003'
-exec sp_ThemTheKhachHang 'TKH004'
+exec sp_ThemTheKhachHang 'TKH001', 0
+exec sp_ThemTheKhachHang 'TKH002', 0
+exec sp_ThemTheKhachHang 'TKH003', 0
+exec sp_ThemTheKhachHang 'TKH004', 0
 GO
 
 ---------------------------- KHÁCH HÀNG ----------------------------
@@ -540,6 +538,17 @@ AS
 	END
 GO
 
+--kiểm tra tình trạng thẻ kh
+CREATE PROC sp_LaySDChuaKH
+AS
+	BEGIN
+		SELECT * 
+		FROM TheKhachHang
+		WHERE TinhTrang = 0
+	END
+GO
+
+
 -------------------------- ĐƠN VỊ TÍNH ----------------------------
 --Lấy dánh sách đơn vị tính
 GO
@@ -585,6 +594,17 @@ AS
 		WHERE MaDVT = @MaDVT
 	END
 GO
+
+--Tìm đơn vị tính 
+CREATE PROC sp_TimDonViTinh(@MaDVT varchar(10))
+AS
+	BEGIN
+		SELECT *
+		FROM DonViTinh
+		WHERE MaDVT = @MaDVT
+	END
+GO
+
 
 exec sp_ThemDonViTinh 'DVT01', N'Gói'
 exec sp_ThemDonViTinh 'DVT02', N'Cái'
@@ -639,6 +659,18 @@ AS
 		FROM DanhMucHH
 		WHERE MaDM = @MaDM
 	END
+go 
+
+--tìm danh mục hàng hóa
+CREATE PROC sp_TimDanhMucHH(@MaDM varchar(10))
+AS
+	BEGIN 
+		SELECT *
+		FROM DanhMucHH
+		WHERE MaDM = @MaDM
+	END
+GO
+
 
 GO
 exec sp_ThemDanhMucHH 'DM01', N'Bánh Ngọt'
@@ -668,6 +700,7 @@ AS
 		SELECT * FROM KhuyenMai ORDER BY MaKM DESC
 	END
 GO
+
 
 --Thêm khuyến mãi
 CREATE PROC sp_ThemKhuyenMai(@MaKM varchar(10), @TenKM nvarchar(50),@GiaTriKM int, @NgayBatDauKM  smalldatetime, @NgayKetThucKM smalldatetime)
@@ -730,7 +763,7 @@ GO
 CREATE PROC sp_ThemHangHoa(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit, @MaKM varchar(10))
 AS
 	BEGIN
-		INSERT INTO HangHoa(MaHH ,TenHH, DVTinh, Gia, MaDM, BaoHanh, MaKM)
+		INSERT INTO HangHoa(MaHH ,TenHH, MaDVT, Gia, MaDM, BaoHanh, MaKM)
 		VALUES(@MaHH ,@TenHH, @DVTinh, @Gia, @MaDM, @BaoHanh, @MaKM)
 	END
 GO
@@ -739,7 +772,7 @@ GO
 CREATE PROC sp_ThemHangHoaKhKM(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar(10), @Gia int, @MaDM varchar(10), @BaoHanh bit)
 AS
 	BEGIN
-		INSERT INTO HangHoa(MaHH ,TenHH, DVTinh, Gia, MaDM, BaoHanh)
+		INSERT INTO HangHoa(MaHH ,TenHH, MaDVT, Gia, MaDM, BaoHanh)
 		VALUES(@MaHH ,@TenHH, @DVTinh, @Gia, @MaDM, @BaoHanh)
 	END
 GO
@@ -749,7 +782,7 @@ CREATE PROC sp_SuaHangHoa(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh varchar
 AS
 	BEGIN
 		UPDATE HangHoa 
-		SET TenHH = @TenHH, DVTinh = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh, MaKM = @MaKM
+		SET TenHH = @TenHH, MaDVT = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh, MaKM = @MaKM
 		WHERE MaHH = @MaHH
 	END
 GO
@@ -759,7 +792,7 @@ CREATE PROC sp_SuaHangHoaKhKM(@MaHH varchar(10),@TenHH nvarchar(50), @DVTinh var
 AS
 	BEGIN
 		UPDATE HangHoa 
-		SET TenHH = @TenHH, DVTinh = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh
+		SET TenHH = @TenHH, MaDVT = @DVTinh, Gia = @Gia, MaDM = @MaDM, BaoHanh = @BaoHanh
 		WHERE MaHH = @MaHH
 	END
 GO
@@ -775,7 +808,7 @@ AS
 	END
 GO
 
---Xóa hàng hóa
+--Tim hàng hóa
 CREATE PROC sp_TimHangHoa(@MaHH varchar(10))
 AS
 	BEGIN
@@ -798,12 +831,15 @@ GO
 -- Tìm tên hàng hóa
 CREATE PROC sp_TimTenHH(@Ten nvarchar(50))
 AS
+	DECLARE @TenHH AS NVARCHAR(50)
+	SET @TenHH = '%'+@Ten+'%' 
 	BEGIN
 		SELECT * 
 		FROM HangHoa
-		WHERE TenHH= @Ten
+		WHERE TenHH LIKE @TenHH
 	 END
 GO
+
 -- Lấy ds hàng hóa có bảo hành
 CREATE PROC sp_LayHHCoBaoHanh
 AS
@@ -1022,6 +1058,14 @@ AS
 	END
 GO
 
+CREATE PROC SP_LayChiTietNhapHangTheoMaHD(@MaHD varchar(10))
+AS
+	BEGIN 
+		SELECT * FROM ChiTietNhapHang WHERE MaHD = @MaHD
+	END
+GO
+
+
 --Thêm HDNH
 CREATE PROC sp_ThemChiTietNhapHang(@MaHD varchar(10) ,
 									@MaHH varchar(10),
@@ -1128,6 +1172,14 @@ GO
 	 END
  GO
 
+    --- Đếm số lượng tồn kho
+ CREATE PROC sp_DemSLTonKho
+ AS
+	 BEGIN
+		 SELECT SUM(SL) as 'TongSL' FROM TonKho
+	 END
+ GO
+
 
 -- Thêm tồn kho
  exec sp_ThemTonKho 'HH01', 'K01', 4
@@ -1179,7 +1231,8 @@ AS
 		WHERE MaPhieuBH=@MaPhieuBH
 	END
 GO
----tìm PhieuBaoHanh
+
+---tim PhieuBaoHanh
 CREATE PROC sp_TimPhieuBaoHanh(@MaPhieuBH varchar(10))
 AS
 	BEGIN
@@ -1187,6 +1240,7 @@ AS
 		WHERE MaPhieuBH=@MaPhieuBH
 	END
 GO
+
 
 
 ------------------------------ HÓA ĐƠN ----------------------------
@@ -1259,6 +1313,13 @@ AS
 	END
 GO
 
+-- Lấy hóa đơn theo ngày
+CREATE PROC sp_LayHoaDonTheoNgay(@ThoiGianTT smalldatetime)
+AS 
+	BEGIN
+		SELECT * FROM HoaDon WHERE (ThoiGianTT >= CAST(@ThoiGianTT AS DATE)) AND (ThoiGianTT < DATEADD(dd, 1, CAST(@ThoiGianTT AS DATE)))
+	END
+GO
 
 ------------------------------ CHI TIẾT HÓA ĐƠN ----------------------------
 --Lấy HoaDon
@@ -1305,6 +1366,8 @@ AS
 		WHERE MaHD=@MaHD and MaHH=@MaHH
 	END
 GO
+
+
 
 
 

@@ -22,10 +22,12 @@ namespace GUI
         Admin.frmNCC frmNCC = null;
         Admin.frmNhanVien frmNV = null;
         Admin.frmTaiKhoan frmTK = null;
+        Admin.frmThongKeNhanVien inTKNhanVien = null;
         CSKH.frmKH frmKH = null;
         CSKH.frmPhieuBH frmPhieuBH = null;
         CSKH.frmPhieuDKTheKH frmPhieuDKTheKH = null;
         CSKH.frmTheKH frmTheKH = null;
+        CSKH.frmThongKeKhachHang frmInKH = null;
         ThuKho.frmDanhMucHH frmDanhMucHH = null;
         ThuKho.frmDVTinh frmDVTinh = null;
         ThuKho.frmHangHoa frmHangHoa = null;
@@ -48,13 +50,13 @@ namespace GUI
                     mnuQL_QLKho.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
-                    mnuBaoCao_QLKho.Visible = false;
+                    //mnuBaoCao_QLKho.Visible = false;
                     break;
                 case "ThuKho":
                     mnuQL_ThuNgan.Visible = false;
                     mnuQL_CSKH.Visible = false;
                     mnuQL_Admin.Visible = false;
-                    mnuBaoCao_ThuNgan.Visible = false;
+                    //mnuBaoCao_ThuNgan.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     break;
@@ -62,8 +64,8 @@ namespace GUI
                     mnuQL_ThuNgan.Visible = false;
                     mnuQL_QLKho.Visible = false;
                     mnuQL_Admin.Visible = false;
-                    mnuBaoCao_ThuNgan.Visible = false;
-                    mnuBaoCao_QLKho.Visible = false;
+                    //mnuBaoCao_ThuNgan.Visible = false;
+                    // mnuBaoCao_QLKho.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
                     break;
                 default:
@@ -71,10 +73,10 @@ namespace GUI
                     mnuQL_QLKho.Visible = false;
                     mnuQL_Admin.Visible = false;
                     mnuQL_CSKH.Visible = false;
-                    mnuBaoCao_ThuNgan.Visible = false;
+                    //mnuBaoCao_ThuNgan.Visible = false;
                     mnuBaoCaoCSKH.Visible = false;
                     mnuBaoCao_Admin.Visible = false;
-                    mnuBaoCao_QLKho.Visible = false;
+                    //mnuBaoCao_QLKho.Visible = false;
                     break;
             }
         }
@@ -87,6 +89,10 @@ namespace GUI
                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
+                    //foreach (Form child in this.MdiChildren)
+                    //   {
+                    //       child.FormClosing += new FormClosingEventHandler(frmMain_FormClosing(null, null));
+                    //   }
                     e.Cancel = false;
                 }
                 else
@@ -102,7 +108,8 @@ namespace GUI
 
         private void mnuHT_Thoat_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // this.Close();
+            Application.Exit();
         }
 
         private void mnuHT_DN_Click(object sender, EventArgs e)
@@ -135,7 +142,8 @@ namespace GUI
             if (CheckFormOpen("frmBoPhan"))
             {
                 frmBoPhan.Focus();
-            } else
+            }
+            else
             {
                 frmBoPhan = new Admin.frmBoPhan();
                 frmBoPhan.MdiParent = this;
@@ -147,7 +155,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmKho"))
             {
-               frmKho.Focus();
+                frmKho.Focus();
             }
             else
             {
@@ -161,7 +169,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmKhuyenMai"))
             {
-               frmKM.Focus();
+                frmKM.Focus();
             }
             else
             {
@@ -175,7 +183,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmLoaiTheKH"))
             {
-               frmLoaiTheKH.Focus();
+                frmLoaiTheKH.Focus();
             }
             else
             {
@@ -189,7 +197,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmLoaiTK"))
             {
-               frmLoaiTK.Focus();
+                frmLoaiTK.Focus();
             }
             else
             {
@@ -203,11 +211,11 @@ namespace GUI
         {
             if (CheckFormOpen("frmNCC"))
             {
-               frmNCC.Focus();
+                frmNCC.Focus();
             }
             else
             {
-                frmNCC = new Admin.frmNCC(); 
+                frmNCC = new Admin.frmNCC();
                 frmNCC.MdiParent = this;
                 frmNCC.Show();
             }
@@ -217,7 +225,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmNhanVien"))
             {
-               frmNV.Focus();
+                frmNV.Focus();
             }
             else
             {
@@ -231,7 +239,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmTaiKhoan"))
             {
-               frmTK.Focus();
+                frmTK.Focus();
             }
             else
             {
@@ -245,7 +253,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmDanhMucHH"))
             {
-               frmDanhMucHH.Focus();
+                frmDanhMucHH.Focus();
             }
             else
             {
@@ -259,7 +267,7 @@ namespace GUI
         {
             if (CheckFormOpen("frmDVTinh"))
             {
-               frmDVTinh.Focus();
+                frmDVTinh.Focus();
             }
             else
             {
@@ -269,19 +277,6 @@ namespace GUI
             }
         }
 
-        //private void OpenForm(Form frm, string frmName)
-        //{
-        //    if (CheckFormOpen(frmName))
-        //    {
-        //        frm.Focus();
-        //    }
-        //    else
-        //    {
-        //        frm = new Form();
-        //        frm.MdiParent = this;
-        //        frm.Show();
-        //    }
-        //}
         private void mnuQLHangHoa_Click(object sender, EventArgs e)
         {
 
@@ -378,6 +373,39 @@ namespace GUI
                 frmPhieuBH = new CSKH.frmPhieuBH();
                 frmPhieuBH.MdiParent = this;
                 frmPhieuBH.Show();
+            }
+        }
+
+        private void mnuBC_NV_Click(object sender, EventArgs e)
+        {
+            if (CheckFormOpen("frmThongKeNhanVien"))
+            {
+                inTKNhanVien.Focus();
+            }
+            else
+            {
+                inTKNhanVien = new Admin.frmThongKeNhanVien();
+                inTKNhanVien.MdiParent = this;
+                inTKNhanVien.Show();
+            }
+        }
+
+        private void mnuBC_TonKho_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuBC_KH_Click(object sender, EventArgs e)
+        {
+            if (CheckFormOpen("frmThongKeKhachHang"))
+            {
+                frmInKH.Focus();
+            }
+            else
+            {
+                frmInKH = new CSKH.frmThongKeKhachHang();
+                frmInKH.MdiParent = this;
+                frmInKH.Show();
             }
         }
     }

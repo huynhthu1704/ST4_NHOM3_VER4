@@ -45,6 +45,7 @@ namespace DAL
             return dt;
         }
 
+        // Lấy danh sách kho
         public DataTable LayDSKho()
         {
 

@@ -23,6 +23,8 @@ namespace GUI.Admin
         BLL_BoPhan bBoPhan = new BLL_BoPhan();
         private void frmThongKeNhanVien_Load(object sender, EventArgs e)
         {
+            labelMaBP.Hide();
+            cboMaBP.Hide();
             cboMaBP.DataSource = bBoPhan.LayDS();
             cboMaBP.DisplayMember = "MaBP";
             cboMaBP.ValueMember = "MaBP";
@@ -67,6 +69,18 @@ namespace GUI.Admin
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void rdbTheoBP_CheckedChanged(object sender, EventArgs e)
+        {
+            labelMaBP.Show();
+            cboMaBP.Show();
+        }
+
+        private void rdbInTatCa_CheckedChanged(object sender, EventArgs e)
+        {
+            labelMaBP.Hide();
+            cboMaBP.Hide();
         }
     }
 }

@@ -64,7 +64,6 @@ namespace GUI.Admin
             }
         }
 
-        }
         /// <summary>
         /// Sự kiện khi click vào nút xoá
         /// </summary>
@@ -106,8 +105,6 @@ namespace GUI.Admin
             }
         }
 
-            }
-        }
 
         /// <summary>
         /// Sự kiện khi click vào nút Sửa

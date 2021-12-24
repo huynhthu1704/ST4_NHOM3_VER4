@@ -71,7 +71,7 @@ namespace DAL
             return dt;
         }
 
-        // Thêm hóa đ
+        // Thêm hóa đơn
         public bool ThemHD(ET_HoaDon et)
         {
             try
